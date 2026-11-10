@@ -1,0 +1,119 @@
+{
+  "generated_on": "2026-11-03",
+  "dataset": "data/processed/wealthgenie_funds.csv",
+  "collected": [
+    {
+      "check": "total_fund_records",
+      "found": 38495
+    },
+    {
+      "check": "unique_scheme_identifiers",
+      "found": 38495
+    },
+    {
+      "check": "duplicate_scheme_identifiers",
+      "found": 0,
+      "note": "0 means the merge worked 1:1 on scheme_code"
+    },
+    {
+      "check": "distribution_active_vs_inactive",
+      "found": {
+        "false": 29610,
+        "true": 8885
+      }
+    },
+    {
+      "check": "missing_fund_names",
+      "found": 0,
+      "missing": 0.0
+    },
+    {
+      "check": "missing_category",
+      "found": 0,
+      "missing": 0.0
+    },
+    {
+      "check": "missing_nav_values",
+      "found": 20,
+      "missing": 0.05
+    },
+    {
+      "check": "missing_riskometer",
+      "found": 27305,
+      "missing": 70.93,
+      "note": "riskometer = coalesce(ssd_riskometer_level, amfi_daily_riskometer, ssd_riskometer)"
+    },
+    {
+      "check": "missing_expense_ratio",
+      "found": 30053,
+      "missing": 78.07,
+      "note": "rows with neither a regular nor a direct TER"
+    },
+    {
+      "check": "invalid_or_negative_nav_values",
+      "found": 0,
+      "note": "non-numeric NAV text + NAV < 0 (never repaired by this pipeline)"
+    },
+    {
+      "check": "invalid_expense_ratios",
+      "found": 21,
+      "note": "ter_regular outside the plausible 0-5% band (never repaired)"
+    },
+    {
+      "check": "missing_benchmark_information",
+      "found": 27183,
+      "missing": 70.61
+    },
+    {
+      "check": "missing_or_invalid_dates",
+      "found": {
+        "first_date": {
+          "invalid_present_values": 0,
+          "missing": 20
+        },
+        "last_date": {
+          "invalid_present_values": 0,
+          "missing": 20
+        },
+        "nav_date": {
+          "invalid_present_values": 0,
+          "missing": 20
+        },
+        "ter_date": {
+          "invalid_present_values": 0,
+          "missing": 30053
+        }
+      }
+    },
+    {
+      "check": "unmatched_records_between_datasets",
+      "found": {
+        "master_rows": 38495,
+        "details_rows": 11417,
+        "details_matched_rows": 11417,
+        "unmatched_master_rows": 27078,
+        "row_multiplication": 0
+      }
+    }
+  ],
+  "riskometer_level_distribution": {
+    "Very High": 5064,
+    "Low to Moderate": 2442,
+    "Moderate": 1823,
+    "Low": 1146,
+    "Moderately High": 471,
+    "High": 244
+  },
+  "category_group_distribution": {
+    "Debt Scheme": 29643,
+    "Equity Scheme": 4335,
+    "Other Scheme": 3084,
+    "Hybrid Scheme": 1433
+  },
+  "plan_distribution": {
+    "Other": 15476,
+    "Direct": 12782,
+    "Regular": 10237
+  },
+  "cleaning_policy": "No row deletion, no zero-filling, no synthetic imputation. Missing suitability attributes make a fund ineligible (flagged, reported) in the recommendation engine."
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "compound-interest",
+  "title": "Compound interest",
+  "branchId": "growing-money",
+  "category": "Growing Money",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "CI-OBJ-1",
+      "text": "Explain compounding as interest earning interest."
+    },
+    {
+      "id": "CI-OBJ-2",
+      "text": "Compare simple and compound growth over the same period."
+    },
+    {
+      "id": "CI-OBJ-3",
+      "text": "Explain why time and frequency of compounding both matter."
+    }
+  ],
+  "prerequisites": [
+    "simple-interest",
+    "inflation"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "Compounding means the interest you earn is added to your money, and the next round of interest is calculated on the larger amount. RBI's FAME material calls it interest on interest. On ₹10,000 at 10% compounded yearly, the balance becomes ₹11,000 after year one, ₹12,100 after year two and ₹13,310 after year three.",
+    "The gap against simple interest widens with time. FAME compares ₹10,000 at 10% for ten years: simple interest gives ₹20,000, while the same rate compounded quarterly gives about ₹26,851. That is roughly ₹6,851 more, or about 34% more, from the same principal and rate.",
+    "Two levers matter. Time matters most, because early years contribute the base for every later year. Frequency matters too: quarterly compounding grows faster than yearly compounding at the same stated rate. Compounding also works against you on a loan or credit card balance that you do not repay."
+  ],
+  "examples": [
+    {
+      "id": "CI-EX-1",
+      "title": "Three years of yearly compounding",
+      "text": "₹10,000 at 10% compounded yearly: year 1 adds ₹1,000 for ₹11,000; year 2 adds ₹1,100 for ₹12,100; year 3 adds ₹1,210 for ₹13,310. Each year's interest is larger because it is calculated on a larger balance.",
+      "sourceIds": [
+        "RBI-FAME"
+      ],
+      "calculation": {
+        "formula": "Amount = Principal × (1 + rate)^years",
+        "steps": [
+          "10,000 × 1.10 = 11,000",
+          "11,000 × 1.10 = 12,100",
+          "12,100 × 1.10 = 13,310"
+        ],
+        "result": "₹13,310 after three years"
+      }
+    },
+    {
+      "id": "CI-EX-2",
+      "title": "Ten years, simple versus quarterly",
+      "text": "₹10,000 at 10% for ten years grows to ₹20,000 with simple interest, but to about ₹26,851 with quarterly compounding. The difference of roughly ₹6,851 comes entirely from interest earning interest.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Compounding is interest on interest, so the balance grows faster each period.",
+    "Time is the strongest lever; starting earlier beats a slightly higher rate later.",
+    "More frequent compounding produces more growth at the same stated rate.",
+    "The same effect increases what you owe on an unpaid loan."
+  ],
+  "sourceIds": [
+    "RBI-FAME"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "All figures (₹11,000 / ₹12,100 / ₹13,310 and ₹20,000 versus ₹26,851 over ten years) are taken from RBI FAME 4th edition, Message 7. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "CI-Q-1",
+      "objectiveId": "CI-OBJ-1",
+      "question": "What does compounding mean?",
+      "options": [
+        "Interest is paid only on the original principal",
+        "Interest is added to the balance and then earns interest too",
+        "Interest is charged as a fixed fee"
+      ],
+      "correctIndex": 1,
+      "explanation": "Compounding is interest on interest: each period's interest joins the balance, so later interest is calculated on a larger amount."
+    },
+    {
+      "id": "CI-Q-2",
+      "objectiveId": "CI-OBJ-2",
+      "question": "₹10,000 at 10% for ten years: roughly what does quarterly compounding produce compared with simple interest?",
+      "options": [
+        "The same ₹20,000",
+        "About ₹11,000",
+        "About ₹26,851, roughly 34% more"
+      ],
+      "correctIndex": 2,
+      "explanation": "RBI's FAME example shows ₹20,000 with simple interest against about ₹26,851 with quarterly compounding over ten years."
+    },
+    {
+      "id": "CI-Q-3",
+      "objectiveId": "CI-OBJ-3",
+      "question": "Two deposits offer the same 8% rate, one compounded yearly and one quarterly. Which grows more?",
+      "options": [
+        "The quarterly compounded one",
+        "The yearly compounded one",
+        "They are always identical"
+      ],
+      "correctIndex": 0,
+      "explanation": "More frequent compounding adds interest to the balance sooner, so the quarterly option grows slightly faster at the same stated rate."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Actual returns depend on the product, fees and taxes."
+}

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "mutual-funds",
+  "title": "Mutual funds",
+  "branchId": "investing",
+  "category": "Investing",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "MF-OBJ-1",
+      "text": "Explain how a mutual fund pools money and who manages it."
+    },
+    {
+      "id": "MF-OBJ-2",
+      "text": "Explain what NAV means and why it changes."
+    },
+    {
+      "id": "MF-OBJ-3",
+      "text": "Recognise that mutual fund returns are not guaranteed and depend on the scheme."
+    }
+  ],
+  "prerequisites": [
+    "stocks"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "A mutual fund collects money from many investors and invests it according to a stated objective. SEBI's investor material describes the structure: the money is pooled, a professional asset management company manages the portfolio, and each investor receives units representing a share of the fund. You do not pick individual shares yourself; you choose the scheme and its objective.",
+    "The value of one unit is the net asset value, or NAV. It is calculated from the market value of the fund's holdings minus its expenses and liabilities, divided by the number of units. SEBI requires NAV to be published daily, so the price you get when you buy or redeem reflects the scheme's holdings at that time. NAV rises and falls with the market value of those holdings.",
+    "A mutual fund is not a deposit and does not promise a fixed return. Its value can fall, and different schemes carry different risks: a debt scheme, an equity scheme and a hybrid scheme will behave very differently. Before investing, read the scheme's objective, its risk level and its costs, and check that the fund's category matches your horizon and tolerance."
+  ],
+  "examples": [
+    {
+      "id": "MF-EX-1",
+      "title": "Pooling in practice",
+      "text": "Aarav invests ₹10,000 in an equity mutual fund at an NAV of ₹50 and receives 200 units. Thousands of other investors pool their money in the same scheme, and the fund uses the total to buy a portfolio of shares. If the portfolio's value rises 10% and costs are unchanged, NAV moves towards ₹55 and his units are worth about ₹11,000.",
+      "sourceIds": [
+        "SEBI-MF"
+      ]
+    },
+    {
+      "id": "MF-EX-2",
+      "title": "Two schemes, two risk levels",
+      "text": "Priya compares an equity scheme and a debt scheme. The equity scheme can fall sharply in a bad market but aims for higher long-term growth. The debt scheme is usually less volatile but may earn less. Neither is universally better; the right choice depends on when she needs the money.",
+      "sourceIds": [
+        "SEBI-MF",
+        "AMFI-INVESTOR"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "A mutual fund pools money from many investors into one professionally managed portfolio.",
+    "Each investor holds units, and the unit value is the NAV, published daily.",
+    "NAV moves with the market value of the fund's holdings.",
+    "Mutual fund returns are not guaranteed; match the scheme category to your goal."
+  ],
+  "sourceIds": [
+    "SEBI-MF",
+    "AMFI-INVESTOR"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Pooling, professional management, units, daily NAV and the absence of a guaranteed return are checked against SEBI's 'Understanding Mutual Funds' page. AMFI's investor corner is used only for general education. No scheme names or return figures are given. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "MF-Q-1",
+      "objectiveId": "MF-OBJ-1",
+      "question": "What happens when you invest in a mutual fund?",
+      "options": [
+        "You lend money to the fund at a fixed interest rate",
+        "You become the sole owner of every share the fund buys",
+        "Your money is pooled with other investors' money and managed professionally"
+      ],
+      "correctIndex": 2,
+      "explanation": "A mutual fund pools money from many investors and a professional asset management company manages the portfolio. You hold units, not the underlying shares directly."
+    },
+    {
+      "id": "MF-Q-2",
+      "objectiveId": "MF-OBJ-2",
+      "question": "What does NAV represent?",
+      "options": [
+        "The value of one unit, based on the fund's holdings minus expenses and liabilities",
+        "The fixed interest rate the fund promises",
+        "The number of investors in the fund"
+      ],
+      "correctIndex": 0,
+      "explanation": "NAV is the net asset value per unit. It is calculated from the market value of holdings less expenses and liabilities, divided by the number of units, and it changes as values move."
+    },
+    {
+      "id": "MF-Q-3",
+      "objectiveId": "MF-OBJ-3",
+      "question": "Which statement about mutual fund returns is correct?",
+      "options": [
+        "They are fixed by SEBI",
+        "They are not guaranteed and can be negative",
+        "They are always higher than bank deposits"
+      ],
+      "correctIndex": 1,
+      "explanation": "Mutual funds invest in markets and their value can fall. SEBI regulates the industry but does not fix returns, and no scheme is guaranteed to beat a deposit."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice or a recommendation of any scheme. Mutual fund investments are subject to market risk."
+}

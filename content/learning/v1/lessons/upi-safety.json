@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "upi-safety",
+  "title": "UPI safety",
+  "branchId": "financial-safety",
+  "category": "Financial Safety",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "UPI-OBJ-1",
+      "text": "Explain why receiving money over UPI never requires entering your UPI PIN or scanning a QR code."
+    },
+    {
+      "id": "UPI-OBJ-2",
+      "text": "Spot a fake collect request or payment request before approving it."
+    },
+    {
+      "id": "UPI-OBJ-3",
+      "text": "Describe the first steps to take if money leaves your account through a transaction you did not make."
+    }
+  ],
+  "prerequisites": [
+    "expenses"
+  ],
+  "estimatedMinutes": 7,
+  "explanation": [
+    "UPI, the Unified Payments Interface, moves money between two bank accounts using a smartphone. When you link your bank account, you create a UPI PIN, and that PIN is what authorises money to leave your account. The PIN belongs to you alone: RBI guidance says never to share your account number, login ID, password, PIN, UPI PIN, OTP or card details with anyone, not even with someone who claims to be a bank official.",
+    "The most common UPI trick reverses the direction of money. A fraudster sends you a collect request, often with a message such as 'enter your PIN to receive the money'. Approving that request with your PIN pays them. RBI's fraud-awareness booklet is direct about this: there is no need to enter a PIN or password anywhere to receive money, and if a UPI app asks for your PIN, you are sending money rather than receiving it. The same rule applies to QR codes, because a QR code carries the account details used to send money to someone. Never scan a QR code to receive money.",
+    "Before you approve anything, read the name, the amount, and whether the request is asking you to pay or to receive. The RBI's Financial Awareness Messages advise reviewing a merchant's or person's collect request before accepting it, re-checking the amount and beneficiary before a transfer, and never transferring money without verifying the recipient first. If money does leave your account without your approval, contact your bank immediately and ask it to block all modes of debit, including UPI."
+  ],
+  "examples": [
+    {
+      "id": "UPI-EX-1",
+      "title": "The 'enter your PIN to receive money' request",
+      "text": "Priya lists a second-hand cycle for ₹4,500. The buyer says he has already sent the money and asks her to 'approve the request and enter the UPI PIN to receive it'. Approving that collect request would send ₹4,500 from Priya's account to the buyer. Because receiving money never needs a PIN, Priya refuses, checks her own app for a credit, finds none, and stops replying to the buyer.",
+      "sourceIds": [
+        "RBI-BEAWARE",
+        "RBI-PR-1630"
+      ]
+    },
+    {
+      "id": "UPI-EX-2",
+      "title": "The QR code offered for 'receiving' a transfer",
+      "text": "A caller tells Imran he will transfer ₹2,000 but first needs Imran to scan a QR code 'to accept the payment'. A QR code contains the account details used to move money to a particular account, so scanning it can authorise a payment from Imran's account. RBI guidance says transactions involving the receipt of money do not require scanning a barcode or QR code or entering a PIN. Imran does not scan the code and ends the call.",
+      "sourceIds": [
+        "RBI-BEAWARE"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Your UPI PIN authorises money to leave your account, so never share it and never enter it in order to receive money.",
+    "Approving a collect request with your PIN pays the other person, even when the message says the request is for receiving money.",
+    "Never scan a QR code to receive money; receiving does not need a QR scan or a PIN.",
+    "Read the payer's name and the amount before approving a request, and re-check the beneficiary before you send.",
+    "A screenshot or a forwarded 'payment done' message is a claim, not a receipt. Confirm the credit in your own bank app, statement or alert.",
+    "If money moves without your approval, contact your bank immediately and ask it to block all debit modes, including UPI."
+  ],
+  "sourceIds": [
+    "RBI-BEAWARE",
+    "RBI-FAME",
+    "RBI-PR-1630"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Every claim was checked on 2026-10-28 against the downloaded RBI FAME 4th edition PDF, the Office of the RBI Ombudsman BE(A)WARE booklet and RBI press release 2021-2022/1630. The NPCI safety and fraud pages could not be retrieved (HTTP 403 for automated requests and a client-side rendered site), so no claim in this lesson depends on NPCI text. A named human reviewer is still required before the status can move to reviewed."
+  },
+  "quiz": [
+    {
+      "id": "UPI-Q-1",
+      "objectiveId": "UPI-OBJ-1",
+      "question": "You are selling a phone online. The buyer says, 'I have sent a request, enter your UPI PIN to receive the money.' What does entering your PIN actually do?",
+      "options": [
+        "It accepts the money into your account",
+        "It only confirms your identity, with no money movement",
+        "It approves a payment from your account to the buyer"
+      ],
+      "correctIndex": 2,
+      "explanation": "RBI guidance states there is no need to enter a PIN or password anywhere to receive money. If a UPI app asks for your PIN, you are sending money instead of receiving it, so this request would pay the buyer."
+    },
+    {
+      "id": "UPI-Q-2",
+      "objectiveId": "UPI-OBJ-2",
+      "question": "Which message should make you stop and check a UPI request before approving it?",
+      "options": [
+        "A message saying you must enter your PIN so that money can be credited to you",
+        "A request that shows the payer's UPI ID",
+        "A request that arrives outside normal banking hours"
+      ],
+      "correctIndex": 0,
+      "explanation": "A request that asks you to enter your PIN in order to receive money is the classic misuse of the UPI collect request feature. Approving it with your PIN sends money out of your account."
+    },
+    {
+      "id": "UPI-Q-3",
+      "objectiveId": "UPI-OBJ-3",
+      "question": "Money has just left your account through a UPI transaction you did not make. What should you do first?",
+      "options": [
+        "Wait a week to see whether the money comes back on its own",
+        "Contact your bank immediately and ask it to block debit modes, including UPI",
+        "Share the OTP you received with customer care so they can reverse the transfer"
+      ],
+      "correctIndex": 1,
+      "explanation": "RBI advises informing your bank immediately if you receive a debit alert for a transaction you did not do, and blocking all modes of debit including UPI. OTPs are never shared, including with people claiming to be bank staff."
+    }
+  ],
+  "disclaimer": "This lesson is general financial education based on public RBI guidance and is not financial, legal or security advice for a specific case. Reporting timelines and liability depend on RBI's customer-protection rules and your bank's assessment."
+}

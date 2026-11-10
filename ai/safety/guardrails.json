@@ -1,0 +1,21 @@
+{
+  "system": "WealthGenie Educational Safety Layer",
+  "version": "1.0.0",
+  "disclaimer": "WealthGenie provides educational content for financial literacy and does not constitute certified financial or investment advice. Consult a SEBI-registered professional for personalized financial planning.",
+  "upiSafetyWarning": "Security Rule: UPI PIN is only required to send or transfer money. Never enter your UPI PIN to receive funds or cashbacks.",
+  "prohibitedTopics": [
+    "Individual stock buy/sell price targets",
+    "Get-rich-quick or guaranteed multi-bagger schemes",
+    "Unregulated crypto lending / binary options",
+    "Personal tax filing evasion strategies"
+  ],
+  "supportedCoreConcepts": [
+    "Emergency Funds and Liquid Mutual Funds",
+    "Systematic Investment Plans (SIP) in Index Funds",
+    "Fixed Deposits (FD) & Recurring Deposits (RD) with DICGC coverage",
+    "Public Provident Fund (PPF) and Employees Provident Fund (EPF)",
+    "Term Life & Health Insurance Fundamentals",
+    "50/30/20 Budgeting Rule for Indian Households",
+    "Inflation Protection and Real Returns"
+  ]
+}

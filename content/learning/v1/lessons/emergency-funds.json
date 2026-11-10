@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "emergency-funds",
+  "title": "Emergency funds",
+  "branchId": "saving",
+  "category": "Saving",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "EMG-OBJ-1",
+      "text": "Explain what an emergency fund is for and what it is not for."
+    },
+    {
+      "id": "EMG-OBJ-2",
+      "text": "Estimate a suitable size for your own emergency fund."
+    },
+    {
+      "id": "EMG-OBJ-3",
+      "text": "Choose where to keep an emergency fund so it is safe and reachable."
+    }
+  ],
+  "prerequisites": [
+    "saving-money",
+    "expenses"
+  ],
+  "estimatedMinutes": 5,
+  "explanation": [
+    "An emergency fund is money kept aside for events you cannot plan: a sudden medical bill, a job loss, an urgent trip home, or a major repair. It is not a holiday fund or a down payment. Its job is to stop an emergency from becoming a loan at a high interest rate.",
+    "A common rule of thumb is three to six months of essential expenses. This is widely used guidance, not a regulatory requirement, so treat any figure as a starting point that depends on how stable your income is. A salaried household with two earners may need less; a single freelancer may want more.",
+    "Keep the fund somewhere safe and quick to reach. A separate savings account or a short-term deposit works for most people. Avoid equity, long lock-ins or anything whose value can fall just when you need the money. Rebuild the fund after using it."
+  ],
+  "examples": [
+    {
+      "id": "EMG-EX-1",
+      "title": "Sizing the fund",
+      "text": "Priya's essential monthly expenses are ₹22,000: rent, food, transport, medicines and the loan instalment. Three months of essentials is ₹66,000 and six months is ₹1,32,000. She targets ₹66,000 first and adds more while her job situation is uncertain.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    },
+    {
+      "id": "EMG-EX-2",
+      "title": "Using it, then rebuilding",
+      "text": "Rahul's father needs an unplanned procedure costing ₹40,000. He pays from the emergency fund instead of a credit card, then restores the balance over the next five months by redirecting his monthly savings.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "An emergency fund covers unplanned essentials, not planned wants.",
+    "Three to six months of essential expenses is a starting point, not an RBI rule.",
+    "Keep it safe and reachable: a separate account or short-term deposit.",
+    "After using it, rebuild it before resuming other goals."
+  ],
+  "sourceIds": [
+    "RBI-FAME"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "The save-before-spend and accessible-savings principles are checked against RBI FAME 4th edition, Message 1. The three-to-six-month range is labelled as common guidance, not a regulatory rule; no source is cited for that figure because it is a rule of thumb. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "EMG-Q-1",
+      "objectiveId": "EMG-OBJ-1",
+      "question": "Which of these is a genuine use of an emergency fund?",
+      "options": [
+        "An unplanned hospital bill",
+        "A festival sale you did not want to miss",
+        "A planned family holiday"
+      ],
+      "correctIndex": 0,
+      "explanation": "Emergency funds exist for unplanned essentials. A sale or a planned holiday should come from separate savings."
+    },
+    {
+      "id": "EMG-Q-2",
+      "objectiveId": "EMG-OBJ-2",
+      "question": "How should you size your emergency fund?",
+      "options": [
+        "Always exactly six months, whatever your situation",
+        "From your essential expenses and how stable your income is",
+        "From your total annual income"
+      ],
+      "correctIndex": 1,
+      "explanation": "Essentials determine what you must cover. Stability of income decides whether you sit at the lower or higher end of the common three-to-six-month range."
+    },
+    {
+      "id": "EMG-Q-3",
+      "objectiveId": "EMG-OBJ-3",
+      "question": "Where is the most suitable place for an emergency fund?",
+      "options": [
+        "A single volatile stock",
+        "A five-year lock-in product",
+        "A separate savings account or short-term deposit"
+      ],
+      "correctIndex": 2,
+      "explanation": "The fund must be safe and quickly available. Volatile or locked products can lose value or trap the money exactly when it is needed."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Choose a fund size that reflects your own obligations and income stability."
+}

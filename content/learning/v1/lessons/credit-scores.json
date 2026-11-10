@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "credit-scores",
+  "title": "Credit scores",
+  "branchId": "financial-safety",
+  "category": "Financial Safety",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "CS-OBJ-1",
+      "text": "Explain what a credit score is and who issues it."
+    },
+    {
+      "id": "CS-OBJ-2",
+      "text": "Explain how repayment behaviour affects a credit score and loan pricing."
+    },
+    {
+      "id": "CS-OBJ-3",
+      "text": "Describe how to get your free credit report and correct an error."
+    }
+  ],
+  "prerequisites": [
+    "borrowing-interest"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "A credit score is a three-digit number that indicates a borrower's creditworthiness, typically based on credit history and other factors. RBI's FAME material explains that it is issued along with a Credit Information Report by a Credit Information Company. Lenders check the score and report, among other things, when they decide whether to sanction a loan.",
+    "Repayment behaviour drives the score. A borrower who has always repaid bank and financial-institution loans on time will generally have a higher score. All other things being equal, a higher score usually means borrowing at a lower rate of interest. Missing instalments, or borrowing beyond what you can repay, works in the opposite direction.",
+    "You have a right to see your own record. Individuals can access one free full credit report, including the credit score, once in a calendar year from each credit information company. If the report contains an error, you can ask the company or the lender to correct it. If the complaint is not resolved within thirty days or you are not satisfied, you can approach the RBI Ombudsman through the CMS portal at cms.rbi.org.in."
+  ],
+  "examples": [
+    {
+      "id": "CS-EX-1",
+      "title": "Two borrowers, two prices",
+      "text": "Aarav has repaid his two-wheeler loan on time for three years and misses no credit card payment. Meera has missed several instalments. When both apply for a home loan, the lender views Aarav as lower risk and, all else being equal, may offer him a lower rate than Meera.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    },
+    {
+      "id": "CS-EX-2",
+      "title": "Checking and correcting the report",
+      "text": "Priya downloads her free full credit report once this calendar year and finds a loan listed that she never took. She raises a correction request with the credit information company and the lender. If it is not fixed within thirty days, she can escalate to the RBI Ombudsman on cms.rbi.org.in.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "A credit score is a three-digit number based on credit history, issued with a credit report by a CIC.",
+    "On-time repayment generally raises the score; missed payments lower it.",
+    "A higher score can mean a lower interest rate, all else being equal.",
+    "You get one free full credit report a year, and errors can be corrected and escalated."
+  ],
+  "sourceIds": [
+    "RBI-FAME"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "The definition, the link between repayment and score, the effect on pricing, the free annual full credit report and the correction/escalation route are checked against RBI FAME 4th edition, Message 3. No specific score bands or cut-offs are quoted. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "CS-Q-1",
+      "objectiveId": "CS-OBJ-1",
+      "question": "What is a credit score?",
+      "options": [
+        "A three-digit number indicating creditworthiness, issued with a credit report by a CIC",
+        "The balance in your savings account",
+        "A tax identification number"
+      ],
+      "correctIndex": 0,
+      "explanation": "RBI describes the credit score as a three-digit number based on credit history, given along with a Credit Information Report by a Credit Information Company."
+    },
+    {
+      "id": "CS-Q-2",
+      "objectiveId": "CS-OBJ-2",
+      "question": "What generally happens to your credit score when you repay loans on time?",
+      "options": [
+        "It falls to zero",
+        "It tends to be higher",
+        "It has no effect at all"
+      ],
+      "correctIndex": 1,
+      "explanation": "RBI's FAME material states that the score would be higher where the borrower has always repaid loans on time. A better score can also mean a lower rate."
+    },
+    {
+      "id": "CS-Q-3",
+      "objectiveId": "CS-OBJ-3",
+      "question": "How often can an individual get a free full credit report?",
+      "options": [
+        "Once a week",
+        "Only after taking a loan",
+        "Once in a calendar year"
+      ],
+      "correctIndex": 2,
+      "explanation": "Individuals have access to one free full credit report, including the score, once a calendar year. Errors can be raised with the CIC or lender and escalated to the RBI Ombudsman if unresolved."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Credit scoring models and lender policies vary; check your own report with the relevant credit information company."
+}

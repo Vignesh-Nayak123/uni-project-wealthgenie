@@ -1,0 +1,7 @@
+{
+  "source": "Association of Mutual Funds in India (AMFI)",
+  "portal": "https://www.amfiindia.com/net-asset-value/nav-download",
+  "endpoint": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx",
+  "retrievalDate": "2026-10-23T20:05:18.404Z",
+  "schemesCount": 1
+}

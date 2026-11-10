@@ -1,0 +1,11 @@
+\section{Personalized Investment Exploration}
+
+The Explore Investments module presents the recommendation engine's output to the user through a personalized guidance interface. Rather than displaying a flat fund ranking, the interface helps users interpret recommendations by contextualizing each suggestion with the user's own profile.
+
+The interface presents readiness statistics including monthly surplus, savings rate, emergency coverage and investable surplus, alongside the derived risk capacity and readiness status. Investment priorities are surfaced first, highlighting urgent needs such as building an emergency cushion or addressing high debt burden before suggesting market investments. Ranked category cards show the top investment categories with their scores and score breakdowns across horizon fit, risk fit, liquidity fit and goal alignment.
+
+Verified fund cards display the top ranked funds within the recommended categories. Each card shows the Riskometer badge and compatibility with the user's effective risk level, the expense ratio with as-of date, the latest NAV with as-of date and freshness, historical performance indicators including one-year, three-year and five-year returns, volatility and maximum drawdown, the composite recommendation score with the per-factor breakdown, deterministic reasons for the recommendation, and risk warnings for high volatility, large historical drawdowns or low rolling-year positivity. The interface explicitly labels historical returns as shown for transparency and not used in the ranking.
+
+The interface also displays exclusions, showing which categories and funds were filtered out and why, so the user understands the boundaries of the suggestions. Warnings are shown for stale NAV data, missing benchmarks or missing expense ratio as-of dates. When the verified fund dataset is unavailable, the interface degrades to an explicit dataset-unavailable state while category guidance remains available.
+
+By exposing the score breakdown, the eligibility reasons and the risk warnings, the interface helps users interpret recommendations rather than simply displaying fund rankings, supporting the explainability objective of the platform.

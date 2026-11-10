@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "budgeting",
+  "title": "Budgeting",
+  "branchId": "money-basics",
+  "category": "Money Basics",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "BUD-OBJ-1",
+      "text": "Build a monthly budget from take-home income and recorded expenses."
+    },
+    {
+      "id": "BUD-OBJ-2",
+      "text": "Explain why savings should be allocated before discretionary spending."
+    },
+    {
+      "id": "BUD-OBJ-3",
+      "text": "Adjust a budget when income falls or an unexpected expense appears."
+    }
+  ],
+  "prerequisites": [
+    "income",
+    "expenses"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "A budget is a plan for next month's money, written before the month starts. Take your take-home income, subtract the expenses you cannot avoid, and decide in advance what the remainder will do. The point is not to track every rupee forever; it is to stop deciding under pressure.",
+    "RBI's financial awareness guidance is to set aside a portion of income before spending anything. A budget makes that automatic: savings is a line item, not a leftover. A commonly quoted starting split is 50% for needs, 30% for wants and 20% for savings and debt repayment. Treat it as a starting point to adjust, not a rule that fits every household.",
+    "Budgets break when they are unrealistic. Leave a small buffer for the expenses you did not foresee. If income drops, protect needs and minimum loan payments first, then reduce wants, and only then reduce savings. If a large one-off expense appears, spread it across the remaining months rather than borrowing for it."
+  ],
+  "examples": [
+    {
+      "id": "BUD-EX-1",
+      "title": "A monthly plan on ₹38,500",
+      "text": "Aarav's take-home pay is ₹38,500. He allocates ₹19,000 for rent, food, transport and utilities, ₹7,500 for savings, and ₹12,000 for everything else, including a ₹2,000 buffer. When the month ends with ₹1,300 unspent, that also goes to savings.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    },
+    {
+      "id": "BUD-EX-2",
+      "title": "Adjusting when income falls",
+      "text": "Meera's income drops to ₹28,000 for a month. She keeps rent and the loan instalment, cuts dining out and pauses one subscription, and reduces her savings transfer from ₹5,000 to ₹2,000 instead of borrowing to keep the original plan.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "A budget is a written plan made before the month, not a record made after it.",
+    "Put savings in the plan before discretionary spending.",
+    "Treat 50/30/20 as a starting point, not a law.",
+    "When income falls, protect needs and loan payments before wants."
+  ],
+  "sourceIds": [
+    "RBI-FAME"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Save-before-spend ordering is checked against RBI FAME 4th edition, Message 1. The 50/30/20 split is presented explicitly as a common guideline, not an RBI rule. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "BUD-Q-1",
+      "objectiveId": "BUD-OBJ-1",
+      "question": "What is the correct first step in building a monthly budget?",
+      "options": [
+        "Start from your credit card limit",
+        "Start from last year's festival spending",
+        "Start from your take-home income"
+      ],
+      "correctIndex": 2,
+      "explanation": "A budget plans money you actually have, so it starts from take-home income and then subtracts unavoidable expenses."
+    },
+    {
+      "id": "BUD-Q-2",
+      "objectiveId": "BUD-OBJ-2",
+      "question": "Why does saving first work better than saving what is left?",
+      "options": [
+        "Because spending expands to use whatever is available",
+        "Because banks pay a bonus for early deposits",
+        "Because savings left at month end earn no interest"
+      ],
+      "correctIndex": 0,
+      "explanation": "If saving is a leftover, discretionary spending tends to absorb it. RBI's guidance is to set aside savings from income before spending."
+    },
+    {
+      "id": "BUD-Q-3",
+      "objectiveId": "BUD-OBJ-3",
+      "question": "Your income falls by ₹10,000 this month. What should you adjust first?",
+      "options": [
+        "Stop paying the loan instalment",
+        "Cut wants while keeping needs and loan payments",
+        "Borrow to keep the original budget unchanged"
+      ],
+      "correctIndex": 1,
+      "explanation": "Needs and minimum loan payments protect your basics and your credit record. Wants are the flexible part, and borrowing to preserve them adds cost."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. A suitable budget depends on your household size, city and obligations."
+}

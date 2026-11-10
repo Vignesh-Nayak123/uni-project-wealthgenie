@@ -1,0 +1,11 @@
+{
+  "experimentVersion": "1.0.0",
+  "seed": 20261027,
+  "profiles": 200,
+  "includeEdgeCases": true,
+  "asOfDate": "2026-10-27",
+  "thresholds": {
+    "lowMandatoryCoverageMonths": 3,
+    "highEmiBurdenPct": 40
+  }
+}

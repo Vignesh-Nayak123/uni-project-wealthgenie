@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Production builds
+dist/
+
+# Local environment secrets
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+frontend/.env
+frontend/.env.*
+!backend/.env.example
+!frontend/.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local paper-trading state
+backend/src/data/paper-trading-state.json
+backend/src/data/paper-replay-state.json
+
+# Raw datasets
+data/*.csv
+data/*.zip
+
+# Phase 4 experiment runs (keep the directory README)
+experiments/results/*
+!experiments/results/README.md
+
+# Python virtual environment
+.venv/
+# Generated datasets and downloaded factsheets
+wealthgenie-datasets/*.csv
+wealthgenie-datasets/*.parquet
+wealthgenie-datasets/factsheets/*.pdf

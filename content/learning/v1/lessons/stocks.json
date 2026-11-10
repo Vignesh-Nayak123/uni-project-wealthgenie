@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "stocks",
+  "title": "Stocks",
+  "branchId": "investing",
+  "category": "Investing",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "STK-OBJ-1",
+      "text": "Explain what a share represents and where shares are traded."
+    },
+    {
+      "id": "STK-OBJ-2",
+      "text": "Describe how a shareholder can gain or lose money."
+    },
+    {
+      "id": "STK-OBJ-3",
+      "text": "Explain why share prices are volatile and why that matters to a short-term investor."
+    }
+  ],
+  "prerequisites": [
+    "risk-and-return"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "A share is a unit of ownership in a company. Buy one share and you own a small fraction of that business, with a claim on its profits and on what is left if it is wound up. Shares are bought and sold on recognised stock exchanges, and their prices move throughout the trading day as buyers and sellers agree on a value.",
+    "A shareholder can gain in two ways. The share price may rise above what was paid, producing a capital gain when sold. The company may also pay a dividend out of profits, though a dividend is not guaranteed and can be reduced or skipped. On the downside, the price can fall, and a company can fail, in which case part or all of the investment can be lost.",
+    "Share prices are volatile because they reflect changing expectations about the company, its industry and the wider economy. SEBI's investor material lists market risk, business risk, liquidity risk and volatility among the risks investors face. A share that looks cheap today can fall further tomorrow, so money needed in the next few years is usually a poor fit for direct equity."
+  ],
+  "examples": [
+    {
+      "id": "STK-EX-1",
+      "title": "Part-ownership in practice",
+      "text": "Aarav buys 20 shares of a company at ₹500 each, investing ₹10,000. He now owns a tiny slice of the business. If the price rises to ₹600 he can sell for ₹12,000, a ₹2,000 capital gain before costs and taxes. If it falls to ₹400, the holding is worth ₹8,000.",
+      "sourceIds": [
+        "SEBI-SHARES"
+      ]
+    },
+    {
+      "id": "STK-EX-2",
+      "title": "Why a three-year goal is a poor fit",
+      "text": "Meera needs ₹2,00,000 for a course in three years and invests it in shares. A market fall in year two leaves her with ₹1,50,000 just when the fee is due. SEBI's risk guidance is to match the investment to the horizon; a short-term need should not depend on a volatile asset.",
+      "sourceIds": [
+        "SEBI-RISK",
+        "SEBI-RISKMGMT"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "A share is part-ownership of a company, not a fixed-return deposit.",
+    "Returns come from price changes and possibly dividends; both can disappoint.",
+    "Share prices are volatile and can fall sharply in the short term.",
+    "Only invest money you will not need for several years, and understand the business."
+  ],
+  "sourceIds": [
+    "SEBI-SHARES",
+    "SEBI-RISK",
+    "SEBI-RISKMGMT"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "The definition of a share as part-ownership and the market-risk warning are checked against SEBI's 'Understanding Shares' page. Risk categories are checked against SEBI's key-risks page, and horizon matching against SEBI's risk-management page. No return figures or stock tips are given. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "STK-Q-1",
+      "objectiveId": "STK-OBJ-1",
+      "question": "What does owning a share of a company mean?",
+      "options": [
+        "You own a small part of the company",
+        "You have lent money to the company at a fixed rate",
+        "You are guaranteed a fixed monthly payment"
+      ],
+      "correctIndex": 0,
+      "explanation": "A share is a unit of ownership. A loan or fixed deposit is a lending arrangement, which is different from owning equity."
+    },
+    {
+      "id": "STK-Q-2",
+      "objectiveId": "STK-OBJ-2",
+      "question": "How can a shareholder make money?",
+      "options": [
+        "Only from a fixed interest rate",
+        "From a rise in the share price and possibly from dividends",
+        "Only if the company buys the share back at the original price"
+      ],
+      "correctIndex": 1,
+      "explanation": "Shareholders can gain from capital appreciation when the price rises and from dividends if the company pays them. Neither is guaranteed."
+    },
+    {
+      "id": "STK-Q-3",
+      "objectiveId": "STK-OBJ-3",
+      "question": "Why is money needed in the next two years a poor fit for shares?",
+      "options": [
+        "Because shares cannot be sold for two years",
+        "Because share prices never change",
+        "Because prices are volatile and may be down when you need to sell"
+      ],
+      "correctIndex": 2,
+      "explanation": "Share prices move with market and business conditions. A short horizon leaves no time to recover from a fall, which is why SEBI advises matching investments to the time available."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice or a recommendation to buy or sell any security. Investing in shares carries risk of loss."
+}

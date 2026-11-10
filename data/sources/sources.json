@@ -1,0 +1,229 @@
+[
+  {
+    "id": "nifty-50-tri",
+    "name": "Nifty 50 Total Returns Index (TRI)",
+    "provider": "NSE Indices Limited (Nifty Indices)",
+    "description": "Historical benchmark index capturing dividend reinvestments and broad Indian large-cap equity market performance.",
+    "intendedUse": "Historical benchmark simulation and long-term equity risk/return education.",
+    "status": "Connected and verified",
+    "updateFrequency": "Daily historical series",
+    "refreshFrequency": "Daily (trading days only); re-run `npm run import:nifty` to extend coverage.",
+    "coveragePeriod": "2010-01-04 to 2026-10-23 (4,170 trading sessions)",
+    "fields": [
+      "date (ISO-8601 YYYY-MM-DD)",
+      "tri (Total Returns Index level, 2 decimals, positive float)",
+      "ntr (Net Total Return index level, present when published)"
+    ],
+    "retrievalDate": "2026-10-23T19:55:30.372Z",
+    "checksum": "05974e09b5132f4f57fb1ed331ab5eeaa803bf8c38456bc0f6ee071cbda89420",
+    "units": "Index Points",
+    "sourceUrl": "https://www.niftyindices.com/reports/historical-data",
+    "endpoint": "POST https://www.niftyindices.com/BackPage/getTotalReturnIndexString",
+    "accessNotes": "Public free access. Max 365 days per query (pipeline auto-splits into yearly chunks with 250 ms pauses). Manual fallback: CSV export from the historical-data portal saved to data/raw/nifty_tri_manual.csv, then `node scripts/importNifty.js --local`. NSE Indices data-usage terms and intellectual-property rights apply; used here for non-commercial educational display.",
+    "licenseOrConstraints": "NSE Indices data-usage terms and intellectual-property rights apply; used for non-commercial educational display."
+  },
+  {
+    "id": "amfi-nav-history",
+    "name": "AMFI Mutual Fund NAV & Scheme Master",
+    "provider": "Association of Mutual Funds in India (AMFI)",
+    "description": "Historical Net Asset Value (NAV) data across Indian mutual fund schemes and open-ended index funds.",
+    "intendedUse": "Educational fund categorization, SIP compounding demonstration, and category average comparisons.",
+    "status": "Connected and verified",
+    "updateFrequency": "Daily NAV publications",
+    "refreshFrequency": "Daily (NAV snapshot after ~10 PM IST via NAVAll.txt master); historical series re-run `npm run import:amfi`.",
+    "coveragePeriod": "120716 UTI Nifty 50 Index Fund - Growth Option- Direct: 2024-01-01 to 2026-10-23 (694 observations); 119063 HDFC Nifty 50 Index Fund - Direct Plan - Growth Option: 2024-01-01 to 2026-10-23 (694 observations)",
+    "fields": [
+      "schemeCode (AMFI numeric scheme identifier)",
+      "isin (ISIN Growth, INF… 12-character format)",
+      "schemeName / fundHouse / plan / option (scheme metadata)",
+      "nav (positive float, 4 decimals)",
+      "date (ISO-8601 YYYY-MM-DD)"
+    ],
+    "retrievalDate": "2026-10-24T20:10:32.709Z",
+    "checksum": "b54ad08b8acefa9125bb6e8578d80056d0ce271dd7dbcd04e63520b38589534b",
+    "sourceUrl": "https://www.amfiindia.com/net-asset-value/nav-download",
+    "masterFileUrl": "https://portal.amfiindia.com/spages/NAVAll.txt",
+    "endpoint": "GET https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=<amcCode>&tp=1&frmdt=<dd-Mon-yyyy>&todt=<dd-Mon-yyyy>",
+    "accessNotes": "Public free access. Historical endpoint enforces ~90-day (one quarter) windows; responses >120 days redirect to the HTML homepage. NAVAll.txt is a daily SNAPSHOT (one row per scheme), not a time series. Subject to AMFI fair usage policy for non-commercial educational purposes.",
+    "rawArtifact": {
+      "directory": "data/raw/amfi/history/nav_history_20261024T201032709Z",
+      "manifestPath": "data/raw/amfi/history/nav_history_20261024T201032709Z/manifest.json",
+      "manifestSha256": "b54ad08b8acefa9125bb6e8578d80056d0ce271dd7dbcd04e63520b38589534b"
+    },
+    "schemes": [
+      {
+        "schemeCode": "120716",
+        "schemeName": "UTI Nifty 50 Index Fund - Growth Option- Direct",
+        "fundHouse": "UTI Mutual Fund",
+        "isin": "INF789F01XA0",
+        "plan": "Direct",
+        "option": "Growth",
+        "startDate": "2024-01-01",
+        "endDate": "2026-10-23",
+        "observationCount": 694,
+        "retrievalDate": "2026-10-24T20:10:32.709Z",
+        "rawSha256": "8ce181e8cde8455d2003548a40afd1308a3b767491d33cf6df18d06852d05b4f",
+        "rawChunkCount": 12,
+        "rawArtifactPath": "data/raw/amfi/history/nav_history_20261024T201032709Z"
+      },
+      {
+        "schemeCode": "119063",
+        "schemeName": "HDFC Nifty 50 Index Fund - Direct Plan - Growth Option",
+        "fundHouse": "HDFC Mutual Fund",
+        "isin": "INF179K01WM1",
+        "plan": "Direct",
+        "option": "Growth",
+        "startDate": "2024-01-01",
+        "endDate": "2026-10-23",
+        "observationCount": 694,
+        "retrievalDate": "2026-10-24T20:10:32.709Z",
+        "rawSha256": "bd7a8b4da70b3bf94fc7eba6aaf7da3a6a8ad0ab0cc7ca997c9bd2dfb904fc2b",
+        "rawChunkCount": 12,
+        "rawArtifactPath": "data/raw/amfi/history/nav_history_20261024T201032709Z"
+      }
+    ],
+    "licenseOrConstraints": "Subject to AMFI fair usage policy for non-commercial educational purposes."
+  },
+  {
+    "id": "sebi-investor-education",
+    "name": "SEBI Investor Education Portal (Saa₹thi)",
+    "provider": "Securities and Exchange Board of India (SEBI)",
+    "description": "Official guidelines, dos and don'ts for securities market participants, grievance redressal mechanisms (SCORES), and fraud awareness.",
+    "intendedUse": "Knowledge base grounding for educational tutor and regulatory compliance guidelines.",
+    "status": "Reference links connected (content not mirrored)",
+    "updateFrequency": "Regulatory update releases",
+    "refreshFrequency": "Check quarterly for regulatory circular updates.",
+    "coveragePeriod": "Current regulatory framework",
+    "sourceUrl": "https://investor.sebi.gov.in/",
+    "fields": [
+      "Guidance pages, circulars, FAQs (linked, not mirrored)."
+    ],
+    "accessNotes": "Official public educational material published for investor welfare. WealthGenie links to SEBI pages rather than copying bulk content.",
+    "relatedUrls": {
+      "mutualFundFaqs": "https://www.sebi.gov.in/sebi_data/faqfiles/sep-2024/1727242783639.pdf",
+      "masterCircularForMutualFunds": "https://www.sebi.gov.in (Legal > Circulars > Master Circular for Mutual Funds)"
+    },
+    "licenseOrConstraints": "Official public educational/regulatory material published for investor welfare; linked, not mirrored."
+  },
+  {
+    "id": "sebi-riskometer",
+    "name": "SEBI Riskometer / Product Labelling",
+    "provider": "Securities and Exchange Board of India (SEBI)",
+    "description": "The six-level Riskometer (Low to Very High) that AMCs must display for every MF scheme and benchmark, per SEBI product-labelling guidelines (Risk-o-meter evaluated monthly and disclosed with portfolio disclosures on AMC and AMFI websites).",
+    "intendedUse": "Grounding scheme-risk explanations in the official SEBI six-level scale and colour scheme when presenting fund risk in the Learn/Invest flows.",
+    "status": "Reference links connected (content not mirrored)",
+    "updateFrequency": "Circular-driven; monthly Riskometer evaluation by AMCs",
+    "refreshFrequency": "Re-check when SEBI revises product-labelling circulars.",
+    "coveragePeriod": "Current regulatory framework",
+    "sourceUrl": "https://investor.sebi.gov.in/riskometer.html",
+    "fields": [
+      "riskLevels: Low / Low to Moderate / Moderate / Moderately High / High / Very High",
+      "officialColourScheme: Irish Green, Chartreuse, Neon Yellow, Caramel, Dark Orange, Red",
+      "schemeAndBenchmarkRiskDisclosureRequirements"
+    ],
+    "accessNotes": "Official public regulatory material, free to access. Cite the circular number when surfacing Riskometer explanations (see relatedUrls).",
+    "relatedUrls": {
+      "riskometerExplainer": "https://investor.sebi.gov.in/riskometer.html",
+      "originalRiskometerCircular": "CIR/IMD/DF/4/2015 dated 30 Apr 2015",
+      "sixLevelUpdate": "SEBI/HO/IMD/DF3/CIR/P/2020/197 dated 05 Oct 2020",
+      "colourSchemeCircular": "SEBI circular Nov-2024 (disclosure of expenses, half yearly returns, yield and risk-o-meter)",
+      "masterCircularClause": "Clause 17.4 of the Master Circular for Mutual Funds"
+    },
+    "note": "Riskometer data files live on individual AMC websites; no single official bulk download exists, so WealthGenie links out instead of scraping.",
+    "licenseOrConstraints": "Official public regulatory material (SEBI circulars); six-level Riskometer disclosed to investors free of charge; cite the circular when reproduced."
+  },
+  {
+    "id": "amc-factsheets",
+    "name": "AMC Monthly Factsheets & Scheme Documents",
+    "provider": "Individual Asset Management Companies (via AMFI index)",
+    "description": "Official monthly scheme factsheets (portfolio holdings, risk ratios, performance, TER), SIDs/KIMs, and annual reports published by each AMC and indexed by AMFI.",
+    "intendedUse": "Scheme-level attributes (fund manager, risk ratios, expense ratio, benchmark) for educational fund profiles — linked, never bulk-scraped.",
+    "status": "Reference links connected (manual collection)",
+    "updateFrequency": "Monthly (within 10 days of month-end, SEBI-mandated)",
+    "refreshFrequency": "Monthly.",
+    "coveragePeriod": "Current published month",
+    "sourceUrl": "https://www.amfiindia.com/online-center/download-factsheets",
+    "fields": [
+      "schemeObjective / fundManager / AUM / TER",
+      "portfolioHoldings / riskRatios (sharpe, beta, etc.)",
+      "performanceHistory / schemeCategory"
+    ],
+    "accessNotes": "Public documents issued by the AMCs for investor information. No bulk scraping: download specific PDFs manually for the schemes actively used. Documents are the copyright of the respective AMCs — used for educational display with attribution.",
+    "verifiedProviderUrls": {
+      "UTI Mutual Fund": "https://www.utimf.com/downloads/fact-sheet",
+      "HDFC Mutual Fund": "https://www.hdfcfund.com/mutual-funds/factsheets"
+    },
+    "otherMajorAmcUrlsNote": "Most other leading AMCs publish at <amc-website>/downloads/factsheet style pages; always start from AMFI's official factsheet index above rather than third-party mirrors.",
+    "licenseOrConstraints": "Documents are the copyright of the respective AMCs; public investor disclosures used for educational display with attribution. No bulk scraping."
+  },
+  {
+    "id": "rbi-banking-deposits",
+    "name": "RBI Banking & Deposit Statistics",
+    "provider": "Reserve Bank of India (RBI)",
+    "description": "Official deposit trends and structure data: annual/quarterly BSR-2 'Deposits with Scheduled Commercial Banks' (type, ownership, maturity, size, interest-rate ranges), fortnightly aggregate deposits (Form-A), and monthly Composition/Ownership Pattern of Deposits.",
+    "intendedUse": "Passive-investing / FD-vs-equity educational comparisons grounded in official RBI statistics.",
+    "status": "Documented for manual collection (not connected)",
+    "updateFrequency": "BSR-2 quarterly (excluding RRBs) + annual; aggregate deposits fortnightly; composition of deposits monthly.",
+    "refreshFrequency": "Quarterly is sufficient for educational use.",
+    "coveragePeriod": "Latest completed reporting period (annual reference date end-March; quarterly reference dates end of each quarter).",
+    "sourceUrl": "https://data.rbi.org.in",
+    "dataReleasesIndex": "https://www.rbi.org.in/Scripts/Statistics.aspx/BS_StatisticsDisplay.aspx",
+    "fields": [
+      "typeOfDeposits (current / savings / term)",
+      "ownershipPattern / ageWiseDistribution",
+      "maturityPattern / sizeDistribution",
+      "interestRateRangeWiseDistribution of term deposits",
+      "state/district/centre disaggregation"
+    ],
+    "accessNotes": "Free public releases on the Database on Indian Economy (DBIE) portal: data.rbi.org.in > Publications. Open data for research/educational use with attribution to RBI. No restricted scraping needed; downloadable Excel/CSV publications are available. Example release: 'Annual Basic Statistical Return (BSR)-2 on Deposits with Scheduled Commercial Banks – March 2026' (announced 29 May 2026).",
+    "manualCollectionSteps": [
+      "1. Open https://data.rbi.org.in > Homepage > Publications.",
+      "2. Choose the latest BSR-2 'Deposits with Scheduled Commercial Banks' (quarterly or annual).",
+      "3. Download the relevant Excel/CSV tables and copy into data/raw/rbi/ with the original file name.",
+      "4. Run the data-quality gate: node scripts/validateDataQuality.js."
+    ],
+    "licenseOrConstraints": "RBI statistical releases — open data for research/educational use with attribution to the Reserve Bank of India."
+  },
+  {
+    "id": "india-fd-rates",
+    "name": "FD Interest Rates (Bank Official Pages)",
+    "provider": "Individual scheduled commercial banks (SBI, HDFC Bank, ICICI Bank, et al.)",
+    "description": "Current retail fixed-deposit interest rates and maturity schemas published on each bank's own website; RBI also publishes a monthly aggregated 'Lending and Deposit Rates of Scheduled Commercial Banks' data release.",
+    "intendedUse": "Illustrative FD comparisons. Rates must always be read from a bank's official page at display time or stored with an explicit retrieval date — never invented or extrapolated.",
+    "status": "Documented for manual collection (not connected; no rates stored yet)",
+    "updateFrequency": "Banks reprice irregularly; RBI aggregated release monthly.",
+    "refreshFrequency": "Manual check whenever FD comparisons are shown; display with the access date.",
+    "coveragePeriod": "Current rates only (no historical) — point-in-time official pages.",
+    "sourceUrl": "https://www.rbi.org.in/Scripts/Statistics.aspx/BS_StatisticsDisplay.aspx",
+    "fields": [
+      "tenorWiseRetailFdRates (e.g., 7d–10y slab rates)",
+      "seniorCitizenPremium (banks typically +0.50%)",
+      "rountrippedComparisonNote (RBI's aggregated deposit rates series)"
+    ],
+    "accessNotes": "Bank rate pages are freely viewable. No scraping of restricted/paged data; copy only the slab table that a member of the public can view openly, always with the date of access. Prefer RBI's aggregated series for thematic use.",
+    "verifiedBankPages": {
+      "SBI": "https://sbi.co.in/web/interest-rates/interest-rates-on-deposit",
+      "HDFC Bank": "https://www.hdfcbank.com/personal/save/fixed-deposit/fd-interest-rates",
+      "ICICI Bank": "https://www.icicibank.com/personal-banking/deposits/fixed-deposit/fd-rates"
+    },
+    "caution": "Bank rate-page URLs occasionally move. If a link 404s, go to the bank homepage > Interest Rates. If no official rate is verified, show the honest unconnected state instead of an approximate rate.",
+    "licenseOrConstraints": "Bank-published rate information is public; copy only openly displayed slab tables with access date. RBI aggregated series is open data with attribution."
+  },
+  {
+    "id": "rbi-financial-education",
+    "name": "RBI Financial Education & Kehta Hai Campaign",
+    "provider": "Reserve Bank of India (RBI)",
+    "description": "Official consumer protection frameworks, DICGC deposit insurance thresholds (up to ₹5 Lakh), and digital payment / UPI safety guidelines.",
+    "intendedUse": "Grounding in banking safety, emergency liquidity buffers, and cyber fraud prevention.",
+    "status": "Reference links connected (content not mirrored)",
+    "updateFrequency": "Quarterly monetary policy and consumer advisories",
+    "refreshFrequency": "Quarterly.",
+    "coveragePeriod": "Current regulatory framework",
+    "sourceUrl": "https://www.rbi.org.in/FinancialEducation",
+    "fields": [
+      "Consumer advisories, UPI safety guidance, DICGC insurance limits."
+    ],
+    "accessNotes": "Official public awareness publications, free to access with attribution.",
+    "licenseOrConstraints": "Official public awareness publications, free to access with attribution to RBI."
+  }
+]

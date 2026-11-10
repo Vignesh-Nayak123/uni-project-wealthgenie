@@ -1,0 +1,210 @@
+{
+  "registryVersion": "1.1.0",
+  "updatedAt": "2026-10-28",
+  "sources": [
+    {
+      "id": "RBI-BEAWARE",
+      "publisher": "Reserve Bank of India (Office of the RBI Ombudsman)",
+      "title": "BE(A)WARE: A Booklet on Modus Operandi of Financial Frauds",
+      "url": "https://www.rbi.org.in/commonman/Upload/english/Content/PDFs/English%20BEAWARE.pdf",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "upi-safety",
+        "digital-financial-fraud"
+      ],
+      "notes": "Verified on 2026-10-28 by downloading the PDF and extracting its text. Section 3 (UPI collect request on online sales platforms), section 9 (QR code scam) and 'Actions to be taken after occurrence of a fraud' (helplines 155260 and 1930, cybercrime.gov.in) support the UPI and reporting claims."
+    },
+    {
+      "id": "RBI-PR-1630",
+      "publisher": "Reserve Bank of India",
+      "title": "Press Release 2021-2022/1630: Consumer Awareness - Cyber Threats and Frauds",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53185",
+      "publishedAt": "2022-01-28",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "upi-safety",
+        "digital-financial-fraud"
+      ],
+      "notes": "Verified on 2026-10-28 from the full HTML press release. Lists vishing, phishing, remote-access apps, misuse of UPI collect requests and fake bank numbers, and sets out the Safe Digital Banking Practices (never share PIN, UPI-PIN or OTP; receiving money needs no QR scan or PIN; block all debit modes after an unauthorised transaction)."
+    },
+    {
+      "id": "RBI-FAME",
+      "publisher": "Reserve Bank of India",
+      "title": "Financial Awareness Messages (FAME), 4th edition",
+      "url": "https://www.rbi.org.in/commonman/images/FAME202426022024.pdf",
+      "publishedAt": "2024-02",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "income",
+        "expenses",
+        "budgeting",
+        "saving-money",
+        "emergency-funds",
+        "inflation",
+        "simple-interest",
+        "compound-interest",
+        "risk-and-return",
+        "bank-deposits",
+        "fixed-recurring-deposits",
+        "diversification",
+        "upi-safety",
+        "digital-financial-fraud",
+        "borrowing-interest",
+        "credit-scores"
+      ],
+      "notes": "RBI educational material, not a legal interpretation. Relevant messages include 1-3, 6-8, 10-11, 13-16 and 20."
+    },
+    {
+      "id": "RBI-FLW25",
+      "publisher": "Reserve Bank of India",
+      "title": "Saving and Risk Management, Financial Literacy Week 2025",
+      "url": "https://rbi.org.in/FinancialEducation/FLW25_SavingandRiskManagement.aspx",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "saving-money",
+        "emergency-funds"
+      ],
+      "notes": "RBI financial education page. It does not mandate a specific emergency-fund month count."
+    },
+    {
+      "id": "DICGC",
+      "publisher": "Deposit Insurance and Credit Guarantee Corporation",
+      "title": "Information Leaflet 2024-25",
+      "url": "https://www.dicgc.org.in/sites/default/files/2025-10/dicgc-informationleaflet-2024-25-eng.pdf",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "bank-deposits"
+      ],
+      "notes": "Covers the current deposit-insurance limit and the same-right/same-capacity rule."
+    },
+    {
+      "id": "SEBI-MF",
+      "publisher": "Securities and Exchange Board of India",
+      "title": "Understanding Mutual Funds",
+      "url": "https://investor.sebi.gov.in/understanding_mf.html",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "mutual-funds",
+        "index-funds",
+        "sips"
+      ],
+      "notes": "SEBI investor education page covering pooling, professional management, NAV and risk."
+    },
+    {
+      "id": "SEBI-RISK",
+      "publisher": "Securities and Exchange Board of India",
+      "title": "Key Risks in Investing in Securities Market",
+      "url": "https://investor.sebi.gov.in/securities-risks_trade_derivatives.html",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "risk-and-return",
+        "stocks",
+        "risk-tolerance"
+      ],
+      "notes": "Covers market, inflation, liquidity, business, volatility and currency risk."
+    },
+    {
+      "id": "SEBI-SHARES",
+      "publisher": "Securities and Exchange Board of India",
+      "title": "Understanding Shares",
+      "url": "https://investor.sebi.gov.in/understandings_shares.html",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "stocks"
+      ],
+      "notes": "Explains shares as part-ownership and the associated market risk."
+    },
+    {
+      "id": "SEBI-INDEX",
+      "publisher": "Securities and Exchange Board of India",
+      "title": "Index Mutual Funds",
+      "url": "https://investor.sebi.gov.in/index_mutual_fund.html",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "index-funds"
+      ],
+      "notes": "Explains passive tracking and tracking error."
+    },
+    {
+      "id": "SEBI-RISKMGMT",
+      "publisher": "Securities and Exchange Board of India",
+      "title": "How to Manage Investment Risks",
+      "url": "https://investor.sebi.gov.in/investment_risk_managment.html",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "diversification",
+        "investment-time-horizon"
+      ],
+      "notes": "Covers diversification and matching investments to the investment horizon."
+    },
+    {
+      "id": "AMFI-INVESTOR",
+      "publisher": "Association of Mutual Funds in India",
+      "title": "Investor Corner",
+      "url": "https://www.amfiindia.com/investor",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "mutual-funds",
+        "sips"
+      ],
+      "notes": "Industry education and disclosures. AMFI is not the securities regulator; SEBI remains authoritative for regulatory claims."
+    },
+    {
+      "id": "AMFI-TER",
+      "publisher": "Association of Mutual Funds in India",
+      "title": "Expense Ratio",
+      "url": "https://www.amfiindia.com/investor/knowledge-center-info?zoneName=expenseRatio",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "index-funds",
+        "fees-expense-ratios"
+      ],
+      "notes": "Explains total expense ratio and its effect on NAV."
+    },
+    {
+      "id": "AMFI-SIP",
+      "publisher": "Association of Mutual Funds in India",
+      "title": "Systematic Investment Plan (SIP)",
+      "url": "https://www.amfiindia.com/investor/become-mf-distributor?zoneName=sip",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "sips"
+      ],
+      "notes": "Explains periodic investing and rupee-cost averaging."
+    },
+    {
+      "id": "NPCI-SAFETY",
+      "publisher": "National Payments Corporation of India",
+      "title": "Safety Features",
+      "url": "https://www.npci.org.in/safety-feature",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "upi-safety"
+      ],
+      "notes": "Re-checked on 2026-10-28: the page returns HTTP 403 to automated requests and the site renders client-side, so its content could not be inspected. No lesson claim may rely on this source until a person verifies it in a browser."
+    },
+    {
+      "id": "NPCI-FRAUD",
+      "publisher": "National Payments Corporation of India",
+      "title": "Fraud Awareness",
+      "url": "https://www.npci.org.in/fraud-awareness",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "upi-safety",
+        "digital-financial-fraud"
+      ],
+      "notes": "Re-checked on 2026-10-28: the page returns HTTP 403 to automated requests and the site renders client-side, so its content could not be inspected. No lesson claim may rely on this source until a person verifies it in a browser."
+    },
+    {
+      "id": "MHA-CYBER",
+      "publisher": "Ministry of Home Affairs, Government of India",
+      "title": "National Cyber Crime Reporting Portal",
+      "url": "https://cybercrime.gov.in/",
+      "accessedAt": "2026-10-28",
+      "scope": [
+        "digital-financial-fraud"
+      ],
+      "notes": "Reporting portal and helpline 1930. Related I4C FAQ: https://i4c.mha.gov.in/FAQ.aspx."
+    }
+  ]
+}

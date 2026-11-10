@@ -1,0 +1,52 @@
+{
+  "source": "wealthgenie-datasets\\nav_history.parquet",
+  "nav_series_rows": 37703595,
+  "funds_processed": 38475,
+  "funds_with_any_nav_history": 38475,
+  "nav_covrage_note": "nav columns transformed decimal128->float; no imputation",
+  "sufficiency_rule": {
+    "min_obs_in_window": 12,
+    "min_span_fraction": 0.97
+  },
+  "output": {
+    "rows": 38475,
+    "columns": [
+      "scheme_code",
+      "obs_count",
+      "first_nav_date",
+      "last_nav_date",
+      "span_days",
+      "freshness_days",
+      "last_nav_value",
+      "return_one_year",
+      "return_three_year",
+      "return_five_year",
+      "volatility_annualized",
+      "max_drawdown",
+      "positive_rolling_year_fraction",
+      "mean_observation_gap_days",
+      "window_start_date_one_year",
+      "window_start_date_three_year",
+      "window_start_date_five_year",
+      "insufficient_horizons",
+      "window_span_days_one_year",
+      "window_span_days_three_year",
+      "window_span_days_five_year",
+      "flag"
+    ],
+    "reproducibility": "Single sorted pass; no RNG; deterministic.",
+    "command": "python wealthgenie-datasets/build_nav_metrics.py"
+  },
+  "population_rates": {
+    "return_one_year": 29888,
+    "return_three_year": 19968,
+    "return_five_year": 7788,
+    "volatility_annualized": 34960,
+    "max_drawdown": 34993,
+    "positive_rolling_year_fraction": 23055
+  },
+  "freshness": {
+    "median_freshness_days": 3184.0,
+    "max_freshness_days": 7519
+  }
+}

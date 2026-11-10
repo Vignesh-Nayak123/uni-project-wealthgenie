@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "fees-expense-ratios",
+  "title": "Fees and expense ratios",
+  "branchId": "investing",
+  "category": "Investing",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "FEE-OBJ-1",
+      "text": "Explain what a total expense ratio is and how it is charged."
+    },
+    {
+      "id": "FEE-OBJ-2",
+      "text": "Estimate how a higher expense ratio reduces a long-term return."
+    },
+    {
+      "id": "FEE-OBJ-3",
+      "text": "Find and compare the costs disclosed for a mutual fund scheme."
+    }
+  ],
+  "prerequisites": [
+    "mutual-funds",
+    "index-funds"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "A mutual fund charges for managing your money. These charges are bundled into the total expense ratio, or TER, which is expressed as a percentage of the fund's assets each year. AMFI explains that the expense ratio is deducted from the scheme's assets, so it reduces the NAV and therefore the return you actually receive. You do not get a separate bill; the cost is already inside the fund's value.",
+    "SEBI caps the expenses a fund may charge, and the permitted limit depends on the scheme's type and size. The exact figure is disclosed in the scheme's documents, so check the current document rather than relying on a number you remember. A fund with a lower expense ratio keeps more of the gross return for the investor, which matters most when returns are modest and the holding period is long.",
+    "Costs compound too. Suppose two funds both earn 8% before expenses, but one charges 1% a year and the other 0.2%. On ₹1,00,000 over 20 years, the net rates are 7% and 7.8%. The first grows to about ₹3,87,000 and the second to about ₹4,49,000, a gap of roughly ₹62,000. The gross return was identical; only the cost differed."
+  ],
+  "examples": [
+    {
+      "id": "FEE-EX-1",
+      "title": "The same return, two expense ratios",
+      "text": "Aarav invests ₹1,00,000 for 20 years in a fund earning 8% before expenses. At a 1% expense ratio his net return is about 7% and the corpus is roughly ₹3,87,000. At 0.2% the net return is about 7.8% and the corpus is roughly ₹4,49,000. The difference of about ₹62,000 is the cost of the higher fee.",
+      "sourceIds": [
+        "AMFI-TER"
+      ],
+      "calculation": {
+        "formula": "Net return = gross return − expense ratio; corpus = principal × (1 + net return)^years",
+        "steps": [
+          "8% − 1% = 7% net",
+          "₹1,00,000 × 1.07^20 ≈ ₹3,87,000",
+          "8% − 0.2% = 7.8% net",
+          "₹1,00,000 × 1.078^20 ≈ ₹4,49,000"
+        ],
+        "result": "About ₹62,000 more with the lower expense ratio"
+      }
+    },
+    {
+      "id": "FEE-EX-2",
+      "title": "Where to find the number",
+      "text": "Priya checks a scheme's total expense ratio in its published disclosures before investing, instead of assuming all funds cost the same. She compares it with the scheme's objective and risk level, because the cheapest fund is not automatically the right one.",
+      "sourceIds": [
+        "AMFI-TER",
+        "SEBI-MF"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "The total expense ratio is an annual percentage deducted from the fund's assets.",
+    "It reduces NAV and therefore the return the investor receives.",
+    "SEBI caps fund expenses; the applicable limit is disclosed in the scheme documents.",
+    "Over long periods, a small difference in cost becomes a large difference in corpus."
+  ],
+  "sourceIds": [
+    "AMFI-TER",
+    "SEBI-MF"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "The definition of TER and its effect on NAV are checked against AMFI's expense-ratio explainer. The fact that SEBI caps fund expenses is checked against SEBI's mutual fund page. No specific regulatory cap is quoted because the limit changes; readers are directed to the scheme documents. The 7% versus 7.8% projection is illustrative arithmetic. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "FEE-Q-1",
+      "objectiveId": "FEE-OBJ-1",
+      "question": "How is a mutual fund's expense ratio charged?",
+      "options": [
+        "It is a one-time fee paid only when you buy units",
+        "It is deducted from the scheme's assets each year, reducing NAV",
+        "It is paid separately by the investor to SEBI"
+      ],
+      "correctIndex": 1,
+      "explanation": "The expense ratio is an annual percentage taken from the fund's assets. It lowers the NAV, so the investor experiences it as a lower return rather than a separate bill."
+    },
+    {
+      "id": "FEE-Q-2",
+      "objectiveId": "FEE-OBJ-2",
+      "question": "Two funds earn 8% before expenses. One charges 1% and the other 0.2%. Over 20 years, what happens?",
+      "options": [
+        "Both end with exactly the same corpus",
+        "The higher-cost fund ends larger because it charges more",
+        "The lower-cost fund ends with a noticeably larger corpus"
+      ],
+      "correctIndex": 2,
+      "explanation": "The net returns are 7% and 7.8%. Compounded over 20 years, that small annual gap becomes a large difference in the final corpus."
+    },
+    {
+      "id": "FEE-Q-3",
+      "objectiveId": "FEE-OBJ-3",
+      "question": "Where should you check a scheme's current expense ratio?",
+      "options": [
+        "In the scheme's published disclosures and documents",
+        "From a social media post",
+        "By guessing from the fund's name"
+      ],
+      "correctIndex": 0,
+      "explanation": "Expense ratios are disclosed in the scheme's documents and published information. Because limits and figures can change, the current disclosure is the reliable source."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Expense ratios and regulatory caps change; check the scheme's current documents."
+}

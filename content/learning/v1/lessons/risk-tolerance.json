@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "risk-tolerance",
+  "title": "Risk tolerance",
+  "branchId": "investing",
+  "category": "Investing",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "RT-OBJ-1",
+      "text": "Distinguish the ability to take risk from the willingness to take it."
+    },
+    {
+      "id": "RT-OBJ-2",
+      "text": "Identify personal factors that shape risk tolerance."
+    },
+    {
+      "id": "RT-OBJ-3",
+      "text": "Choose a portfolio risk level you can hold through a market fall."
+    }
+  ],
+  "prerequisites": [
+    "investment-time-horizon",
+    "diversification"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "Risk tolerance has two parts. Ability to take risk is financial: your income stability, emergency fund, dependants and how soon you need the money. Willingness to take risk is temperamental: how you would feel and behave if your portfolio fell 20% in a year. A plan needs both. Taking more risk than you can afford is dangerous, and taking more than you can tolerate usually ends in panic selling.",
+    "SEBI's investor material lists the risks that feed into this judgement, including market risk, inflation risk, liquidity risk and business risk. A useful way to test willingness is to ask what you would actually do after a sharp fall: sell, stop investing, or keep going. If the honest answer is sell, the portfolio is too aggressive for you, whatever a questionnaire says.",
+    "Risk tolerance is not a fixed personality label. It changes with your obligations, your job, your emergency fund and your experience. Reassess it when your circumstances change, and prefer a portfolio you can hold through a bad year over one that looks optimal only if markets behave. Diversification and a suitable horizon are the tools that make a chosen risk level survivable."
+  ],
+  "examples": [
+    {
+      "id": "RT-EX-1",
+      "title": "Ability without willingness",
+      "text": "Aarav has a stable job, a six-month emergency fund and a 20-year horizon, so he can financially afford equity risk. But he checks his portfolio daily and sells whenever it falls 5%. His ability is high; his willingness is low. A smoother mix would serve him better than the most aggressive one.",
+      "sourceIds": [
+        "SEBI-RISK",
+        "SEBI-RISKMGMT"
+      ]
+    },
+    {
+      "id": "RT-EX-2",
+      "title": "Willingness without ability",
+      "text": "Meera is comfortable with volatility and wants an all-equity portfolio. But she has no emergency fund, her income is irregular and she is repaying a loan. Her willingness is high; her ability is limited. Building a cushion first is the safer order of operations.",
+      "sourceIds": [
+        "SEBI-RISKMGMT"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Ability to take risk is financial; willingness is behavioural.",
+    "A suitable plan respects both, not just the higher one.",
+    "Ask what you would actually do after a sharp fall.",
+    "Reassess risk tolerance when your job, dependants or emergency fund change."
+  ],
+  "sourceIds": [
+    "SEBI-RISK",
+    "SEBI-RISKMGMT"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Risk categories and the possibility of loss are checked against SEBI's key-risks page. The link between risk tolerance, horizon and diversification is checked against SEBI's risk-management page. The ability-versus-willingness framing is standard practice, presented as a thinking tool rather than a regulatory rule. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "RT-Q-1",
+      "objectiveId": "RT-OBJ-1",
+      "question": "What is the difference between ability and willingness to take risk?",
+      "options": [
+        "Ability is financial capacity; willingness is how you would behave in a fall",
+        "They mean exactly the same thing",
+        "Ability is about age; willingness is about income"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ability depends on your finances, such as income stability and emergency savings. Willingness is behavioural: whether you can stay invested through losses."
+    },
+    {
+      "id": "RT-Q-2",
+      "objectiveId": "RT-OBJ-2",
+      "question": "Which factor most directly reduces your ability to take investment risk?",
+      "options": [
+        "Having a long time horizon",
+        "Having no emergency fund and irregular income",
+        "Being interested in financial news"
+      ],
+      "correctIndex": 1,
+      "explanation": "Without a cushion and with unpredictable income, a loss could force you to sell at the wrong time. That limits how much risk you can afford."
+    },
+    {
+      "id": "RT-Q-3",
+      "objectiveId": "RT-OBJ-3",
+      "question": "How should you choose a portfolio's risk level?",
+      "options": [
+        "Pick the highest-return option regardless of falls",
+        "Pick the option a friend uses",
+        "Pick a level you can hold through a market fall and that fits your finances"
+      ],
+      "correctIndex": 2,
+      "explanation": "A portfolio only works if you can stay with it. It must fit both your financial ability and your willingness to tolerate losses."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. A financial adviser can help assess your circumstances, but the final decision is yours."
+}

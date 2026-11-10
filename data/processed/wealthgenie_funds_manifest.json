@@ -1,0 +1,86 @@
+{
+  "generated_from": {
+    "scheme_master": "wealthgenie-datasets\\scheme_master.csv.csv",
+    "scheme_details": "wealthgenie-datasets\\scheme_details.csv.csv",
+    "scheme_master_sha_note": "row-count identity, no hash on 38k rows needed for reproducibility"
+  },
+  "master_rows": 38495,
+  "details_rows": 11417,
+  "duplicate_scheme_codes": {
+    "master": 0,
+    "details": 0
+  },
+  "details_only_scheme_codes": {
+    "count": 0,
+    "sample": []
+  },
+  "merged_rows": 38495,
+  "row_multiplication": 0,
+  "details_matched_rows": 11417,
+  "unmatched_master_rows": 27078,
+  "cleaning": [
+    {
+      "step": "riskometer coalesce",
+      "detail": "riskometer = coalesce(ssd_riskometer_level, amfi_daily_riskometer, ssd_riskometer); label normalized to the SEBI scale; source per row recorded in riskometer_source.",
+      "populated": 11190,
+      "null": 27305
+    },
+    {
+      "step": "riskometer_level mapping",
+      "detail": "Normalized labels mapped to SEBI levels 1-6; off-scale labels stay null.",
+      "populated": 11190,
+      "null": 27305
+    },
+    {
+      "step": "fund_name preference",
+      "detail": "fund_name_latest preferred; scheme_name kept as scheme_name_master.",
+      "populated": 8849
+    },
+    {
+      "step": "expense ratio",
+      "detail": "ter_regular kept verbatim with ter_date as-of. ter_direct kept separately.",
+      "populated_regular": 8348,
+      "populated_direct": 8223
+    },
+    {
+      "step": "no deletion",
+      "detail": "No rows dropped; no missing financial value replaced with zero or synthetic data."
+    }
+  ],
+  "output": {
+    "path": "data\\processed\\wealthgenie_funds.csv",
+    "rows": 38495,
+    "columns": [
+      "scheme_code",
+      "fund_name",
+      "scheme_name",
+      "amc",
+      "isin",
+      "scheme_plan",
+      "scheme_option",
+      "details_matched",
+      "category_primary",
+      "category_group_clean",
+      "category_group",
+      "category_sub",
+      "riskometer",
+      "riskometer_source",
+      "riskometer_level",
+      "ter_regular",
+      "ter_direct",
+      "ter_date",
+      "expense_ratio_ssd",
+      "benchmark",
+      "first_date",
+      "last_date",
+      "nav_date",
+      "nav",
+      "is_active",
+      "is_stale",
+      "aaum_cr_quarterly_avg",
+      "source"
+    ],
+    "reproducibility": "Deterministic: merge order derived from source row order; no sampling, no RNG. Re-running produces identical output.",
+    "command": "python wealthgenie-datasets/build_fund_dataset.py"
+  }
+}

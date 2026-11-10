@@ -1,0 +1,1025 @@
+{
+  "source": "AMFI NAVAll.txt - Daily NAV Snapshot",
+  "sourceUrl": "https://portal.amfiindia.com/spages/NAVAll.txt",
+  "retrievalDate": "2026-10-24T19:07:06.403Z",
+  "rawSha256": "ba9705cb9b075a8ed4080d9370ae4eca8c8d9bf498a83302ef45ebabcc11dd3d",
+  "limitation": "NAVAll.txt contains ONE row per scheme (latest NAV only). Not a historical time series.",
+  "totalSchemesInFile": 14171,
+  "nifty50IndexFundSchemesCount": 79,
+  "directGrowthSchemesCount": 22,
+  "snapshotDate": "2026-10-23",
+  "allNifty50Schemes": [
+    {
+      "schemeCode": "149373",
+      "isinGrowth": "INF846K013D2",
+      "isinReinvestment": "-",
+      "schemeName": "Axis Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav": 13.7576,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "149374",
+      "isinGrowth": "INF846K014D0",
+      "isinReinvestment": "INF846K015D7",
+      "schemeName": "Axis Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW Option",
+      "nav": 13.0488,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "149371",
+      "isinGrowth": "INF846K016D5",
+      "isinReinvestment": "-",
+      "schemeName": "Axis Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth Option",
+      "nav": 13.5622,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "149372",
+      "isinGrowth": "INF846K017D3",
+      "isinReinvestment": "INF846K018D1",
+      "schemeName": "Axis Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW Option",
+      "nav": 12.8644,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "154301",
+      "isinGrowth": "INF2KCX01020",
+      "isinReinvestment": "-",
+      "schemeName": "Choice Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 9.7839,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "154302",
+      "isinGrowth": "INF2KCX01038",
+      "isinReinvestment": "-",
+      "schemeName": "Choice Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 9.7681,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153704",
+      "isinGrowth": "INF666M01KT3",
+      "isinReinvestment": "-",
+      "schemeName": "Groww Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 9.0724,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153709",
+      "isinGrowth": "INF666M01KU1",
+      "isinReinvestment": "INF666M01KV9",
+      "schemeName": "Groww Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Income Distribution cum capital withdrawal",
+      "nav": 9.0724,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153710",
+      "isinGrowth": "INF666M01KW7",
+      "isinReinvestment": "-",
+      "schemeName": "Groww Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 8.9936,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153711",
+      "isinGrowth": "INF666M01LJ2",
+      "isinReinvestment": "INF666M01LK0",
+      "schemeName": "Groww Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Income Distribution cum capital withdrawal",
+      "nav": 8.9936,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "151157",
+      "isinGrowth": "INF917K01D12",
+      "isinReinvestment": "-",
+      "schemeName": "HSBC NIFTY 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 26.785,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "151156",
+      "isinGrowth": "INF917K01C96",
+      "isinReinvestment": "INF917K01D04",
+      "schemeName": "HSBC NIFTY 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Direct IDCW",
+      "nav": 26.7849,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "151158",
+      "isinGrowth": "INF917K01D38",
+      "isinReinvestment": "-",
+      "schemeName": "HSBC NIFTY 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 26.2814,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "151159",
+      "isinGrowth": "INF917K01D20",
+      "isinReinvestment": "INF917K01D46",
+      "schemeName": "HSBC NIFTY 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW",
+      "nav": 26.2813,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153787",
+      "isinGrowth": "INF22M001044",
+      "isinReinvestment": "-",
+      "schemeName": "JioBlackRock Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav": 9.1731,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "154633",
+      "isinGrowth": "INF22M001200",
+      "isinReinvestment": "-",
+      "schemeName": "JioBlackRock Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth Option",
+      "nav": 9.3027,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "152972",
+      "isinGrowth": "INF769K01MQ1",
+      "isinReinvestment": "-",
+      "schemeName": "Mirae Asset Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 9.4365,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "152973",
+      "isinGrowth": "INF769K01MN8",
+      "isinReinvestment": "INF769K01MM0",
+      "schemeName": "Mirae Asset Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW",
+      "nav": 9.4366,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "152974",
+      "isinGrowth": "INF769K01MO6",
+      "isinReinvestment": "-",
+      "schemeName": "Mirae Asset Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 9.3185,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "152975",
+      "isinGrowth": "INF769K01MP3",
+      "isinReinvestment": "INF769K01MR9",
+      "schemeName": "Mirae Asset Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW",
+      "nav": 9.3202,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153906",
+      "isinGrowth": "INF0R8F01158",
+      "isinReinvestment": "-",
+      "schemeName": "Zerodha Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav": 9.0548,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "119648",
+      "isinGrowth": "INF209K01VY3",
+      "isinReinvestment": "-",
+      "schemeName": "Aditya Birla Sun Life Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "GROWTH",
+      "nav": 236.2292,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "101314",
+      "isinGrowth": "INF209K01LB2",
+      "isinReinvestment": "-",
+      "schemeName": "Aditya Birla Sun Life Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "GROWTH",
+      "nav": 230.2537,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "119649",
+      "isinGrowth": "INF209K01VX5",
+      "isinReinvestment": "-",
+      "schemeName": "Aditya Birla Sun Life Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW",
+      "nav": 23.9307,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "101313",
+      "isinGrowth": "INF209K01LA4",
+      "isinReinvestment": "INF209K01LC0",
+      "schemeName": "Aditya Birla Sun Life Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW",
+      "nav": 23.0561,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153529",
+      "isinGrowth": "INF1J2R01072",
+      "isinReinvestment": "-",
+      "schemeName": "ANGEL ONE NIFTY 50 INDEX FUND",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 9.317,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153530",
+      "isinGrowth": "INF1J2R01080",
+      "isinReinvestment": "-",
+      "schemeName": "ANGEL ONE NIFTY 50 INDEX FUND",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 9.2515,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153506",
+      "isinGrowth": "INF0QA701BA9",
+      "isinReinvestment": "-",
+      "schemeName": "Bajaj Finserv Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 9.24,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153505",
+      "isinGrowth": "INF0QA701BB7",
+      "isinReinvestment": "INF0QA701BC5",
+      "schemeName": "Bajaj Finserv Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW",
+      "nav": 9.24,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153508",
+      "isinGrowth": "INF0QA701AY1",
+      "isinReinvestment": "-",
+      "schemeName": "Bajaj Finserv Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 9.1476,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153507",
+      "isinGrowth": "INF0QA701BJ0",
+      "isinReinvestment": "INF0QA701AZ8",
+      "schemeName": "Bajaj Finserv Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW",
+      "nav": 9.1476,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "112877",
+      "isinGrowth": "INF194K01920",
+      "isinReinvestment": "-",
+      "schemeName": "BANDHAN Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 48.886,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "112878",
+      "isinGrowth": "INF194K01938",
+      "isinReinvestment": "INF194K01946",
+      "schemeName": "BANDHAN Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW",
+      "nav": 44.37,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "118482",
+      "isinGrowth": "INF194K012A8",
+      "isinReinvestment": "-",
+      "schemeName": "BANDHAN Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 50.6537,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "118483",
+      "isinGrowth": "INF194K013A6",
+      "isinReinvestment": "INF194K014A4",
+      "schemeName": "BANDHAN Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW",
+      "nav": 46.0388,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "152329",
+      "isinGrowth": "INF251K01SY1",
+      "isinReinvestment": "-",
+      "schemeName": "Baroda BNP Paribas Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav": 10.6806,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "152330",
+      "isinGrowth": "INF251K01SZ8",
+      "isinReinvestment": "INF251K01TA9",
+      "schemeName": "Baroda BNP Paribas Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW Option",
+      "nav": 10.6806,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "152331",
+      "isinGrowth": "INF251K01SV7",
+      "isinReinvestment": "-",
+      "schemeName": "Baroda BNP Paribas Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth Option",
+      "nav": 10.5707,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "152328",
+      "isinGrowth": "INF251K01SW5",
+      "isinReinvestment": "INF251K01SX3",
+      "schemeName": "Baroda BNP Paribas Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW Option",
+      "nav": 10.5707,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "146376",
+      "isinGrowth": "INF740KA1MM7",
+      "isinReinvestment": "-",
+      "schemeName": "DSP Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 22.3377,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "146377",
+      "isinGrowth": "INF740KA1MN5",
+      "isinReinvestment": "INF740KA1MO3",
+      "schemeName": "DSP Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW",
+      "nav": 19.1135,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "146379",
+      "isinGrowth": "INF740KA1MJ3",
+      "isinReinvestment": "-",
+      "schemeName": "DSP Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 22.0006,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "146378",
+      "isinGrowth": "INF740KA1MK1",
+      "isinReinvestment": "INF740KA1ML9",
+      "schemeName": "DSP Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW",
+      "nav": 17.9407,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "149250",
+      "isinGrowth": "INF754K01NB3",
+      "isinReinvestment": "-",
+      "schemeName": "Edelweiss Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 13.4285,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "149251",
+      "isinGrowth": "INF754K01NC1",
+      "isinReinvestment": "INF754K01ND9",
+      "schemeName": "Edelweiss Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW",
+      "nav": 13.2427,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "149252",
+      "isinGrowth": "INF754K01MX9",
+      "isinReinvestment": "-",
+      "schemeName": "Edelweiss Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 12.9468,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "149253",
+      "isinGrowth": "INF754K01MY7",
+      "isinReinvestment": "INF754K01MZ4",
+      "schemeName": "Edelweiss Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW",
+      "nav": 12.9467,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "118580",
+      "isinGrowth": "INF090I01GQ8",
+      "isinReinvestment": "INF090I01GR6",
+      "schemeName": "Franklin India NSE Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW",
+      "nav": 168.5867,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "100484",
+      "isinGrowth": "INF090I01890",
+      "isinReinvestment": "-",
+      "schemeName": "Franklin India NSE Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 183.3759,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "105067",
+      "isinGrowth": "INF090I01874",
+      "isinReinvestment": "INF090I01882",
+      "schemeName": "Franklin India NSE Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW",
+      "nav": 158.5743,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "118581",
+      "isinGrowth": "INF090I01GS4",
+      "isinReinvestment": "-",
+      "schemeName": "Franklin India NSE Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 193.5268,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "119063",
+      "isinGrowth": "INF179K01WM1",
+      "isinReinvestment": "-",
+      "schemeName": "HDFC Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav": 221.2213,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "101525",
+      "isinGrowth": "INF179K01KZ8",
+      "isinReinvestment": "-",
+      "schemeName": "HDFC Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth Option",
+      "nav": 215.971,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "101349",
+      "isinGrowth": "INF109K01PI0",
+      "isinReinvestment": "-",
+      "schemeName": "ICICI Prudential Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Cumulative",
+      "nav": 229.085,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "120620",
+      "isinGrowth": "INF109K012M7",
+      "isinReinvestment": "-",
+      "schemeName": "ICICI Prudential Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Cumulative",
+      "nav": 239.2611,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "135391",
+      "isinGrowth": "INF109KB1NL1",
+      "isinReinvestment": "INF109KB1NM9",
+      "schemeName": "ICICI Prudential Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW",
+      "nav": 32.1753,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "135390",
+      "isinGrowth": "INF109KB1NN7",
+      "isinReinvestment": "INF109KB1NO5",
+      "schemeName": "ICICI Prudential Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW",
+      "nav": 30.5194,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "148978",
+      "isinGrowth": "INF174KA1HA7",
+      "isinReinvestment": "-",
+      "schemeName": "Kotak Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 15.038,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "148976",
+      "isinGrowth": "INF174KA1HB5",
+      "isinReinvestment": "INF174KA1HC3",
+      "schemeName": "Kotak Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW Payout",
+      "nav": 15.034,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "148974",
+      "isinGrowth": "INF174KA1GX1",
+      "isinReinvestment": "-",
+      "schemeName": "Kotak Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 14.794,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "148979",
+      "isinGrowth": "INF174KA1GY9",
+      "isinReinvestment": "INF174KA1GZ6",
+      "schemeName": "Kotak Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW Payout",
+      "nav": 14.794,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "120307",
+      "isinGrowth": "INF767K01FF2",
+      "isinReinvestment": "-",
+      "schemeName": "LIC MF Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 135.4784,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "120309",
+      "isinGrowth": "INF767K01FG0",
+      "isinReinvestment": "INF767K01FH8",
+      "schemeName": "LIC MF Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW",
+      "nav": 49.916,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "101201",
+      "isinGrowth": "INF767K01162",
+      "isinReinvestment": "-",
+      "schemeName": "LIC MF Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 124.911,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "101200",
+      "isinGrowth": "INF767K01154",
+      "isinReinvestment": "INF767K01147",
+      "schemeName": "LIC MF Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW",
+      "nav": 46.0793,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "147794",
+      "isinGrowth": "INF247L01AE7",
+      "isinReinvestment": "-",
+      "schemeName": "Motilal Oswal Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 19.7397,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "147795",
+      "isinGrowth": "INF247L01AF4",
+      "isinReinvestment": "-",
+      "schemeName": "Motilal Oswal Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 19.1931,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "149039",
+      "isinGrowth": "INF959L01FP2",
+      "isinReinvestment": "-",
+      "schemeName": "Navi Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 14.9391,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "149040",
+      "isinGrowth": "INF959L01FQ0",
+      "isinReinvestment": "-",
+      "schemeName": "Navi Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 14.7769,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "119288",
+      "isinGrowth": "INF277K01PJ3",
+      "isinReinvestment": "-",
+      "schemeName": "Tata Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "",
+      "nav": 153.8697,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "101659",
+      "isinGrowth": "INF277K01741",
+      "isinReinvestment": "-",
+      "schemeName": "Tata Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "",
+      "nav": 141.3109,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "118881",
+      "isinGrowth": "INF044D01CQ5",
+      "isinReinvestment": "-",
+      "schemeName": "Taurus Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 45.9333,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "118882",
+      "isinGrowth": "INF044D01CR3",
+      "isinReinvestment": "INF044D01CS1",
+      "schemeName": "Taurus Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Income Distribution cum Capital Withdrawal",
+      "nav": 40.796,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "112948",
+      "isinGrowth": "INF044D01948",
+      "isinReinvestment": "-",
+      "schemeName": "Taurus Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 42.9789,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "112949",
+      "isinGrowth": "INF044D01914",
+      "isinReinvestment": "INF044D01922",
+      "schemeName": "Taurus Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Income Distribution cum Capital Withdrawal",
+      "nav": 26.0043,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "120717",
+      "isinGrowth": "INF789F01WY2",
+      "isinReinvestment": "INF789F01WZ9",
+      "schemeName": "UTI Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "IDCW",
+      "nav": 80.1956,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "120716",
+      "isinGrowth": "INF789F01XA0",
+      "isinReinvestment": "-",
+      "schemeName": "UTI Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 159.177,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "100822",
+      "isinGrowth": "INF789F01JN2",
+      "isinReinvestment": "-",
+      "schemeName": "UTI Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "Growth",
+      "nav": 156.7345,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "100823",
+      "isinGrowth": "INF789F01JL6",
+      "isinReinvestment": "INF789F01JM4",
+      "schemeName": "UTI Nifty 50 Index Fund",
+      "plan": "Regular Plan",
+      "option": "IDCW",
+      "nav": 78.9626,
+      "date": "2026-10-23"
+    }
+  ],
+  "directGrowthOnly": [
+    {
+      "schemeCode": "149373",
+      "isinGrowth": "INF846K013D2",
+      "isinReinvestment": "-",
+      "schemeName": "Axis Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav": 13.7576,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "154301",
+      "isinGrowth": "INF2KCX01020",
+      "isinReinvestment": "-",
+      "schemeName": "Choice Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 9.7839,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153704",
+      "isinGrowth": "INF666M01KT3",
+      "isinReinvestment": "-",
+      "schemeName": "Groww Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 9.0724,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "151157",
+      "isinGrowth": "INF917K01D12",
+      "isinReinvestment": "-",
+      "schemeName": "HSBC NIFTY 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 26.785,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153787",
+      "isinGrowth": "INF22M001044",
+      "isinReinvestment": "-",
+      "schemeName": "JioBlackRock Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav": 9.1731,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "152972",
+      "isinGrowth": "INF769K01MQ1",
+      "isinReinvestment": "-",
+      "schemeName": "Mirae Asset Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 9.4365,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153906",
+      "isinGrowth": "INF0R8F01158",
+      "isinReinvestment": "-",
+      "schemeName": "Zerodha Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav": 9.0548,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "119648",
+      "isinGrowth": "INF209K01VY3",
+      "isinReinvestment": "-",
+      "schemeName": "Aditya Birla Sun Life Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "GROWTH",
+      "nav": 236.2292,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153529",
+      "isinGrowth": "INF1J2R01072",
+      "isinReinvestment": "-",
+      "schemeName": "ANGEL ONE NIFTY 50 INDEX FUND",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 9.317,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "153506",
+      "isinGrowth": "INF0QA701BA9",
+      "isinReinvestment": "-",
+      "schemeName": "Bajaj Finserv Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 9.24,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "118482",
+      "isinGrowth": "INF194K012A8",
+      "isinReinvestment": "-",
+      "schemeName": "BANDHAN Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 50.6537,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "152329",
+      "isinGrowth": "INF251K01SY1",
+      "isinReinvestment": "-",
+      "schemeName": "Baroda BNP Paribas Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav": 10.6806,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "146376",
+      "isinGrowth": "INF740KA1MM7",
+      "isinReinvestment": "-",
+      "schemeName": "DSP Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 22.3377,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "149250",
+      "isinGrowth": "INF754K01NB3",
+      "isinReinvestment": "-",
+      "schemeName": "Edelweiss Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 13.4285,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "118581",
+      "isinGrowth": "INF090I01GS4",
+      "isinReinvestment": "-",
+      "schemeName": "Franklin India NSE Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 193.5268,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "119063",
+      "isinGrowth": "INF179K01WM1",
+      "isinReinvestment": "-",
+      "schemeName": "HDFC Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav": 221.2213,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "148978",
+      "isinGrowth": "INF174KA1HA7",
+      "isinReinvestment": "-",
+      "schemeName": "Kotak Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 15.038,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "120307",
+      "isinGrowth": "INF767K01FF2",
+      "isinReinvestment": "-",
+      "schemeName": "LIC MF Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 135.4784,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "147794",
+      "isinGrowth": "INF247L01AE7",
+      "isinReinvestment": "-",
+      "schemeName": "Motilal Oswal Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 19.7397,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "149039",
+      "isinGrowth": "INF959L01FP2",
+      "isinReinvestment": "-",
+      "schemeName": "Navi Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 14.9391,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "118881",
+      "isinGrowth": "INF044D01CQ5",
+      "isinReinvestment": "-",
+      "schemeName": "Taurus Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 45.9333,
+      "date": "2026-10-23"
+    },
+    {
+      "schemeCode": "120716",
+      "isinGrowth": "INF789F01XA0",
+      "isinReinvestment": "-",
+      "schemeName": "UTI Nifty 50 Index Fund",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav": 159.177,
+      "date": "2026-10-23"
+    }
+  ]
+}

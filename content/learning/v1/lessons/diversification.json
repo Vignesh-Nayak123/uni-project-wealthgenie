@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "diversification",
+  "title": "Diversification",
+  "branchId": "investing",
+  "category": "Investing",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "DIV-OBJ-1",
+      "text": "Explain diversification as spreading money across different assets."
+    },
+    {
+      "id": "DIV-OBJ-2",
+      "text": "Explain why assets that do not move together reduce risk."
+    },
+    {
+      "id": "DIV-OBJ-3",
+      "text": "Identify the limits of diversification."
+    }
+  ],
+  "prerequisites": [
+    "mutual-funds",
+    "risk-and-return"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "Diversification means spreading money across different assets instead of putting everything into one. RBI's FAME material uses the familiar image: do not put all your eggs in one basket. It lists bank deposits, equity, mutual funds, gold, real estate and bonds as different places money can go, each with its own behaviour.",
+    "The reason it works is that different assets do not always fall at the same time. If one holding falls, another may rise or hold steady, so the total portfolio moves less than any single holding would. The aim is not to own everything; it is to avoid a single bad outcome deciding your financial future.",
+    "Diversification has limits. It cannot remove market risk when the whole market falls, and it cannot fix a portfolio that is too expensive or badly matched to your horizon. Owning twenty similar funds is not real diversification, because they may hold the same shares. Diversify across asset classes and within them, and keep the mix aligned with your goals."
+  ],
+  "examples": [
+    {
+      "id": "DIV-EX-1",
+      "title": "One basket versus several",
+      "text": "Aarav puts his entire ₹3,00,000 into shares of one company. If that company fails, he can lose most of it. Priya spreads ₹3,00,000 across a fixed deposit, a diversified equity fund and a gold bond. A fall in equities hurts, but it does not wipe out her savings.",
+      "sourceIds": [
+        "RBI-FAME",
+        "SEBI-RISKMGMT"
+      ]
+    },
+    {
+      "id": "DIV-EX-2",
+      "title": "Different names, same holdings",
+      "text": "Meera owns three equity funds and believes she is diversified. On checking, all three hold the same large companies in similar proportions. When those companies fall, all three funds fall together, so the apparent diversification adds cost without adding much protection.",
+      "sourceIds": [
+        "SEBI-RISKMGMT"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Diversification spreads money across assets rather than concentrating it in one.",
+    "Assets that do not move together can offset each other's falls.",
+    "Owning many similar funds is not the same as diversifying.",
+    "Diversification reduces some risk but cannot eliminate market-wide losses."
+  ],
+  "sourceIds": [
+    "RBI-FAME",
+    "SEBI-RISKMGMT"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "The definition, the eggs-in-one-basket image and the list of asset classes are checked against RBI FAME 4th edition, Message 11. The point about diversifying across asset classes is checked against SEBI's risk-management page. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "DIV-Q-1",
+      "objectiveId": "DIV-OBJ-1",
+      "question": "What is diversification?",
+      "options": [
+        "Putting all your money in the highest-return asset",
+        "Spreading money across different assets",
+        "Buying only one company's shares"
+      ],
+      "correctIndex": 1,
+      "explanation": "Diversification means spreading investments across different assets so no single holding decides your outcome."
+    },
+    {
+      "id": "DIV-Q-2",
+      "objectiveId": "DIV-OBJ-2",
+      "question": "Why can diversification reduce risk?",
+      "options": [
+        "Because it guarantees a positive return",
+        "Because it removes all costs",
+        "Because different assets do not always fall at the same time"
+      ],
+      "correctIndex": 2,
+      "explanation": "If one asset falls while another holds or rises, the portfolio's total movement is smaller. RBI's FAME material explains diversification this way."
+    },
+    {
+      "id": "DIV-Q-3",
+      "objectiveId": "DIV-OBJ-3",
+      "question": "Which is a limit of diversification?",
+      "options": [
+        "It cannot prevent losses when the whole market falls",
+        "It always eliminates all risk",
+        "It only works with bank deposits"
+      ],
+      "correctIndex": 0,
+      "explanation": "Diversification reduces concentration risk but market-wide falls can still affect most assets at once. It is not a guarantee against loss."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. The right asset mix depends on your goals, horizon and risk tolerance."
+}

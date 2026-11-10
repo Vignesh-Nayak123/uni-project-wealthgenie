@@ -1,0 +1,43 @@
+{
+  "source": "wealthgenie-datasets\\portfolio_holdings.csv.csv",
+  "holding_rows": 22236,
+  "holdings_funds": 24,
+  "month_ends": [
+    "2025-06-30",
+    "2025-09-30",
+    "2025-12-31",
+    "2026-01-31",
+    "2026-02-28",
+    "2026-03-31",
+    "2026-04-30",
+    "2026-05-31",
+    "2026-06-30",
+    "2026-07-31",
+    "2026-08-31",
+    "2026-09-30"
+  ],
+  "asset_group_distribution": {
+    "Equity": 20023,
+    "Money market": 1082,
+    "Others": 466,
+    "Cash": 324,
+    "Debt": 99,
+    "Foreign stocks": 99,
+    "REITs and InvITs": 86,
+    "Mutual fund units": 57
+  },
+  "output": {
+    "rows": 288,
+    "command": "python wealthgenie-datasets/build_holdings_metrics.py"
+  },
+  "scheme_code_match": {
+    "holdings_funds": 24,
+    "matched_funds": 24,
+    "unmatched_funds": [],
+    "note": "Best-effort normalized-name match between the AMC-style holdings fund_code / fund_name and scheme names. Not an identifier join; treated as enrichment only."
+  },
+  "limitations": [
+    "Only 24 funds report holdings in this dataset — coverage is narrow and concentration metrics must not be generalized across the universe.",
+    "Allocation percentages are used as reported in the source rows; they are NOT renormalized."
+  ]
+}

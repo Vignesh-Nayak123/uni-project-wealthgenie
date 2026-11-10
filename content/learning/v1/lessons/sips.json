@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "sips",
+  "title": "SIPs",
+  "branchId": "investing",
+  "category": "Investing",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "SIP-OBJ-1",
+      "text": "Explain how a systematic investment plan works."
+    },
+    {
+      "id": "SIP-OBJ-2",
+      "text": "Explain rupee cost averaging using a simple unit-price example."
+    },
+    {
+      "id": "SIP-OBJ-3",
+      "text": "Identify what a SIP does not guarantee and when it can still lose money."
+    }
+  ],
+  "prerequisites": [
+    "mutual-funds",
+    "compound-interest"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "A systematic investment plan, or SIP, invests a fixed amount in a mutual fund at fixed intervals, usually every month. AMFI describes it as similar to a recurring deposit: you give a standing instruction to your bank, and the amount is debited automatically. AMFI notes that the instalment can be as small as ₹500 a month, which makes the habit accessible.",
+    "The main mechanical benefit is rupee cost averaging. When the NAV is low, a fixed instalment buys more units; when it is high, it buys fewer. AMFI's example: ₹1,000 buys 50 units at an NAV of ₹20 and 100 units at an NAV of ₹10, so the average purchase price is ₹13.33 rather than the simple average of ₹20 and ₹10. Over many instalments, this smooths the entry price.",
+    "A SIP is a discipline tool, not a promise. AMFI states clearly that it does not assure a profit or protect against loss in a declining market. If the fund's holdings fall and stay low, the investor still loses money. A SIP also needs time: stopping after a few months, or starting a SIP in money you will need next year, defeats its purpose."
+  ],
+  "examples": [
+    {
+      "id": "SIP-EX-1",
+      "title": "Two instalments, two prices",
+      "text": "Meera invests ₹1,000 a month. In month one, NAV is ₹20 and she gets 50 units. In month two, NAV falls to ₹10 and she gets 100 units. She has spent ₹2,000 for 150 units, an average cost of ₹13.33 per unit, even though the average NAV was ₹15.",
+      "sourceIds": [
+        "AMFI-SIP"
+      ],
+      "calculation": {
+        "formula": "Average cost = total amount invested ÷ total units purchased",
+        "steps": [
+          "₹1,000 ÷ ₹20 = 50 units",
+          "₹1,000 ÷ ₹10 = 100 units",
+          "₹2,000 ÷ 150 units = ₹13.33 per unit"
+        ],
+        "result": "Average cost of ₹13.33 per unit"
+      }
+    },
+    {
+      "id": "SIP-EX-2",
+      "title": "A SIP in a falling market",
+      "text": "Rahul starts a ₹5,000 monthly SIP in an equity fund. The market falls 25% over the next year and stays down. His units are worth less than he invested, even though he kept buying. The SIP lowered his average cost, but it did not remove market risk.",
+      "sourceIds": [
+        "AMFI-SIP",
+        "SEBI-MF"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "A SIP invests a fixed amount at fixed intervals, usually monthly.",
+    "Fixed instalments buy more units when prices are low and fewer when high.",
+    "Rupee cost averaging smooths the entry price but does not guarantee a profit.",
+    "A SIP needs a long horizon and a fund whose risk matches your goal."
+  ],
+  "sourceIds": [
+    "AMFI-SIP",
+    "SEBI-MF"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "The definition, the ₹500 minimum, the rupee-cost-averaging example and the no-assurance warning are checked against AMFI's SIP page. SEBI's mutual fund page is used for the market-risk point. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "SIP-Q-1",
+      "objectiveId": "SIP-OBJ-1",
+      "question": "What is a SIP?",
+      "options": [
+        "A fixed amount invested in a mutual fund at fixed intervals",
+        "A one-time lump-sum purchase of shares",
+        "A type of bank fixed deposit"
+      ],
+      "correctIndex": 0,
+      "explanation": "A SIP invests a fixed sum periodically, usually monthly, through a standing instruction. It is a method of investing in a mutual fund, not a separate deposit product."
+    },
+    {
+      "id": "SIP-Q-2",
+      "objectiveId": "SIP-OBJ-2",
+      "question": "You invest ₹1,000 at NAV ₹20 and ₹1,000 at NAV ₹10. What is your average cost per unit?",
+      "options": [
+        "₹15.00",
+        "₹13.33",
+        "₹10.00"
+      ],
+      "correctIndex": 1,
+      "explanation": "You get 50 units at ₹20 and 100 units at ₹10, so ₹2,000 buys 150 units. 2,000 ÷ 150 = ₹13.33, lower than the simple average NAV of ₹15."
+    },
+    {
+      "id": "SIP-Q-3",
+      "objectiveId": "SIP-OBJ-3",
+      "question": "Which statement about SIPs is correct?",
+      "options": [
+        "A SIP guarantees a fixed return",
+        "A SIP removes all market risk",
+        "A SIP does not assure a profit and can lose money in a falling market"
+      ],
+      "correctIndex": 2,
+      "explanation": "AMFI states that a SIP does not assure a profit or protect against loss. It averages the purchase price but the fund's value can still fall."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. SIP returns depend on the scheme and the market; investments can lose value."
+}

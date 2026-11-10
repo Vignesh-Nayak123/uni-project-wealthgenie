@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "income",
+  "title": "Income",
+  "branchId": "money-basics",
+  "category": "Money Basics",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "INC-OBJ-1",
+      "text": "Identify the different sources of income a household can have."
+    },
+    {
+      "id": "INC-OBJ-2",
+      "text": "Distinguish gross income from the take-home amount that actually reaches your bank account."
+    },
+    {
+      "id": "INC-OBJ-3",
+      "text": "Plan a budget from take-home income, including when income is irregular."
+    }
+  ],
+  "prerequisites": [],
+  "estimatedMinutes": 5,
+  "explanation": [
+    "Income is money that comes in. For most Indian households it is a salary, but it can also be business profit, freelance or gig payments, rent from a property, interest from a deposit, a pension or money sent by family. Your total income is the sum of everything that arrives in a month.",
+    "The figure on your offer letter is not the figure you can spend. Provident fund contributions, professional tax and income tax are deducted before the salary is credited, so your take-home pay is lower than your gross salary. Budget from the amount that actually reaches your bank account.",
+    "Some income is irregular. A freelancer or shop owner may earn ₹60,000 one month and ₹25,000 the next. In that case, plan fixed costs on a cautious average of recent months rather than on the best month, so a slow month does not force you to borrow."
+  ],
+  "examples": [
+    {
+      "id": "INC-EX-1",
+      "title": "Gross salary versus take-home pay",
+      "text": "Aarav's offer letter says ₹45,000 per month. After provident fund and tax deductions, ₹38,500 is credited to his account. He builds his monthly budget on ₹38,500, not ₹45,000, so the deductions never come as a surprise.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    },
+    {
+      "id": "INC-EX-2",
+      "title": "Planning on an irregular income",
+      "text": "Meera is a freelance designer. Her last three months were ₹60,000, ₹25,000 and ₹40,000, an average of about ₹41,700. She keeps rent and loan payments below that average and treats any month above it as a bonus for savings.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Income is everything that comes in, not only salary.",
+    "Budget from take-home pay, because deductions never reach your account.",
+    "Average irregular income over several months before committing to fixed costs.",
+    "RBI's budgeting message is simple: set aside savings from income before you spend."
+  ],
+  "sourceIds": [
+    "RBI-FAME"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Budgeting principle checked against RBI FAME 4th edition, Message 1. Gross-versus-net pay and irregular-income guidance are general personal-finance practice, not regulatory claims. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "INC-Q-1",
+      "objectiveId": "INC-OBJ-1",
+      "question": "Which of these counts as income?",
+      "options": [
+        "The electricity bill you paid",
+        "A loan you took from a friend",
+        "Rent received from a flat you own"
+      ],
+      "correctIndex": 2,
+      "explanation": "Income is money coming in. Rent received is income; a bill is an expense, and a loan creates a repayment obligation rather than income."
+    },
+    {
+      "id": "INC-Q-2",
+      "objectiveId": "INC-OBJ-2",
+      "question": "Your offer letter says ₹45,000 but ₹38,500 is credited. Which amount should your budget use?",
+      "options": [
+        "₹38,500, because that is what actually reaches your account",
+        "₹45,000, because that is your salary",
+        "Whichever is higher that month"
+      ],
+      "correctIndex": 0,
+      "explanation": "Deductions such as provident fund and tax are taken before the salary is credited, so only the take-home amount is available to spend."
+    },
+    {
+      "id": "INC-Q-3",
+      "objectiveId": "INC-OBJ-3",
+      "question": "Your income varies between ₹25,000 and ₹60,000 a month. What is the safer way to plan fixed costs?",
+      "options": [
+        "Plan on the best month, ₹60,000",
+        "Plan on an average of recent months",
+        "Ignore fixed costs until the money arrives"
+      ],
+      "correctIndex": 1,
+      "explanation": "Planning on the best month leaves you short in weak months. A cautious average keeps rent and loan payments affordable across the year."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Your deductions and tax position depend on your own employment terms."
+}

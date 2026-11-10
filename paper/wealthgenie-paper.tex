@@ -1,0 +1,95 @@
+% WealthGenie IEEE Research Paper
+% Title: WealthGenie: An SDG-Aligned Financial Literacy and Explainable Investment Decision Support Platform for Indian Investors
+%
+% Compile instructions:
+%   1. Replace this folder's IEEEtran.cls with the official IEEEtran conference class
+%      from the IEEE website (or install IEEEtran in your TeX distribution).
+%   2. Place the four application screenshots in paper/screenshots/ as
+%      fig-learn.png, fig-assessment.png, fig-explore.png, fig-twin.png
+%   3. Add your curated bibliography entries to references.bib
+%   4. Compile with: pdflatex -> bibtex -> pdflatex -> pdflatex
+
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{enumitem}
+\usepackage{float}
+
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue}
+
+\newcommand{\ie}{i.e.}
+\newcommand{\eg}{e.g.}
+\newcommand{\etc}{et al.}
+
+\title{WealthGenie: An SDG-Aligned Financial Literacy and Explainable Investment Decision Support Platform for Indian Investors}
+
+\author{
+\IEEEauthorblockN{Vignesh Nayak}
+\IEEEauthorblockA{Independent Researcher\\
+Email: vigneshnayak0001@gmail.com}
+}
+
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\begin{IEEEkeywords}
+financial literacy, explainable recommendation, mutual funds, digital twin, sustainable development goals, Indian investors, personal finance, decision support
+\end{IEEEkeywords}
+
+\section{Introduction}
+\input{sections/introduction}
+
+\section{Sustainable Development Goal Alignment}
+\input{sections/sdg-alignment}
+
+\section{Proposed WealthGenie Platform}
+\input{sections/platform}
+
+\section{Financial Literacy Through the Learn Module}
+\input{sections/learn}
+\input{figures/fig-learn}
+
+\section{Financial Assessment and Investor Profiling}
+\input{sections/assessment}
+\input{figures/fig-assessment}
+
+\section{Risk-Aware Mutual Fund Recommendation Engine}
+\input{sections/recommendation-engine}
+
+\section{Personalized Investment Exploration}
+\input{sections/explore-investments}
+\input{figures/fig-explore}
+
+\section{Paper Trading and Simulated Investment Learning}
+\input{sections/paper-trading}
+
+\section{Digital Twin and Financial Scenario Comparison}
+\input{sections/digital-twin}
+\input{figures/fig-twin}
+
+\section{System Implementation and Evaluation}
+\input{sections/implementation-evaluation}
+
+\section{Limitations and Future Scope}
+\input{sections/limitations}
+
+\section{Conclusion}
+\input{sections/conclusion}
+
+\section*{Acknowledgment}
+The authors acknowledge the open-source datasets and regulatory publications of SEBI, RBI, AMFI and NSE Indices that underpin the verified data used by the WealthGenie platform.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

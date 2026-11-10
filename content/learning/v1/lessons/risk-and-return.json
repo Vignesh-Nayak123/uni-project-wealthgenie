@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "risk-and-return",
+  "title": "Risk and return",
+  "branchId": "growing-money",
+  "category": "Growing Money",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "RR-OBJ-1",
+      "text": "Explain the trade-off between expected return and risk."
+    },
+    {
+      "id": "RR-OBJ-2",
+      "text": "Name the main kinds of risk that affect savings and investments."
+    },
+    {
+      "id": "RR-OBJ-3",
+      "text": "Judge whether an advertised high return is plausible or a warning sign."
+    }
+  ],
+  "prerequisites": [
+    "compound-interest"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "Every investment involves a trade-off between risk and return. RBI's financial awareness material states the principle directly: higher expected returns may involve higher risk, including the possibility of losing the amount invested, while lower returns generally come with lower risk. A product that promises a high return with no risk is not a bargain; it is a warning sign.",
+    "Risk is not one thing. Market risk is the chance that prices fall. Inflation risk is the chance that your return fails to keep up with rising prices. Liquidity risk is being unable to sell when you need cash. Business risk is the chance that a company performs badly. Currency risk matters when your money is exposed to exchange-rate movements. Different products carry these risks in different amounts.",
+    "The practical question is not 'which product gives the highest return' but 'which product gives a return I can reasonably expect for a risk I can afford to carry'. That depends on your time horizon, your other savings and how you would react if the value fell. Chapter-level guidance cannot answer it for you, but it can stop you from being surprised."
+  ],
+  "examples": [
+    {
+      "id": "RR-EX-1",
+      "title": "Same ₹1,00,000, different risk",
+      "text": "A bank fixed deposit and an equity mutual fund can both be bought with ₹1,00,000. The deposit's return is modest but predictable, and deposits are insured up to the DICGC limit. The equity fund may do better over many years, but its value can fall sharply in a bad year. Neither is 'better' in the abstract; they carry different risks.",
+      "sourceIds": [
+        "RBI-FAME",
+        "SEBI-RISK"
+      ]
+    },
+    {
+      "id": "RR-EX-2",
+      "title": "The too-good-to-be-true offer",
+      "text": "A scheme promises 4% per month with 'zero risk'. RBI's material warns against chasing high and quick returns without understanding the risk, and asks people to check the entity's background and report defaulters on the SACHET portal. A guaranteed 48% a year is not a normal investment return.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Higher expected return generally means higher risk, including the chance of loss.",
+    "Risk comes in several forms: market, inflation, liquidity, business and currency.",
+    "Match the risk you take to the time you can stay invested and the cushion you already have.",
+    "Treat guaranteed high returns from unknown entities as a fraud warning, not an opportunity."
+  ],
+  "sourceIds": [
+    "RBI-FAME",
+    "SEBI-RISK"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "The risk-return principle and the SACHET warning are checked against RBI FAME 4th edition, Message 10. The list of risk types is checked against SEBI's investor page on key risks. No product-specific return figures are stated. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "RR-Q-1",
+      "objectiveId": "RR-OBJ-1",
+      "question": "What does the risk-return trade-off say?",
+      "options": [
+        "Higher returns are always safer",
+        "Higher expected returns generally come with higher risk",
+        "Risk and return are unrelated"
+      ],
+      "correctIndex": 1,
+      "explanation": "RBI's FAME material describes a direct correlation: the higher the expected return, the higher the risk, including the possibility of losing the initial investment."
+    },
+    {
+      "id": "RR-Q-2",
+      "objectiveId": "RR-OBJ-2",
+      "question": "You may need your money in two months, but its value can fall in that time. Which risk is most relevant?",
+      "options": [
+        "Currency risk only",
+        "No risk, because two months is short",
+        "Liquidity and market risk"
+      ],
+      "correctIndex": 2,
+      "explanation": "A short horizon exposes you to market risk if prices fall, and to liquidity risk if you cannot sell quickly at a fair price."
+    },
+    {
+      "id": "RR-Q-3",
+      "objectiveId": "RR-OBJ-3",
+      "question": "An unknown entity guarantees 4% per month with no risk. What is the sensible response?",
+      "options": [
+        "Treat it as a warning sign and check the entity before doing anything",
+        "Invest quickly before the offer closes",
+        "Borrow money to invest more"
+      ],
+      "correctIndex": 0,
+      "explanation": "RBI warns that high and quick returns may be risky and asks investors to verify the entity and read the terms. A guaranteed high monthly return is not a normal market outcome."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Every investment decision depends on your own circumstances."
+}

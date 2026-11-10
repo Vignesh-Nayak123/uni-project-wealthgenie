@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "digital-financial-fraud",
+  "title": "Digital financial fraud",
+  "branchId": "financial-safety",
+  "category": "Financial Safety",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "FRAUD-OBJ-1",
+      "text": "Recognise common digital fraud patterns such as fake KYC calls, phishing links and remote-access apps."
+    },
+    {
+      "id": "FRAUD-OBJ-2",
+      "text": "Explain why an OTP, PIN, CVV or screen-sharing session must never be handed to a caller."
+    },
+    {
+      "id": "FRAUD-OBJ-3",
+      "text": "List the immediate steps and official reporting channels after a suspected fraud, without assuming that recovery is guaranteed."
+    }
+  ],
+  "prerequisites": [
+    "upi-safety"
+  ],
+  "estimatedMinutes": 8,
+  "explanation": [
+    "Digital financial fraud usually starts with a message or a call that creates urgency. Someone claims to be from your bank, a wallet provider, a telecom company or a government office, and says your account will be blocked, your SIM will stop working, a refund is waiting, or you have won a prize. RBI lists the common methods as vishing (phone calls pretending to be from a bank or wallet provider), phishing (spoofed emails and SMS with links), remote-access apps, misuse of the UPI collect request feature, and fake bank contact numbers shown on search engines or social media.",
+    "In every version, the target is the same: your credentials. Never share your account number, login ID, password, PIN, UPI PIN, OTP or card details such as the CVV and expiry date with anyone, not even a person who says they are a bank official. RBI's guidance is blunt on the UPI point: there is no need to enter a PIN or password anywhere to receive money, and if an app asks for one, you are sending money rather than receiving it.",
+    "Remote-access apps deserve special care. A caller offers to 'fix' a failed cashback or a blocked account and asks you to install a screen-sharing or support app. Once it is installed, the caller can watch your screen and read any OTP that appears. RBI's safe digital banking practices say not to download unknown apps because they may secretly access your confidential data, and to avoid banking on public, open or free Wi-Fi networks.",
+    "If you think you have been defrauded, act in order. First stop the loss: contact your bank using the number on its official website or app, ask it to block your cards and freeze debits, and change the passwords on the accounts linked to your bank. Then report: the Office of the RBI Ombudsman booklet lists the helplines 155260 and 1930 and the National Cybercrime Reporting Portal at cybercrime.gov.in. Keep the transaction IDs, the messages you received and the numbers that contacted you. Reporting quickly can limit further loss, but recovery is never automatic or guaranteed, because the outcome depends on the facts of the case, your bank's assessment and the investigation."
+  ],
+  "examples": [
+    {
+      "id": "FRAUD-EX-1",
+      "title": "The KYC expiry call",
+      "text": "A caller tells Meera that her account will be frozen the same day unless she updates KYC, and sends a link to 'complete the update'. RBI warns that calls or emails threatening to block an account over KYC, with a link to update it, are a common fraud method; customers should use the bank's official website or visit the branch instead. Meera ends the call and contacts her branch using the number printed on her bank's website.",
+      "sourceIds": [
+        "RBI-PR-1630"
+      ]
+    },
+    {
+      "id": "FRAUD-EX-2",
+      "title": "The screen-sharing 'support' app",
+      "text": "A caller claiming to be from a wallet helpdesk asks Ravi to install a remote-support app so that a failed cashback can be reversed. Installing it would let the caller see Ravi's screen and any OTP that appears on it. RBI's safe digital banking practices advise against downloading unknown apps because they may access confidential data. Ravi declines to install anything and reports the number.",
+      "sourceIds": [
+        "RBI-PR-1630",
+        "RBI-FAME"
+      ]
+    },
+    {
+      "id": "FRAUD-EX-3",
+      "title": "The forwarded payment screenshot",
+      "text": "A buyer sends Anjali a screenshot that appears to show ₹6,000 paid for her old laptop, and asks her to hand over the laptop. A screenshot is only a claim: it can be edited or taken from another transaction. RBI advises regularly checking the alerts sent by your own bank or payment provider. Anjali opens her own banking app, sees no credit, and asks the buyer to wait until the money actually reaches her account.",
+      "sourceIds": [
+        "RBI-PR-1630"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Urgency is the tool: a sudden KYC expiry, account block, refund or prize claim is a common pretext for fraud.",
+    "Never share an OTP, PIN, UPI PIN, CVV, password or card detail, including with someone who says they are from your bank.",
+    "Do not install unknown apps or share your screen with a caller; they can watch your screen and read your OTPs.",
+    "Act fast: contact your bank on its official number, block cards and debits, then report on 1930 or cybercrime.gov.in.",
+    "A payment screenshot or forwarded message is not proof of a credit, so confirm it in your own bank app or statement.",
+    "Recovery is not guaranteed: reporting quickly can limit the loss, but the outcome depends on the facts and the investigation."
+  ],
+  "sourceIds": [
+    "RBI-BEAWARE",
+    "RBI-FAME",
+    "RBI-PR-1630"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Every claim was checked on 2026-10-28 against the downloaded RBI FAME 4th edition PDF, the Office of the RBI Ombudsman BE(A)WARE booklet and RBI press release 2021-2022/1630. The helplines 155260 and 1930 and the cybercrime.gov.in portal are cited from the RBI Ombudsman booklet; the MHA portal itself was not independently verified because it renders client-side. The NPCI fraud pages returned HTTP 403 to automated requests, so no claim depends on NPCI text. A named human reviewer is still required before the status can move to reviewed."
+  },
+  "quiz": [
+    {
+      "id": "FRAUD-Q-1",
+      "objectiveId": "FRAUD-OBJ-1",
+      "question": "Which of these is a fraud pattern that RBI specifically warns about?",
+      "options": [
+        "A bank SMS asking you to check your balance in the official app",
+        "A call saying your KYC will expire today unless you click a link",
+        "A passbook entry showing interest credited by your bank"
+      ],
+      "correctIndex": 1,
+      "explanation": "RBI warns that calls or emails threatening to block an account over KYC, along with a link to update it, are a common modus operandi of fraudsters. KYC changes should be done through the bank's official website or branch."
+    },
+    {
+      "id": "FRAUD-Q-2",
+      "objectiveId": "FRAUD-OBJ-2",
+      "question": "A caller says he is from your bank and needs the OTP 'only to cancel a fraudulent transaction'. What is the safe response?",
+      "options": [
+        "Share the OTP because he called from the bank",
+        "Share only the first four digits of the OTP",
+        "Do not share it, end the call, and contact the bank on its official number"
+      ],
+      "correctIndex": 2,
+      "explanation": "RBI says never share an OTP, PIN or UPI PIN with anyone, not even with bank officials however genuine they sound. An OTP shared with a caller can authorise a debit from your account."
+    },
+    {
+      "id": "FRAUD-Q-3",
+      "objectiveId": "FRAUD-OBJ-3",
+      "question": "Which statement about recovery after a digital fraud is accurate?",
+      "options": [
+        "Reporting quickly can help limit the loss, but recovery is not guaranteed",
+        "Reporting on 1930 guarantees a full refund",
+        "Recovery is impossible, so reporting the fraud is pointless"
+      ],
+      "correctIndex": 0,
+      "explanation": "RBI advises notifying your bank immediately because the longer you take, the higher the potential loss, and it lists 155260, 1930 and cybercrime.gov.in for reporting. Whether money is recovered depends on the facts of the case, the bank's assessment and the investigation."
+    }
+  ],
+  "disclaimer": "This lesson is general financial education based on public RBI guidance and is not financial, legal or security advice for a specific case. Reporting timelines and liability depend on RBI's customer-protection rules and your bank's assessment."
+}

@@ -1,0 +1,377 @@
+{
+  "generated_on": "2026-11-02T20:13:19.118Z",
+  "scope": "POST /api/recommendations — fund-level stage + category engine, against the real processed datasets",
+  "api_latency_ms": {
+    "conservative": {
+      "coldMs": 139,
+      "warmMs": [
+        27,
+        21,
+        28,
+        22,
+        27,
+        22,
+        25,
+        45,
+        45,
+        35,
+        35
+      ],
+      "p50Ms": 27,
+      "p95Ms": 139,
+      "meanMs": 39.3
+    },
+    "moderate": {
+      "coldMs": 64,
+      "warmMs": [
+        27,
+        25,
+        28,
+        32,
+        50,
+        39,
+        53,
+        43,
+        58,
+        51,
+        62
+      ],
+      "p50Ms": 43,
+      "p95Ms": 64,
+      "meanMs": 44.3
+    },
+    "aggressive": {
+      "coldMs": 44,
+      "warmMs": [
+        98,
+        56,
+        57,
+        40,
+        58,
+        54,
+        75,
+        54,
+        48,
+        62,
+        53
+      ],
+      "p50Ms": 54,
+      "p95Ms": 98,
+      "meanMs": 58.3
+    }
+  },
+  "profile_summaries": {
+    "conservative": {
+      "riskProfile": "conservative",
+      "readinessStatus": "ready",
+      "categories": [
+        "fixed-deposit",
+        "savings-account",
+        "liquid-debt-fund"
+      ],
+      "funds": [
+        {
+          "schemeCode": 100814,
+          "schemeName": "UTI - Overnight Fund",
+          "riskometer": "Low",
+          "expenseRatio": 0.1,
+          "score": 0.99
+        },
+        {
+          "schemeCode": 119833,
+          "schemeName": "SBI OVERNIGHT FUND",
+          "riskometer": "Low",
+          "expenseRatio": 0.09,
+          "score": 0.99
+        },
+        {
+          "schemeCode": 145481,
+          "schemeName": "ADITYA BIRLA SUN LIFE OVERNIGHT FUND",
+          "riskometer": "Low",
+          "expenseRatio": 0.05,
+          "score": 0.99
+        },
+        {
+          "schemeCode": 145535,
+          "schemeName": "ICICI Prudential Overnight Fund",
+          "riskometer": "Low",
+          "expenseRatio": 0.09,
+          "score": 0.99
+        },
+        {
+          "schemeCode": 145810,
+          "schemeName": "Nippon India Overnight Fund",
+          "riskometer": "Low",
+          "expenseRatio": 0.1,
+          "score": 0.99
+        },
+        {
+          "schemeCode": 146141,
+          "schemeName": "Kotak Overnight Fund",
+          "riskometer": "Low",
+          "expenseRatio": 0.0863,
+          "score": 0.99
+        }
+      ],
+      "exclusionsSummary": {
+        "riskometer": 19272,
+        "group": 1974,
+        "category": 2791,
+        "horizon": 0,
+        "dataMissing": 196,
+        "stale": 1,
+        "note": "Hard eligibility failures by rule class across the scanned candidates; a ranking score never overrides them."
+      },
+      "fundStageStatus": "connected"
+    },
+    "moderate": {
+      "riskProfile": "moderate",
+      "readinessStatus": "ready",
+      "categories": [
+        "retirement-oriented",
+        "liquid-debt-fund",
+        "equity-index-fund",
+        "equity-etf-direct",
+        "gold",
+        "fixed-deposit",
+        "savings-account"
+      ],
+      "funds": [
+        {
+          "schemeCode": 101357,
+          "schemeName": "Franklin India Money Market Fund",
+          "riskometer": "Moderate",
+          "expenseRatio": 0.14,
+          "score": 0.9867
+        },
+        {
+          "schemeCode": 149661,
+          "schemeName": "Sundaram Liquid Fund (Formerly Known as Principal Cash Management Fund)",
+          "riskometer": "Moderate",
+          "expenseRatio": 0.14,
+          "score": 0.9867
+        },
+        {
+          "schemeCode": 100835,
+          "schemeName": "Kotak Liquid Fund",
+          "riskometer": "Moderate",
+          "expenseRatio": 0.1509,
+          "score": 0.9858
+        },
+        {
+          "schemeCode": 101893,
+          "schemeName": "Kotak Money Market Fund",
+          "riskometer": "Moderate",
+          "expenseRatio": 0.1612,
+          "score": 0.9849
+        },
+        {
+          "schemeCode": 100723,
+          "schemeName": "UTI - Money Market Fund",
+          "riskometer": "Moderate",
+          "expenseRatio": 0.17,
+          "score": 0.9842
+        },
+        {
+          "schemeCode": 101847,
+          "schemeName": "Tata Money Market Fund",
+          "riskometer": "Moderate",
+          "expenseRatio": 0.18,
+          "score": 0.9833
+        }
+      ],
+      "exclusionsSummary": {
+        "riskometer": 13514,
+        "group": 7255,
+        "category": 11464,
+        "horizon": 0,
+        "dataMissing": 476,
+        "stale": 1,
+        "note": "Hard eligibility failures by rule class across the scanned candidates; a ranking score never overrides them."
+      },
+      "fundStageStatus": "connected"
+    },
+    "aggressive": {
+      "riskProfile": "aggressive",
+      "readinessStatus": "ready",
+      "categories": [
+        "retirement-oriented",
+        "equity-index-fund",
+        "liquid-debt-fund",
+        "equity-etf-direct",
+        "gold",
+        "fixed-deposit",
+        "savings-account"
+      ],
+      "funds": [
+        {
+          "schemeCode": 146940,
+          "schemeName": "Aditya Birla Sun Life Retirement Fund-The 50s Plan",
+          "riskometer": "Moderately High",
+          "expenseRatio": 0.63,
+          "score": 0.9449
+        },
+        {
+          "schemeCode": 148687,
+          "schemeName": "SBI Retirement Benefit Fund - Conservative Plan",
+          "riskometer": "Moderately High",
+          "expenseRatio": 0.98,
+          "score": 0.9167
+        },
+        {
+          "schemeCode": 133569,
+          "schemeName": "Nippon India Retirement Fund- Income Generation Scheme",
+          "riskometer": "Moderately High",
+          "expenseRatio": 0.98,
+          "score": 0.9158
+        },
+        {
+          "schemeCode": 146716,
+          "schemeName": "ICICI Prudential Retirement Fund Hybrid Conservative Plan",
+          "riskometer": "Moderately High",
+          "expenseRatio": 1.03,
+          "score": 0.9125
+        },
+        {
+          "schemeCode": 101357,
+          "schemeName": "Franklin India Money Market Fund",
+          "riskometer": "Moderate",
+          "expenseRatio": 0.14,
+          "score": 0.9117
+        },
+        {
+          "schemeCode": 149661,
+          "schemeName": "Sundaram Liquid Fund (Formerly Known as Principal Cash Management Fund)",
+          "riskometer": "Moderate",
+          "expenseRatio": 0.14,
+          "score": 0.9117
+        }
+      ],
+      "exclusionsSummary": {
+        "riskometer": 13514,
+        "group": 7255,
+        "category": 11464,
+        "horizon": 0,
+        "dataMissing": 476,
+        "stale": 1,
+        "note": "Hard eligibility failures by rule class across the scanned candidates; a ranking score never overrides them."
+      },
+      "fundStageStatus": "connected"
+    }
+  },
+  "determinism": {
+    "method": "Two identical generateRecommendation runs per profile (12 requests apart); payloads compared byte-for-byte.",
+    "results": [
+      {
+        "profile": "conservative",
+        "identical": true,
+        "length": 26085
+      },
+      {
+        "profile": "moderate",
+        "identical": true,
+        "length": 31543
+      },
+      {
+        "profile": "aggressive",
+        "identical": true,
+        "length": 31517
+      }
+    ],
+    "all_identical": true
+  },
+  "eligibility_constraints": {
+    "method": "Every recommended fund re-validated against its pool hard rules (riskometer band, group, category regex, horizon, TER disclosure, NAV freshness ≤ 30 days, required return windows) plus a missing-expense-ratio scan.",
+    "recommendations_checked": 216,
+    "violations": [],
+    "violation_count": 0
+  },
+  "tests": {
+    "total": 448,
+    "passed": 448,
+    "failed": 0,
+    "suites": 101
+  },
+  "data_quality": {
+    "source": "data/reports/data_quality_report.json",
+    "total_fund_records": 38495,
+    "unique_scheme_identifiers": 38495,
+    "missing_riskometer": {
+      "check": "missing_riskometer",
+      "found": 27305,
+      "missing": 70.93,
+      "note": "riskometer = coalesce(ssd_riskometer_level, amfi_daily_riskometer, ssd_riskometer)"
+    },
+    "missing_expense_ratio": {
+      "check": "missing_expense_ratio",
+      "found": 30053,
+      "missing": 78.07,
+      "note": "rows with neither a regular nor a direct TER"
+    },
+    "unmatched_records": {
+      "check": "unmatched_records_between_datasets",
+      "found": {
+        "master_rows": 38495,
+        "details_rows": 11417,
+        "details_matched_rows": 11417,
+        "unmatched_master_rows": 27078,
+        "row_multiplication": 0
+      }
+    }
+  },
+  "pipelines": {
+    "merge_manifest": {
+      "merged_rows": 38495,
+      "details_matched_rows": 11417,
+      "unmatched_master_rows": 27078,
+      "row_multiplication": 0
+    },
+    "nav_metrics_manifest": {
+      "nav_series_rows": 37703595,
+      "funds_processed": 38475,
+      "population_rates": {
+        "return_one_year": 29888,
+        "return_three_year": 19968,
+        "return_five_year": 7788,
+        "volatility_annualized": 34960,
+        "max_drawdown": 34993,
+        "positive_rolling_year_fraction": 23055
+      }
+    },
+    "holdings_manifest": {
+      "holding_rows": 22236,
+      "snapshots": 288,
+      "scheme_code_match": {
+        "matched_funds": 24,
+        "unmatched_funds": []
+      }
+    }
+  },
+  "fund_catalog_stats": {
+    "totalFundsInDataset": 38495,
+    "inactiveExcluded": 29610,
+    "activeFunds": 8885,
+    "fundsWithRiskometer": 8684,
+    "fundsWithTer": 7999,
+    "fundsWithNavMetrics": 8885,
+    "fundsWithHistoryOneYear": 7769,
+    "fundsWithHistoryThreeYear": 6280,
+    "fundsWithHistoryFiveYear": 4841,
+    "fundsWithHoldingsMetrics": 0,
+    "sourceManifest": {
+      "generated_from": {
+        "scheme_master": "wealthgenie-datasets\\scheme_master.csv.csv",
+        "scheme_details": "wealthgenie-datasets\\scheme_details.csv.csv",
+        "scheme_master_sha_note": "row-count identity, no hash on 38k rows needed for reproducibility"
+      },
+      "matchedDetailsRows": 11417,
+      "unmatchedMasterRows": 27078
+    }
+  },
+  "limitations": [
+    "Real-data check: NAV decimal precision on liquid/overnight funds inflates some volatility estimates (rounding of ₹-denominated NAV steps). Volatility can therefore penalize, but never reward, a fund; the artifact is documented rather than smoothed away.",
+    "Holdings coverage: only 24 funds disclose portfolio holdings — concentration snapshot is enrichment only, never scored.",
+    "Approximately 70% of merged rows carry no Riskometer: they are merged catalog rows without details disclosure (mostly inactive legacy schemes). They are excluded by the engine, flagged in the quality report, never imputed.",
+    "Collaborative filtering / ML training was deliberately not deployed: the repository holds no verified user-fund interaction dataset. The system remains fully deterministic and explainable."
+  ]
+}

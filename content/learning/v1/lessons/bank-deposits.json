@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "bank-deposits",
+  "title": "Bank deposits",
+  "branchId": "investing",
+  "category": "Investing",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "BD-OBJ-1",
+      "text": "Distinguish a savings account from a term deposit."
+    },
+    {
+      "id": "BD-OBJ-2",
+      "text": "Explain how deposit insurance protects a depositor."
+    },
+    {
+      "id": "BD-OBJ-3",
+      "text": "Apply the nomination and premature-withdrawal rules to a deposit."
+    }
+  ],
+  "prerequisites": [
+    "saving-money",
+    "simple-interest"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "A bank deposit is money placed with a bank. A savings account keeps the money available for daily use and pays a low rate of interest. A term deposit, such as a fixed deposit, commits the money for an agreed period at a higher rate. RBI's FAME material calls savings-account balances passive savings for exactly this reason, and describes term deposits as a way to earn better returns.",
+    "Deposits in insured banks are protected by the Deposit Insurance and Credit Guarantee Corporation, a wholly owned subsidiary of the RBI. Each depositor is insured up to ₹5 lakh for principal and interest together, in the same right and same capacity, at each insured bank. The cover includes savings, fixed and recurring deposits. You do not pay any premium for it.",
+    "Two habits prevent problems. First, fill in the nomination form when you open the deposit and update it when your family situation changes. Second, understand that withdrawing a fixed deposit before maturity usually attracts a penalty. If you may need the money early, choose a shorter tenure or keep part of it in a savings account instead of locking everything away."
+  ],
+  "examples": [
+    {
+      "id": "BD-EX-1",
+      "title": "Two accounts, two jobs",
+      "text": "Priya keeps ₹25,000 in her savings account for monthly bills and emergencies, where it earns a low rate but stays available. She puts ₹1,00,000 she will not need for a year into a fixed deposit at a higher rate, accepting that early withdrawal would cost her a penalty.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    },
+    {
+      "id": "BD-EX-2",
+      "title": "What the ₹5 lakh cover means",
+      "text": "Rahul has ₹3,00,000 in a savings account and ₹4,00,000 in fixed deposits at the same bank. His total at that bank is ₹7,00,000, so ₹5,00,000 is insured and ₹2,00,000 is not. Deposits at a different bank are counted separately, because the limit applies per depositor per bank.",
+      "sourceIds": [
+        "DICGC",
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Savings accounts are for access; term deposits are for a committed period at a higher rate.",
+    "DICGC insures up to ₹5 lakh per depositor per insured bank, principal and interest together.",
+    "The insurance is free to the depositor and covers savings, fixed and recurring deposits.",
+    "Always add a nominee, and check the premature-withdrawal penalty before locking money away."
+  ],
+  "sourceIds": [
+    "RBI-FAME",
+    "DICGC"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Deposit types, the passive-savings description, nomination and premature-withdrawal penalty are checked against RBI FAME 4th edition, Message 2. The ₹5 lakh limit and same-right/same-capacity rule are checked against the DICGC leaflet and FAME Message 20. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "BD-Q-1",
+      "objectiveId": "BD-OBJ-1",
+      "question": "What is the main difference between a savings account and a fixed deposit?",
+      "options": [
+        "A savings account keeps money available; a fixed deposit commits it for a period at a higher rate",
+        "A fixed deposit can be withdrawn any time without any condition",
+        "A savings account always pays a higher rate"
+      ],
+      "correctIndex": 0,
+      "explanation": "Savings accounts are built for access and pay a low rate. Fixed deposits commit the money for an agreed tenure and generally pay more, with a penalty for early withdrawal."
+    },
+    {
+      "id": "BD-Q-2",
+      "objectiveId": "BD-OBJ-2",
+      "question": "How much deposit insurance does one depositor have at one insured bank?",
+      "options": [
+        "Unlimited cover",
+        "Up to ₹5 lakh for principal and interest together",
+        "Up to ₹5 lakh only for fixed deposits"
+      ],
+      "correctIndex": 1,
+      "explanation": "DICGC insures each depositor up to ₹5 lakh for principal and interest combined, in the same right and same capacity, at each insured bank. Savings and recurring deposits are covered too."
+    },
+    {
+      "id": "BD-Q-3",
+      "objectiveId": "BD-OBJ-3",
+      "question": "You may need your money in three months. What should you check before opening a one-year fixed deposit?",
+      "options": [
+        "Whether the bank has a mobile app",
+        "Whether the branch is painted in your favourite colour",
+        "The premature-withdrawal penalty and whether a shorter tenure suits you"
+      ],
+      "correctIndex": 2,
+      "explanation": "Breaking a fixed deposit early usually attracts a penalty. If the money may be needed soon, a shorter tenure or a savings account avoids that cost."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Deposit rates, tenures and penalties vary by bank and change over time."
+}

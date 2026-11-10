@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "borrowing-interest",
+  "title": "Borrowing and interest",
+  "branchId": "financial-safety",
+  "category": "Financial Safety",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "BRW-OBJ-1",
+      "text": "Distinguish borrowing for a value-creating asset from borrowing for consumption."
+    },
+    {
+      "id": "BRW-OBJ-2",
+      "text": "Convert a quoted interest rate into an annualised cost before comparing loans."
+    },
+    {
+      "id": "BRW-OBJ-3",
+      "text": "Check a lender's legitimacy and read the total cost of a loan."
+    }
+  ],
+  "prerequisites": [
+    "budgeting",
+    "simple-interest"
+  ],
+  "estimatedMinutes": 7,
+  "explanation": [
+    "Borrowing is not automatically bad, but its purpose matters. RBI's FAME material says one should borrow to invest in assets that create value or generate returns, such as a home loan or an education loan. Borrowing to fund everyday consumption, or to invest in something you do not understand, turns interest into a permanent drain on income.",
+    "The quoted rate is not always the cost you pay. A lender may advertise 2% without saying it is per month; RBI's material shows that this works out to about 24% a year. Ask for the annualised rate and the total repayment, not just the instalment. For digital loans, RBI asks borrowers to check the Annual Percentage Rate and the Key Fact Statement, which set out the total cost and terms.",
+    "Who you borrow from matters too. RBI advises borrowing from regulated entities such as banks, NBFCs and housing finance companies, which are supervised, transparent and have grievance redressal. It warns against agents who charge a fee to arrange a loan and against downloading loan apps from links in SMS or social media. Check the lender, read the documents, and keep the repayment within what your budget can carry."
+  ],
+  "examples": [
+    {
+      "id": "BRW-EX-1",
+      "title": "The monthly-rate trap",
+      "text": "A shop advertises a loan at 'just 2%'. The small print says 2% per month. Annualised, that is about 24% a year. On a ₹50,000 loan held for a year, the interest alone could be around ₹12,000, far more than the headline suggests.",
+      "sourceIds": [
+        "RBI-FAME"
+      ],
+      "calculation": {
+        "formula": "Annualised rate = monthly rate × 12",
+        "steps": [
+          "2% per month × 12 = 24% per year",
+          "₹50,000 × 24% = ₹12,000 for a year"
+        ],
+        "result": "About 24% a year, roughly ₹12,000 on ₹50,000"
+      }
+    },
+    {
+      "id": "BRW-EX-2",
+      "title": "Checking a digital lender",
+      "text": "Rahul needs ₹20,000 urgently and receives a loan-app link on WhatsApp. Instead of installing it, he checks whether the app is associated with an RBI-regulated bank or NBFC, reads the Key Fact Statement for the APR, and compares it with a loan from his bank. The app's 'instant' approval came with charges he had not seen.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Borrow for assets that create value, not to fund routine spending.",
+    "Convert every quoted rate to an annualised figure before comparing.",
+    "Check the APR and Key Fact Statement, including all fees.",
+    "Borrow from regulated lenders and avoid loan links sent by SMS or social media."
+  ],
+  "sourceIds": [
+    "RBI-FAME"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Good versus consumption borrowing, the 2%-per-month example, the preference for regulated lenders and the digital-lending checks (APR, Key Fact Statement, avoiding SMS links) are checked against RBI FAME 4th edition, Messages 1, 6 and 25. The ₹12,000 figure is simple illustrative arithmetic, not a quoted product price. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "BRW-Q-1",
+      "objectiveId": "BRW-OBJ-1",
+      "question": "Which is the better reason to borrow, according to RBI's guidance?",
+      "options": [
+        "To buy an asset that creates value, such as a home or education",
+        "To fund a holiday you cannot afford",
+        "To invest in a scheme you do not understand"
+      ],
+      "correctIndex": 0,
+      "explanation": "RBI's FAME material says borrowing should fund assets that create value or generate returns. Borrowing for consumption or unclear schemes adds cost without building anything."
+    },
+    {
+      "id": "BRW-Q-2",
+      "objectiveId": "BRW-OBJ-2",
+      "question": "A loan is quoted at 2% per month. What is the annualised rate?",
+      "options": [
+        "2% a year",
+        "About 24% a year",
+        "12% a year"
+      ],
+      "correctIndex": 1,
+      "explanation": "2% per month multiplied by 12 months is about 24% a year. Comparing annualised rates prevents a monthly quote from looking cheaper than it is."
+    },
+    {
+      "id": "BRW-Q-3",
+      "objectiveId": "BRW-OBJ-3",
+      "question": "What should you check before taking a digital loan?",
+      "options": [
+        "Only how fast the money arrives",
+        "Only the app's star rating",
+        "Whether the lender is regulated and what the APR and Key Fact Statement say"
+      ],
+      "correctIndex": 2,
+      "explanation": "RBI advises checking that the app is linked to a regulated bank or NBFC and reading the APR and Key Fact Statement. Speed and ratings do not tell you the total cost."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Loan terms vary by lender; read the sanction letter and Key Fact Statement before signing."
+}

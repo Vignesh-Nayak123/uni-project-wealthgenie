@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "synthetic",
+  "realData": false,
+  "description": "Seeded synthetic financial profiles for Phase 4 evaluation. Not real people and not real-world evidence. Kept separate from data/processed/findex_resilience.csv.",
+  "generation": {
+    "prng": "mulberry32",
+    "seedParameter": "config.seed",
+    "profileCountParameter": "config.profiles",
+    "randomArchetypes": [
+      "positive_surplus",
+      "zero_surplus",
+      "negative_surplus",
+      "emi_separate",
+      "emi_included",
+      "low_emergency_savings",
+      "high_emergency_savings",
+      "shock_funded",
+      "shock_unfunded",
+      "goal_achieved",
+      "goal_achievable",
+      "goal_unreachable",
+      "zero_income",
+      "zero_expenses"
+    ],
+    "randomArchetypeAssignment": "index modulo the ordered archetype list",
+    "edgeCasesAlwaysIncluded": true,
+    "asOfDate": "Fixed per profile; defaults to config.asOfDate"
+  },
+  "fields": {
+    "id": {
+      "type": "string",
+      "description": "Stable synthetic profile identifier."
+    },
+    "source": {
+      "type": "string",
+      "const": "synthetic"
+    },
+    "archetype": {
+      "type": "string",
+      "description": "Generating archetype or deterministic edge-case label."
+    },
+    "note": {
+      "type": "string",
+      "description": "Human-readable description; not evidence."
+    },
+    "asOfDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Fixed projection date used for the goal completion calculation."
+    },
+    "monthlyIncome": {
+      "type": "number",
+      "minimum": 0,
+      "unit": "INR/month"
+    },
+    "monthlyExpenses": {
+      "type": "number",
+      "minimum": 0,
+      "unit": "INR/month"
+    },
+    "accessibleSavings": {
+      "type": "number",
+      "minimum": 0,
+      "unit": "INR"
+    },
+    "goal": {
+      "type": "string",
+      "enum": [
+        "emergency_fund",
+        "debt_repayment",
+        "retirement",
+        "home_purchase",
+        "education",
+        "wealth_building",
+        "other"
+      ]
+    },
+    "emiPayments": {
+      "type": "number",
+      "minimum": 0,
+      "unit": "INR/month"
+    },
+    "emiIncludedInExpenses": {
+      "type": "boolean",
+      "description": "True when EMI is already inside monthlyExpenses."
+    },
+    "unexpectedExpense": {
+      "type": "number",
+      "minimum": 0,
+      "unit": "INR one-time"
+    },
+    "monthlySavingsCapacity": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "unit": "INR/month",
+      "description": "Optional explicit goal contribution. Null means the engine uses max(0, monthly surplus)."
+    },
+    "targetAmount": {
+      "type": ["number", "null"],
+      "exclusiveMinimum": 0,
+      "unit": "INR",
+      "description": "Optional goal target."
+    },
+    "currentGoalSavings": {
+      "type": "number",
+      "minimum": 0,
+      "unit": "INR"
+    },
+    "goalTimelineMonths": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Optional requested timeline in whole months."
+    }
+  },
+  "coverage": {
+    "surplus": ["positive", "zero", "negative"],
+    "incomeAndExpenses": "Varied random levels and zero-income / zero-expense boundaries.",
+    "emi": ["included", "excluded"],
+    "emergencySavings": ["low", "high", "zero"],
+    "unexpectedExpenses": ["fully funded", "exactly funded", "unfunded"],
+    "goals": ["achieved", "achievable", "unreachable", "no target"],
+    "boundaries": [
+      "zero income denominator",
+      "zero expenses denominator",
+      "zero mandatory outflows denominator",
+      "coverage exactly at threshold",
+      "coverage just below threshold",
+      "EMI exactly at threshold",
+      "EMI just above threshold",
+      "floating-point month rounding",
+      "month-end date clamping",
+      "large monetary values"
+    ]
+  },
+  "scenarios": {
+    "basePerProfile": [
+      "income_up",
+      "expenses_up",
+      "emi_up",
+      "savings_up",
+      "shock",
+      "combined_stress"
+    ],
+    "conditionalPerProfile": ["goal_contribution_up"],
+    "conditionalRule": "goal_contribution_up is generated only when targetAmount is not null",
+    "overrideSemantics": "Each scenario changes only the listed fields; all other baseline fields are inherited."
+  },
+  "isolation": {
+    "findexDataset": "data/processed/findex_resilience.csv",
+    "findexExperiment": "ml/",
+    "mergedWithFindex": false,
+    "writtenToFindex": false
+  }
+}

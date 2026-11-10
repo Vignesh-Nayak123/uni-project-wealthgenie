@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "inflation",
+  "title": "Inflation",
+  "branchId": "saving",
+  "category": "Saving",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "INF-OBJ-1",
+      "text": "Explain inflation as a rise in the price of goods and services over time."
+    },
+    {
+      "id": "INF-OBJ-2",
+      "text": "Calculate a real return by subtracting inflation from a nominal return."
+    },
+    {
+      "id": "INF-OBJ-3",
+      "text": "Explain why cash held idle loses purchasing power."
+    }
+  ],
+  "prerequisites": [
+    "saving-money"
+  ],
+  "estimatedMinutes": 5,
+  "explanation": [
+    "Inflation is the rate at which prices of goods and services rise over a period. If a kilogram of apples costs ₹100 this year and ₹110 next year, prices rose by ₹10, which is 10%. The same money buys less, so the cost of living goes up.",
+    "What matters is the real return, not the headline return. RBI's FAME material defines it simply as return percentage minus inflation percentage. Money in a deposit earning 6% while inflation is 4% has a real return of 2%. Money held as cash earns 0%, so with 4% inflation its real return is minus 4%.",
+    "This is why idle cash is not neutral. It feels safe because the number does not fall, but its purchasing power does. Savings and investments need a return at least above inflation to preserve what the money can buy over the years."
+  ],
+  "examples": [
+    {
+      "id": "INF-EX-1",
+      "title": "Real return on a deposit",
+      "text": "Meera keeps ₹50,000 in a deposit earning 6% a year while inflation is 4%. Her real return is 2%. On ₹50,000 that is roughly ₹1,000 of real gain for the year, not the ₹3,000 the headline rate suggests.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    },
+    {
+      "id": "INF-EX-2",
+      "title": "Cash under the mattress",
+      "text": "Rahul keeps ₹20,000 as cash at home for a year. The note count is unchanged, but with 4% inflation those rupees buy about 4% less, a real loss of roughly ₹800 in purchasing power.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Inflation is a rise in prices, so the same money buys less over time.",
+    "Real return is the return percentage minus the inflation percentage.",
+    "Cash earning nothing has a negative real return whenever prices rise.",
+    "Aim for returns above inflation to preserve purchasing power."
+  ],
+  "sourceIds": [
+    "RBI-FAME"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Definition, the apples example and the real-return formula are checked against RBI FAME 4th edition, Message 8. No current inflation rate is quoted, since rates change. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "INF-Q-1",
+      "objectiveId": "INF-OBJ-1",
+      "question": "A kilogram of apples goes from ₹100 to ₹110 in a year. What happened?",
+      "options": [
+        "Prices fell by 10%",
+        "Prices rose by 10%",
+        "Nothing changed in real terms"
+      ],
+      "correctIndex": 1,
+      "explanation": "A ₹10 rise on a ₹100 base is a 10% increase, which is the inflation rate for that item over the year."
+    },
+    {
+      "id": "INF-Q-2",
+      "objectiveId": "INF-OBJ-2",
+      "question": "Your deposit earns 6% while inflation is 4%. What is the real return?",
+      "options": [
+        "10%",
+        "6%",
+        "2%"
+      ],
+      "correctIndex": 2,
+      "explanation": "RBI's FAME material calculates real return as return minus inflation: 6% minus 4% equals 2%."
+    },
+    {
+      "id": "INF-Q-3",
+      "objectiveId": "INF-OBJ-3",
+      "question": "Why does cash kept idle lose value?",
+      "options": [
+        "Because prices rise while the cash earns nothing",
+        "Because the notes expire",
+        "Because banks charge a fee on cash at home"
+      ],
+      "correctIndex": 0,
+      "explanation": "The cash earns a 0% return, so with positive inflation its real return is negative and it buys less over time."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Inflation varies by item and over time; no current rate is quoted here."
+}

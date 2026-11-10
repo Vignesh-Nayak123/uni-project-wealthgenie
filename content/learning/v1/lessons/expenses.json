@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "expenses",
+  "title": "Expenses",
+  "branchId": "money-basics",
+  "category": "Money Basics",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "EXP-OBJ-1",
+      "text": "Sort expenses into fixed, variable and occasional categories."
+    },
+    {
+      "id": "EXP-OBJ-2",
+      "text": "Explain the difference between a need and a want when money is tight."
+    },
+    {
+      "id": "EXP-OBJ-3",
+      "text": "Use a simple spending record to find money that can be redirected to savings."
+    }
+  ],
+  "prerequisites": [
+    "income"
+  ],
+  "estimatedMinutes": 5,
+  "explanation": [
+    "An expense is money that goes out. Fixed expenses stay roughly the same every month, such as rent, a loan instalment or a phone plan. Variable expenses move with your choices, such as groceries, transport and eating out. Occasional expenses appear a few times a year, such as insurance premiums, festival spending or a medical bill.",
+    "RBI's financial awareness material puts the relationship plainly: expenditure equals income minus saving. That ordering matters. If you spend first and save what is left, saving usually loses. If you set aside a portion of income before spending, the rest becomes your spending limit.",
+    "Separating needs from wants is not about guilt. It is about ordering. A need keeps your life running: rent, food, medicines, school fees, minimum loan payments. A want improves life but can wait a month. Writing down expenses for a month usually reveals one or two regular wants that could become savings."
+  ],
+  "examples": [
+    {
+      "id": "EXP-EX-1",
+      "title": "Three kinds of expense in one household",
+      "text": "Priya pays ₹12,000 rent and ₹4,500 towards a two-wheeler loan every month; these are fixed. Groceries and auto fares vary between ₹9,000 and ₹12,000. Her annual insurance premium of ₹9,000 is occasional, so she sets aside ₹750 each month instead of being caught short in the renewal month.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    },
+    {
+      "id": "EXP-EX-2",
+      "title": "Finding savings in the record",
+      "text": "Rahul writes down every expense for one month. He finds ₹2,400 of food delivery and ₹1,100 of unused subscriptions. Cancelling two subscriptions frees ₹700 a month without changing anything he actually values.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Split expenses into fixed, variable and occasional so nothing arrives as a surprise.",
+    "Expenditure is income minus saving, so decide savings before spending.",
+    "Needs keep life running; wants can usually wait one month.",
+    "A single month of written expenses shows where money leaks."
+  ],
+  "sourceIds": [
+    "RBI-FAME"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "The income, expenditure and saving relationship is checked against RBI FAME 4th edition, Message 1. The fixed/variable/occasional split is general practice. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "EXP-Q-1",
+      "objectiveId": "EXP-OBJ-1",
+      "question": "Which list contains only fixed expenses?",
+      "options": [
+        "Groceries, auto fares, eating out",
+        "Insurance premium, festival spending, a medical bill",
+        "Rent, loan instalment, phone plan"
+      ],
+      "correctIndex": 2,
+      "explanation": "Fixed expenses stay roughly the same each month. Groceries and transport vary with use, and insurance or festival costs appear only occasionally."
+    },
+    {
+      "id": "EXP-Q-2",
+      "objectiveId": "EXP-OBJ-2",
+      "question": "Money is tight this month. Which item is a need rather than a want?",
+      "options": [
+        "The monthly loan instalment",
+        "A second streaming subscription",
+        "A weekend trip"
+      ],
+      "correctIndex": 0,
+      "explanation": "Missing a loan instalment creates penalties and hurts your credit record. The subscription and the trip can be postponed."
+    },
+    {
+      "id": "EXP-Q-3",
+      "objectiveId": "EXP-OBJ-3",
+      "question": "According to RBI's budgeting message, how should saving relate to spending?",
+      "options": [
+        "Save whatever is left at the end of the month",
+        "Set aside a portion of income before you spend anything",
+        "Save only during festival months"
+      ],
+      "correctIndex": 1,
+      "explanation": "RBI's FAME material describes expenditure as income minus saving, and advises setting aside savings from income before spending."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Your own essential expenses depend on your household."
+}

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "fixed-recurring-deposits",
+  "title": "Fixed and recurring deposits",
+  "branchId": "investing",
+  "category": "Investing",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "FRD-OBJ-1",
+      "text": "Compare a fixed deposit with a recurring deposit."
+    },
+    {
+      "id": "FRD-OBJ-2",
+      "text": "Estimate how compounding affects a deposit's maturity value."
+    },
+    {
+      "id": "FRD-OBJ-3",
+      "text": "Explain the cost of breaking a deposit early and how to plan around it."
+    }
+  ],
+  "prerequisites": [
+    "bank-deposits",
+    "compound-interest"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "A fixed deposit puts a lump sum with a bank for a fixed tenure. A recurring deposit puts a fixed amount every month for a fixed tenure. Both pay interest and both are term deposits, but they suit different situations: a fixed deposit suits money you already have, while a recurring deposit builds a corpus from monthly income.",
+    "Term deposits usually earn interest that is added to the balance, so the maturity value is higher than principal plus a flat interest figure. The exact method depends on the bank and the tenure. As a rough check, ₹1,00,000 at 7% compounded quarterly for one year grows to about ₹1,07,186, because each quarter's interest starts earning in the next quarter.",
+    "The flexibility has a price. RBI's FAME material notes that withdrawing a fixed deposit before the end of its period attracts a penalty. Recurring deposits can also carry conditions for missed instalments. Before you commit, confirm the tenure, the penalty, whether the rate is fixed or floating, and whether you have a nominee. If you may need part of the money, split it across deposits of different tenures rather than locking the whole amount in one."
+  ],
+  "examples": [
+    {
+      "id": "FRD-EX-1",
+      "title": "Lump sum versus monthly",
+      "text": "Priya receives a ₹1,50,000 bonus and puts it in a one-year fixed deposit. Meera, who has no lump sum, starts a recurring deposit of ₹12,500 a month for a year. Both build a deposit corpus, but Priya's money starts earning immediately while Meera's later instalments earn for fewer months.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    },
+    {
+      "id": "FRD-EX-2",
+      "title": "The cost of breaking early",
+      "text": "Rahul locks ₹80,000 in a two-year fixed deposit, then needs ₹30,000 after eight months for a medical bill. He withdraws part of the deposit and pays the bank's premature-withdrawal penalty, receiving less than the stated rate would suggest. Keeping three months of expenses in a savings account would have avoided that.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "A fixed deposit takes a lump sum; a recurring deposit takes a fixed monthly amount.",
+    "Interest is usually added to the balance, so maturity value reflects compounding.",
+    "Premature withdrawal of a fixed deposit normally attracts a penalty.",
+    "Split money across tenures so an emergency does not force you to break the whole deposit."
+  ],
+  "sourceIds": [
+    "RBI-FAME",
+    "DICGC"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Fixed versus recurring deposit descriptions and the premature-withdrawal penalty are checked against RBI FAME 4th edition, Message 2. The ₹1,07,186 figure is a standard quarterly-compounding calculation at 7% for one year, shown as an illustration, not a quoted bank rate. DICGC cover is referenced from the DICGC leaflet. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "FRD-Q-1",
+      "objectiveId": "FRD-OBJ-1",
+      "question": "Which deposit suits someone who has no lump sum but can save every month?",
+      "options": [
+        "A fixed deposit",
+        "A recurring deposit",
+        "A current account"
+      ],
+      "correctIndex": 1,
+      "explanation": "A recurring deposit accepts a fixed amount each month, which matches regular income. A fixed deposit needs a lump sum at the start."
+    },
+    {
+      "id": "FRD-Q-2",
+      "objectiveId": "FRD-OBJ-2",
+      "question": "Why is a deposit's maturity value usually more than principal plus a flat year's interest?",
+      "options": [
+        "Because banks add a random bonus",
+        "Because the principal increases every month on its own",
+        "Because interest added to the balance earns interest in later periods"
+      ],
+      "correctIndex": 2,
+      "explanation": "When interest is credited to the deposit, later interest is calculated on the larger balance. That is compounding, and it raises the maturity value."
+    },
+    {
+      "id": "FRD-Q-3",
+      "objectiveId": "FRD-OBJ-3",
+      "question": "What normally happens if you withdraw a fixed deposit before maturity?",
+      "options": [
+        "The bank charges a premature-withdrawal penalty",
+        "The bank pays a higher rate as a reward",
+        "Nothing changes at all"
+      ],
+      "correctIndex": 0,
+      "explanation": "RBI's FAME material states that early withdrawal of a fixed deposit attracts a penalty. That is why money you may need soon belongs in a more accessible account."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Interest rates, compounding methods and penalties differ by bank and product."
+}

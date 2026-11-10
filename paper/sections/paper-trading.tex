@@ -1,0 +1,11 @@
+\section{Paper Trading and Simulated Investment Learning}
+
+The paper trading module provides a zero-risk environment in which users can experiment with buying and selling before committing real capital. The module is explicitly educational: all trades are simulated, and the interface never presents simulated trading as actual investment execution.
+
+The module initializes a virtual portfolio with a starting cash balance of one lakh Indian Rupees. Users may place simulated buy and sell orders for supported instruments, including Nifty 50 ETFs and large-cap stocks. Order execution resolves a price through a layered provider: when a live Upstox V3 market data feed is configured and a fresh tick is available, the live price is used with its real source, timestamp and staleness status; otherwise a clearly labelled simulated fixture price is used. Stale live prices are rejected unless the user explicitly acknowledges using the last available price.
+
+Portfolio valuation is computed from current holdings and available prices, and the order history records each trade with its price source, quantity, average cost and timestamp. Realized and unrealized profit and loss are tracked and displayed alongside the cash balance and position quantities.
+
+The module includes a historical replay feature that steps through verified daily OHLC data for a Nifty 50 ETF, revealing one candle at a time. Users may place trades against the revealed history, simulating investment decisions with the benefit of hindsight while observing how earlier decisions affect later portfolio outcomes. The replay source is explicitly labelled as verified local CSV data or a development-only synthetic fixture, never as live market data.
+
+Simulated trading allows users to understand market behaviour, the impact of timing, the effect of costs on portfolio growth, and the emotional and practical dimensions of holding positions, without risking real money. This module relates directly to SDG 4 by providing experiential learning that reinforces the conceptual lessons of the Learn module, and to SDG 12 by encouraging responsible engagement with market instruments before real capital is involved.

@@ -1,0 +1,301 @@
+{
+  "source": "Association of Mutual Funds in India (AMFI)",
+  "portal": "https://www.amfiindia.com/net-asset-value/nav-download",
+  "endpoint": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx",
+  "retrievalDate": "2026-10-24T20:10:32.709Z",
+  "requestedRange": {
+    "startDate": "2024-01-01",
+    "endDate": "2026-10-23"
+  },
+  "schemesCount": 2,
+  "schemes": [
+    {
+      "schemeCode": "120716",
+      "schemeName": "UTI Nifty 50 Index Fund - Growth Option- Direct",
+      "fundHouse": "UTI Mutual Fund",
+      "isin": "INF789F01XA0",
+      "plan": "Direct",
+      "option": "Growth",
+      "rawPayloadSha256": "8ce181e8cde8455d2003548a40afd1308a3b767491d33cf6df18d06852d05b4f",
+      "chunkCount": 12,
+      "chunks": [
+        {
+          "index": 1,
+          "requestedStart": "01-Jan-2024",
+          "requestedEnd": "30-Mar-2024",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=01-Jan-2024&todt=30-Mar-2024",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 3023971,
+          "sha256": "9116e63e06faf657bd34829545d5b7417a8247bb3fa18cc47740f7a9c8b4c5b8",
+          "file": "120716/chunk_01_2024-01-01_to_2024-03-30.txt"
+        },
+        {
+          "index": 2,
+          "requestedStart": "31-Mar-2024",
+          "requestedEnd": "28-Jun-2024",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=31-Mar-2024&todt=28-Jun-2024",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 3021151,
+          "sha256": "0a76dae91a4425bd4a05064e72644b4615dcd43a52a95e16d91b01a07cd00d91",
+          "file": "120716/chunk_02_2024-03-31_to_2024-06-28.txt"
+        },
+        {
+          "index": 3,
+          "requestedStart": "29-Jun-2024",
+          "requestedEnd": "26-Sep-2024",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=29-Jun-2024&todt=26-Sep-2024",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 3138303,
+          "sha256": "3ec89a92d73c66347c6750365f1a7a5f2d24c7e57502da5790e940cbb9156cc4",
+          "file": "120716/chunk_03_2024-06-29_to_2024-09-26.txt"
+        },
+        {
+          "index": 4,
+          "requestedStart": "27-Sep-2024",
+          "requestedEnd": "25-Dec-2024",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=27-Sep-2024&todt=25-Dec-2024",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 3072353,
+          "sha256": "909f6ca42e177c421da6e2e2ddde6a01fd0ebe428d01559847e448d5f503d1f5",
+          "file": "120716/chunk_04_2024-09-27_to_2024-12-25.txt"
+        },
+        {
+          "index": 5,
+          "requestedStart": "26-Dec-2024",
+          "requestedEnd": "25-Mar-2025",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=26-Dec-2024&todt=25-Mar-2025",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 3224081,
+          "sha256": "35c8f2740758fa4e18e8ace03240bd370036c10be380588c2f41aa2f6d1be094",
+          "file": "120716/chunk_05_2024-12-26_to_2025-03-25.txt"
+        },
+        {
+          "index": 6,
+          "requestedStart": "26-Mar-2025",
+          "requestedEnd": "23-Jun-2025",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=26-Mar-2025&todt=23-Jun-2025",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 3139971,
+          "sha256": "47fcb3bec5fb285e264f4eba8940c900ab45d17047dbd3ea76dd5471dc428cb2",
+          "file": "120716/chunk_06_2025-03-26_to_2025-06-23.txt"
+        },
+        {
+          "index": 7,
+          "requestedStart": "24-Jun-2025",
+          "requestedEnd": "21-Sep-2025",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=24-Jun-2025&todt=21-Sep-2025",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 3280900,
+          "sha256": "547b4cac564a1f4a37cd6cdf5f037b9bf164bddf017e0a2fe2d96b6633228f57",
+          "file": "120716/chunk_07_2025-06-24_to_2025-09-21.txt"
+        },
+        {
+          "index": 8,
+          "requestedStart": "22-Sep-2025",
+          "requestedEnd": "20-Dec-2025",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=22-Sep-2025&todt=20-Dec-2025",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 3263087,
+          "sha256": "e4cf46b6b5dc3b0f13bca2d43cce9ec1bbb3dfa9723b9c012c7a748e03a1a9a1",
+          "file": "120716/chunk_08_2025-09-22_to_2025-12-20.txt"
+        },
+        {
+          "index": 9,
+          "requestedStart": "21-Dec-2025",
+          "requestedEnd": "20-Mar-2026",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=21-Dec-2025&todt=20-Mar-2026",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 3201939,
+          "sha256": "08e8f416e7d957dbf840553a88773371b126a5eb7347263d61e5f739c1460670",
+          "file": "120716/chunk_09_2025-12-21_to_2026-03-20.txt"
+        },
+        {
+          "index": 10,
+          "requestedStart": "21-Mar-2026",
+          "requestedEnd": "18-Jun-2026",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=21-Mar-2026&todt=18-Jun-2026",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 3137263,
+          "sha256": "9a01d4dc74dbc7ce457850e8fc0304d9149ee2179d0cb168e11f3da0c19a3aaa",
+          "file": "120716/chunk_10_2026-03-21_to_2026-06-18.txt"
+        },
+        {
+          "index": 11,
+          "requestedStart": "19-Jun-2026",
+          "requestedEnd": "16-Sep-2026",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=19-Jun-2026&todt=16-Sep-2026",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 3291051,
+          "sha256": "90ab3fbd0500c5a8f82bf216f18f04b1a40f4709dcdf18cd9c076639b1b98b55",
+          "file": "120716/chunk_11_2026-06-19_to_2026-09-16.txt"
+        },
+        {
+          "index": 12,
+          "requestedStart": "17-Sep-2026",
+          "requestedEnd": "23-Oct-2026",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=28&tp=1&frmdt=17-Sep-2026&todt=23-Oct-2026",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 1366643,
+          "sha256": "953cff087f3c6443831a93eb71d43a4321fac68fc5187fe0cf608cd2ee49df50",
+          "file": "120716/chunk_12_2026-09-17_to_2026-10-23.txt"
+        }
+      ]
+    },
+    {
+      "schemeCode": "119063",
+      "schemeName": "HDFC Nifty 50 Index Fund - Direct Plan - Growth Option",
+      "fundHouse": "HDFC Mutual Fund",
+      "isin": "INF179K01WM1",
+      "plan": "Direct",
+      "option": "Growth",
+      "rawPayloadSha256": "bd7a8b4da70b3bf94fc7eba6aaf7da3a6a8ad0ab0cc7ca997c9bd2dfb904fc2b",
+      "chunkCount": 12,
+      "chunks": [
+        {
+          "index": 1,
+          "requestedStart": "01-Jan-2024",
+          "requestedEnd": "30-Mar-2024",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=01-Jan-2024&todt=30-Mar-2024",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 2041068,
+          "sha256": "2213ca2b9feb1199d29099325d15c134392dddba9acea035f7ade55b68c447fb",
+          "file": "119063/chunk_01_2024-01-01_to_2024-03-30.txt"
+        },
+        {
+          "index": 2,
+          "requestedStart": "31-Mar-2024",
+          "requestedEnd": "28-Jun-2024",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=31-Mar-2024&todt=28-Jun-2024",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 2087864,
+          "sha256": "a8077bcb8b5d0f294272f3096c6b6f12cfa221683789682a7b0f02bdf0681252",
+          "file": "119063/chunk_02_2024-03-31_to_2024-06-28.txt"
+        },
+        {
+          "index": 3,
+          "requestedStart": "29-Jun-2024",
+          "requestedEnd": "26-Sep-2024",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=29-Jun-2024&todt=26-Sep-2024",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 2184600,
+          "sha256": "fcd1aa7a2498bff9d7dd27ec41f7723eed84b7591bc8da4fd481b92d289c5e2b",
+          "file": "119063/chunk_03_2024-06-29_to_2024-09-26.txt"
+        },
+        {
+          "index": 4,
+          "requestedStart": "27-Sep-2024",
+          "requestedEnd": "25-Dec-2024",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=27-Sep-2024&todt=25-Dec-2024",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 2121925,
+          "sha256": "99a311755832cc77f83af472096551a85c77d3898a34b4264e9d0d5b6b36ae6f",
+          "file": "119063/chunk_04_2024-09-27_to_2024-12-25.txt"
+        },
+        {
+          "index": 5,
+          "requestedStart": "26-Dec-2024",
+          "requestedEnd": "25-Mar-2025",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=26-Dec-2024&todt=25-Mar-2025",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 2233818,
+          "sha256": "7ad89c7f2dd5bc0a316b16c433f7584f4097e95a60ea3ab2f2deaf9230e05b79",
+          "file": "119063/chunk_05_2024-12-26_to_2025-03-25.txt"
+        },
+        {
+          "index": 6,
+          "requestedStart": "26-Mar-2025",
+          "requestedEnd": "23-Jun-2025",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=26-Mar-2025&todt=23-Jun-2025",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 2182748,
+          "sha256": "a8447284cbcda1f47d561fd0179ecf2b16b1cade07ca7e3bd76872bfce6e5e57",
+          "file": "119063/chunk_06_2025-03-26_to_2025-06-23.txt"
+        },
+        {
+          "index": 7,
+          "requestedStart": "24-Jun-2025",
+          "requestedEnd": "21-Sep-2025",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=24-Jun-2025&todt=21-Sep-2025",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 2297542,
+          "sha256": "74b8610a8930b4196a21e81c5a4da9dca9f74ab480204f9e866c005d4a12309e",
+          "file": "119063/chunk_07_2025-06-24_to_2025-09-21.txt"
+        },
+        {
+          "index": 8,
+          "requestedStart": "22-Sep-2025",
+          "requestedEnd": "20-Dec-2025",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=22-Sep-2025&todt=20-Dec-2025",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 2321785,
+          "sha256": "ca3182d46b5b11f4706be1476c513b8634b4feed4c496159ef61c79f8cb81b40",
+          "file": "119063/chunk_08_2025-09-22_to_2025-12-20.txt"
+        },
+        {
+          "index": 9,
+          "requestedStart": "21-Dec-2025",
+          "requestedEnd": "20-Mar-2026",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=21-Dec-2025&todt=20-Mar-2026",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 2321177,
+          "sha256": "800e94a5f180f64614f98c00f0a42139f5248b5d0f96e46a257c0738436b1643",
+          "file": "119063/chunk_09_2025-12-21_to_2026-03-20.txt"
+        },
+        {
+          "index": 10,
+          "requestedStart": "21-Mar-2026",
+          "requestedEnd": "18-Jun-2026",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=21-Mar-2026&todt=18-Jun-2026",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 2301182,
+          "sha256": "30c8a2717a826b4901e215ee200d45f8d0765a6650135327ac716ccec4aa8653",
+          "file": "119063/chunk_10_2026-03-21_to_2026-06-18.txt"
+        },
+        {
+          "index": 11,
+          "requestedStart": "19-Jun-2026",
+          "requestedEnd": "16-Sep-2026",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=19-Jun-2026&todt=16-Sep-2026",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 2410549,
+          "sha256": "a225b17d3669d8c7a0cd5785afe7862c7117aa01347c8b79619b3e9b6783c0dd",
+          "file": "119063/chunk_11_2026-06-19_to_2026-09-16.txt"
+        },
+        {
+          "index": 12,
+          "requestedStart": "17-Sep-2026",
+          "requestedEnd": "23-Oct-2026",
+          "url": "https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=9&tp=1&frmdt=17-Sep-2026&todt=23-Oct-2026",
+          "httpStatus": 200,
+          "contentType": "text/plain",
+          "byteLength": 1003310,
+          "sha256": "121df907d0d144c0566f4421f8f41f23bb1266fafb5825092d21c643970d19a6",
+          "file": "119063/chunk_12_2026-09-17_to_2026-10-23.txt"
+        }
+      ]
+    }
+  ]
+}

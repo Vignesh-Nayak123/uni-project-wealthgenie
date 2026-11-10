@@ -1,0 +1,31 @@
+\section{Risk-Aware Mutual Fund Recommendation Engine}
+
+The risk-aware mutual fund recommendation engine is the platform's main technical contribution. It is fully deterministic and explainable: every number shown to a user is traceable to a processed AMFI or SEBI dataset row or to the user's own profile. Nothing is invented, zero-filled or imputed. The engine operates in five stages.
+
+\subsection{Dataset preparation}
+
+The engine consumes a verified merged fund dataset produced by Python pipelines. The AMFI scheme master file containing 38,495 schemes is left-joined with the SEBI scheme details file containing 11,417 richer rows on scheme code, yielding 38,495 rows with zero multiplication. The 27,078 unmatched master rows are preserved with a details-matched flag rather than deleted. Riskometer level is coalesced from the details side, AMFI daily disclosure and the master side, normalized to SEBI labels with a per-row source flag; off-scale labels remain null. Benchmark, primary category and group are coalesced similarly. Expense ratio is kept verbatim per plan with an as-of date.
+
+NAV metrics are computed from 3.77 crore NAV observations. A horizon is computed only when the actual observation span covers at least 97 percent of the window and at least 12 observations exist; otherwise the metric stays null and the horizon is listed in insufficientHorizons. Volatility annualizes log-return standard deviation by the real median observation gap, with gaps exceeding 15 days excluded. Maximum drawdown uses the full series. Portfolio holdings are available for only 24 funds and are used as enrichment context, never as a scoring factor.
+
+A 13-check data quality report documents the state of the dataset. Approximately 70 percent of merged rows carry no Riskometer, dominated by inactive legacy schemes without details disclosures; these rows are excluded by the engine and flagged in the quality report.
+
+\subsection{Financial readiness}
+
+The readiness stage computes household indicators from the user's profile using the shared assessment engine. Monthly surplus, outflows, savings rate and emergency coverage are computed with the same EMI double-counting guard as the assessment module. Debt burden is computed as EMI payments divided by income. Investable surplus is the positive monthly surplus, halved while emergency coverage is below the three-month heuristic threshold. Risk capacity is derived on a 1 to 5 scale from income stability, positive surplus, emergency coverage and debt burden, independent of stated tolerance.
+
+\subsection{Category ranking}
+
+The category stage ranks investment categories using fixed published weights: horizon fit 0.30, risk fit 0.25, liquidity fit 0.20 and goal alignment 0.25. Risk interpretation maps the minimum of derived capacity and stated tolerance to category Riskometer bands, so equity is never auto-recommended to a stressed profile. Categories are filtered by hard eligibility gates including emergency fund presence, positive surplus, minimum investment horizon, retirement goal or long horizon requirement, and derived risk capacity reaching the category band. Excluded categories carry explicit reasons.
+
+\subsection{Fund eligibility and scoring}
+
+For each eligible category, funds are drawn from category-specific pools verified against real dataset distributions. Each fund must pass all hard eligibility checks: Riskometer present and inside the pool band; category group and category or name regex matching the pool; investment horizon at least the pool minimum; expense ratio disclosed for at least one plan; NAV history present and at most 30 days fresh; and the pool-required return window actually computable. Failures are counted by rule class and never overridden by any score.
+
+Eligible funds are scored using the published weights: risk alignment 0.30, expense ratio 0.20, volatility 0.15, maximum drawdown 0.15, return consistency 0.15 and data completeness 0.05. Risk alignment normalizes as $1 - |\text{effectiveRisk} - \text{fundLevel}| / 4$, clipped to zero. Expense ratio normalizes linearly from 1 at 0.10 percent to 0 at 2.50 percent, using the best plan TER with direct winning ties. Volatility normalizes linearly from 1 at 2 percent to 0 at 30 percent. Maximum drawdown normalizes linearly from 1 at 15 percent to 0 at 60 percent. Consistency is the positive rolling-year fraction, with missing data scoring a neutral 0.5. Data completeness is the share of present fields among TER, benchmark, 3Y history, holdings and fresh NAV.
+
+Returns are displayed but never scored, and AUM is excluded entirely. Missing data scores a neutral value rather than being punished. Only the best variant per fund family is retained. Risk eligibility is evaluated before ranking because hard constraints are gates, not weights: a ranking score can never rescue a fund that failed an eligibility check, and an ineligible category pool is never consulted for funds.
+
+\subsection{Explainable output}
+
+Every recommended fund carries scheme code and name, AMC, category, plan, option, Riskometer level and label, expense ratio with as-of date, NAV with as-of date and freshness, historical metrics, the composite score with per-factor breakdown, deterministic reasons, risk warnings, benchmark and dataAsOf. The engine is deterministic, not a trained machine learning or collaborative filtering model. The repository holds no verified user-fund interaction dataset, so collaborative filtering was deliberately not deployed. The optional Gemini narrator may reword the finished structured result into plain language under strict prompt rules, but it never introduces fund names, NAVs, returns or suitability decisions, and any failure keeps the deterministic explanation.

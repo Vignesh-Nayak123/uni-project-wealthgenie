@@ -1,0 +1,27 @@
+{
+  "name": "wealthgenie-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "WealthGenie - AI-powered financial literacy platform for Indian beginners",
+  "scripts": {
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "start:backend": "npm --prefix backend start",
+    "test": "node --test tests/*.test.js",
+    "validate:content": "node scripts/validateLearningContent.js",
+    "experiment": "node experiments/run.js",
+    "experiment:publish": "node experiments/run.js --publish-doc",
+    "experiment:verify": "node experiments/run.js --verify",
+    "import:nifty": "node scripts/importNifty.js",
+    "import:amfi": "node scripts/importAMFI.js",
+    "import:amfi-master": "node scripts/importAMFIMaster.js",
+    "validate:data": "node scripts/validateDataQuality.js"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.118.0",
+    "recharts": "^2.12.0"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "simple-interest",
+  "title": "Simple interest",
+  "branchId": "growing-money",
+  "category": "Growing Money",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "SI-OBJ-1",
+      "text": "Calculate simple interest on a principal amount for a given rate and time."
+    },
+    {
+      "id": "SI-OBJ-2",
+      "text": "Explain why the interest rate must be annualised before comparing offers."
+    },
+    {
+      "id": "SI-OBJ-3",
+      "text": "Recognise that simple interest is a teaching model, while many loans work differently."
+    }
+  ],
+  "prerequisites": [
+    "saving-money"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "Simple interest is calculated only on the original amount, called the principal. The formula is interest equals principal times rate times time, divided by 100. Borrow ₹100 at 10% simple interest for one year and you repay ₹100 plus ₹10, which is ₹110.",
+    "The rate must always be annualised. RBI's FAME material warns that a lender may advertise 2% while the small print says per month, which works out to 24% a year. Converting every offer to a yearly rate is the only fair way to compare a loan, a deposit or a credit card.",
+    "Simple interest is a clean way to learn the idea, but most bank and NBFC loans do not use it. They typically charge interest on a reducing balance, so the effective cost differs from the simple-interest figure. Always read the sanction letter and ask for the annualised rate and the total repayment."
+  ],
+  "examples": [
+    {
+      "id": "SI-EX-1",
+      "title": "One year at 10%",
+      "text": "Ravi borrows ₹100 for one year at 10% simple interest. Interest is 100 × 10 × 1 ÷ 100 = ₹10, so he repays ₹110 in total.",
+      "sourceIds": [
+        "RBI-FAME"
+      ],
+      "calculation": {
+        "formula": "Interest = Principal × Rate × Time ÷ 100",
+        "steps": [
+          "Principal = ₹100",
+          "Rate = 10% per year",
+          "Time = 1 year",
+          "100 × 10 × 1 ÷ 100 = ₹10"
+        ],
+        "result": "Total repayment = ₹110"
+      }
+    },
+    {
+      "id": "SI-EX-2",
+      "title": "The monthly rate trap",
+      "text": "A shop advertises a loan at 'just 2%'. The small print says 2% per month. Annualised, that is about 24% a year, which is very different from 2%.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Simple interest is charged only on the original principal.",
+    "Interest = Principal × Rate × Time ÷ 100.",
+    "Always convert a quoted rate to a yearly rate before comparing.",
+    "Most bank loans use reducing-balance interest, not simple interest."
+  ],
+  "sourceIds": [
+    "RBI-FAME"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "The ₹100 at 10% example, the formula and the monthly-rate warning are checked against RBI FAME 4th edition, Message 6. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "SI-Q-1",
+      "objectiveId": "SI-OBJ-1",
+      "question": "You borrow ₹1,000 at 10% simple interest for two years. How much interest do you pay?",
+      "options": [
+        "₹100",
+        "₹200",
+        "₹210"
+      ],
+      "correctIndex": 1,
+      "explanation": "Simple interest is charged on the original principal only: 1,000 × 10 × 2 ÷ 100 = ₹200."
+    },
+    {
+      "id": "SI-Q-2",
+      "objectiveId": "SI-OBJ-2",
+      "question": "A lender quotes '2% per month'. What is the annualised rate?",
+      "options": [
+        "2%",
+        "12%",
+        "24%"
+      ],
+      "correctIndex": 2,
+      "explanation": "RBI's FAME material uses exactly this example: 2% per month works out to about 24% per year."
+    },
+    {
+      "id": "SI-Q-3",
+      "objectiveId": "SI-OBJ-3",
+      "question": "Why should you not assume a bank loan costs the simple-interest figure you calculated?",
+      "options": [
+        "Because bank loans usually charge interest on a reducing balance",
+        "Because banks do not charge interest",
+        "Because simple interest applies only to deposits"
+      ],
+      "correctIndex": 0,
+      "explanation": "Most bank and NBFC loans use reducing-balance interest, so the total cost differs from a simple-interest calculation on the full principal."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Loan terms, fees and effective rates vary by lender; read the sanction letter."
+}

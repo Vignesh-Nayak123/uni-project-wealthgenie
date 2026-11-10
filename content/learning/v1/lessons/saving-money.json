@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "saving-money",
+  "title": "Saving money",
+  "branchId": "saving",
+  "category": "Saving",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "SAV-OBJ-1",
+      "text": "Explain why saving is a planned transfer rather than a leftover."
+    },
+    {
+      "id": "SAV-OBJ-2",
+      "text": "Distinguish passive savings in a savings account from active savings in deposits."
+    },
+    {
+      "id": "SAV-OBJ-3",
+      "text": "Choose a realistic first savings target and a place to keep it."
+    }
+  ],
+  "prerequisites": [
+    "budgeting"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "Saving is money you deliberately keep instead of spending. The reliable method is a transfer on the day income arrives, so the decision is made once rather than every evening. Even ₹500 a month builds the habit and a small cushion.",
+    "RBI's FAME material separates passive savings from active savings. Money sitting in a regular savings bank account earns a low rate of interest, so it is called passive. Moving part of it into a fixed or recurring deposit, where you commit the money for a period, is described as active savings and generally earns more.",
+    "Choose a target you can actually keep. A first goal of one month's essential expenses is a reasonable start, then build towards a full emergency fund. Keep savings in an account you do not use for daily spending, and avoid locking all of it in a long deposit if you may need it soon."
+  ],
+  "examples": [
+    {
+      "id": "SAV-EX-1",
+      "title": "Automatic transfer on salary day",
+      "text": "Aarav sets a standing instruction to move ₹4,000 to a separate savings account on the day his salary is credited. Because the transfer happens first, he never has to decide whether to save at the end of the month.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    },
+    {
+      "id": "SAV-EX-2",
+      "title": "Passive versus active savings",
+      "text": "Priya keeps ₹20,000 in her savings account for daily use, where interest is low. She moves ₹15,000 she will not need for a year into a fixed deposit, which commits the money for a set period and pays a higher rate, with a penalty if she withdraws early.",
+      "sourceIds": [
+        "RBI-FAME"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Save by transferring money on income day, not by hoping for leftovers.",
+    "Savings account balances are passive savings and earn a low rate.",
+    "Fixed and recurring deposits are active savings, with a commitment period.",
+    "Start with one month of essential expenses, then build further."
+  ],
+  "sourceIds": [
+    "RBI-FAME"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Passive versus active savings and the low savings-account rate are checked against RBI FAME 4th edition, Message 2. The one-month starting target is general practice, not an RBI figure. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "SAV-Q-1",
+      "objectiveId": "SAV-OBJ-1",
+      "question": "Which approach is most likely to build savings reliably?",
+      "options": [
+        "Transfer a fixed amount on the day income arrives",
+        "Save whatever remains after all spending",
+        "Save only in months with a bonus"
+      ],
+      "correctIndex": 0,
+      "explanation": "Saving first makes it a decision you take once. Saving leftovers depends on spending behaviour and usually produces little."
+    },
+    {
+      "id": "SAV-Q-2",
+      "objectiveId": "SAV-OBJ-2",
+      "question": "Why does RBI describe money in a regular savings account as passive savings?",
+      "options": [
+        "Because it cannot be withdrawn",
+        "Because it earns a very low rate of interest",
+        "Because it is insured up to ₹5 lakh"
+      ],
+      "correctIndex": 1,
+      "explanation": "RBI's FAME material calls savings-account balances passive savings because they earn a low rate, unlike active savings in deposits held for a period."
+    },
+    {
+      "id": "SAV-Q-3",
+      "objectiveId": "SAV-OBJ-3",
+      "question": "You are saving for the first time. What is a sensible first target?",
+      "options": [
+        "Ten years of expenses",
+        "Enough to buy a car outright",
+        "One month of essential expenses"
+      ],
+      "correctIndex": 2,
+      "explanation": "A month of essentials is achievable and useful quickly. Larger goals come after the habit and the cushion exist."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Deposit rates and terms vary by bank and change over time."
+}

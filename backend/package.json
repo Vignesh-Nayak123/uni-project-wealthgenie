@@ -1,0 +1,19 @@
+{
+  "name": "wealthgenie-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "protobufjs": "^7.6.6",
+    "upstox-js-sdk": "^2.31.0",
+    "wealthgenie-monorepo": "file:..",
+    "ws": "^8.22.0"
+  }
+}

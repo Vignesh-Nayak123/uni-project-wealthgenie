@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "index-funds",
+  "title": "Index funds",
+  "branchId": "investing",
+  "category": "Investing",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "IDX-OBJ-1",
+      "text": "Explain what an index is and how an index fund tracks it."
+    },
+    {
+      "id": "IDX-OBJ-2",
+      "text": "Explain tracking error and why costs reduce an index fund's return."
+    },
+    {
+      "id": "IDX-OBJ-3",
+      "text": "Compare an index fund with an actively managed fund."
+    }
+  ],
+  "prerequisites": [
+    "mutual-funds"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "An index is a basket of securities chosen by a set of rules to represent a market or a segment. An index fund is a mutual fund that tries to copy that basket rather than trying to beat it. SEBI's investor material describes index funds as passively managed: the fund buys the index constituents in similar proportions and does not rely on a manager's stock picks.",
+    "Because the fund does not employ a team to research and select stocks, its costs are usually lower than an actively managed fund. But it cannot match the index exactly. It must hold cash for redemptions, pay expenses, and buy or sell when the index changes. The gap between the fund's return and the index return is called tracking error. Returns to the investor are the index return minus these costs and frictions.",
+    "The choice between index and active is not a contest of personalities. An index fund offers market-level returns at low cost and is easy to understand. An active fund may outperform, but it may also lag, and it charges more. Either way, the fund's category still carries market risk, so an index fund is not a safe short-term parking place."
+  ],
+  "examples": [
+    {
+      "id": "IDX-EX-1",
+      "title": "Tracking the basket",
+      "text": "An index of 50 large companies rises 8% in a year. An index fund tracking it, after expenses and small tracking differences, might return slightly less, say 7.7%. The investor gets broadly the market's result rather than a manager's bet on a few stocks.",
+      "sourceIds": [
+        "SEBI-INDEX",
+        "AMFI-TER"
+      ]
+    },
+    {
+      "id": "IDX-EX-2",
+      "title": "Where the cost shows up",
+      "text": "Two index funds track the same index. One has an expense ratio of 0.2% a year and the other 0.8%. On ₹1,00,000, the difference is about ₹600 a year before compounding. Over many years that gap grows, which is why cost matters in a passive product.",
+      "sourceIds": [
+        "AMFI-TER",
+        "SEBI-INDEX"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "An index fund copies an index instead of trying to beat it.",
+    "Passive management usually means lower costs than active management.",
+    "Tracking error is the gap between the fund's return and the index's return.",
+    "An index fund still carries market risk and is not a guaranteed-return product."
+  ],
+  "sourceIds": [
+    "SEBI-INDEX",
+    "AMFI-TER"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Passive tracking, lower cost and tracking error are checked against SEBI's 'Index Mutual Funds' page. The effect of the expense ratio on returns is checked against AMFI's expense-ratio explainer. The 8% versus 7.7% and 0.2% versus 0.8% figures are illustrative arithmetic, not market data. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "IDX-Q-1",
+      "objectiveId": "IDX-OBJ-1",
+      "question": "How does an index fund invest?",
+      "options": [
+        "It copies the securities in an index in similar proportions",
+        "It lets a manager pick any shares freely",
+        "It guarantees the index's past return"
+      ],
+      "correctIndex": 0,
+      "explanation": "An index fund is passively managed. It holds the index constituents in similar weights instead of relying on active stock selection."
+    },
+    {
+      "id": "IDX-Q-2",
+      "objectiveId": "IDX-OBJ-2",
+      "question": "What is tracking error?",
+      "options": [
+        "A penalty charged for selling units",
+        "The gap between the fund's return and the index's return",
+        "The number of stocks in the index"
+      ],
+      "correctIndex": 1,
+      "explanation": "Tracking error measures how closely a fund follows its index. Cash holdings, expenses and rebalancing create a small gap."
+    },
+    {
+      "id": "IDX-Q-3",
+      "objectiveId": "IDX-OBJ-3",
+      "question": "What is a key difference between an index fund and an active fund?",
+      "options": [
+        "An index fund cannot fall in value",
+        "An active fund never underperforms its benchmark",
+        "An index fund usually costs less because it does not research and select stocks"
+      ],
+      "correctIndex": 2,
+      "explanation": "Passive funds avoid the cost of a research team, so their expense ratios are usually lower. Both kinds can lose value, and active funds can underperform."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. Index funds carry market risk, and past index performance does not guarantee future returns."
+}

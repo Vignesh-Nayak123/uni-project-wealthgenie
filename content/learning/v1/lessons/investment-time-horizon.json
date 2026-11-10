@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "conceptId": "investment-time-horizon",
+  "title": "Investment time horizon",
+  "branchId": "investing",
+  "category": "Investing",
+  "status": "source-checked",
+  "objectives": [
+    {
+      "id": "TH-OBJ-1",
+      "text": "Define an investment time horizon and identify your own."
+    },
+    {
+      "id": "TH-OBJ-2",
+      "text": "Explain why the horizon should determine how much market risk you take."
+    },
+    {
+      "id": "TH-OBJ-3",
+      "text": "Adjust a plan when a goal moves closer."
+    }
+  ],
+  "prerequisites": [
+    "compound-interest",
+    "risk-and-return"
+  ],
+  "estimatedMinutes": 6,
+  "explanation": [
+    "Your time horizon is when you will need the money. It is not when you start investing. A retirement corpus needed in 25 years and a school fee needed in 18 months are both investments, but they cannot carry the same risk. SEBI's investor guidance is to match the investment to the horizon: money needed soon belongs in safer, more accessible products.",
+    "The horizon matters because it decides how much time you have to recover from a fall. Share prices can be down for years at a stretch. If you need the money during that period, you may be forced to sell at a loss. If you have a long horizon, you can wait for a recovery, and compounding has more time to work. That is why long-term goals can carry more equity risk than short-term ones.",
+    "Horizons also change. A goal that was ten years away becomes two years away, and the plan should shift towards safety as the date approaches. Reviewing the horizon once a year, and moving money for near-term goals into deposits or liquid options, prevents a market fall from derailing a plan you cannot postpone."
+  ],
+  "examples": [
+    {
+      "id": "TH-EX-1",
+      "title": "Same person, two horizons",
+      "text": "Priya is saving for a car in two years and for retirement in 25 years. The car money goes into a fixed deposit so it is available and stable. The retirement money can stay in a diversified equity portfolio, because a fall in year five still leaves two decades to recover.",
+      "sourceIds": [
+        "SEBI-RISKMGMT",
+        "SEBI-RISK"
+      ]
+    },
+    {
+      "id": "TH-EX-2",
+      "title": "When the goal gets closer",
+      "text": "Rahul's daughter's college fees are due in three years. He has been investing monthly in an equity fund. As the date approaches, he moves each year's contribution into a fixed deposit, so a market fall in the final year cannot reduce the amount he has already secured.",
+      "sourceIds": [
+        "SEBI-RISKMGMT"
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "The time horizon is when you need the money, not when you invest.",
+    "Short horizons need safer, accessible products; long horizons can carry more market risk.",
+    "A long horizon gives compounding time and room to recover from falls.",
+    "Shift towards safety as a goal approaches."
+  ],
+  "sourceIds": [
+    "SEBI-RISKMGMT",
+    "SEBI-RISK"
+  ],
+  "review": {
+    "sourceCheckedAt": "2026-10-28",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "nextReviewAt": "2027-04-28",
+    "notes": "Matching investments to the horizon and avoiding equity for short-term needs are checked against SEBI's risk-management page. Market-risk and volatility points are checked against SEBI's key-risks page. No specific asset-allocation percentages are given. Awaiting a named human reviewer."
+  },
+  "quiz": [
+    {
+      "id": "TH-Q-1",
+      "objectiveId": "TH-OBJ-1",
+      "question": "What is an investment time horizon?",
+      "options": [
+        "The date you opened the account",
+        "The length of the fund's name",
+        "The date when you will need the money"
+      ],
+      "correctIndex": 2,
+      "explanation": "The horizon is the period until you need to use the money. That date, not the purchase date, decides how much risk the money can carry."
+    },
+    {
+      "id": "TH-Q-2",
+      "objectiveId": "TH-OBJ-2",
+      "question": "Why can a long horizon carry more market risk than a short one?",
+      "options": [
+        "There is more time to recover from a fall and for compounding to work",
+        "Markets never fall over long periods",
+        "Long-term investments are insured"
+      ],
+      "correctIndex": 0,
+      "explanation": "A long horizon gives the investment time to recover from temporary falls and lets compounding build the corpus. It does not remove risk entirely."
+    },
+    {
+      "id": "TH-Q-3",
+      "objectiveId": "TH-OBJ-3",
+      "question": "Your child's fee is due in two years and the money is in an equity fund. What is the sensible adjustment?",
+      "options": [
+        "Increase equity risk to catch up",
+        "Move that money towards safer, accessible products as the date approaches",
+        "Ignore it until the fee is due"
+      ],
+      "correctIndex": 1,
+      "explanation": "As the horizon shortens, there is less time to recover from a fall. Shifting near-term money to safer products protects the goal."
+    }
+  ],
+  "disclaimer": "General financial education, not personalised advice. The right horizon and asset mix depend on your own goals and obligations."
+}
