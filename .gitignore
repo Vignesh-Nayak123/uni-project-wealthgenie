@@ -3,6 +3,13 @@ node_modules/
 
 # Production builds
 dist/
+build/
+frontend/dist/
+
+# Coverage / test artifacts
+coverage/
+.nyc_output/
+*.lcov
 
 # Local environment secrets
 .env
@@ -40,6 +47,14 @@ experiments/results/*
 
 # Python virtual environment
 .venv/
+
+# Python caches / artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.egg-info/
+
 # Generated datasets and downloaded factsheets
 wealthgenie-datasets/*.csv
 wealthgenie-datasets/*.parquet
