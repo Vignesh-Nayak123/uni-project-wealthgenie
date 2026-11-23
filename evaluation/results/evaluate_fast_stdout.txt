@@ -1,0 +1,34 @@
+$ node evaluation/verify_components.mjs
+Component 1: Findex classifier ...
+Components 2/5: verification ...
+metrics.json written
+RESULTS.md written
+
+==============================================================================
+HEADLINE SUMMARY
+==============================================================================
+C1 selected model                       Logistic regression (class-weighted)
+C1 macro-F1 (test, 95% CI)              0.406 [0.368, 0.444]
+C1 balanced accuracy (test, 95% CI)     0.457 [0.410, 0.513]
+C1 MCC (test, 95% CI)                   0.183 [0.126, 0.244]
+C1 accuracy (test) / majority baseline  0.513 / 0.666
+C1 macro-F1 majority baseline           0.267
+C1 ROC-AUC OvR / ECE                    0.666 / 0.052
+C2 profiles / constraint violations     375 / 0
+C2 determinism                          375/375
+C2 coverage of eligible universe        25/2529 (0.99%)
+C2 latency p50 / p95 (in-process)       22.8 / 48.5 ms
+C2 re-run deterministic items matching  15/15
+C3 formula correctness                  22988/22988
+C3 invariants                           1172/1172
+C3 determinism                          1642/1642
+C5 XIRR cases                           6/6
+C5 paper-trading ledger ops             6/6
+C5 SIP arithmetic checks                5/5
+
+Not computed:
+  - Precision@k, Recall@k, NDCG@k, MAP, hit rate for the recommender: no ground-truth relevance labels or user-fund interactions exist in the repository
+  - Answer quality / faithfulness of Gemini lesson generation and narrator: no reference answers exist and Gemini calls were out of scope (no paid APIs)
+  - Retrieval metrics (Recall@k, MRR): the system has no retrieval / RAG component
+  - Backtest (Sharpe, drawdown, win rate): the system makes no buy/sell or allocation decisions; users place practice trades themselves
+  - Real-world accuracy of the Money Check-up / What-if Planner: rule-based formulas evaluated only on synthetic profiles; no outcome labels

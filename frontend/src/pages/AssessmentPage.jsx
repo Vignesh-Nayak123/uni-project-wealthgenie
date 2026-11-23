@@ -186,7 +186,7 @@ export default function AssessmentPage() {
         setSavedId('');
       }
     } catch (deleteError) {
-      setError(deleteError.message || 'Unable to delete the assessment.');
+      setError(deleteError.message || 'Unable to delete this check-up.');
     } finally {
       setDeletingId('');
     }
@@ -201,13 +201,13 @@ export default function AssessmentPage() {
       <div>
         <div className="flex items-center gap-2 text-xs font-semibold text-genie-700 uppercase tracking-wider mb-1">
           <Calculator className="w-3.5 h-3.5" />
-          <span>Transparent Financial Check-Up</span>
+          <span>Takes about 2 minutes</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-navy-950 tracking-tight">
-          Financial Assessment
+          Money Check-up
         </h1>
         <p className="text-sm text-slate-600 mt-0.5 max-w-2xl">
-          Enter your monthly cash flow and a goal. WealthGenie will calculate your surplus, savings rate, expense coverage, and an illustrative goal timeline, then save the result to your account.
+          Tell us what you earn and spend each month, and one thing you are saving for. We will show how much you save, how long your savings would last in an emergency, and roughly how long your goal may take. Your answers are saved privately to your account.
         </p>
       </div>
 
@@ -217,13 +217,13 @@ export default function AssessmentPage() {
             <div>
               <h2 className="text-base font-bold text-navy-950">Your monthly numbers</h2>
               <p className="text-xs text-slate-500 mt-0.5">
-                Four fields are required. Everything else is optional.
+                Only the first four are needed. Rough figures are fine; you can update them any time.
               </p>
             </div>
 
             <div>
               <label htmlFor="monthlyIncome" className="block text-xs font-semibold text-navy-900 mb-1">
-                Monthly income (₹) <span className="text-rose-600">*</span>
+                Monthly take-home income (₹) <span className="text-rose-600">*</span>
               </label>
               <input
                 id="monthlyIncome"
@@ -234,13 +234,15 @@ export default function AssessmentPage() {
                 value={form.monthlyIncome}
                 onChange={(e) => updateField('monthlyIncome', e.target.value)}
                 placeholder="e.g. 75000"
+                aria-describedby="monthlyIncome-hint"
                 className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-navy-900 focus:outline-none focus:bg-white focus:border-genie-500"
               />
+              <p id="monthlyIncome-hint" className="mt-1 text-[11px] leading-relaxed text-slate-500">What actually reaches your bank account each month, after tax and PF.</p>
             </div>
 
             <div>
               <label htmlFor="monthlyExpenses" className="block text-xs font-semibold text-navy-900 mb-1">
-                Monthly expenses (₹) <span className="text-rose-600">*</span>
+                Monthly spending (₹) <span className="text-rose-600">*</span>
               </label>
               <input
                 id="monthlyExpenses"
@@ -251,13 +253,15 @@ export default function AssessmentPage() {
                 value={form.monthlyExpenses}
                 onChange={(e) => updateField('monthlyExpenses', e.target.value)}
                 placeholder="e.g. 40000"
+                aria-describedby="monthlyExpenses-hint"
                 className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-navy-900 focus:outline-none focus:bg-white focus:border-genie-500"
               />
+              <p id="monthlyExpenses-hint" className="mt-1 text-[11px] leading-relaxed text-slate-500">Rent, food, bills, travel, school fees and other regular costs.</p>
             </div>
 
             <div>
               <label htmlFor="accessibleSavings" className="block text-xs font-semibold text-navy-900 mb-1">
-                Accessible savings (₹) <span className="text-rose-600">*</span>
+                Savings you can use quickly (₹) <span className="text-rose-600">*</span>
               </label>
               <input
                 id="accessibleSavings"
@@ -268,13 +272,15 @@ export default function AssessmentPage() {
                 value={form.accessibleSavings}
                 onChange={(e) => updateField('accessibleSavings', e.target.value)}
                 placeholder="e.g. 150000"
+                aria-describedby="accessibleSavings-hint"
                 className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-navy-900 focus:outline-none focus:bg-white focus:border-genie-500"
               />
+              <p id="accessibleSavings-hint" className="mt-1 text-[11px] leading-relaxed text-slate-500">Money in your bank account, FDs or similar that you could withdraw within a few days.</p>
             </div>
 
             <div>
               <label htmlFor="goal" className="block text-xs font-semibold text-navy-900 mb-1">
-                Financial goal <span className="text-rose-600">*</span>
+                What are you saving for? <span className="text-rose-600">*</span>
               </label>
               <select
                 id="goal"
@@ -293,14 +299,14 @@ export default function AssessmentPage() {
 
             <div className="pt-3 border-t border-slate-100">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
-                Optional personalisation
+                Optional: for a more exact result
               </h3>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label htmlFor="emiPayments" className="block text-xs font-semibold text-navy-900 mb-1">
-                      EMI payments (₹)
+                      Loan EMIs (₹/month)
                     </label>
                     <input
                       id="emiPayments"
@@ -316,7 +322,7 @@ export default function AssessmentPage() {
 
                   <div>
                     <label htmlFor="monthlySavingsCapacity" className="block text-xs font-semibold text-navy-900 mb-1">
-                      Savings capacity (₹/mo)
+                      Can save (₹/month)
                     </label>
                     <input
                       id="monthlySavingsCapacity"
@@ -344,7 +350,7 @@ export default function AssessmentPage() {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label htmlFor="targetAmount" className="block text-xs font-semibold text-navy-900 mb-1">
-                      Goal target (₹)
+                      Goal amount (₹)
                     </label>
                     <input
                       id="targetAmount"
@@ -377,7 +383,7 @@ export default function AssessmentPage() {
 
                 <div>
                   <label htmlFor="goalTimelineMonths" className="block text-xs font-semibold text-navy-900 mb-1">
-                    Desired timeline (months)
+                    Want it within (months)
                   </label>
                   <input
                     id="goalTimelineMonths"
@@ -418,7 +424,7 @@ export default function AssessmentPage() {
                 ) : (
                   <Sparkles className="w-4 h-4" />
                 )}
-                <span>{loading ? 'Assessing & saving...' : 'Assess & save'}</span>
+                <span>{loading ? 'Working it out...' : 'See my results'}</span>
               </button>
             </div>
           </form>
@@ -430,9 +436,9 @@ export default function AssessmentPage() {
               <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400 mb-4">
                 <Calculator className="w-7 h-7" />
               </div>
-              <h3 className="text-lg font-bold text-navy-900 mb-1">Your assessment will appear here</h3>
+              <h3 className="text-lg font-bold text-navy-900 mb-1">Your results will appear here</h3>
               <p className="text-sm text-slate-500 max-w-md mx-auto">
-                Fill in the required fields and submit the form. The result is a transparent, rule-based illustration, not a prediction or regulated advice. Completed assessments are saved to your account.
+                Fill in the first four boxes and press &ldquo;See my results&rdquo;. Every number is worked out from your own figures and shows how it was calculated. It is a guide for learning, not financial advice.
               </p>
             </Card>
           ) : (
@@ -441,7 +447,7 @@ export default function AssessmentPage() {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <div className="text-xs font-semibold uppercase tracking-wider text-genie-700">
-                      Assessment complete
+                      Check-up complete
                     </div>
                     {savedId && (
                       <Badge variant="green" size="xs">
@@ -591,7 +597,7 @@ export default function AssessmentPage() {
           <div className="flex items-center gap-2">
             <History className="w-4 h-4 text-slate-400" />
             <h2 id="assessment-history-heading" className="text-base font-bold text-navy-950">
-              Assessment History
+              Past check-ups
             </h2>
             <Badge variant="slate" size="xs">
               {assessments.length} saved
@@ -617,14 +623,14 @@ export default function AssessmentPage() {
         {historyLoading ? (
           <Card className="p-8 flex items-center justify-center gap-2 text-sm text-slate-500">
             <Loader2 className="w-4 h-4 animate-spin text-genie-600" />
-            <span>Loading your saved assessments...</span>
+            <span>Loading your past check-ups...</span>
           </Card>
         ) : assessments.length === 0 ? (
           <Card className="p-8 text-center border-dashed border-2 border-slate-200 bg-slate-50/50">
             <History className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-            <p className="text-sm font-semibold text-navy-900">No saved assessments yet</p>
+            <p className="text-sm font-semibold text-navy-900">No check-ups saved yet</p>
             <p className="text-xs text-slate-500 mt-1">
-              Complete the form above to save your first assessment to your account.
+              Fill in the form above and your first check-up is saved to your account.
             </p>
           </Card>
         ) : (

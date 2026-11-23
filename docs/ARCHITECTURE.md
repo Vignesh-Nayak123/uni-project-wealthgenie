@@ -19,7 +19,7 @@ wealthgenie/
 
 1. **Frontend (`frontend/`)**:
    - Pure client UI using React and Tailwind CSS.
-   - Talks to backend API for AI queries (`POST /api/ai/chat`) and verified dataset status (`GET /api/investments/sources`).
+   - Talks to the backend API for lessons (`/api/learn/*`), account data, and verified dataset status (`GET /api/investments/sources`). All calls go through `lib/api.js` (`apiUrl`/`apiRequest`) so `VITE_API_BASE_URL` is honoured.
    - Formatters enforce `en-IN` numbering and INR (`₹`) across all screens.
    - Zero hardcoded API keys or client-side LLM calls.
 

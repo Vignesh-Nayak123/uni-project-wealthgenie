@@ -10,7 +10,6 @@ import {
   RefreshCw,
   RotateCcw,
   ShieldCheck,
-  Sparkles,
 } from 'lucide-react';
 import Card from '../components/common/Card';
 import Badge from '../components/common/Badge';
@@ -39,13 +38,14 @@ import {
   mergeAccountLearningProgress,
 } from '../utils/learningProgressApi';
 import { useAuth } from '../context/AuthContext';
+import { apiUrl } from '../lib/api';
 
 function CurriculumSkeleton() {
   return (
     <Card className="p-6" aria-busy="true" aria-live="polite">
       <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
         <Loader2 className="h-4 w-4 animate-spin text-genie-600" />
-        Loading the verified learning roadmap...
+        Loading your lessons...
       </div>
       <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-3">
         {[0, 1, 2].map((item) => (
@@ -99,7 +99,7 @@ function ResetProgressModal({ isOpen, onClose, onReset }) {
   );
 }
 
-export default function LearnPage({ onAskGenieAboutLesson }) {
+export default function LearnPage({ initialConceptId = null, onInitialConceptHandled }) {
   const { session, handleUnauthorized } = useAuth();
   const [curriculum, setCurriculum] = useState(null);
   const [curriculumLoading, setCurriculumLoading] = useState(true);
@@ -127,7 +127,7 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
       setCurriculumError('');
 
       try {
-        const response = await fetch('/api/learn/curriculum', {
+        const response = await fetch(apiUrl('/api/learn/curriculum'), {
           signal: controller.signal,
         });
 
@@ -148,7 +148,7 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
       } catch (error) {
         if (error.name === 'AbortError') return;
         setCurriculumError(
-          error.message || 'Could not load the learning roadmap from the backend.'
+          'We could not load the lessons right now. Please check your internet connection and try again.'
         );
       } finally {
         if (!controller.signal.aborted) {
@@ -164,7 +164,7 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
   useEffect(() => {
     let active = true;
 
-    fetch('/api/ai/status')
+    fetch(apiUrl('/api/ai/status'))
       .then((response) => response.json())
       .then((body) => {
         if (!active) return;
@@ -187,7 +187,7 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
   useEffect(() => {
     let active = true;
 
-    fetch('/api/learn/lessons')
+    fetch(apiUrl('/api/learn/lessons'))
       .then((response) => (response.ok ? response.json() : null))
       .then((body) => {
         if (!active || !body || !Array.isArray(body.lessons)) return;
@@ -437,20 +437,21 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
     }
   };
 
-  const handleAskGenie = (conceptTitle) => {
-    setSelectedConcept(null);
-    if (onAskGenieAboutLesson) {
-      onAskGenieAboutLesson(`Can you explain more about: "${conceptTitle}"?`);
-    }
-  };
+  // Open a lesson requested from Home or the search box once the roadmap and
+  // the learner's progress are loaded (locked lessons explain what comes first).
+  useEffect(() => {
+    const progressReady =
+      !session?.access_token || progressSync === 'synced' || progressSync === 'error';
+    if (!initialConceptId || !curriculum || !progressReady) return;
+    const concept = curriculum.concepts.find((item) => item.id === initialConceptId);
+    if (concept) handleSelectConcept(concept);
+    if (onInitialConceptHandled) onInitialConceptHandled();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialConceptId, curriculum, progressSync]);
 
-  const aiBadge = !aiStatus.checked
-    ? { variant: 'slate', label: 'Checking AI tutor' }
-    : aiStatus.error
-      ? { variant: 'amber', label: 'AI status unavailable' }
-      : aiStatus.isConfigured
-        ? { variant: 'green', label: 'AI Tutor Ready' }
-        : { variant: 'amber', label: 'AI Setup Required' };
+  // Lessons without published content fall back to AI generation; only then
+  // does a missing AI setup matter to the learner.
+  const missingLessonCount = Math.max(0, summary.total - curatedLessonCount);
 
   return (
     <div className="space-y-6">
@@ -458,28 +459,24 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
         <div>
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-genie-700 mb-1">
             <BookOpen className="h-3.5 w-3.5" />
-            <span>Prerequisite-Based Financial Curriculum</span>
+            <span>Step-by-step money lessons</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy-950">
-            Learning Roadmap
+            Learn
           </h1>
           <p className="mt-1 max-w-2xl text-sm leading-relaxed text-slate-600">
-            Follow connected branches from money basics to investing and financial safety. Complete
-            a concept to unlock the nodes that depend on it.
+            Short lessons in plain language, from everyday money basics to investing and staying
+            safe from fraud. Finish a lesson and its quiz to unlock the next ones.
           </p>
 
           <div className="mt-3 flex flex-wrap items-center gap-2">
-            <Badge variant={aiBadge.variant} size="xs">
-              <Sparkles className="h-3 w-3" />
-              {aiBadge.label}
-            </Badge>
             <Badge variant="slate" size="xs">
-              {summary.total} concepts
+              {summary.total} lessons
             </Badge>
             {curatedLessonCount > 0 && (
-              <Badge variant="amber" size="xs">
+              <Badge variant="green" size="xs">
                 <ShieldCheck className="h-3 w-3" />
-                {curatedLessonCount} source-checked
+                Checked against official sources
               </Badge>
             )}
             <Badge variant={progressSync === 'error' ? 'amber' : 'slate'} size="xs">
@@ -487,11 +484,11 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
                 ? progressSync === 'syncing'
                   ? 'Syncing progress'
                   : progressSync === 'synced'
-                    ? 'Progress synced to account'
+                    ? 'Progress saved to your account'
                     : progressSync === 'error'
-                      ? 'Browser-only progress'
-                      : 'Progress saved in this browser'
-                : 'Progress saved in this browser'}
+                      ? 'Progress saved on this device only'
+                      : 'Progress saved on this device'
+                : 'Progress saved on this device'}
             </Badge>
           </div>
         </div>
@@ -499,7 +496,7 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
         <Card padding="sm" className="w-full max-w-sm shrink-0">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <div className="text-[11px] font-medium text-slate-500">Completed concepts</div>
+              <div className="text-[11px] font-medium text-slate-500">Lessons finished</div>
               <div className="mt-0.5 text-2xl font-extrabold leading-none text-navy-950">
                 {summary.completedCount}
                 <span className="ml-1 text-sm font-medium text-slate-400">/ {summary.total}</span>
@@ -508,7 +505,7 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
             <div className="text-right">
               <div className="text-lg font-extrabold text-genie-700">{summary.percent}%</div>
               <div className="text-[10px] font-medium text-slate-500">
-                {summary.availableCount} ready
+                {summary.availableCount} ready to start
               </div>
             </div>
           </div>
@@ -532,17 +529,12 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
         </Card>
       </div>
 
-      {aiStatus.checked && !aiStatus.isConfigured && (
+      {aiStatus.checked && !aiStatus.isConfigured && missingLessonCount > 0 && curatedLessonCount > 0 && (
         <div className="flex items-start gap-2.5 rounded-xl border border-amber-200 bg-amber-50/80 p-3.5 text-xs leading-relaxed text-amber-900">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" />
           <p>
-            <strong className="font-semibold">AI tutor is optional.</strong>{' '}
-            {curatedLessonCount > 0
-              ? `All ${curatedLessonCount} roadmap lessons are published from source-checked content and open without AI. `
-              : ''}
-            {aiStatus.error
-              ? 'The backend AI status could not be checked, so the optional AI tutor may be unavailable. Lesson reading, quizzes and progress are unaffected.'
-              : 'Add GEMINI_API_KEY only if you want the optional AI tutor. The roadmap, curated lessons, quizzes and progress work without it.'}
+            {missingLessonCount === 1 ? '1 lesson is' : `${missingLessonCount} lessons are`} not
+            available yet. Every other lesson, quiz and your progress work as usual.
           </p>
         </div>
       )}
@@ -557,30 +549,30 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
       <Card padding="sm" className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-2">
           <Info className="h-4 w-4 text-slate-400" />
-          <span className="text-xs font-semibold text-navy-900">Roadmap legend</span>
+          <span className="text-xs font-semibold text-navy-900">How it works</span>
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] font-medium text-slate-600">
           <span className="inline-flex items-center gap-1.5">
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-genie-600 text-white">
               <CheckCircle2 className="h-3 w-3" />
             </span>
-            Completed
+            Finished
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="flex h-5 w-5 items-center justify-center rounded-full border border-genie-300 bg-genie-50 text-genie-700">
               <Play className="h-3 w-3" />
             </span>
-            Available
+            Ready to start
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="flex h-5 w-5 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-slate-400">
               <Lock className="h-3 w-3" />
             </span>
-            Locked
+            Finish earlier lessons first
           </span>
         </div>
-        <p className="text-[10px] text-slate-400">
-          Locked nodes show exactly which prerequisite is still incomplete.
+        <p className="text-[11px] text-slate-500">
+          Tap a locked lesson to see which lesson to finish first.
         </p>
       </Card>
 
@@ -589,9 +581,9 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
       {!curriculumLoading && curriculumError && (
         <Card className="p-8 text-center">
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <h2 className="mt-3 text-base font-bold text-navy-950">Could not load the roadmap</h2>
+          <h2 className="mt-3 text-base font-bold text-navy-950">Lessons could not be loaded</h2>
           <p className="mx-auto mt-1 max-w-md text-xs leading-relaxed text-slate-500">
-            {curriculumError} No fallback curriculum is being displayed.
+            {curriculumError}
           </p>
           <button
             type="button"
@@ -616,18 +608,12 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
         </Card>
       )}
 
-      <div className="flex items-start gap-2 rounded-xl border border-slate-200 bg-white p-3.5 text-[11px] leading-relaxed text-slate-500">
+      <div className="flex items-start gap-2 rounded-xl border border-slate-200 bg-white p-3.5 text-xs leading-relaxed text-slate-500">
         <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-400" />
         <p>
           {session
-            ? 'Learning progress is saved to your account and cached in this browser under '
-            : 'Learning progress is stored locally in this browser under '}
-          <code className="rounded bg-slate-100 px-1 py-0.5 text-[10px] text-navy-700">
-            wealthgenie.learningProgress.v1
-          </code>
-          {session
-            ? '. Browser progress is merged into your account when you sign in, and only you can read or change your account record. It is not shared with the AI provider.'
-            : '. It is not synced to an account or shared with the AI provider.'}
+            ? 'Your progress is saved to your account, so you can continue on any device. Only you can see it.'
+            : 'Your progress is saved on this device.'}
         </p>
       </div>
 
@@ -637,9 +623,17 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
           onClose={() => setSelectedConcept(null)}
           title={selectedConcept.title}
           subtitle={
+            // The review status is shown once, inside the lesson itself.
             curatedLessons[selectedConcept.id]
-              ? `${selectedConcept.category} • ${curatedLessons[selectedConcept.id].reviewLabel}`
-              : `${selectedConcept.category} • Live AI lesson`
+              ? [
+                  selectedConcept.category,
+                  curatedLessons[selectedConcept.id].estimatedMinutes
+                    ? `${curatedLessons[selectedConcept.id].estimatedMinutes} min read`
+                    : null,
+                ]
+                  .filter(Boolean)
+                  .join(' • ')
+              : `${selectedConcept.category} • AI-written lesson`
           }
           maxWidth="max-w-3xl"
         >
@@ -656,7 +650,6 @@ export default function LearnPage({ onAskGenieAboutLesson }) {
               isCompleted={progress.completedConceptIds.includes(selectedConcept.id)}
               onComplete={handleCompleteConcept}
               onQuizProgress={handleQuizProgress}
-              onAskGenie={onAskGenieAboutLesson ? handleAskGenie : null}
               onClose={() => setSelectedConcept(null)}
             />
           </ErrorBoundary>

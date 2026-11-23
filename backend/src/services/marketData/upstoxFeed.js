@@ -87,14 +87,17 @@ export const WATCHLIST_CANDIDATES = Object.freeze([
   },
 ]);
 
+// Daily NSE sequence: PRE_OPEN_START -> PRE_OPEN_END -> NORMAL_OPEN ->
+// NORMAL_CLOSE (15:30) -> CLOSING_START (post-close session) -> CLOSING_END.
+// CLOSING_END means the day's last session has finished, so no ticks are
+// expected; treating it as open made the UI report "market open" all evening.
 const OPEN_MARKET_STATUSES = new Set([
   'PRE_OPEN_START',
   'PRE_OPEN_END',
   'NORMAL_OPEN',
   'CLOSING_START',
-  'CLOSING_END',
 ]);
-const CLOSED_MARKET_STATUSES = new Set(['NORMAL_CLOSE']);
+const CLOSED_MARKET_STATUSES = new Set(['NORMAL_CLOSE', 'CLOSING_END']);
 
 const MARKET_STATUS_LABELS = Object.freeze({
   PRE_OPEN_START: 'Pre-open',
@@ -102,7 +105,7 @@ const MARKET_STATUS_LABELS = Object.freeze({
   NORMAL_OPEN: 'Market open',
   NORMAL_CLOSE: 'Market closed',
   CLOSING_START: 'Closing session',
-  CLOSING_END: 'Closing session',
+  CLOSING_END: 'Market closed',
 });
 
 export const FEED_STATE_LABELS = Object.freeze({

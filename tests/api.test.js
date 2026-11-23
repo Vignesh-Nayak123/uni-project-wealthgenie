@@ -55,28 +55,13 @@ describe('WealthGenie Backend API Endpoints', () => {
     assert.ok(body.error);
   });
 
-  it('POST /api/ai/chat should return 400 when message is missing', async () => {
-    const res = await fetch(`${baseUrl}/api/ai/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: '' }),
-    });
-    assert.equal(res.status, 400);
-    const body = await res.json();
-    assert.equal(body.status, 'error');
-  });
-
-  it('POST /api/ai/chat should return 503 unconfigured when GEMINI_API_KEY is not set', async () => {
+  it('POST /api/ai/chat is no longer served (chatbot removed)', async () => {
     const res = await fetch(`${baseUrl}/api/ai/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: 'What is an emergency fund?' }),
     });
-    assert.equal(res.status, 503);
-    const body = await res.json();
-    assert.equal(body.status, 'unconfigured');
-    assert.equal(body.setupRequired, true);
-    assert.ok(body.message.includes('GEMINI_API_KEY'));
+    assert.equal(res.status, 404);
   });
 
   it('GET /api/learn/curriculum should return the prerequisite roadmap', async () => {

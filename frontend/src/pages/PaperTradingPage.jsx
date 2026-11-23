@@ -1,7 +1,10 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { AlertTriangle, CandlestickChart, CheckCircle2, Loader2, RefreshCw } from 'lucide-react';
 import Card from '../components/common/Card';
 import Badge from '../components/common/Badge';
 import ReplayChart, { normalizeCandles } from '../components/charts/ReplayChart';
+import { apiUrl, wsUrl } from '../lib/api';
+import { useAuth } from '../context/AuthContext';
 
 const API = '/api/paper-trading';
 
@@ -19,7 +22,7 @@ const PRICE_FORMATTER = new Intl.NumberFormat('en-IN', {
   maximumFractionDigits: 2,
 });
 const MONEY_FORMATTER = new Intl.NumberFormat('en-IN', {
-  maximumFractionDigits: 2,
+  maximumFractionDigits: 0,
 });
 
 function formatPrice(value) {
@@ -28,10 +31,38 @@ function formatPrice(value) {
   return Number.isFinite(number) ? PRICE_FORMATTER.format(number) : '—';
 }
 
+// Whole rupees stay clean (₹94,200); anything with paise always shows two
+// decimals (₹99,952.20), never one.
 function formatMoney(value) {
   if (value === null || value === undefined || value === '') return '₹—';
   const number = Number(value);
-  return Number.isFinite(number) ? `₹${MONEY_FORMATTER.format(number)}` : '₹—';
+  if (!Number.isFinite(number)) return '₹—';
+  return Number.isInteger(number)
+    ? `₹${MONEY_FORMATTER.format(number)}`
+    : `₹${PRICE_FORMATTER.format(number)}`;
+}
+
+// Signed amounts read as "−₹4,665.60" / "+₹120.00", never "₹-4,665.6".
+function formatSignedMoney(value) {
+  const number = Number(value);
+  if (value === null || value === undefined || !Number.isFinite(number)) return '₹—';
+  const sign = number > 0 ? '+' : number < 0 ? '−' : '';
+  return `${sign}₹${PRICE_FORMATTER.format(Math.abs(number))}`;
+}
+
+function pnlTone(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number) || number === 0) return 'text-navy-950';
+  return number > 0 ? 'text-emerald-600' : 'text-rose-600';
+}
+
+function ChartEmptyState({ message }) {
+  return (
+    <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-slate-200 bg-slate-50/60 px-4 py-12 text-center">
+      <CandlestickChart className="h-7 w-7 text-slate-300" aria-hidden="true" />
+      <p className="max-w-sm text-sm text-slate-500">{message}</p>
+    </div>
+  );
 }
 
 function formatClock(value) {
@@ -49,56 +80,76 @@ function formatDateTime(value) {
 }
 
 function sourceLabel(source) {
-  if (source === 'upstox_v3') return 'Upstox V3 live';
+  if (source === 'upstox_v3') return 'Live price';
   if (source === 'historical_replay' || source === 'historical_csv') {
-    return 'Historical CSV replay';
+    return 'Past price (replay)';
   }
-  if (source === 'simulated_fixture') return 'Simulated fixture (not live)';
-  return source || 'Unknown source';
+  if (source === 'simulated_fixture') return 'Practice price (not live)';
+  return source || 'Unknown';
 }
 
 function statusChip({ marketStatus, socketState, stale, livePrice }) {
   if (!marketStatus && socketState === 'closed') {
-    return { label: 'Disconnected — reconnecting…', tone: 'rose' };
+    return { label: 'Reconnecting to live prices…', tone: 'rose' };
   }
   if (!marketStatus) {
-    return { label: 'Connecting to live feed…', tone: 'amber' };
+    return { label: 'Connecting to live prices…', tone: 'amber' };
   }
   if (socketState === 'closed') {
-    return { label: 'Disconnected — reconnecting…', tone: 'rose' };
+    return { label: 'Reconnecting to live prices…', tone: 'rose' };
   }
 
   switch (marketStatus.state) {
     case 'not_configured':
     case 'disabled':
-      return { label: 'Live feed off — UPSTOX_ACCESS_TOKEN missing', tone: 'slate' };
+      return { label: 'Live prices off · practice prices in use', tone: 'slate' };
     case 'auth_failed':
-      return { label: 'Authentication failed — refresh UPSTOX_ACCESS_TOKEN', tone: 'rose' };
+      return { label: 'Live prices unavailable', tone: 'rose' };
     case 'subscription_failed':
-      return { label: 'Subscription failed', tone: 'rose' };
+      return { label: 'Live prices unavailable', tone: 'rose' };
     case 'connecting':
-      return { label: 'Connecting to Upstox V3…', tone: 'amber' };
+      return { label: 'Connecting to live prices…', tone: 'amber' };
     case 'disconnected':
-      return { label: 'Disconnected', tone: 'rose' };
+      return { label: 'Live prices disconnected', tone: 'rose' };
     case 'market_closed':
       return {
-        label: `Market closed${marketStatus.marketStatus?.nseEqStatus ? ` (${marketStatus.marketStatus.nseEqStatus})` : ''}`,
+        label: 'Market closed',
         tone: 'slate',
       };
     case 'stale':
-      return { label: 'Stale data — no recent ticks', tone: 'amber' };
+      return { label: 'Prices delayed', tone: 'amber' };
     case 'waiting':
-      return { label: 'Connected — waiting for first tick', tone: 'amber' };
+      return { label: 'Waiting for the first live price', tone: 'amber' };
     case 'live':
       return stale || !livePrice
-        ? { label: 'Stale data — no recent ticks', tone: 'amber' }
-        : { label: 'Upstox LIVE', tone: 'green' };
+        ? { label: 'Prices delayed', tone: 'amber' }
+        : { label: 'Live prices', tone: 'green' };
     default:
-      return { label: marketStatus.stateLabel || 'Live feed unavailable', tone: 'slate' };
+      return { label: 'Live prices unavailable', tone: 'slate' };
   }
 }
 
 export default function PaperTradingPage() {
+  const { session, handleUnauthorized } = useAuth();
+  // Every paper-trading account is private to the signed-in user, so each
+  // request carries the session token.
+  const paperFetch = async (path, init = {}) => {
+    const response = await fetch(apiUrl(`${API}${path}`), {
+      ...init,
+      headers: {
+        ...(init.headers || {}),
+        ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}),
+      },
+    });
+    if (response.status === 401 && handleUnauthorized) {
+      await handleUnauthorized({ status: 401 });
+    }
+    return response;
+  };
+  // The WebSocket effect below is mounted once; this ref always points at the
+  // latest paperFetch (and therefore the current session token).
+  const paperFetchRef = useRef(paperFetch);
+  paperFetchRef.current = paperFetch;
   const [instruments, setInstruments] = useState([]);
   const [portfolio, setPortfolio] = useState(null);
   const [history, setHistory] = useState([]);
@@ -130,15 +181,15 @@ export default function PaperTradingPage() {
     setLoading(true);
     setError('');
     try {
-      const initRes = await fetch(`${API}/init`, { method: 'POST' });
+      const initRes = await paperFetch(`/init`, { method: 'POST' });
       if (!initRes.ok) {
         const body = await initRes.json().catch(() => ({}));
         throw new Error(body.error || `Init failed (${initRes.status})`);
       }
       const [instRes, portRes, histRes] = await Promise.all([
-        fetch(`${API}/instruments`),
-        fetch(`${API}/portfolio`),
-        fetch(`${API}/history`),
+        paperFetch(`/instruments`),
+        paperFetch(`/portfolio`),
+        paperFetch(`/history`),
       ]);
       const failed = [instRes, portRes, histRes].find((response) => !response.ok);
       if (failed) {
@@ -171,7 +222,23 @@ export default function PaperTradingPage() {
     let cancelled = false;
     let ws = null;
     let reconnectTimer = null;
+    let revalueTimer = null;
     let attempt = 0;
+
+    // Live ticks change holding values, so re-read this user's own portfolio
+    // over the authenticated API at most every few seconds.
+    const scheduleRevalue = () => {
+      if (revalueTimer || cancelled) return;
+      revalueTimer = setTimeout(async () => {
+        revalueTimer = null;
+        try {
+          const response = await paperFetchRef.current('/portfolio');
+          if (response.ok && !cancelled) setPortfolio(await response.json());
+        } catch {
+          // The next tick tries again; the order panel refreshes on its own.
+        }
+      }, 5000);
+    };
 
     const flushTimer = setInterval(() => {
       if (cancelled) return;
@@ -245,13 +312,11 @@ export default function PaperTradingPage() {
           break;
         case 'market_tick':
           applyTick(message.tick);
+          scheduleRevalue();
           break;
         case 'ticks':
           // Backwards-compatible with older backend frames.
           for (const tick of message.ticks || []) applyTick(tick);
-          break;
-        case 'portfolio':
-          setPortfolio(message.account);
           break;
         default:
           break;
@@ -261,9 +326,8 @@ export default function PaperTradingPage() {
     const connect = () => {
       if (cancelled) return;
       setSocketState(attempt === 0 ? 'connecting' : 'reconnecting');
-      const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
       try {
-        ws = new WebSocket(`${protocol}://${window.location.host}/ws/market`);
+        ws = new WebSocket(wsUrl('/ws/market'));
       } catch {
         scheduleReconnect();
         return;
@@ -303,6 +367,7 @@ export default function PaperTradingPage() {
       cancelled = true;
       clearInterval(flushTimer);
       if (reconnectTimer) clearTimeout(reconnectTimer);
+      if (revalueTimer) clearTimeout(revalueTimer);
       if (ws) {
         ws.onopen = null;
         ws.onmessage = null;
@@ -351,10 +416,10 @@ export default function PaperTradingPage() {
           : 'slate';
 
   const priceSource = hasLivePrice
-    ? 'Upstox V3 live'
+    ? 'Live price'
     : instrument?.isLive
-      ? 'Upstox V3 last tick'
-      : 'Simulated fixture — not live';
+      ? 'Last live price'
+      : 'Practice price';
 
   const visibleCandles = useMemo(() => {
     const revealed = normalizeCandles(replay?.revealed);
@@ -373,24 +438,24 @@ export default function PaperTradingPage() {
   const chartCandles = dataMode === 'replay' ? visibleCandles : liveChartCandles;
   const chartEmptyMessage =
     dataMode === 'replay'
-      ? 'Start the historical replay to reveal CSV candles.'
-      : 'Waiting for live Upstox 1-minute candles…';
+      ? 'Start the replay to see past prices.'
+      : 'Waiting for live prices. The chart fills in while the market is open.';
 
   const handleOrder = async (side) => {
     setOrderError('');
     setFeedback('');
     const parsedQuantity = Number(quantity);
     if (!Number.isInteger(parsedQuantity) || parsedQuantity <= 0) {
-      setOrderError('Quantity must be a positive whole number.');
+      setOrderError('Enter how many units you want, as a whole number (1 or more).');
       return;
     }
     if (!Number.isFinite(Number(displayedPrice)) || Number(displayedPrice) <= 0) {
-      setOrderError('No valid price is available. Order not executed.');
+      setOrderError('There is no price available right now, so the order was not placed.');
       return;
     }
     setSubmitting(true);
     try {
-      const response = await fetch(`${API}/${side}`, {
+      const response = await paperFetch(`/${side}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -402,16 +467,16 @@ export default function PaperTradingPage() {
       const body = await response.json();
       if (!response.ok) throw new Error(body.error || 'Order failed');
       setPortfolio(body.account);
-      const historyResponse = await fetch(`${API}/history`);
+      const historyResponse = await paperFetch(`/history`);
       const historyBody = await historyResponse.json();
       setHistory(historyBody.history || []);
       const executedAt = body.trade?.executedAt || body.trade?.at;
       setFeedback(
-        `${side.toUpperCase()} ${parsedQuantity} ${symbol} at ₹${formatPrice(
+        `${side === 'buy' ? 'Bought' : 'Sold'} ${parsedQuantity} ${symbol} at ₹${formatPrice(
           body.trade.price
-        )} via ${sourceLabel(body.trade.priceSource)}${
-          body.trade.stale ? ' (stale quote explicitly accepted)' : ''
-        }. Executed ${formatDateTime(executedAt)}.`
+        )} (${sourceLabel(body.trade.priceSource).toLowerCase()}${
+          body.trade.stale ? ', last known price' : ''
+        }) on ${formatDateTime(executedAt)}.`
       );
       setAllowStale(false);
     } catch (e) {
@@ -424,7 +489,7 @@ export default function PaperTradingPage() {
   const handleInit = async () => {
     setOrderError('');
     try {
-      const response = await fetch(`${API}/init`, { method: 'POST' });
+      const response = await paperFetch(`/init`, { method: 'POST' });
       const body = await response.json();
       if (!response.ok) throw new Error(body.error || 'Init failed');
       setPortfolio(body.account);
@@ -437,7 +502,7 @@ export default function PaperTradingPage() {
   const startReplay = async () => {
     setOrderError('');
     try {
-      const response = await fetch(`${API}/replay/start`, { method: 'POST' });
+      const response = await paperFetch(`/replay/start`, { method: 'POST' });
       const body = await response.json();
       if (!response.ok) throw new Error(body.error || 'Replay start failed');
       setReplay(body);
@@ -450,7 +515,7 @@ export default function PaperTradingPage() {
   const nextCandle = async () => {
     setOrderError('');
     try {
-      const response = await fetch(`${API}/replay/next`, { method: 'POST' });
+      const response = await paperFetch(`/replay/next`, { method: 'POST' });
       const body = await response.json();
       if (!response.ok) throw new Error(body.error || 'No more candles');
       setReplay(body);
@@ -464,12 +529,12 @@ export default function PaperTradingPage() {
     setOrderError('');
     const parsedQuantity = Number(quantity);
     if (!Number.isInteger(parsedQuantity) || parsedQuantity <= 0) {
-      setOrderError('Quantity must be a positive whole number.');
+      setOrderError('Enter how many units you want, as a whole number (1 or more).');
       return;
     }
     setSubmitting(true);
     try {
-      const response = await fetch(`${API}/replay/trade`, {
+      const response = await paperFetch(`/replay/trade`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ side, quantity: parsedQuantity }),
@@ -478,16 +543,16 @@ export default function PaperTradingPage() {
       if (!response.ok) throw new Error(body.error || 'Order failed');
       setPortfolio(body.account);
       const [historyResponse, replayResponse] = await Promise.all([
-        fetch(`${API}/history`),
-        fetch(`${API}/replay`),
+        paperFetch(`/history`),
+        paperFetch(`/replay`),
       ]);
       const historyBody = await historyResponse.json();
       setHistory(historyBody.history || []);
       setReplay(await replayResponse.json());
       setFeedback(
-        `Historical replay ${side.toUpperCase()} ${parsedQuantity} ${
+        `Replay: ${side === 'buy' ? 'bought' : 'sold'} ${parsedQuantity} ${
           replay?.instrument || 'NIFTYBEES'
-        } at ₹${formatPrice(body.trade.price)} (CSV close, not live).`
+        } at that day's closing price of ₹${formatPrice(body.trade.price)}.`
       );
     } catch (e) {
       setOrderError(e.message || 'Server error');
@@ -496,8 +561,33 @@ export default function PaperTradingPage() {
     }
   };
 
-  if (loading) return <div className="p-6 text-slate-500">Loading paper trading...</div>;
-  if (error) return <div className="p-6 text-red-600">{error}</div>;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center gap-2 py-24 text-sm text-slate-500">
+        <Loader2 className="h-5 w-5 animate-spin text-genie-600" />
+        Opening your practice account...
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <Card className="p-8 text-center">
+        <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
+        <h2 className="mt-3 text-base font-bold text-navy-950">
+          Your practice account could not be opened
+        </h2>
+        <p className="mx-auto mt-1 max-w-md text-xs leading-relaxed text-slate-500">{error}</p>
+        <button
+          type="button"
+          onClick={loadAll}
+          className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-navy-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-navy-800"
+        >
+          <RefreshCw className="h-3.5 w-3.5" />
+          Try again
+        </button>
+      </Card>
+    );
+  }
 
   const canOrder =
     !submitting &&
@@ -524,258 +614,334 @@ export default function PaperTradingPage() {
       })),
   ];
 
+  const changeText =
+    change !== null
+      ? `${change >= 0 ? '+' : '−'}₹${formatPrice(Math.abs(change))} (${change >= 0 ? '+' : '−'}${Math.abs(changePct).toFixed(2)}%) today`
+      : null;
+
+  const timeframeButtons = (
+    <div className="flex flex-wrap items-center gap-1" role="group" aria-label="Chart time range">
+      {TIMEFRAMES.map((item) => (
+        <button
+          key={item.id}
+          type="button"
+          onClick={() => setTimeframe(item.id)}
+          aria-pressed={timeframe === item.id}
+          className={`px-2.5 py-1 text-[11px] font-semibold rounded-md transition-colors ${
+            timeframe === item.id
+              ? 'bg-genie-600 text-white'
+              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+          }`}
+        >
+          {item.id}
+        </button>
+      ))}
+    </div>
+  );
+
+  const orderMessages = (
+    <>
+      {feedback && (
+        <div className="mt-3 flex items-start gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-900">
+          <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+          <span>{feedback}</span>
+        </div>
+      )}
+      {orderError && (
+        <div className="mt-3 flex items-start gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-900">
+          <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+          <span>{orderError}</span>
+        </div>
+      )}
+    </>
+  );
+
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      {/* Header */}
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-navy-900">Paper Trading (Simulated)</h1>
-          <p className="text-xs text-slate-500">
-            Virtual ₹1,00,000 account · no real Upstox orders or funds are ever used.
+          <div className="flex items-center gap-2 text-xs font-semibold text-genie-700 uppercase tracking-wider mb-1">
+            <CandlestickChart className="w-3.5 h-3.5" />
+            <span>Practise with virtual money</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-navy-950 tracking-tight">
+            Practice Trading
+          </h1>
+          <p className="text-sm text-slate-600 mt-1 max-w-2xl">
+            You get {formatMoney(portfolio?.initialCash ?? 100000)} of pretend money to buy and
+            sell real Indian shares and ETFs. No real money or real orders are ever involved, so
+            mistakes cost nothing.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Badge variant={badgeVariant} size="xs">{chip.label}</Badge>
-          <button
-            type="button"
-            onClick={() => setMode('learn')}
-            className={`px-3 py-1 rounded ${mode === 'learn' ? 'bg-genie-600 text-white' : 'bg-slate-200'}`}
-          >
-            Learn Mode
-          </button>
-          <button
-            type="button"
-            onClick={() => setMode('terminal')}
-            className={`px-3 py-1 rounded ${mode === 'terminal' ? 'bg-genie-600 text-white' : 'bg-slate-200'}`}
-          >
-            Terminal Mode
-          </button>
+          <Badge variant={badgeVariant} size="sm">
+            <span className={`h-1.5 w-1.5 rounded-full ${chip.tone === 'green' ? 'bg-emerald-500 animate-pulse' : 'bg-current opacity-60'}`} />
+            {chip.label}
+          </Badge>
+          <div className="inline-flex rounded-lg border border-slate-200 bg-white p-0.5" role="group" aria-label="View">
+            {[
+              { id: 'learn', label: 'Simple view' },
+              { id: 'terminal', label: 'Advanced view' },
+            ].map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setMode(item.id)}
+                aria-pressed={mode === item.id}
+                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+                  mode === item.id ? 'bg-navy-900 text-white' : 'text-slate-600 hover:text-navy-900'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
+      {/* Account summary */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { label: 'Cash left', value: formatMoney(portfolio?.cash), hint: 'Virtual money you can still use' },
+          { label: 'Total worth', value: formatMoney(portfolio?.totalEquity), hint: 'Cash + value of what you own' },
+          { label: 'Profit from sales', value: formatSignedMoney(portfolio?.realizedPnl), tone: pnlTone(portfolio?.realizedPnl), hint: 'Gain or loss on things you sold' },
+          { label: 'Profit on holdings', value: formatSignedMoney(portfolio?.unrealizedPnl), tone: pnlTone(portfolio?.unrealizedPnl), hint: 'If you sold everything now' },
+        ].map((stat) => (
+          <Card key={stat.label} padding="sm">
+            <div className="text-xs font-medium text-slate-500">{stat.label}</div>
+            <div className={`mt-1 text-xl font-bold tracking-tight ${stat.tone || 'text-navy-950'}`}>
+              {stat.value}
+            </div>
+            <div className="mt-1 text-[11px] text-slate-400">{stat.hint}</div>
+          </Card>
+        ))}
+      </div>
+
+      {/* Price data source */}
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-          Chart data mode
-        </span>
-        <button
-          type="button"
-          onClick={() => setDataMode('live')}
-          className={`px-3 py-1.5 text-xs font-semibold rounded-md ${
-            dataMode === 'live'
-              ? 'bg-emerald-600 text-white'
-              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-          }`}
-        >
-          Live · Upstox V3
-        </button>
-        <button
-          type="button"
-          onClick={() => setDataMode('replay')}
-          className={`px-3 py-1.5 text-xs font-semibold rounded-md ${
-            dataMode === 'replay'
-              ? 'bg-navy-950 text-white'
-              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-          }`}
-        >
-          Historical replay · CSV
-        </button>
+        <span className="text-xs font-semibold text-slate-500">Prices to use:</span>
+        <div className="inline-flex rounded-lg border border-slate-200 bg-white p-0.5" role="group" aria-label="Price data">
+          {[
+            { id: 'live', label: "Today's market prices" },
+            { id: 'replay', label: 'Replay past prices' },
+          ].map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => setDataMode(item.id)}
+              aria-pressed={dataMode === item.id}
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+                dataMode === item.id ? 'bg-genie-600 text-white' : 'text-slate-600 hover:text-navy-900'
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
         <span className="text-[11px] text-slate-500">
           {dataMode === 'live'
-            ? 'Live candles only. Historical CSV candles are never mixed into this chart.'
-            : 'Historical CSV candles only. Live ticks continue in the live panel above.'}
+            ? 'The chart shows live prices only; past prices are never mixed in.'
+            : 'Step through real past prices one day at a time and practise deciding.'}
         </span>
       </div>
 
-      {/* Live market panel — always sourced from Upstox V3 when available. */}
+      {/* Live price */}
       <Card>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="font-semibold text-navy-950">{symbol || 'NIFTYBEES'}</h2>
+              <h2 className="text-lg font-bold text-navy-950">{symbol || 'NIFTYBEES'}</h2>
               <Badge variant={hasLivePrice ? 'green' : 'amber'} size="xs">
                 {priceSource}
               </Badge>
-              {stale && (
-                <Badge variant="amber" size="xs">STALE</Badge>
-              )}
-              {marketClosed && (
-                <Badge variant="slate" size="xs">Market closed</Badge>
-              )}
+              {stale && <Badge variant="amber" size="xs">Delayed</Badge>}
+              {marketClosed && <Badge variant="slate" size="xs">Market closed</Badge>}
             </div>
-            <p className="text-[11px] text-slate-500 mt-1">
-              {instrument?.name || 'Nippon India ETF Nifty 50 BeES'} · source:{' '}
-              {hasLivePrice ? 'Upstox Market Data Feed V3' : 'local simulation fixture'}
+            <p className="text-xs text-slate-500 mt-1">
+              {instrument?.name || 'Nippon India ETF Nifty 50 BeES'}
             </p>
           </div>
           <div className="text-right">
-            <div className="text-3xl font-extrabold text-navy-950">
+            <div className="text-3xl font-extrabold tracking-tight text-navy-950">
               ₹{formatPrice(displayedPrice)}
             </div>
-            {change !== null && (
-              <div
-                className={`text-sm font-semibold ${
-                  change >= 0 ? 'text-emerald-600' : 'text-rose-600'
-                }`}
-              >
-                {change >= 0 ? '+' : '−'}₹{formatPrice(Math.abs(change))} ({change >= 0 ? '+' : '−'}
-                {Math.abs(changePct).toFixed(2)}%)
+            {changeText && (
+              <div className={`text-sm font-semibold ${change >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                {changeText}
               </div>
             )}
           </div>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
-          <div>
-            <div className="text-[11px] text-slate-500">Open</div>
-            <div className="font-semibold">{liveTick?.open !== undefined ? `₹${formatPrice(liveTick.open)}` : '—'}</div>
-          </div>
-          <div>
-            <div className="text-[11px] text-slate-500">High</div>
-            <div className="font-semibold">{liveTick?.high !== undefined ? `₹${formatPrice(liveTick.high)}` : '—'}</div>
-          </div>
-          <div>
-            <div className="text-[11px] text-slate-500">Low</div>
-            <div className="font-semibold">{liveTick?.low !== undefined ? `₹${formatPrice(liveTick.low)}` : '—'}</div>
-          </div>
-          <div>
-            <div className="text-[11px] text-slate-500">Previous close</div>
-            <div className="font-semibold">{hasPreviousClose ? `₹${formatPrice(previousClose)}` : '—'}</div>
-          </div>
+        <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 rounded-xl bg-slate-50 p-3 text-sm">
+          {[
+            { label: "Today's open", value: liveTick?.open },
+            { label: "Today's high", value: liveTick?.high },
+            { label: "Today's low", value: liveTick?.low },
+            { label: "Yesterday's close", value: hasPreviousClose ? previousClose : undefined },
+          ].map((item) => (
+            <div key={item.label}>
+              <div className="text-[11px] text-slate-500">{item.label}</div>
+              <div className="font-semibold text-navy-900">
+                {item.value !== undefined && item.value !== null ? `₹${formatPrice(item.value)}` : '—'}
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[11px] text-slate-500">
-          <span>
-            Last tick: <strong>{liveTick?.lastTradedTime ? formatClock(liveTick.lastTradedTime) : '—'}</strong>
-          </span>
-          <span>
-            Received: <strong>{liveTick?.receivedAt ? formatClock(liveTick.receivedAt) : '—'}</strong>
-          </span>
-          <span>
-            Market status:{' '}
-            <strong>
-              {marketStatus?.marketStatusKnown
-                ? `${marketStatus.marketStatus?.label || 'Unknown'} (${marketStatus.marketStatus?.nseEqStatus || 'N/A'})`
-                : 'Waiting for Upstox market_info'}
-            </strong>
-          </span>
-          <span>
-            Connection: <strong>{marketStatus?.connectionState || socketState}</strong>
-          </span>
-        </div>
+        <details className="mt-3 text-[11px] text-slate-500">
+          <summary className="cursor-pointer select-none font-medium text-slate-600 hover:text-navy-900">
+            Price feed details
+          </summary>
+          <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
+            <span>
+              Last trade: <strong>{liveTick?.lastTradedTime ? formatClock(liveTick.lastTradedTime) : '—'}</strong>
+            </span>
+            <span>
+              Received: <strong>{liveTick?.receivedAt ? formatClock(liveTick.receivedAt) : '—'}</strong>
+            </span>
+            <span>
+              Market status:{' '}
+              <strong>
+                {marketStatus?.marketStatusKnown
+                  ? `${marketStatus.marketStatus?.label || 'Unknown'} (${marketStatus.marketStatus?.nseEqStatus || 'N/A'})`
+                  : 'Not known yet'}
+              </strong>
+            </span>
+            <span>
+              Connection: <strong>{marketStatus?.connectionState || socketState}</strong>
+            </span>
+            <span>Source: {hasLivePrice ? 'Upstox market data feed' : 'practice price (not live)'}</span>
+          </div>
+        </details>
 
         {marketStatus?.failureReason && (
           <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
-            {marketStatus.failureReason}
-            {marketStatus.instrumentNote ? ` ${marketStatus.instrumentNote}` : ''}
+            Live prices are not available right now, so practice prices are used instead.
           </div>
         )}
 
         {stale && (
           <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
-            Live data is stale. Last tick was{' '}
-            {liveTick?.receivedAt ? formatDateTime(liveTick.receivedAt) : 'unknown'}.
-            {marketOpen ? ' The market is open, so the feed may be interrupted.' : ''}
+            This price may be out of date. The last update was{' '}
+            {liveTick?.receivedAt ? formatDateTime(liveTick.receivedAt) : 'some time ago'}.
+            {marketOpen ? ' The market is open, so the live feed may be interrupted.' : ''}
           </div>
         )}
 
         {marketClosed && (
           <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-700">
-            Upstox reports NSE_EQ as <strong>{marketStatus?.marketStatus?.nseEqStatus}</strong>.
-            No live ticks are expected while the market is closed; the last received price is shown.
+            The stock market is closed now (it is open 9:15 AM to 3:30 PM on trading days). You are
+            seeing the last price from when it was open.
           </div>
         )}
 
-        {!hasLivePrice && !marketClosed && marketStatus?.state !== 'auth_failed' && (
+        {!hasLivePrice && !marketClosed && marketStatus?.state !== 'auth_failed' && !marketStatus?.failureReason && (
           <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-700">
-            No live tick for {symbol} yet. This is not being reported as “market closed” — the
-            actual Upstox market status is used above. Until a tick arrives the order panel
-            labels any fallback price as simulated.
+            Waiting for a live price for {symbol}. Until it arrives, orders use a clearly labelled
+            practice price.
           </div>
         )}
       </Card>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card><div className="text-xs text-slate-500">Virtual Cash</div><div className="text-xl font-bold">{formatMoney(portfolio?.cash)}</div></Card>
-        <Card><div className="text-xs text-slate-500">Total Equity</div><div className="text-xl font-bold">{formatMoney(portfolio?.totalEquity)}</div></Card>
-        <Card><div className="text-xs text-slate-500">Realized P&L</div><div className="text-xl font-bold">{formatMoney(portfolio?.realizedPnl)}</div></Card>
-        <Card><div className="text-xs text-slate-500">Unrealized P&L</div><div className="text-xl font-bold">{formatMoney(portfolio?.unrealizedPnl)}</div></Card>
-      </div>
-
+      {/* Order panel */}
       <Card>
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 className="font-semibold mb-1">Place Simulated Order</h2>
-          <span className="text-[11px] text-slate-500">
-            Execution price: {hasLivePrice ? 'latest Upstox tick' : 'simulated fixture'} · ₹
-            {formatPrice(displayedPrice)}
-          </span>
-        </div>
-        <div className="flex flex-wrap gap-3 items-end mt-2">
           <div>
-            <label className="text-xs text-slate-500">Instrument</label>
+            <h2 className="text-base font-semibold text-navy-950">Buy or sell</h2>
+            <p className="text-xs text-slate-500">
+              Orders use pretend money at the price shown: ₹{formatPrice(displayedPrice)} ({priceSource.toLowerCase()}).
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={handleInit}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+          >
+            <RefreshCw className="h-3.5 w-3.5" />
+            Refresh account
+          </button>
+        </div>
+
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_120px_auto] sm:items-end">
+          <div>
+            <label htmlFor="paper-symbol" className="block text-xs font-medium text-slate-600 mb-1">
+              Share or ETF
+            </label>
             <select
+              id="paper-symbol"
               value={symbol}
               onChange={(event) => setSymbol(event.target.value)}
-              className="block border rounded px-3 py-2"
+              className="block w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-genie-500 focus:outline-none focus:ring-2 focus:ring-genie-100"
             >
               {instruments.map((item) => (
                 <option key={item.symbol} value={item.symbol}>
-                  {item.symbol} — ₹{formatPrice(item.price)}{' '}
-                  {item.isLive ? '(Upstox live)' : '(simulated)'}
+                  {item.symbol} · ₹{formatPrice(item.price)} {item.isLive ? '(live)' : '(practice price)'}
                 </option>
               ))}
             </select>
           </div>
           <div>
-            <label className="text-xs text-slate-500">Quantity</label>
+            <label htmlFor="paper-qty" className="block text-xs font-medium text-slate-600 mb-1">
+              How many
+            </label>
             <input
+              id="paper-qty"
               type="number"
               min="1"
               step="1"
+              inputMode="numeric"
               value={quantity}
               onChange={(event) => setQuantity(event.target.value)}
-              className="block border rounded px-3 py-2 w-24"
+              className="block w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-genie-500 focus:outline-none focus:ring-2 focus:ring-genie-100"
             />
           </div>
-          <div className="text-xs text-slate-500 pb-2">
-            Price: ₹{formatPrice(displayedPrice)} · {priceSource}
+          <div className="flex gap-2">
+            <button
+              type="button"
+              disabled={!canOrder}
+              onClick={() => handleOrder('buy')}
+              className="flex-1 sm:flex-none rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-subtle hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Buy
+            </button>
+            <button
+              type="button"
+              disabled={!canOrder}
+              onClick={() => handleOrder('sell')}
+              className="flex-1 sm:flex-none rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-semibold text-white shadow-subtle hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Sell
+            </button>
           </div>
-          <button
-            disabled={!canOrder}
-            onClick={() => handleOrder('buy')}
-            className="px-4 py-2 bg-green-600 text-white rounded disabled:opacity-50"
-          >
-            Buy
-          </button>
-          <button
-            disabled={!canOrder}
-            onClick={() => handleOrder('sell')}
-            className="px-4 py-2 bg-red-600 text-white rounded disabled:opacity-50"
-          >
-            Sell
-          </button>
-          <button onClick={handleInit} className="px-4 py-2 bg-slate-200 rounded">Init Account</button>
         </div>
+
+        {Number(quantity) > 0 && Number.isFinite(Number(displayedPrice)) && (
+          <p className="mt-2 text-xs text-slate-500">
+            Approximate amount: <strong className="text-navy-900">{formatMoney(Number(quantity) * Number(displayedPrice))}</strong>
+          </p>
+        )}
+
         {stale && (
-          <label className="mt-3 flex items-start gap-2 text-xs text-amber-900">
+          <label className="mt-3 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
             <input
               type="checkbox"
               checked={allowStale}
               onChange={(event) => setAllowStale(event.target.checked)}
               className="mt-0.5"
             />
-            Use the last available stale price for the next simulated order (explicit acknowledgement).
+            The price may be out of date. Tick to place this one order at the last known price anyway.
           </label>
         )}
-        {feedback && <div className="mt-2 text-sm text-green-700">{feedback}</div>}
-        {orderError && <div className="mt-2 text-sm text-red-600">{orderError}</div>}
+        {orderMessages}
       </Card>
 
       {mode === 'terminal' && (
-        <div className="grid grid-cols-1 lg:grid-cols-[210px_minmax(0,1fr)_240px] gap-4 items-stretch">
-          <Card className="lg:max-h-[520px] overflow-y-auto">
-            <h2 className="font-semibold mb-2 text-sm">Watchlist</h2>
-            <p className="text-[10px] text-slate-400 mb-2 uppercase tracking-wider">
-              Simulated &amp; Upstox live prices
-            </p>
+        <div className="grid grid-cols-1 lg:grid-cols-[210px_minmax(0,1fr)] gap-4 items-stretch">
+          <Card padding="sm" className="lg:max-h-[520px] overflow-y-auto">
+            <h2 className="font-semibold text-sm text-navy-950">Watchlist</h2>
+            <p className="text-[11px] text-slate-400 mb-2">Tap a name to trade it</p>
             <div className="space-y-1">
               {watchlistRows.map((item) => (
                 <button
@@ -806,121 +972,56 @@ export default function PaperTradingPage() {
           </Card>
 
           <Card className="flex flex-col min-w-0">
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm font-bold text-navy-950">{symbol}</span>
                 <Badge variant={dataMode === 'live' ? 'green' : 'amber'} size="xs">
-                  {dataMode === 'live'
-                    ? 'Live · Upstox V3 1-min candles'
-                    : 'Historical replay · NIFTYBEES CSV'}
+                  {dataMode === 'live' ? 'Live · 1-minute candles' : 'Past prices · daily candles'}
                 </Badge>
               </div>
               <div className="flex flex-wrap items-center gap-1.5">
-                {TIMEFRAMES.map((item) => (
+                {timeframeButtons}
+                <span className="mx-1 h-4 w-px bg-slate-200" />
+                {[
+                  { id: 'candle', label: 'Candles' },
+                  { id: 'line', label: 'Line' },
+                ].map((item) => (
                   <button
                     key={item.id}
                     type="button"
-                    onClick={() => setTimeframe(item.id)}
-                    className={`px-2 py-1 text-[11px] font-semibold rounded-md transition-colors ${
-                      timeframe === item.id
-                        ? 'bg-genie-600 text-white'
+                    onClick={() => setChartType(item.id)}
+                    aria-pressed={chartType === item.id}
+                    className={`px-2.5 py-1 text-[11px] font-semibold rounded-md transition-colors ${
+                      chartType === item.id
+                        ? 'bg-navy-900 text-white'
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                   >
-                    {item.id}
+                    {item.label}
                   </button>
                 ))}
-                <span className="mx-1 h-4 w-px bg-slate-200" />
-                <button
-                  type="button"
-                  onClick={() => setChartType('candle')}
-                  className={`px-2 py-1 text-[11px] font-semibold rounded-md transition-colors ${
-                    chartType === 'candle'
-                      ? 'bg-navy-950 text-white'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                >
-                  Candles
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setChartType('line')}
-                  className={`px-2 py-1 text-[11px] font-semibold rounded-md transition-colors ${
-                    chartType === 'line'
-                      ? 'bg-navy-950 text-white'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                >
-                  Line
-                </button>
               </div>
             </div>
             <div className="min-w-0 flex-1">
-              <ReplayChart candles={chartCandles} chartType={chartType} />
+              {chartCandles.length > 0 ? (
+                <ReplayChart candles={chartCandles} chartType={chartType} />
+              ) : (
+                <ChartEmptyState message={chartEmptyMessage} />
+              )}
             </div>
-            {chartCandles.length === 0 && (
-              <p className="mt-2 text-[11px] text-slate-500">{chartEmptyMessage}</p>
-            )}
-            <div className="mt-2 flex flex-wrap gap-3 text-[11px] text-slate-500">
-              <button type="button" onClick={startReplay} className="px-2.5 py-1.5 bg-slate-100 rounded-md font-semibold hover:bg-slate-200">Start Replay</button>
-              <button type="button" onClick={nextCandle} className="px-2.5 py-1.5 bg-slate-100 rounded-md font-semibold hover:bg-slate-200">Next Candle</button>
-              <span>Progress {replay && replay.status !== 'none' ? `${replay.currentIndex + 1}/${replay.total}` : 'not started'}</span>
-            </div>
-          </Card>
-
-          <Card className="lg:max-h-[520px] flex flex-col">
-            <h2 className="font-semibold text-sm text-navy-950">{symbol || '—'}</h2>
-            <p className="text-[10px] text-slate-400 uppercase tracking-wider">
-              {hasLivePrice ? 'Upstox V3 live price' : 'Simulated price'}
-            </p>
-            <div className="mt-1 text-2xl font-extrabold text-navy-950">
-              ₹{formatPrice(displayedPrice)}
-            </div>
-            {change !== null && (
-              <div className={`text-xs font-semibold ${change >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                {change >= 0 ? '+' : '−'}₹{formatPrice(Math.abs(change))} ({change >= 0 ? '+' : '−'}
-                {Math.abs(changePct).toFixed(2)}%)
-              </div>
-            )}
-            <p className="mt-1 text-[10px] text-slate-400 leading-relaxed">
-              {hasLivePrice
-                ? `Last tick ${liveTick?.lastTradedTime ? formatClock(liveTick.lastTradedTime) : '—'} · previous close ₹${formatPrice(previousClose)} · ${priceSource}`
-                : 'No live tick for this symbol — the fallback is labelled simulated, never live.'}
-            </p>
-
-            <div className="mt-3 space-y-2">
-              <div>
-                <label className="text-[10px] text-slate-500">Quantity</label>
-                <input
-                  type="number"
-                  min="1"
-                  step="1"
-                  value={quantity}
-                  onChange={(event) => setQuantity(event.target.value)}
-                  className="block w-full border border-slate-200 rounded-lg px-3 py-2 text-sm"
-                />
-              </div>
-              <button
-                disabled={!canOrder}
-                onClick={() => handleOrder('buy')}
-                className="w-full px-3 py-2 bg-genie-600 hover:bg-genie-700 text-white rounded-lg text-xs font-bold disabled:opacity-50"
-              >
-                Buy (virtual)
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+              <button type="button" onClick={startReplay} className="px-3 py-1.5 bg-slate-100 rounded-md font-semibold text-slate-700 hover:bg-slate-200">
+                Start replay
               </button>
-              <button
-                disabled={!canOrder}
-                onClick={() => handleOrder('sell')}
-                className="w-full px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-bold disabled:opacity-50"
-              >
-                Sell (virtual)
+              <button type="button" onClick={nextCandle} className="px-3 py-1.5 bg-slate-100 rounded-md font-semibold text-slate-700 hover:bg-slate-200">
+                Next day
               </button>
-              <p className="text-[10px] text-slate-400 leading-relaxed">
-                Orders execute at the latest valid price. Stale live quotes require explicit confirmation.
-              </p>
+              <span>
+                {replay && replay.status !== 'none'
+                  ? `Day ${replay.currentIndex + 1} of ${replay.total}`
+                  : 'Replay not started'}
+              </span>
             </div>
-
-            {feedback && <p className="mt-2 text-[11px] text-emerald-700">{feedback}</p>}
-            {orderError && <p className="mt-2 text-[11px] text-rose-700">{orderError}</p>}
           </Card>
         </div>
       )}
@@ -928,95 +1029,125 @@ export default function PaperTradingPage() {
       {mode === 'learn' && (
         <>
           <Card>
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <h2 className="font-semibold">Price Chart</h2>
-              <div className="flex flex-wrap items-center gap-1.5">
-                {TIMEFRAMES.map((item) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => setTimeframe(item.id)}
-                    className={`px-2 py-1 text-[11px] font-semibold rounded-md transition-colors ${
-                      timeframe === item.id
-                        ? 'bg-genie-600 text-white'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
-                  >
-                    {item.id}
-                  </button>
-                ))}
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div>
+                <h2 className="text-base font-semibold text-navy-950">Price chart</h2>
+                <p className="text-xs text-slate-500">
+                  {dataMode === 'live'
+                    ? 'Each bar is one minute of live trading today.'
+                    : 'Each bar is one day of past prices from the replay.'}
+                </p>
               </div>
+              {timeframeButtons}
             </div>
-            <ReplayChart candles={chartCandles} chartType={chartType} />
-            {chartCandles.length === 0 && (
-              <p className="mt-2 text-sm text-slate-500">{chartEmptyMessage}</p>
+            {chartCandles.length > 0 ? (
+              <ReplayChart candles={chartCandles} chartType={chartType} />
+            ) : (
+              <ChartEmptyState message={chartEmptyMessage} />
             )}
-            <p className="mt-2 text-[11px] text-slate-500">
-              {dataMode === 'live'
-                ? 'This chart shows only live Upstox ticks aggregated into 1-minute candles.'
-                : 'This chart shows only the historical NIFTYBEES CSV replay; it never overwrites the live price.'}
-            </p>
           </Card>
 
           <Card>
-            <h2 className="font-semibold mb-3">Historical Replay (NIFTYBEES CSV)</h2>
+            <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
+              <div>
+                <h2 className="text-base font-semibold text-navy-950">Replay the past</h2>
+                <p className="text-xs text-slate-500 max-w-xl">
+                  See real NIFTYBEES prices from the past one day at a time. Decide to buy, sell or
+                  wait, then reveal the next day to see what happened.
+                </p>
+              </div>
+              {replay && replay.status !== 'none' && (
+                <Badge variant="slate" size="xs">
+                  Day {replay.currentIndex + 1} of {replay.total}
+                </Badge>
+              )}
+            </div>
             <div className="flex flex-wrap gap-2 mb-3">
-              <button onClick={startReplay} className="px-3 py-2 bg-slate-200 rounded">Start Replay</button>
-              <button onClick={nextCandle} className="px-3 py-2 bg-slate-200 rounded">Next Candle</button>
-              <button disabled={submitting} onClick={() => replayTrade('buy')} className="px-3 py-2 bg-green-600 text-white rounded disabled:opacity-50">Buy at Close</button>
-              <button disabled={submitting} onClick={() => replayTrade('sell')} className="px-3 py-2 bg-red-600 text-white rounded disabled:opacity-50">Sell at Close</button>
-              <button onClick={() => fetch(`${API}/replay/hold`, { method: 'POST' })} className="px-3 py-2 bg-slate-200 rounded">Hold</button>
+              <button type="button" onClick={startReplay} className="rounded-lg bg-navy-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-navy-800">
+                {replay && replay.status !== 'none' ? 'Restart replay' : 'Start replay'}
+              </button>
+              <button type="button" onClick={nextCandle} className="rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-navy-800 hover:bg-slate-50">
+                Next day
+              </button>
+              <button type="button" disabled={submitting} onClick={() => replayTrade('buy')} className="rounded-lg bg-emerald-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-emerald-700 disabled:opacity-50">
+                Buy at day&apos;s close
+              </button>
+              <button type="button" disabled={submitting} onClick={() => replayTrade('sell')} className="rounded-lg bg-rose-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-rose-700 disabled:opacity-50">
+                Sell at day&apos;s close
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  paperFetch(`/replay/hold`, { method: 'POST' });
+                  setFeedback('You chose to wait. No trade was made.');
+                }}
+                className="rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-navy-800 hover:bg-slate-50"
+              >
+                Wait (no trade)
+              </button>
             </div>
             {replay && replay.status !== 'none' ? (
               <div className="text-sm text-slate-600">
-                <span className="font-semibold">{replay.instrument}</span> — {replay.source} | Progress{' '}
-                {replay.currentIndex + 1}/{replay.total} | Current close: ₹{formatPrice(replay.current?.close)} on {replay.current?.date}
+                <p>
+                  <span className="font-semibold text-navy-900">{replay.instrument}</span> closed at{' '}
+                  <strong className="text-navy-900">₹{formatPrice(replay.current?.close)}</strong> on {replay.current?.date}.
+                </p>
                 <div className="mt-2">
                   <ReplayChart candles={replay.revealed} />
                 </div>
                 <div className="text-xs text-slate-500 mt-1">
-                  Latest: O {formatPrice(replay.current?.open)} H {formatPrice(replay.current?.high)} L{' '}
-                  {formatPrice(replay.current?.low)} C {formatPrice(replay.current?.close)}
+                  That day: opened ₹{formatPrice(replay.current?.open)}, high ₹{formatPrice(replay.current?.high)}, low ₹
+                  {formatPrice(replay.current?.low)}, closed ₹{formatPrice(replay.current?.close)}
                 </div>
                 <p className="mt-2 text-[11px] text-amber-700">
-                  Historical replay prices are dated CSV closes, not live market prices. Replay orders are
-                  recorded with priceSource “historical_replay”.
+                  These are real past prices, not today&apos;s. Replay trades are marked as replay in your history.
                 </p>
               </div>
             ) : (
-              <p className="text-sm text-slate-500">
-                Start the replay to reveal historical NIFTYBEES candles (first row is 2026-04-27).
-              </p>
+              <p className="text-sm text-slate-500">Press &ldquo;Start replay&rdquo; to see the first day.</p>
             )}
+            {orderMessages}
           </Card>
         </>
       )}
 
+      {/* Holdings */}
       <Card>
-        <h2 className="font-semibold mb-3">Holdings</h2>
+        <h2 className="text-base font-semibold text-navy-950 mb-3">What you own</h2>
         {(!portfolio?.holdings || portfolio.holdings.length === 0) ? (
-          <div className="text-slate-500 text-sm">No holdings yet.</div>
+          <p className="text-sm text-slate-500">
+            Nothing yet. Buy a few units above to see how their value changes.
+          </p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+          <div className="overflow-x-auto -mx-1">
+            <table className="w-full min-w-[640px] text-sm">
               <thead>
-                <tr className="text-left text-slate-500">
-                  <th>Symbol</th><th>Qty</th><th>Avg Cost</th><th>Price</th><th>Source</th><th>Market Value</th><th>Unrealized P&L</th>
+                <tr className="text-left text-xs text-slate-500 border-b border-slate-200">
+                  <th className="px-1 py-2 font-medium">Name</th>
+                  <th className="px-1 py-2 font-medium text-right">Units</th>
+                  <th className="px-1 py-2 font-medium text-right">Avg. buy price</th>
+                  <th className="px-1 py-2 font-medium text-right">Price now</th>
+                  <th className="px-1 py-2 font-medium text-right">Value now</th>
+                  <th className="px-1 py-2 font-medium text-right">Profit / loss</th>
                 </tr>
               </thead>
               <tbody>
                 {portfolio.holdings.map((holding) => (
-                  <tr key={holding.symbol} className="border-t">
-                    <td>{holding.symbol}</td>
-                    <td>{holding.quantity}</td>
-                    <td>₹{formatPrice(holding.avgCost)}</td>
-                    <td>₹{formatPrice(holding.currentPrice)}</td>
-                    <td className="text-xs text-slate-500">
-                      {sourceLabel(holding.priceSource)}
-                      {holding.stale ? ' · STALE' : ''}
+                  <tr key={holding.symbol} className="border-b border-slate-100 last:border-0">
+                    <td className="px-1 py-2.5">
+                      <div className="font-semibold text-navy-900">{holding.symbol}</div>
+                      <div className="text-[11px] text-slate-400">
+                        {sourceLabel(holding.priceSource)}
+                        {holding.stale ? ' · delayed' : ''}
+                      </div>
                     </td>
-                    <td>₹{formatPrice(holding.marketValue)}</td>
-                    <td>₹{formatPrice(holding.unrealizedPnl)}</td>
+                    <td className="px-1 py-2.5 text-right tabular-nums">{holding.quantity}</td>
+                    <td className="px-1 py-2.5 text-right tabular-nums">₹{formatPrice(holding.avgCost)}</td>
+                    <td className="px-1 py-2.5 text-right tabular-nums">₹{formatPrice(holding.currentPrice)}</td>
+                    <td className="px-1 py-2.5 text-right tabular-nums">₹{formatPrice(holding.marketValue)}</td>
+                    <td className={`px-1 py-2.5 text-right font-semibold tabular-nums ${pnlTone(holding.unrealizedPnl)}`}>
+                      {formatSignedMoney(holding.unrealizedPnl)}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -1025,36 +1156,51 @@ export default function PaperTradingPage() {
         )}
         {portfolio?.valuationUpdatedAt && (
           <p className="mt-2 text-[11px] text-slate-400">
-            Portfolio revalued at {formatDateTime(portfolio.valuationUpdatedAt)} from the latest available prices.
+            Values updated {formatDateTime(portfolio.valuationUpdatedAt)} using the latest prices.
           </p>
         )}
       </Card>
 
+      {/* History */}
       <Card>
-        <h2 className="font-semibold mb-3">Trade History</h2>
+        <h2 className="text-base font-semibold text-navy-950 mb-3">Your trades</h2>
         {history.length === 0 ? (
-          <div className="text-slate-500 text-sm">No trades yet.</div>
+          <p className="text-sm text-slate-500">No trades yet.</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+          <div className="overflow-x-auto -mx-1">
+            <table className="w-full min-w-[640px] text-sm">
               <thead>
-                <tr className="text-left text-slate-500">
-                  <th>Side</th><th>Symbol</th><th>Qty</th><th>Price</th><th>Source</th><th>Total</th><th>Executed</th>
+                <tr className="text-left text-xs text-slate-500 border-b border-slate-200">
+                  <th className="px-1 py-2 font-medium">Type</th>
+                  <th className="px-1 py-2 font-medium">Name</th>
+                  <th className="px-1 py-2 font-medium text-right">Units</th>
+                  <th className="px-1 py-2 font-medium text-right">Price</th>
+                  <th className="px-1 py-2 font-medium text-right">Amount</th>
+                  <th className="px-1 py-2 font-medium">Price used</th>
+                  <th className="px-1 py-2 font-medium">When</th>
                 </tr>
               </thead>
               <tbody>
-                {history.map((trade, index) => (
-                  <tr key={`${trade.at}-${index}`} className="border-t">
-                    <td>{trade.type}</td>
-                    <td>{trade.symbol}</td>
-                    <td>{trade.quantity}</td>
-                    <td>₹{formatPrice(trade.price)}</td>
-                    <td className="text-xs text-slate-500">
-                      {sourceLabel(trade.priceSource)}
-                      {trade.stale ? ' · STALE' : ''}
+                {[...history].reverse().map((trade, index) => (
+                  <tr key={`${trade.at}-${index}`} className="border-b border-slate-100 last:border-0">
+                    <td className="px-1 py-2.5">
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${
+                          trade.type === 'BUY' ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'
+                        }`}
+                      >
+                        {trade.type === 'BUY' ? 'Bought' : 'Sold'}
+                      </span>
                     </td>
-                    <td>₹{formatPrice(trade.total)}</td>
-                    <td className="text-xs text-slate-500">{formatDateTime(trade.executedAt || trade.at)}</td>
+                    <td className="px-1 py-2.5 font-medium text-navy-900">{trade.symbol}</td>
+                    <td className="px-1 py-2.5 text-right tabular-nums">{trade.quantity}</td>
+                    <td className="px-1 py-2.5 text-right tabular-nums">₹{formatPrice(trade.price)}</td>
+                    <td className="px-1 py-2.5 text-right tabular-nums">₹{formatPrice(trade.total)}</td>
+                    <td className="px-1 py-2.5 text-xs text-slate-500">
+                      {sourceLabel(trade.priceSource)}
+                      {trade.stale ? ' · delayed' : ''}
+                    </td>
+                    <td className="px-1 py-2.5 text-xs text-slate-500">{formatDateTime(trade.executedAt || trade.at)}</td>
                   </tr>
                 ))}
               </tbody>

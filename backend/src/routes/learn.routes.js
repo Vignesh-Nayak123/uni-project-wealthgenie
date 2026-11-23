@@ -102,22 +102,19 @@ router.get('/lessons/:conceptId', async (req, res, next) => {
  * Generates one structured lesson through the live backend LLM integration.
  * Kept for concepts that do not have curated content yet.
  */
-router.post('/lesson', async (req, res) => {
-  const { conceptId } = req.body || {};
+router.post('/lesson', async (req, res, next) => {
+  const rawConceptId = req.body?.conceptId;
+  const conceptId = typeof rawConceptId === 'string' ? rawConceptId.trim() : '';
 
-  if (
-    typeof conceptId !== 'string' ||
-    conceptId.trim().length === 0 ||
-    conceptId.trim().length > 80
-  ) {
+  if (!conceptId || conceptId.length > 80 || !CONCEPT_ID_PATTERN.test(conceptId)) {
     return res.status(400).json({
       status: 'error',
       code: 'invalid_concept_id',
-      message: 'conceptId is required and must be a non-empty string.',
+      message: 'conceptId is required and must be a lowercase slug.',
     });
   }
 
-  const concept = getLearningConcept(conceptId.trim());
+  const concept = getLearningConcept(conceptId);
   if (!concept) {
     return res.status(404).json({
       status: 'error',
@@ -126,24 +123,34 @@ router.post('/lesson', async (req, res) => {
     });
   }
 
-  const prerequisiteTitles = concept.prerequisites
-    .map((id) => LEARNING_CONCEPTS_BY_ID.get(id)?.title)
-    .filter(Boolean);
+  // Express 4 does not catch rejected promises from async handlers; without
+  // this an unexpected throw becomes an unhandledRejection and the request
+  // hangs until the client gives up.
+  try {
+    const prerequisiteTitles = (concept.prerequisites || [])
+      .map((id) => LEARNING_CONCEPTS_BY_ID.get(id)?.title)
+      .filter(Boolean);
 
-  const result = await generateLesson(concept, { prerequisiteTitles });
+    const result = await generateLesson(concept, { prerequisiteTitles });
 
-  if (result.status === 'unconfigured') {
-    return res.status(503).json(result);
+    if (result.status === 'unconfigured') {
+      return res.status(503).json(result);
+    }
+
+    if (result.status === 'error') {
+      // Parse/validation details are for server logs, not learners.
+      const { details, ...publicResult } = result;
+      const status = result.code === 'provider_timeout' ? 504 : 502;
+      return res.status(status).json(publicResult);
+    }
+
+    return res.status(200).json({
+      ...result,
+      generatedAt: new Date().toISOString(),
+    });
+  } catch (error) {
+    return next(error);
   }
-
-  if (result.status === 'error') {
-    return res.status(502).json(result);
-  }
-
-  return res.status(200).json({
-    ...result,
-    generatedAt: new Date().toISOString(),
-  });
 });
 
 export default router;

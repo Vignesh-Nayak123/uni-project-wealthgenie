@@ -1,28 +1,52 @@
 import React, { useState } from 'react';
-import { Info, X, ShieldAlert } from 'lucide-react';
+import { Info, X } from 'lucide-react';
+
+const DISMISS_KEY = 'wealthgenie.disclaimerDismissed.v1';
+
+function wasDismissed() {
+  try {
+    return window.localStorage.getItem(DISMISS_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
 
 export default function DisclaimerBanner() {
-  const [isDismissed, setIsDismissed] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(wasDismissed);
 
   if (isDismissed) return null;
 
+  const dismiss = () => {
+    setIsDismissed(true);
+    try {
+      window.localStorage.setItem(DISMISS_KEY, '1');
+    } catch {
+      // Private mode: the banner simply reappears next visit.
+    }
+  };
+
   return (
-    <aside aria-label="Educational Disclaimer" className="bg-amber-50/90 border-b border-amber-200/80 px-4 py-2.5 text-xs text-amber-900 transition-all">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <Info className="w-4 h-4 text-amber-700 shrink-0" aria-hidden="true" />
-          <p>
-            <strong className="font-semibold text-amber-950">Educational Financial Literacy Platform:</strong>{' '}
-            WealthGenie provides educational concepts and calculators for Indian beginners. We are not a SEBI-registered Investment Adviser. All scenario metrics and portfolio illustrations are for literacy purposes and do not constitute certified financial or investment advice.
+    <aside
+      aria-label="About WealthGenie"
+      className="rounded-xl border border-amber-200/80 bg-amber-50/80 px-4 py-3 text-xs text-amber-900"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-2.5">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" aria-hidden="true" />
+          <p className="leading-relaxed">
+            <strong className="font-semibold text-amber-950">WealthGenie is for learning.</strong>{' '}
+            We explain how money works and help you plan with your own numbers. We are not a
+            SEBI-registered adviser, and nothing here is a recommendation to buy or sell any
+            investment.
           </p>
         </div>
         <button
           type="button"
-          onClick={() => setIsDismissed(true)}
-          className="text-amber-700 hover:text-amber-950 p-1 rounded hover:bg-amber-100 transition-colors shrink-0"
-          aria-label="Dismiss disclaimer banner"
+          onClick={dismiss}
+          className="shrink-0 rounded p-1 text-amber-700 transition-colors hover:bg-amber-100 hover:text-amber-950"
+          aria-label="Dismiss this notice"
         >
-          <X className="w-3.5 h-3.5" />
+          <X className="h-3.5 w-3.5" />
         </button>
       </div>
     </aside>

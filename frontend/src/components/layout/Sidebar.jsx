@@ -6,26 +6,47 @@ import {
   Wallet,
   TrendingUp,
   Target,
-  Shield,
+  ShieldCheck,
   X,
-  Calculator,
+  ClipboardCheck,
   User,
-  FlaskConical,
+  SlidersHorizontal,
+  CandlestickChart,
 } from 'lucide-react';
 import { useUserData } from '../../context/UserDataContext';
 
-export const NAV_ITEMS = [
-  { id: 'home', label: 'Home', icon: LayoutDashboard, badge: null },
-  { id: 'learn', label: 'Learn', icon: BookOpen, badge: '23 Concepts' },
-  { id: 'ask', label: 'Ask WealthGenie', icon: Sparkles, badge: 'AI Tutor', badgeColor: 'green' },
-  { id: 'finances', label: 'My Finances', icon: Wallet, badge: null },
-  { id: 'investments', label: 'Explore Investments', icon: TrendingUp, badge: null },
-  { id: 'goals', label: 'Goals', icon: Target, badge: null },
-  { id: 'assessment', label: 'Assessment', icon: Calculator, badge: null },
-  { id: 'twin', label: 'Digital Twin', icon: FlaskConical, badge: 'What-if' },
-  { id: 'paper', label: 'Paper Trading', icon: Wallet, badge: 'Optional' },
-  { id: 'profile', label: 'Profile', icon: User, badge: null },
+// Grouped by what a beginner is trying to do, in the order they usually need it.
+export const NAV_SECTIONS = [
+  {
+    title: 'Start here',
+    items: [
+      { id: 'home', label: 'Home', icon: LayoutDashboard },
+      { id: 'learn', label: 'Learn', icon: BookOpen },
+    ],
+  },
+  {
+    title: 'Plan my money',
+    items: [
+      { id: 'assessment', label: 'Money Check-up', icon: ClipboardCheck },
+      { id: 'finances', label: 'My Finances', icon: Wallet },
+      { id: 'goals', label: 'My Goals', icon: Target },
+      { id: 'twin', label: 'What-if Planner', icon: SlidersHorizontal },
+    ],
+  },
+  {
+    title: 'Explore & practise',
+    items: [
+      { id: 'investments', label: 'Explore Investments', icon: TrendingUp },
+      { id: 'paper', label: 'Practice Trading', icon: CandlestickChart, hint: 'Virtual ₹' },
+    ],
+  },
+  {
+    title: 'Account',
+    items: [{ id: 'profile', label: 'Profile', icon: User }],
+  },
 ];
+
+export const NAV_ITEMS = NAV_SECTIONS.flatMap((section) => section.items);
 
 export default function Sidebar({
   activeTab,
@@ -35,14 +56,8 @@ export default function Sidebar({
 }) {
   const { goals } = useUserData();
 
-  const navItems = NAV_ITEMS.map((item) =>
-    item.id === 'goals'
-      ? {
-          ...item,
-          badge: goals.length > 0 ? `${goals.length} Saved` : null,
-        }
-      : item
-  );
+  const hintFor = (item) =>
+    item.id === 'goals' ? (goals.length > 0 ? `${goals.length}` : null) : item.hint;
 
   const handleNavClick = (tabId) => {
     onSelectTab(tabId);
@@ -52,28 +67,25 @@ export default function Sidebar({
   const NavContent = (
     <div className="flex flex-col h-full bg-white border-r border-slate-200">
       {/* Brand Header */}
-      <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100">
-        <div
-          role="button"
-          tabIndex={0}
+      <div className="flex items-center justify-between px-5 py-5 border-b border-slate-100">
+        <button
+          type="button"
           onClick={() => handleNavClick('home')}
-          onKeyDown={(e) => e.key === 'Enter' && handleNavClick('home')}
-          className="flex items-center gap-3 cursor-pointer group focus:outline-none"
+          className="flex items-center gap-3 rounded-lg text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-genie-500"
+          aria-label="WealthGenie home"
         >
           <div className="w-10 h-10 rounded-xl bg-navy-900 text-white flex items-center justify-center shadow-subtle group-hover:bg-navy-800 transition-colors">
-            <Sparkles className="w-5 h-5 text-genie-400" />
+            <Sparkles className="w-5 h-5 text-genie-400" aria-hidden="true" />
           </div>
           <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-bold text-lg text-navy-950 tracking-tight">
-                WealthGenie
-              </span>
-            </div>
-            <p className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">
-              Financial Literacy
-            </p>
+            <span className="block font-bold text-lg leading-tight text-navy-950 tracking-tight">
+              WealthGenie
+            </span>
+            <span className="block text-[11px] font-medium text-slate-500">
+              Money made simple
+            </span>
           </div>
-        </div>
+        </button>
 
         {/* Mobile close button */}
         {onCloseMobile && (
@@ -88,69 +100,65 @@ export default function Sidebar({
         )}
       </div>
 
-      {/* Navigation List */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto" aria-label="Main Navigation">
-        <div className="px-3 pb-2 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-          Main Menu
-        </div>
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = activeTab === item.id;
-          return (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => handleNavClick(item.id)}
-              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all group ${
-                isActive
-                  ? 'bg-genie-50/90 text-genie-900 font-semibold shadow-2xs'
-                  : 'text-slate-600 hover:text-navy-900 hover:bg-slate-50'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <Icon
-                  className={`w-4 h-4 transition-colors ${
-                    isActive
-                      ? 'text-genie-700'
-                      : 'text-slate-400 group-hover:text-navy-800'
-                  }`}
-                />
-                <span>{item.label}</span>
-              </div>
-              {item.badge && (
-                <span
-                  className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
-                    item.badgeColor === 'green'
-                      ? 'bg-genie-100 text-genie-800'
-                      : 'bg-slate-100 text-slate-600'
-                  }`}
-                >
-                  {item.badge}
-                </span>
-              )}
-            </button>
-          );
-        })}
+      {/* Navigation */}
+      <nav className="flex-1 px-3 py-4 space-y-5 overflow-y-auto" aria-label="Main navigation">
+        {NAV_SECTIONS.map((section) => (
+          <div key={section.title}>
+            <div className="px-3 pb-1.5 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+              {section.title}
+            </div>
+            <div className="space-y-0.5">
+              {section.items.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
+                const hint = hintFor(item);
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => handleNavClick(item.id)}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`relative w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-colors group focus:outline-none focus-visible:ring-2 focus-visible:ring-genie-500 ${
+                      isActive
+                        ? 'bg-genie-50 text-genie-900 font-semibold'
+                        : 'font-medium text-slate-600 hover:text-navy-900 hover:bg-slate-50'
+                    }`}
+                  >
+                    {isActive && (
+                      <span
+                        className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-genie-600"
+                        aria-hidden="true"
+                      />
+                    )}
+                    <span className="flex items-center gap-3">
+                      <Icon
+                        className={`w-4 h-4 transition-colors ${
+                          isActive ? 'text-genie-700' : 'text-slate-400 group-hover:text-navy-800'
+                        }`}
+                        aria-hidden="true"
+                      />
+                      <span>{item.label}</span>
+                    </span>
+                    {hint && (
+                      <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                        {hint}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </nav>
 
-      {/* Bottom Footer Widget: Account Data Note */}
-      <div className="p-4 border-t border-slate-100 space-y-3 bg-canvas-subtle/40">
-        <div className="bg-white p-3 rounded-lg border border-slate-200/80 shadow-2xs">
-          <div className="flex items-center gap-1.5 mb-1.5">
-            <span className="w-2 h-2 rounded-full bg-genie-500"></span>
-            <span className="text-xs font-semibold text-navy-900">
-              Account Data
-            </span>
-          </div>
-          <p className="text-[11px] text-slate-500 leading-relaxed">
-            Your assessments and goals are stored against your signed-in
-            Supabase account. Only you can read or change them.
+      {/* Trust note */}
+      <div className="p-4 border-t border-slate-100">
+        <div className="flex items-start gap-2 rounded-lg bg-slate-50 p-3">
+          <ShieldCheck className="mt-0.5 w-4 h-4 shrink-0 text-genie-600" aria-hidden="true" />
+          <p className="text-[11px] leading-relaxed text-slate-600">
+            Your numbers are private to your account. WealthGenie never moves real money.
           </p>
-        </div>
-
-        <div className="text-[11px] text-slate-400 text-center flex items-center justify-center gap-1">
-          <Shield className="w-3.5 h-3.5 text-slate-400" />
-          <span>Phase 0 • India Context • No real funds</span>
         </div>
       </div>
     </div>
@@ -165,10 +173,10 @@ export default function Sidebar({
 
       {/* Mobile Drawer (Slide-over) */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true" aria-label="Menu">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-navy-950/40 backdrop-blur-xs transition-opacity"
+            className="fixed inset-0 bg-navy-950/40 backdrop-blur-sm transition-opacity"
             onClick={onCloseMobile}
             aria-hidden="true"
           />

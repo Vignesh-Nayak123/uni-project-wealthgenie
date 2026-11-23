@@ -145,19 +145,29 @@ export async function loadCuratedLessonIndex({
 }
 
 let cache = null;
+let cacheDay = null;
 let pending = null;
 
+function currentDay() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 async function buildIndex(options) {
+  const day = currentDay();
   const index = await loadCuratedLessonIndex(options);
   cache = index;
+  cacheDay = day;
   return index;
 }
 
 /**
- * Cached index used by the API. Tests can call resetCuratedLessonCache().
+ * Cached index used by the API. Lesson validation depends on today's date
+ * (review deadlines, source freshness), so the cache is rebuilt once per day
+ * instead of serving a lesson past its review date until the next restart.
+ * Tests can call resetCuratedLessonCache().
  */
 export async function getCuratedLessonIndex(options = {}) {
-  if (cache) return cache;
+  if (cache && (options.today || cacheDay === currentDay())) return cache;
   if (!pending) {
     pending = buildIndex(options).finally(() => {
       pending = null;
@@ -168,6 +178,7 @@ export async function getCuratedLessonIndex(options = {}) {
 
 export function resetCuratedLessonCache() {
   cache = null;
+  cacheDay = null;
   pending = null;
 }
 
@@ -183,6 +194,9 @@ export async function listCuratedLessons(options = {}) {
       conceptId: entry.lesson.conceptId,
       title: entry.lesson.title,
       category: entry.lesson.category,
+      // One plain sentence on what the learner will be able to do, for
+      // lesson cards and search results.
+      summary: entry.lesson.objectives?.[0]?.text ?? null,
       contentVersion: entry.lesson.contentVersion,
       schemaVersion: entry.lesson.schemaVersion,
       status: entry.review.status,

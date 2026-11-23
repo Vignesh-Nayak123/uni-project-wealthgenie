@@ -34,30 +34,31 @@ export default function GoalProgressCard({ goals = [], onNavigate, onOpenNewGoal
             <Target className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-base font-semibold text-navy-950">Savings & Milestones</h3>
-            <p className="text-xs text-slate-500">Your saved goals from this account</p>
+            <h3 className="text-base font-semibold text-navy-950">My savings goals</h3>
+            <p className="text-xs text-slate-500">How close you are to each goal</p>
           </div>
         </div>
         <button
           type="button"
           onClick={() => onNavigate('goals')}
-          className="text-xs font-semibold text-genie-700 hover:text-genie-900 inline-flex items-center gap-1 group"
+          className="shrink-0 whitespace-nowrap text-xs font-semibold text-genie-700 hover:text-genie-900 inline-flex items-center gap-1 group"
         >
-          <span>View All</span>
+          <span>All goals</span>
           <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </button>
       </div>
 
       {goals.length === 0 ? (
         <div className="text-center py-8">
-          <p className="text-sm text-slate-500">No goals saved yet.</p>
+          <p className="text-sm font-medium text-navy-900">No goals yet</p>
+          <p className="mt-1 text-xs text-slate-500">Saving is easier when you know what it is for.</p>
           <button
             type="button"
             onClick={onOpenNewGoalModal}
-            className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-genie-700 hover:text-genie-800"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-genie-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-genie-700"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span>Set your first financial goal</span>
+            <span>Add my first goal</span>
           </button>
         </div>
       ) : (
@@ -109,8 +110,8 @@ export default function GoalProgressCard({ goals = [], onNavigate, onOpenNewGoal
                   showPercentage={false}
                 />
                 <div className="flex justify-between items-center text-[11px] text-slate-500 mt-1.5">
-                  <span className="font-medium text-genie-700">{percentage}% funded</span>
-                  <span>{formatINR(remaining)} remaining</span>
+                  <span className="font-medium text-genie-700">{percentage}% saved</span>
+                  <span>{formatINR(remaining)} to go</span>
                 </div>
               </div>
             );
@@ -119,14 +120,14 @@ export default function GoalProgressCard({ goals = [], onNavigate, onOpenNewGoal
       )}
 
       <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-        <span className="text-xs text-slate-500">Need inspiration for your next goal?</span>
+        <span className="text-xs text-slate-500">Saving for something new?</span>
         <button
           type="button"
           onClick={onOpenNewGoalModal}
           className="text-xs font-semibold text-navy-800 hover:text-navy-950 inline-flex items-center gap-1"
         >
           <Plus className="w-3.5 h-3.5" />
-          <span>New Goal</span>
+          <span>Add goal</span>
         </button>
       </div>
     </Card>

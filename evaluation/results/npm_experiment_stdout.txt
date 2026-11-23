@@ -1,0 +1,21 @@
+
+> wealthgenie-monorepo@0.1.0 experiment
+> node experiments/run.js
+
+WealthGenie Phase 4 experiment
+Run directory: experiments/results/run-20261123T094623Z-seed-20261027
+Seed: 20261027 | profiles: 226 | scenarios: 1416 | results: 1642
+Formula: 100.00% (22988/22988)
+Goal: 100.00% (18062/18062)
+Recommendation exact set: 100.00% (1642/1642)
+Recommendation decisions: 100.00% (11494/11494)
+Comparison: 100.00% (148680/148680)
+Determinism: 100.00% (1642/1642)
+Validation invalid: 31/31 (100.00%)
+Validation valid: 5/5 (100.00%)
+Invariants: 100.00% (1172/1172)
+Explainability: 100.00% (261857/261857)
+Failures: 0 (stored 0)
+Report: C:\Users\vigne\Documents\z\uni-project\experiments\results\run-20261123T094623Z-seed-20261027\report.md
+
+exit=0

@@ -1,0 +1,2929 @@
+{
+  "generated_at": "2026-11-23T09:50:58+00:00",
+  "seed": 42,
+  "bootstrap_resamples": 1000,
+  "environment": {
+    "python": "3.13.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "cpu_count": 16,
+    "node": "v22.16.0",
+    "libraries": {
+      "scikit-learn": "1.9.1",
+      "pandas": "3.1.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.2",
+      "seaborn": "0.13.2"
+    }
+  },
+  "component1_findex_classifier": {
+    "data": {
+      "raw_rows": 3000,
+      "raw_columns": 199,
+      "raw_target_counts": {
+        "1": 1915,
+        "2": 719,
+        "3": 241,
+        "4": 1,
+        "missing": 124
+      },
+      "rows_retained": 2875,
+      "rows_excluded": 125,
+      "rebuilt_equals_processed_csv": true,
+      "missing_weights": 0,
+      "class_distribution": {
+        "1": {
+          "n": 1915,
+          "pct": 0.6660869565217391
+        },
+        "2": {
+          "n": 719,
+          "pct": 0.2500869565217391
+        },
+        "3": {
+          "n": 241,
+          "pct": 0.08382608695652174
+        }
+      },
+      "imbalance_ratio_majority_to_minority": 7.946058091286307,
+      "class_share_by_income_quintile": {
+        "1": {
+          "1": 0.8430962343096234,
+          "2": 0.11506276150627615,
+          "3": 0.04184100418410042
+        },
+        "2": {
+          "1": 0.7437858508604207,
+          "2": 0.20650095602294455,
+          "3": 0.0497131931166348
+        },
+        "3": {
+          "1": 0.7160068846815835,
+          "2": 0.20309810671256454,
+          "3": 0.08089500860585198
+        },
+        "4": {
+          "1": 0.6279461279461279,
+          "2": 0.2996632996632997,
+          "3": 0.0723905723905724
+        },
+        "5": {
+          "1": 0.47782546494992845,
+          "2": 0.3719599427753934,
+          "3": 0.15021459227467812
+        }
+      },
+      "class_share_by_saved": {
+        "0": {
+          "1": 0.767512077294686,
+          "2": 0.1817632850241546,
+          "3": 0.050724637681159424
+        },
+        "1": {
+          "1": 0.5283018867924528,
+          "2": 0.34290401968826906,
+          "3": 0.1287940935192781
+        }
+      },
+      "target_wording": {
+        "found_in_repo": false,
+        "repo_description": "ml/README.md: 'reported difficulty obtaining emergency money (fin24a)', 'a 3-point ordinal survey response'",
+        "status": "exact category wording to be verified against the Findex 2025 codebook"
+      },
+      "duplicates": {
+        "exact_duplicate_rows_features_and_target": 559,
+        "unique_feature_vectors": 2053,
+        "feature_vectors_with_conflicting_labels": 246,
+        "rows_in_conflicting_feature_vectors": 691
+      }
+    },
+    "split": {
+      "method": "stratified train_test_split, test_size=0.20, random_state=42 (identical to ml/train.py)",
+      "train_n": 2300,
+      "test_n": 575,
+      "train_class_counts": {
+        "1": 1532,
+        "2": 575,
+        "3": 193
+      },
+      "test_class_counts": {
+        "1": 383,
+        "2": 144,
+        "3": 48
+      },
+      "test_rows_with_feature_vector_seen_in_train": 226,
+      "test_rows_with_feature_vector_seen_in_train_pct": 0.39304347826086955,
+      "exact_row_duplicates_across_split": 158
+    },
+    "accuracy_ceiling": {
+      "full_dataset_in_sample": 0.9001739130434783,
+      "test_set_in_sample": 0.9634782608695652,
+      "rows_in_singleton_feature_vectors": 1542,
+      "rows_in_repeated_feature_vectors": 1333,
+      "repeated_vectors_only_in_sample": 0.7846961740435109,
+      "majority_class_rate_on_repeated_rows": 0.6894223555888972,
+      "note": "Max accuracy achievable by any classifier that maps identical feature vectors to one label, computed by predicting the within-vector majority label (in-sample, optimistic upper bound).",
+      "test_rows_in_repeated_vectors": 263,
+      "ceiling_on_those_test_rows_full_data_majority": 0.7984790874524715,
+      "model_accuracy_on_those_test_rows": {
+        "dummy_majority": 0.6958174904942965,
+        "dummy_stratified": 0.532319391634981,
+        "logreg": 0.7072243346007605,
+        "logreg_balanced": 0.5475285171102662,
+        "random_forest": 0.5285171102661597,
+        "hist_gb": 0.6996197718631179
+      }
+    },
+    "leakage_checks": {
+      "fin24_excluded": "fin24 (source of emergency money) is not a feature; fin24a is only defined for respondents who answered fin24.",
+      "target_derived_features": "none of the 7 features is derived from fin24/fin24a",
+      "temporal": "single cross-sectional survey wave (2025); no time ordering, so a random stratified split is appropriate",
+      "preprocessing_fit_on_train_only": true
+    },
+    "cv_train_5fold": {
+      "dummy_majority": {
+        "f1_macro": {
+          "mean": 0.26652732436686055,
+          "std": 0.0002858927001342224
+        },
+        "balanced_accuracy": {
+          "mean": 0.3333333333333333,
+          "std": 0.0
+        },
+        "mcc": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "accuracy": {
+          "mean": 0.6660869565217391,
+          "std": 0.0011907012119677456
+        },
+        "quadratic_weighted_kappa": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      "dummy_stratified": {
+        "f1_macro": {
+          "mean": 0.33512786956511514,
+          "std": 0.0333307522444821
+        },
+        "balanced_accuracy": {
+          "mean": 0.3351287847340687,
+          "std": 0.03338023760679076
+        },
+        "mcc": {
+          "mean": 0.0006803864532092266,
+          "std": 0.06433147379197374
+        },
+        "accuracy": {
+          "mean": 0.5160869565217391,
+          "std": 0.031675039519224346
+        },
+        "quadratic_weighted_kappa": {
+          "mean": -0.024744154764020743,
+          "std": 0.07147256687812553
+        }
+      },
+      "logreg": {
+        "f1_macro": {
+          "mean": 0.3862571582171796,
+          "std": 0.025405574137471645
+        },
+        "balanced_accuracy": {
+          "mean": 0.39732161790725307,
+          "std": 0.016973605621699046
+        },
+        "mcc": {
+          "mean": 0.22393635733822012,
+          "std": 0.051063413271516325
+        },
+        "accuracy": {
+          "mean": 0.6821739130434782,
+          "std": 0.02192313432257166
+        },
+        "quadratic_weighted_kappa": {
+          "mean": 0.20896578851298991,
+          "std": 0.028454229880372262
+        }
+      },
+      "logreg_balanced": {
+        "f1_macro": {
+          "mean": 0.42747801510669425,
+          "std": 0.0306960218545468
+        },
+        "balanced_accuracy": {
+          "mean": 0.47619832547932345,
+          "std": 0.03772087010439526
+        },
+        "mcc": {
+          "mean": 0.2106296970882227,
+          "std": 0.048238180560155185
+        },
+        "accuracy": {
+          "mean": 0.5395652173913044,
+          "std": 0.030138307522823284
+        },
+        "quadratic_weighted_kappa": {
+          "mean": 0.2737284996241022,
+          "std": 0.049182599365235856
+        }
+      },
+      "random_forest": {
+        "f1_macro": {
+          "mean": 0.39887586737265435,
+          "std": 0.02372090057262135
+        },
+        "balanced_accuracy": {
+          "mean": 0.41038710112914867,
+          "std": 0.029117207353406595
+        },
+        "mcc": {
+          "mean": 0.14094287435844438,
+          "std": 0.026405509348908597
+        },
+        "accuracy": {
+          "mean": 0.5360869565217392,
+          "std": 0.015871054129081717
+        },
+        "quadratic_weighted_kappa": {
+          "mean": 0.1602137439870607,
+          "std": 0.04593519924642916
+        }
+      },
+      "hist_gb": {
+        "f1_macro": {
+          "mean": 0.4081582583148832,
+          "std": 0.017902568257400976
+        },
+        "balanced_accuracy": {
+          "mean": 0.4059259132342826,
+          "std": 0.014737959222142683
+        },
+        "mcc": {
+          "mean": 0.18952827859242488,
+          "std": 0.03179049828330743
+        },
+        "accuracy": {
+          "mean": 0.6452173913043479,
+          "std": 0.01768769183200694
+        },
+        "quadratic_weighted_kappa": {
+          "mean": 0.20500397953638894,
+          "std": 0.03510606913963749
+        }
+      }
+    },
+    "best_model": {
+      "name": "logreg_balanced",
+      "label": "Logistic regression (class-weighted)",
+      "selection_rule": "highest mean 5-fold stratified CV macro-F1 on the training portion (test set not used)"
+    },
+    "cv_full_sensitivity": {
+      "dummy_majority": {
+        "stratified_5fold": {
+          "f1_macro": {
+            "mean": 0.2665274878218511,
+            "std": 0.0
+          },
+          "balanced_accuracy": {
+            "mean": 0.3333333333333333,
+            "std": 0.0
+          },
+          "mcc": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "accuracy": {
+            "mean": 0.6660869565217391,
+            "std": 0.0
+          },
+          "quadratic_weighted_kappa": {
+            "mean": 0.0,
+            "std": 0.0
+          }
+        },
+        "grouped_5fold": {
+          "f1_macro": {
+            "mean": 0.26652818421046254,
+            "std": 0.00029483868134164674
+          },
+          "balanced_accuracy": {
+            "mean": 0.3333333333333333,
+            "std": 0.0
+          },
+          "mcc": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "accuracy": {
+            "mean": 0.6660905797978162,
+            "std": 0.0012276556698422273
+          },
+          "quadratic_weighted_kappa": {
+            "mean": 0.0,
+            "std": 0.0
+          }
+        }
+      },
+      "dummy_stratified": {
+        "stratified_5fold": {
+          "f1_macro": {
+            "mean": 0.32261301098881046,
+            "std": 0.017962845835892766
+          },
+          "balanced_accuracy": {
+            "mean": 0.32244148815390894,
+            "std": 0.017767162480556466
+          },
+          "mcc": {
+            "mean": -0.0007587012226806494,
+            "std": 0.03194380118093384
+          },
+          "accuracy": {
+            "mean": 0.519304347826087,
+            "std": 0.015290507575883992
+          },
+          "quadratic_weighted_kappa": {
+            "mean": -0.007287685771158792,
+            "std": 0.04169938235006156
+          }
+        },
+        "grouped_5fold": {
+          "f1_macro": {
+            "mean": 0.34155120364226343,
+            "std": 0.019052037205101985
+          },
+          "balanced_accuracy": {
+            "mean": 0.3414321619651306,
+            "std": 0.018999591922046127
+          },
+          "mcc": {
+            "mean": 0.022579301263169305,
+            "std": 0.030169538003783553
+          },
+          "accuracy": {
+            "mean": 0.5304460690505522,
+            "std": 0.014578314684709014
+          },
+          "quadratic_weighted_kappa": {
+            "mean": 0.013340959225494452,
+            "std": 0.03298460231113899
+          }
+        }
+      },
+      "logreg": {
+        "stratified_5fold": {
+          "f1_macro": {
+            "mean": 0.38422792734972944,
+            "std": 0.008983618656406421
+          },
+          "balanced_accuracy": {
+            "mean": 0.39663362215581544,
+            "std": 0.006211019746217148
+          },
+          "mcc": {
+            "mean": 0.21686207474334845,
+            "std": 0.015525797588189765
+          },
+          "accuracy": {
+            "mean": 0.6824347826086956,
+            "std": 0.004857126971745738
+          },
+          "quadratic_weighted_kappa": {
+            "mean": 0.19383103784051628,
+            "std": 0.04555736016018539
+          }
+        },
+        "grouped_5fold": {
+          "f1_macro": {
+            "mean": 0.3861738619682094,
+            "std": 0.021557046877882485
+          },
+          "balanced_accuracy": {
+            "mean": 0.39922077866064215,
+            "std": 0.016820925495111983
+          },
+          "mcc": {
+            "mean": 0.22371569505561767,
+            "std": 0.04637214962826955
+          },
+          "accuracy": {
+            "mean": 0.6841723475862185,
+            "std": 0.015087499525074625
+          },
+          "quadratic_weighted_kappa": {
+            "mean": 0.1958174497779897,
+            "std": 0.026772153406884578
+          }
+        }
+      },
+      "logreg_balanced": {
+        "stratified_5fold": {
+          "f1_macro": {
+            "mean": 0.4235745226336829,
+            "std": 0.02301472790135828
+          },
+          "balanced_accuracy": {
+            "mean": 0.46970114134418506,
+            "std": 0.0370910003139534
+          },
+          "mcc": {
+            "mean": 0.20253139677584553,
+            "std": 0.0342971130929769
+          },
+          "accuracy": {
+            "mean": 0.5384347826086957,
+            "std": 0.01809865842190988
+          },
+          "quadratic_weighted_kappa": {
+            "mean": 0.255514177525639,
+            "std": 0.04336037987473866
+          }
+        },
+        "grouped_5fold": {
+          "f1_macro": {
+            "mean": 0.4215728928535551,
+            "std": 0.023885860414551097
+          },
+          "balanced_accuracy": {
+            "mean": 0.4681300043650502,
+            "std": 0.0327831423140646
+          },
+          "mcc": {
+            "mean": 0.2017682968184721,
+            "std": 0.03261533852170096
+          },
+          "accuracy": {
+            "mean": 0.5325363900429344,
+            "std": 0.023589169310134057
+          },
+          "quadratic_weighted_kappa": {
+            "mean": 0.24547895508612286,
+            "std": 0.028329693674336503
+          }
+        }
+      },
+      "random_forest": {
+        "stratified_5fold": {
+          "f1_macro": {
+            "mean": 0.3901952635311335,
+            "std": 0.02638485816423136
+          },
+          "balanced_accuracy": {
+            "mean": 0.4015872165396597,
+            "std": 0.03291545224918735
+          },
+          "mcc": {
+            "mean": 0.1260600139846821,
+            "std": 0.05005784487830949
+          },
+          "accuracy": {
+            "mean": 0.5241739130434783,
+            "std": 0.022292097661446048
+          },
+          "quadratic_weighted_kappa": {
+            "mean": 0.14301218761994464,
+            "std": 0.05184191659995506
+          }
+        },
+        "grouped_5fold": {
+          "f1_macro": {
+            "mean": 0.3795585905200102,
+            "std": 0.018373062944372326
+          },
+          "balanced_accuracy": {
+            "mean": 0.3881065955767241,
+            "std": 0.021578437426838674
+          },
+          "mcc": {
+            "mean": 0.12393129327743913,
+            "std": 0.033635059185294844
+          },
+          "accuracy": {
+            "mean": 0.5231196975132585,
+            "std": 0.023879519138308217
+          },
+          "quadratic_weighted_kappa": {
+            "mean": 0.14959704773711818,
+            "std": 0.07211139751320556
+          }
+        }
+      },
+      "hist_gb": {
+        "stratified_5fold": {
+          "f1_macro": {
+            "mean": 0.4087033378215086,
+            "std": 0.007395054774292595
+          },
+          "balanced_accuracy": {
+            "mean": 0.40710596613244887,
+            "std": 0.007830305574583429
+          },
+          "mcc": {
+            "mean": 0.1893077407926423,
+            "std": 0.025052902496792182
+          },
+          "accuracy": {
+            "mean": 0.6469565217391304,
+            "std": 0.011922877565914827
+          },
+          "quadratic_weighted_kappa": {
+            "mean": 0.2153741740798226,
+            "std": 0.03383521398619328
+          }
+        },
+        "grouped_5fold": {
+          "f1_macro": {
+            "mean": 0.4047550961553732,
+            "std": 0.030963652957132427
+          },
+          "balanced_accuracy": {
+            "mean": 0.40397927433290637,
+            "std": 0.02654759108322648
+          },
+          "mcc": {
+            "mean": 0.19099885132259045,
+            "std": 0.061222769933297165
+          },
+          "accuracy": {
+            "mean": 0.64766453976293,
+            "std": 0.02732463568463887
+          },
+          "quadratic_weighted_kappa": {
+            "mean": 0.22486510559792672,
+            "std": 0.053154504725619216
+          }
+        }
+      }
+    },
+    "test": {
+      "dummy_majority": {
+        "accuracy": 0.6660869565217391,
+        "balanced_accuracy": 0.3333333333333333,
+        "precision_macro": 0.22202898550724637,
+        "recall_macro": 0.3333333333333333,
+        "f1_macro": 0.2665274878218511,
+        "precision_weighted": 0.44367183364839313,
+        "recall_weighted": 0.6660869565217391,
+        "f1_weighted": 0.532591449577925,
+        "mcc": 0.0,
+        "cohen_kappa": 0.0,
+        "quadratic_weighted_kappa": 0.0,
+        "mae_class_index": 0.41739130434782606,
+        "spearman_rho": null,
+        "roc_auc_ovr_macro": 0.5,
+        "pr_auc_macro": 0.3333333333333333,
+        "brier_multiclass": 0.6678260869565218,
+        "log_loss": 12.03544600123564,
+        "ece_top_label_10bin": 0.3339130434782609,
+        "per_class": {
+          "1": {
+            "precision": 0.6660869565217391,
+            "recall": 1.0,
+            "f1": 0.7995824634655533,
+            "support": 383
+          },
+          "2": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 144
+          },
+          "3": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 48
+          }
+        },
+        "survey_weighted": {
+          "accuracy": 0.6932390920184649,
+          "balanced_accuracy": 0.3333333333333333,
+          "f1_macro": 0.27294396689604467,
+          "f1_weighted": 0.5676462833487957,
+          "mcc": 0.0
+        }
+      },
+      "dummy_stratified": {
+        "accuracy": 0.5165217391304348,
+        "balanced_accuracy": 0.33508002127453823,
+        "precision_macro": 0.33463054432969114,
+        "recall_macro": 0.33508002127453823,
+        "f1_macro": 0.33461348884029296,
+        "precision_weighted": 0.5100272674619135,
+        "recall_weighted": 0.5165217391304348,
+        "f1_weighted": 0.513062081143121,
+        "mcc": -0.006656615674511725,
+        "cohen_kappa": -0.006650125319596523,
+        "quadratic_weighted_kappa": -0.0052557621767614915,
+        "mae_class_index": 0.6,
+        "spearman_rho": -0.011083961932558237,
+        "roc_auc_ovr_macro": 0.4992578045176634,
+        "pr_auc_macro": 0.3323622355642562,
+        "brier_multiclass": 0.9669565217391304,
+        "log_loss": 17.426322855955775,
+        "ece_top_label_10bin": 0.48347826086956525,
+        "per_class": {
+          "1": {
+            "precision": 0.6615776081424937,
+            "recall": 0.6788511749347258,
+            "f1": 0.6701030927835051,
+            "support": 383
+          },
+          "2": {
+            "precision": 0.24427480916030533,
+            "recall": 0.2222222222222222,
+            "f1": 0.23272727272727273,
+            "support": 144
+          },
+          "3": {
+            "precision": 0.09803921568627451,
+            "recall": 0.10416666666666667,
+            "f1": 0.10101010101010101,
+            "support": 48
+          }
+        },
+        "survey_weighted": {
+          "accuracy": 0.527116744279227,
+          "balanced_accuracy": 0.3254822127947499,
+          "f1_macro": 0.3253673236237163,
+          "f1_weighted": 0.5296500010915469,
+          "mcc": -0.008861914556003518
+        }
+      },
+      "logreg": {
+        "accuracy": 0.6695652173913044,
+        "balanced_accuracy": 0.3960388260322986,
+        "precision_macro": 0.7182084285657003,
+        "recall_macro": 0.3960388260322986,
+        "f1_macro": 0.3887573458132101,
+        "precision_weighted": 0.666738131475583,
+        "recall_weighted": 0.6695652173913044,
+        "f1_weighted": 0.6151129454939946,
+        "mcc": 0.18720901555452218,
+        "cohen_kappa": 0.16634872186188487,
+        "quadratic_weighted_kappa": 0.14579374676109857,
+        "mae_class_index": 0.3947826086956522,
+        "spearman_rho": 0.20327590724254438,
+        "roc_auc_ovr_macro": 0.6824126015551895,
+        "pr_auc_macro": 0.4754512503157213,
+        "brier_multiclass": 0.4424403523795711,
+        "log_loss": 0.7634015922713007,
+        "ece_top_label_10bin": 0.04375965161509006,
+        "per_class": {
+          "1": {
+            "precision": 0.7075664621676891,
+            "recall": 0.9033942558746736,
+            "f1": 0.7935779816513762,
+            "support": 383
+          },
+          "2": {
+            "precision": 0.4470588235294118,
+            "recall": 0.2638888888888889,
+            "f1": 0.3318777292576419,
+            "support": 144
+          },
+          "3": {
+            "precision": 1.0,
+            "recall": 0.020833333333333332,
+            "f1": 0.04081632653061224,
+            "support": 48
+          }
+        },
+        "survey_weighted": {
+          "accuracy": 0.6892299093588423,
+          "balanced_accuracy": 0.3828945785236884,
+          "f1_macro": 0.37092872485858575,
+          "f1_weighted": 0.626212821039061,
+          "mcc": 0.159592364902499
+        }
+      },
+      "logreg_balanced": {
+        "accuracy": 0.5130434782608696,
+        "balanced_accuracy": 0.4571185088482739,
+        "precision_macro": 0.42551091230879395,
+        "recall_macro": 0.4571185088482739,
+        "f1_macro": 0.40566808813077476,
+        "precision_weighted": 0.626780342512203,
+        "recall_weighted": 0.5130434782608696,
+        "f1_weighted": 0.5527325793393282,
+        "mcc": 0.18317274276599507,
+        "cohen_kappa": 0.17141004395129333,
+        "quadratic_weighted_kappa": 0.22617637302753157,
+        "mae_class_index": 0.6539130434782608,
+        "spearman_rho": 0.2792863108062586,
+        "roc_auc_ovr_macro": 0.6658233321453643,
+        "pr_auc_macro": 0.45312201219241993,
+        "brier_multiclass": 0.5935768030000947,
+        "log_loss": 1.0095184898427896,
+        "ece_top_label_10bin": 0.051925595828709835,
+        "per_class": {
+          "1": {
+            "precision": 0.7958477508650519,
+            "recall": 0.6005221932114883,
+            "f1": 0.6845238095238095,
+            "support": 383
+          },
+          "2": {
+            "precision": 0.3387096774193548,
+            "recall": 0.2916666666666667,
+            "f1": 0.31343283582089554,
+            "support": 144
+          },
+          "3": {
+            "precision": 0.1419753086419753,
+            "recall": 0.4791666666666667,
+            "f1": 0.21904761904761905,
+            "support": 48
+          }
+        },
+        "survey_weighted": {
+          "accuracy": 0.534520729069821,
+          "balanced_accuracy": 0.42460900859078327,
+          "f1_macro": 0.3903004814877067,
+          "f1_weighted": 0.5670955841802242,
+          "mcc": 0.1508164875660599
+        }
+      },
+      "random_forest": {
+        "accuracy": 0.528695652173913,
+        "balanced_accuracy": 0.4148776714050866,
+        "precision_macro": 0.4032054219234397,
+        "recall_macro": 0.4148776714050866,
+        "f1_macro": 0.4008216280690751,
+        "precision_weighted": 0.5948849001090831,
+        "recall_weighted": 0.528695652173913,
+        "f1_weighted": 0.553953191127987,
+        "mcc": 0.14693829470204192,
+        "cohen_kappa": 0.14286264349796762,
+        "quadratic_weighted_kappa": 0.1654045184904709,
+        "mae_class_index": 0.5808695652173913,
+        "spearman_rho": 0.1941823277314945,
+        "roc_auc_ovr_macro": 0.6128717086410341,
+        "pr_auc_macro": 0.41092923907840334,
+        "brier_multiclass": 0.6728395504162262,
+        "log_loss": 1.7856173857635076,
+        "ece_top_label_10bin": 0.2261618513280042,
+        "per_class": {
+          "1": {
+            "precision": 0.7532467532467533,
+            "recall": 0.6057441253263708,
+            "f1": 0.6714905933429812,
+            "support": 383
+          },
+          "2": {
+            "precision": 0.32978723404255317,
+            "recall": 0.4305555555555556,
+            "f1": 0.37349397590361444,
+            "support": 144
+          },
+          "3": {
+            "precision": 0.12658227848101267,
+            "recall": 0.20833333333333334,
+            "f1": 0.15748031496062992,
+            "support": 48
+          }
+        },
+        "survey_weighted": {
+          "accuracy": 0.5133839169676028,
+          "balanced_accuracy": 0.3727102716070871,
+          "f1_macro": 0.364109155525004,
+          "f1_weighted": 0.5395875350067093,
+          "mcc": 0.07772241317064184
+        }
+      },
+      "hist_gb": {
+        "accuracy": 0.6556521739130434,
+        "balanced_accuracy": 0.4237803403926119,
+        "precision_macro": 0.4602812982603924,
+        "recall_macro": 0.4237803403926119,
+        "f1_macro": 0.43079068128119796,
+        "precision_weighted": 0.6114186495219672,
+        "recall_weighted": 0.6556521739130434,
+        "f1_weighted": 0.6255142563363338,
+        "mcc": 0.20909701621064403,
+        "cohen_kappa": 0.20123200404119768,
+        "quadratic_weighted_kappa": 0.24415420265430798,
+        "mae_class_index": 0.41043478260869565,
+        "spearman_rho": 0.26862779546638593,
+        "roc_auc_ovr_macro": 0.6400126717462488,
+        "pr_auc_macro": 0.43094777932060796,
+        "brier_multiclass": 0.49626287691954885,
+        "log_loss": 0.9046636073149229,
+        "ece_top_label_10bin": 0.0867243691073006,
+        "per_class": {
+          "1": {
+            "precision": 0.7317073170731707,
+            "recall": 0.8616187989556136,
+            "f1": 0.7913669064748201,
+            "support": 383
+          },
+          "2": {
+            "precision": 0.41836734693877553,
+            "recall": 0.2847222222222222,
+            "f1": 0.33884297520661155,
+            "support": 144
+          },
+          "3": {
+            "precision": 0.23076923076923078,
+            "recall": 0.125,
+            "f1": 0.16216216216216217,
+            "support": 48
+          }
+        },
+        "survey_weighted": {
+          "accuracy": 0.6792407193828104,
+          "balanced_accuracy": 0.39952005314125816,
+          "f1_macro": 0.4003264797924362,
+          "f1_weighted": 0.6393092202621644,
+          "mcc": 0.19632107132685464
+        }
+      }
+    },
+    "bootstrap_ci95": {
+      "dummy_majority": {
+        "f1_macro": {
+          "point": 0.2665274878218511,
+          "ci95_low": 0.2571225071225071,
+          "ci95_high": 0.2755102040816327
+        },
+        "balanced_accuracy": {
+          "point": 0.3333333333333333,
+          "ci95_low": 0.3333333333333333,
+          "ci95_high": 0.3333333333333333
+        },
+        "mcc": {
+          "point": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0
+        },
+        "accuracy": {
+          "point": 0.6660869565217391,
+          "ci95_low": 0.6278260869565218,
+          "ci95_high": 0.7043478260869566
+        },
+        "quadratic_weighted_kappa": {
+          "point": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0
+        }
+      },
+      "dummy_stratified": {
+        "f1_macro": {
+          "point": 0.33461348884029296,
+          "ci95_low": 0.2961429560251541,
+          "ci95_high": 0.37630105417655463
+        },
+        "balanced_accuracy": {
+          "point": 0.33508002127453823,
+          "ci95_low": 0.29608659340751725,
+          "ci95_high": 0.37869696966929317
+        },
+        "mcc": {
+          "point": -0.006656615674511725,
+          "ci95_low": -0.0700558071044516,
+          "ci95_high": 0.06450927575737529
+        },
+        "accuracy": {
+          "point": 0.5165217391304348,
+          "ci95_low": 0.4782608695652174,
+          "ci95_high": 0.5617391304347826
+        },
+        "quadratic_weighted_kappa": {
+          "point": -0.0052557621767614915,
+          "ci95_low": -0.08766373397871823,
+          "ci95_high": 0.08566772806692756
+        }
+      },
+      "logreg": {
+        "f1_macro": {
+          "point": 0.3887573458132101,
+          "ci95_low": 0.3505096341687387,
+          "ci95_high": 0.4324537344733777
+        },
+        "balanced_accuracy": {
+          "point": 0.3960388260322986,
+          "ci95_low": 0.36796630196735397,
+          "ci95_high": 0.428655574044322
+        },
+        "mcc": {
+          "point": 0.18720901555452218,
+          "ci95_low": 0.10885877322664464,
+          "ci95_high": 0.26861269521495307
+        },
+        "accuracy": {
+          "point": 0.6695652173913044,
+          "ci95_low": 0.6295652173913043,
+          "ci95_high": 0.7095652173913043
+        },
+        "quadratic_weighted_kappa": {
+          "point": 0.14579374676109857,
+          "ci95_low": 0.07287104842935563,
+          "ci95_high": 0.22147266929153314
+        }
+      },
+      "logreg_balanced": {
+        "f1_macro": {
+          "point": 0.40566808813077476,
+          "ci95_low": 0.3680142308407264,
+          "ci95_high": 0.44439466887550416
+        },
+        "balanced_accuracy": {
+          "point": 0.4571185088482739,
+          "ci95_low": 0.40985024507992185,
+          "ci95_high": 0.5127790730361423
+        },
+        "mcc": {
+          "point": 0.18317274276599507,
+          "ci95_low": 0.12609302621026036,
+          "ci95_high": 0.24382665121228564
+        },
+        "accuracy": {
+          "point": 0.5130434782608696,
+          "ci95_low": 0.47304347826086957,
+          "ci95_high": 0.5530434782608695
+        },
+        "quadratic_weighted_kappa": {
+          "point": 0.22617637302753157,
+          "ci95_low": 0.1621316590513151,
+          "ci95_high": 0.2896064825379292
+        }
+      },
+      "random_forest": {
+        "f1_macro": {
+          "point": 0.4008216280690751,
+          "ci95_low": 0.358372149170267,
+          "ci95_high": 0.44349150512371577
+        },
+        "balanced_accuracy": {
+          "point": 0.4148776714050866,
+          "ci95_low": 0.3664027945890213,
+          "ci95_high": 0.4664512647982155
+        },
+        "mcc": {
+          "point": 0.14693829470204192,
+          "ci95_low": 0.07903084458301311,
+          "ci95_high": 0.21059963734335874
+        },
+        "accuracy": {
+          "point": 0.528695652173913,
+          "ci95_low": 0.49043478260869566,
+          "ci95_high": 0.5704347826086956
+        },
+        "quadratic_weighted_kappa": {
+          "point": 0.1654045184904709,
+          "ci95_low": 0.08543117122608683,
+          "ci95_high": 0.24354208285091686
+        }
+      },
+      "hist_gb": {
+        "f1_macro": {
+          "point": 0.43079068128119796,
+          "ci95_low": 0.3783492408696681,
+          "ci95_high": 0.48606435812333615
+        },
+        "balanced_accuracy": {
+          "point": 0.4237803403926119,
+          "ci95_low": 0.3800463464900327,
+          "ci95_high": 0.4709145361756709
+        },
+        "mcc": {
+          "point": 0.20909701621064403,
+          "ci95_low": 0.13239087638691796,
+          "ci95_high": 0.28827345170162827
+        },
+        "accuracy": {
+          "point": 0.6556521739130434,
+          "ci95_low": 0.6156521739130435,
+          "ci95_high": 0.6956956521739129
+        },
+        "quadratic_weighted_kappa": {
+          "point": 0.24415420265430798,
+          "ci95_low": 0.15228762623613315,
+          "ci95_high": 0.3390995143544159
+        }
+      }
+    },
+    "paired_bootstrap_best_minus_other": {
+      "dummy_majority": {
+        "f1_macro": {
+          "point": 0.13914060030892367,
+          "ci95_low": 0.09905902672970832,
+          "ci95_high": 0.1803492581626266,
+          "share_resamples_best_not_better": 0.0
+        },
+        "balanced_accuracy": {
+          "point": 0.12378517551494056,
+          "ci95_low": 0.07651691174658852,
+          "ci95_high": 0.17944573970280903,
+          "share_resamples_best_not_better": 0.0
+        },
+        "mcc": {
+          "point": 0.18317274276599507,
+          "ci95_low": 0.12609302621026036,
+          "ci95_high": 0.24382665121228564,
+          "share_resamples_best_not_better": 0.0
+        }
+      },
+      "dummy_stratified": {
+        "f1_macro": {
+          "point": 0.0710545992904818,
+          "ci95_low": 0.014540476847251562,
+          "ci95_high": 0.12548553856803832,
+          "share_resamples_best_not_better": 0.008
+        },
+        "balanced_accuracy": {
+          "point": 0.12203848757373564,
+          "ci95_low": 0.055487922664120164,
+          "ci95_high": 0.18868904257035793,
+          "share_resamples_best_not_better": 0.0
+        },
+        "mcc": {
+          "point": 0.1898293584405068,
+          "ci95_low": 0.09780183837649871,
+          "ci95_high": 0.2756255792627596,
+          "share_resamples_best_not_better": 0.0
+        }
+      },
+      "logreg": {
+        "f1_macro": {
+          "point": 0.016910742317564675,
+          "ci95_low": -0.036116690629916126,
+          "ci95_high": 0.06742270771974548,
+          "share_resamples_best_not_better": 0.277
+        },
+        "balanced_accuracy": {
+          "point": 0.061079682815975256,
+          "ci95_low": 0.007178473132594164,
+          "ci95_high": 0.1214711766214685,
+          "share_resamples_best_not_better": 0.019
+        },
+        "mcc": {
+          "point": -0.004036272788527112,
+          "ci95_low": -0.08884025445424582,
+          "ci95_high": 0.0855029805682154,
+          "share_resamples_best_not_better": 0.539
+        }
+      },
+      "random_forest": {
+        "f1_macro": {
+          "point": 0.004846460061699642,
+          "ci95_low": -0.04923662161865306,
+          "ci95_high": 0.055802880877533524,
+          "share_resamples_best_not_better": 0.458
+        },
+        "balanced_accuracy": {
+          "point": 0.042240837443187296,
+          "ci95_low": -0.026447714742344162,
+          "ci95_high": 0.10681416445455261,
+          "share_resamples_best_not_better": 0.104
+        },
+        "mcc": {
+          "point": 0.03623444806395315,
+          "ci95_low": -0.04061355233029029,
+          "ci95_high": 0.11160603804885852,
+          "share_resamples_best_not_better": 0.181
+        }
+      },
+      "hist_gb": {
+        "f1_macro": {
+          "point": -0.0251225931504232,
+          "ci95_low": -0.07912226867143207,
+          "ci95_high": 0.02912606894744975,
+          "share_resamples_best_not_better": 0.823
+        },
+        "balanced_accuracy": {
+          "point": 0.033338168455661954,
+          "ci95_low": -0.01995233413738744,
+          "ci95_high": 0.09094307170621901,
+          "share_resamples_best_not_better": 0.116
+        },
+        "mcc": {
+          "point": -0.025924273444648954,
+          "ci95_low": -0.09886785546248451,
+          "ci95_high": 0.0501991529045158,
+          "share_resamples_best_not_better": 0.758
+        }
+      }
+    },
+    "mcnemar_best_vs": {
+      "dummy_majority": {
+        "both_correct": 230,
+        "best_only_correct": 65,
+        "other_only_correct": 153,
+        "both_wrong": 127,
+        "test": "chi-square with continuity correction",
+        "statistic": 34.72018348623853,
+        "p_value": 3.8066442630319325e-09
+      },
+      "logreg": {
+        "both_correct": 245,
+        "best_only_correct": 50,
+        "other_only_correct": 140,
+        "both_wrong": 140,
+        "test": "chi-square with continuity correction",
+        "statistic": 41.689473684210526,
+        "p_value": 1.0698343401731118e-10
+      }
+    },
+    "permutation_importance_f1_macro": [
+      {
+        "feature": "inc_q",
+        "importance_mean": 0.01885214716451634,
+        "importance_std": 0.013744438633260851
+      },
+      {
+        "feature": "borrowed",
+        "importance_mean": 0.01599095331127949,
+        "importance_std": 0.011823579381149642
+      },
+      {
+        "feature": "urbanicity",
+        "importance_mean": 0.015022892082479745,
+        "importance_std": 0.009377054389374062
+      },
+      {
+        "feature": "saved",
+        "importance_mean": 0.01112178456061395,
+        "importance_std": 0.011935548320373962
+      },
+      {
+        "feature": "educ",
+        "importance_mean": 0.009142827316657049,
+        "importance_std": 0.011385821193229874
+      },
+      {
+        "feature": "emp_in",
+        "importance_mean": 0.004714794200884821,
+        "importance_std": 0.005852890598695883
+      },
+      {
+        "feature": "age",
+        "importance_mean": 0.003936266754647886,
+        "importance_std": 0.00948441773071547
+      }
+    ],
+    "ablation": [
+      {
+        "ablation": "drop age",
+        "features": "educ,inc_q,emp_in,urbanicity,saved,borrowed",
+        "f1_macro": 0.40242276048790915,
+        "balanced_accuracy": 0.4464147567933469,
+        "mcc": 0.1746614262931092,
+        "delta_f1_macro": -0.003245327642865614,
+        "delta_balanced_accuracy": -0.010703752054926963,
+        "delta_mcc": -0.00851131647288586
+      },
+      {
+        "ablation": "drop educ",
+        "features": "age,inc_q,emp_in,urbanicity,saved,borrowed",
+        "f1_macro": 0.4094313223341264,
+        "balanced_accuracy": 0.4730260613093511,
+        "mcc": 0.19442315686902883,
+        "delta_f1_macro": 0.0037632342033516175,
+        "delta_balanced_accuracy": 0.015907552461077223,
+        "delta_mcc": 0.011250414103033762
+      },
+      {
+        "ablation": "drop inc_q",
+        "features": "age,educ,emp_in,urbanicity,saved,borrowed",
+        "f1_macro": 0.38722407635860145,
+        "balanced_accuracy": 0.43598902427231406,
+        "mcc": 0.14812732327409764,
+        "delta_f1_macro": -0.018444011772173308,
+        "delta_balanced_accuracy": -0.02112948457595981,
+        "delta_mcc": -0.035045419491897434
+      },
+      {
+        "ablation": "drop emp_in",
+        "features": "age,educ,inc_q,urbanicity,saved,borrowed",
+        "f1_macro": 0.4111110951240466,
+        "balanced_accuracy": 0.45422952325693844,
+        "mcc": 0.1918175520079751,
+        "delta_f1_macro": 0.005443006993271826,
+        "delta_balanced_accuracy": -0.0028889855913354356,
+        "delta_mcc": 0.008644809241980023
+      },
+      {
+        "ablation": "drop urbanicity",
+        "features": "age,educ,inc_q,emp_in,saved,borrowed",
+        "f1_macro": 0.3793064149101301,
+        "balanced_accuracy": 0.4241187989556136,
+        "mcc": 0.1598001711680028,
+        "delta_f1_macro": -0.026361673220644644,
+        "delta_balanced_accuracy": -0.03299970989266027,
+        "delta_mcc": -0.023372571597992275
+      },
+      {
+        "ablation": "drop saved",
+        "features": "age,educ,inc_q,emp_in,urbanicity,borrowed",
+        "f1_macro": 0.41893638813139006,
+        "balanced_accuracy": 0.4620442897205299,
+        "mcc": 0.2096811849695681,
+        "delta_f1_macro": 0.013268300000615296,
+        "delta_balanced_accuracy": 0.004925780872256036,
+        "delta_mcc": 0.02650844220357304
+      },
+      {
+        "ablation": "drop borrowed",
+        "features": "age,educ,inc_q,emp_in,urbanicity,saved",
+        "f1_macro": 0.3839420137621368,
+        "balanced_accuracy": 0.42091553041291946,
+        "mcc": 0.16167068953776292,
+        "delta_f1_macro": -0.021726074368637938,
+        "delta_balanced_accuracy": -0.036202978435354416,
+        "delta_mcc": -0.02150205322823215
+      },
+      {
+        "ablation": "drop saved + borrowed (financial behaviour)",
+        "features": "age,educ,inc_q,emp_in,urbanicity",
+        "f1_macro": 0.3900607108940443,
+        "balanced_accuracy": 0.4151556909389807,
+        "mcc": 0.16308573042385766,
+        "delta_f1_macro": -0.015607377236730446,
+        "delta_balanced_accuracy": -0.04196281790929318,
+        "delta_mcc": -0.020087012342137417
+      },
+      {
+        "ablation": "drop age + educ + emp_in + urbanicity (demographics)",
+        "features": "inc_q,saved,borrowed",
+        "f1_macro": 0.36546707228618214,
+        "balanced_accuracy": 0.42558142346001354,
+        "mcc": 0.13943439455354836,
+        "delta_f1_macro": -0.040201015844592625,
+        "delta_balanced_accuracy": -0.03153708538826033,
+        "delta_mcc": -0.04373834821244671
+      },
+      {
+        "ablation": "only inc_q",
+        "features": "inc_q",
+        "f1_macro": 0.37803181176608797,
+        "balanced_accuracy": 0.41143264674596264,
+        "mcc": 0.15482478900162877,
+        "delta_f1_macro": -0.027636276364686796,
+        "delta_balanced_accuracy": -0.04568586210231124,
+        "delta_mcc": -0.0283479537643663
+      }
+    ],
+    "dedup_sensitivity": {
+      "rows": 2316,
+      "train_n": 1852,
+      "test_n": 464,
+      "class_counts": {
+        "1": 1452,
+        "2": 638,
+        "3": 226
+      },
+      "test_rows_with_feature_vector_seen_in_train": 85,
+      "note": "Exact duplicate rows (features AND target) removed, keeping the first; feature vectors with conflicting labels remain.",
+      "models": {
+        "dummy_majority": {
+          "f1_macro": 0.25695364238410595,
+          "balanced_accuracy": 0.3333333333333333,
+          "mcc": 0.0,
+          "accuracy": 0.6271551724137931,
+          "delta_f1_macro": -0.009573845437745143,
+          "delta_balanced_accuracy": 0.0,
+          "delta_mcc": 0.0,
+          "delta_accuracy": -0.038931784107945955
+        },
+        "dummy_stratified": {
+          "f1_macro": 0.3607557767630805,
+          "balanced_accuracy": 0.3612644377625047,
+          "mcc": 0.033096133608301714,
+          "accuracy": 0.4956896551724138,
+          "delta_f1_macro": 0.026142287922787555,
+          "delta_balanced_accuracy": 0.02618441648796649,
+          "delta_mcc": 0.03975274928281344,
+          "delta_accuracy": -0.02083208395802094
+        },
+        "logreg": {
+          "f1_macro": 0.3597617718220733,
+          "balanced_accuracy": 0.3828214490263459,
+          "mcc": 0.175568883786765,
+          "accuracy": 0.6379310344827587,
+          "delta_f1_macro": -0.02899557399113678,
+          "delta_balanced_accuracy": -0.013217377005952713,
+          "delta_mcc": -0.01164013176775719,
+          "delta_accuracy": -0.031634182908545694
+        },
+        "logreg_balanced": {
+          "f1_macro": 0.4078521029296102,
+          "balanced_accuracy": 0.45592723844978994,
+          "mcc": 0.17642648533389105,
+          "accuracy": 0.48060344827586204,
+          "delta_f1_macro": 0.002184014798835454,
+          "delta_balanced_accuracy": -0.0011912703984839346,
+          "delta_mcc": -0.006746257432104025,
+          "delta_accuracy": -0.03244002998500756
+        },
+        "random_forest": {
+          "f1_macro": 0.3332244065669769,
+          "balanced_accuracy": 0.33794327510500194,
+          "mcc": 0.015903810909446748,
+          "accuracy": 0.4353448275862069,
+          "delta_f1_macro": -0.06759722150209824,
+          "delta_balanced_accuracy": -0.07693439630008464,
+          "delta_mcc": -0.13103448379259516,
+          "delta_accuracy": -0.0933508245877061
+        },
+        "hist_gb": {
+          "f1_macro": 0.341009192341908,
+          "balanced_accuracy": 0.34858665043909887,
+          "mcc": 0.058129764185405684,
+          "accuracy": 0.5581896551724138,
+          "delta_f1_macro": -0.08978148893928994,
+          "delta_balanced_accuracy": -0.07519368995351305,
+          "delta_mcc": -0.15096725202523834,
+          "delta_accuracy": -0.09746251874062961
+        }
+      }
+    },
+    "segments": [
+      {
+        "segment": "inc_q",
+        "value": "1",
+        "n": 90,
+        "n_class1": 77,
+        "n_class2": 10,
+        "n_class3": 3,
+        "accuracy": 0.7444444444444445,
+        "balanced_accuracy": 0.5036075036075035,
+        "f1_macro": 0.3553906411049268,
+        "low_n_flag": false
+      },
+      {
+        "segment": "inc_q",
+        "value": "2",
+        "n": 93,
+        "n_class1": 72,
+        "n_class2": 13,
+        "n_class3": 8,
+        "accuracy": 0.6129032258064516,
+        "balanced_accuracy": 0.443019943019943,
+        "f1_macro": 0.44308341716472377,
+        "low_n_flag": false
+      },
+      {
+        "segment": "inc_q",
+        "value": "3",
+        "n": 126,
+        "n_class1": 95,
+        "n_class2": 21,
+        "n_class3": 10,
+        "accuracy": 0.5793650793650794,
+        "balanced_accuracy": 0.40016708437761067,
+        "f1_macro": 0.35626225875518425,
+        "low_n_flag": false
+      },
+      {
+        "segment": "inc_q",
+        "value": "4",
+        "n": 107,
+        "n_class1": 66,
+        "n_class2": 32,
+        "n_class3": 9,
+        "accuracy": 0.5420560747663551,
+        "balanced_accuracy": 0.46959175084175087,
+        "f1_macro": 0.4582731338149295,
+        "low_n_flag": false
+      },
+      {
+        "segment": "inc_q",
+        "value": "5",
+        "n": 159,
+        "n_class1": 73,
+        "n_class2": 68,
+        "n_class3": 18,
+        "accuracy": 0.25157232704402516,
+        "balanced_accuracy": 0.36872892231474025,
+        "f1_macro": 0.254040404040404,
+        "low_n_flag": false
+      },
+      {
+        "segment": "age_band",
+        "value": "15-24",
+        "n": 133,
+        "n_class1": 87,
+        "n_class2": 34,
+        "n_class3": 12,
+        "accuracy": 0.45864661654135336,
+        "balanced_accuracy": 0.41908947487040793,
+        "f1_macro": 0.3917111619628782,
+        "low_n_flag": false
+      },
+      {
+        "segment": "age_band",
+        "value": "25-34",
+        "n": 142,
+        "n_class1": 91,
+        "n_class2": 37,
+        "n_class3": 14,
+        "accuracy": 0.4154929577464789,
+        "balanced_accuracy": 0.4360954360954361,
+        "f1_macro": 0.36772486772486773,
+        "low_n_flag": false
+      },
+      {
+        "segment": "age_band",
+        "value": "35-44",
+        "n": 122,
+        "n_class1": 93,
+        "n_class2": 22,
+        "n_class3": 7,
+        "accuracy": 0.6229508196721312,
+        "balanced_accuracy": 0.5179444211702277,
+        "f1_macro": 0.4349276822551887,
+        "low_n_flag": false
+      },
+      {
+        "segment": "age_band",
+        "value": "45-54",
+        "n": 98,
+        "n_class1": 57,
+        "n_class2": 32,
+        "n_class3": 9,
+        "accuracy": 0.5816326530612245,
+        "balanced_accuracy": 0.5615862573099415,
+        "f1_macro": 0.4845403084130393,
+        "low_n_flag": false
+      },
+      {
+        "segment": "age_band",
+        "value": "55-64",
+        "n": 51,
+        "n_class1": 36,
+        "n_class2": 11,
+        "n_class3": 4,
+        "accuracy": 0.5686274509803921,
+        "balanced_accuracy": 0.3636363636363636,
+        "f1_macro": 0.33928571428571425,
+        "low_n_flag": false
+      },
+      {
+        "segment": "age_band",
+        "value": "65+",
+        "n": 29,
+        "n_class1": 19,
+        "n_class2": 8,
+        "n_class3": 2,
+        "accuracy": 0.4482758620689655,
+        "balanced_accuracy": 0.2280701754385965,
+        "f1_macro": 0.21666666666666667,
+        "low_n_flag": true
+      },
+      {
+        "segment": "educ",
+        "value": "1",
+        "n": 314,
+        "n_class1": 234,
+        "n_class2": 55,
+        "n_class3": 25,
+        "accuracy": 0.643312101910828,
+        "balanced_accuracy": 0.40819994819994826,
+        "f1_macro": 0.3934365439881338,
+        "low_n_flag": false
+      },
+      {
+        "segment": "educ",
+        "value": "2",
+        "n": 192,
+        "n_class1": 117,
+        "n_class2": 60,
+        "n_class3": 15,
+        "accuracy": 0.3385416666666667,
+        "balanced_accuracy": 0.433048433048433,
+        "f1_macro": 0.3208026588317216,
+        "low_n_flag": false
+      },
+      {
+        "segment": "educ",
+        "value": "3",
+        "n": 69,
+        "n_class1": 32,
+        "n_class2": 29,
+        "n_class3": 8,
+        "accuracy": 0.4057971014492754,
+        "balanced_accuracy": 0.4942528735632184,
+        "f1_macro": 0.3938239908714876,
+        "low_n_flag": false
+      },
+      {
+        "segment": "urbanicity",
+        "value": "1",
+        "n": 393,
+        "n_class1": 271,
+        "n_class2": 89,
+        "n_class3": 33,
+        "accuracy": 0.5292620865139949,
+        "balanced_accuracy": 0.4633113338283536,
+        "f1_macro": 0.3988675213675214,
+        "low_n_flag": false
+      },
+      {
+        "segment": "urbanicity",
+        "value": "2",
+        "n": 182,
+        "n_class1": 112,
+        "n_class2": 55,
+        "n_class3": 15,
+        "accuracy": 0.47802197802197804,
+        "balanced_accuracy": 0.42610028860028853,
+        "f1_macro": 0.3965330089976982,
+        "low_n_flag": false
+      },
+      {
+        "segment": "emp_in",
+        "value": "1",
+        "n": 357,
+        "n_class1": 220,
+        "n_class2": 103,
+        "n_class3": 34,
+        "accuracy": 0.4677871148459384,
+        "balanced_accuracy": 0.4690341449907412,
+        "f1_macro": 0.40662289805936536,
+        "low_n_flag": false
+      },
+      {
+        "segment": "emp_in",
+        "value": "2",
+        "n": 218,
+        "n_class1": 163,
+        "n_class2": 41,
+        "n_class3": 14,
+        "accuracy": 0.5871559633027523,
+        "balanced_accuracy": 0.39749755955052973,
+        "f1_macro": 0.3741868752092601,
+        "low_n_flag": false
+      },
+      {
+        "segment": "saved",
+        "value": "0",
+        "n": 316,
+        "n_class1": 238,
+        "n_class2": 61,
+        "n_class3": 17,
+        "accuracy": 0.6613924050632911,
+        "balanced_accuracy": 0.4102493456398953,
+        "f1_macro": 0.39346374906569753,
+        "low_n_flag": false
+      },
+      {
+        "segment": "saved",
+        "value": "1",
+        "n": 259,
+        "n_class1": 145,
+        "n_class2": 83,
+        "n_class3": 31,
+        "accuracy": 0.33204633204633205,
+        "balanced_accuracy": 0.4115576879263439,
+        "f1_macro": 0.3278368812446134,
+        "low_n_flag": false
+      },
+      {
+        "segment": "borrowed",
+        "value": "0",
+        "n": 184,
+        "n_class1": 116,
+        "n_class2": 45,
+        "n_class3": 23,
+        "accuracy": 0.40217391304347827,
+        "balanced_accuracy": 0.44899217058137597,
+        "f1_macro": 0.34495962127541074,
+        "low_n_flag": false
+      },
+      {
+        "segment": "borrowed",
+        "value": "1",
+        "n": 391,
+        "n_class1": 267,
+        "n_class2": 99,
+        "n_class3": 25,
+        "accuracy": 0.5652173913043478,
+        "balanced_accuracy": 0.41259788900238337,
+        "f1_macro": 0.40291604446656715,
+        "low_n_flag": false
+      }
+    ],
+    "class_weights_balanced": {
+      "1": 0.5004351610095735,
+      "2": 1.3333333333333333,
+      "3": 3.9723661485319517
+    },
+    "error_analysis": {
+      "n_test_errors": 280,
+      "error_pairs": {
+        "1->3": 81,
+        "1->2": 72,
+        "2->3": 58,
+        "2->1": 44,
+        "3->1": 15,
+        "3->2": 10
+      },
+      "representative": [
+        {
+          "age": 35,
+          "educ": 2,
+          "inc_q": 5,
+          "emp_in": 1,
+          "urbanicity": 1,
+          "saved": 1,
+          "borrowed": 0,
+          "true_class": 1,
+          "predicted_class": 3,
+          "confidence_in_prediction": 0.6936002871374475,
+          "p_true_class": 0.05364116311261631,
+          "ordinal_distance": 2,
+          "likely_cause": "Class weighting: training peers with same income quintile/saved/borrowed (n=102) split {1: 0.38, 2: 0.39, 3: 0.23}; class 3 carries 3.97x sample weight vs 0.50x for class 1, tipping a mixed segment toward the rarer class"
+        },
+        {
+          "age": 25,
+          "educ": 2,
+          "inc_q": 4,
+          "emp_in": 1,
+          "urbanicity": 2,
+          "saved": 1,
+          "borrowed": 1,
+          "true_class": 1,
+          "predicted_class": 2,
+          "confidence_in_prediction": 0.5592791195291381,
+          "p_true_class": 0.20684320177644777,
+          "ordinal_distance": 1,
+          "likely_cause": "Class weighting: training peers with same income quintile/saved/borrowed (n=153) split {1: 0.54, 2: 0.35, 3: 0.12}; class 2 carries 1.33x sample weight vs 0.50x for class 1, tipping a mixed segment toward the rarer class"
+        },
+        {
+          "age": 40,
+          "educ": 2,
+          "inc_q": 5,
+          "emp_in": 1,
+          "urbanicity": 1,
+          "saved": 1,
+          "borrowed": 0,
+          "true_class": 2,
+          "predicted_class": 3,
+          "confidence_in_prediction": 0.7017877015476369,
+          "p_true_class": 0.24434315404611048,
+          "ordinal_distance": 1,
+          "likely_cause": "Class weighting: training peers with same income quintile/saved/borrowed (n=102) split {1: 0.38, 2: 0.39, 3: 0.23}; class 3 carries 3.97x sample weight vs 1.33x for class 2, tipping a mixed segment toward the rarer class"
+        },
+        {
+          "age": 27,
+          "educ": 1,
+          "inc_q": 3,
+          "emp_in": 2,
+          "urbanicity": 2,
+          "saved": 0,
+          "borrowed": 1,
+          "true_class": 2,
+          "predicted_class": 1,
+          "confidence_in_prediction": 0.7080917223711913,
+          "p_true_class": 0.2051365354210015,
+          "ordinal_distance": 1,
+          "likely_cause": "Atypical for segment: training peers with same income quintile/saved/borrowed (n=166) split {1: 0.8, 2: 0.17, 3: 0.03}; model followed the segment majority"
+        },
+        {
+          "age": 32,
+          "educ": 1,
+          "inc_q": 1,
+          "emp_in": 1,
+          "urbanicity": 2,
+          "saved": 0,
+          "borrowed": 1,
+          "true_class": 3,
+          "predicted_class": 1,
+          "confidence_in_prediction": 0.7221111121482158,
+          "p_true_class": 0.0857392491009689,
+          "ordinal_distance": 2,
+          "likely_cause": "Atypical for segment: training peers with same income quintile/saved/borrowed (n=198) split {1: 0.9, 2: 0.08, 3: 0.02}; model followed the segment majority"
+        },
+        {
+          "age": 25,
+          "educ": 3,
+          "inc_q": 4,
+          "emp_in": 1,
+          "urbanicity": 2,
+          "saved": 1,
+          "borrowed": 1,
+          "true_class": 3,
+          "predicted_class": 2,
+          "confidence_in_prediction": 0.6000355121661204,
+          "p_true_class": 0.242808891052213,
+          "ordinal_distance": 1,
+          "likely_cause": "Weak signal: training peers with same income quintile/saved/borrowed (n=153) split {1: 0.54, 2: 0.35, 3: 0.12}; the 7 features do not separate these classes here"
+        },
+        {
+          "age": 65,
+          "educ": 2,
+          "inc_q": 4,
+          "emp_in": 1,
+          "urbanicity": 1,
+          "saved": 1,
+          "borrowed": 0,
+          "true_class": 1,
+          "predicted_class": 3,
+          "confidence_in_prediction": 0.5790337998268031,
+          "p_true_class": 0.099685845851308,
+          "ordinal_distance": 2,
+          "likely_cause": "Class weighting: training peers with same income quintile/saved/borrowed (n=66) split {1: 0.5, 2: 0.39, 3: 0.11}; class 3 carries 3.97x sample weight vs 0.50x for class 1, tipping a mixed segment toward the rarer class"
+        },
+        {
+          "age": 35,
+          "educ": 2,
+          "inc_q": 2,
+          "emp_in": 1,
+          "urbanicity": 2,
+          "saved": 1,
+          "borrowed": 1,
+          "true_class": 1,
+          "predicted_class": 2,
+          "confidence_in_prediction": 0.5406202517062026,
+          "p_true_class": 0.2697837155838948,
+          "ordinal_distance": 1,
+          "likely_cause": "Class weighting: training peers with same income quintile/saved/borrowed (n=84) split {1: 0.62, 2: 0.3, 3: 0.08}; class 2 carries 1.33x sample weight vs 0.50x for class 1, tipping a mixed segment toward the rarer class"
+        },
+        {
+          "age": 45,
+          "educ": 2,
+          "inc_q": 1,
+          "emp_in": 1,
+          "urbanicity": 1,
+          "saved": 1,
+          "borrowed": 0,
+          "true_class": 2,
+          "predicted_class": 3,
+          "confidence_in_prediction": 0.5916062813066817,
+          "p_true_class": 0.2502312811521869,
+          "ordinal_distance": 1,
+          "likely_cause": "Class weighting: training peers with same income quintile/saved/borrowed (n=18) split {1: 0.67, 2: 0.22, 3: 0.11}; class 3 carries 3.97x sample weight vs 1.33x for class 2, tipping a mixed segment toward the rarer class"
+        },
+        {
+          "age": 48,
+          "educ": 1,
+          "inc_q": 1,
+          "emp_in": 1,
+          "urbanicity": 1,
+          "saved": 0,
+          "borrowed": 1,
+          "true_class": 2,
+          "predicted_class": 1,
+          "confidence_in_prediction": 0.7008485987195651,
+          "p_true_class": 0.1573116938803586,
+          "ordinal_distance": 1,
+          "likely_cause": "Atypical for segment: training peers with same income quintile/saved/borrowed (n=198) split {1: 0.9, 2: 0.08, 3: 0.02}; model followed the segment majority"
+        }
+      ]
+    },
+    "confusion_matrix_best": [
+      [
+        230,
+        72,
+        81
+      ],
+      [
+        44,
+        42,
+        58
+      ],
+      [
+        15,
+        10,
+        23
+      ]
+    ],
+    "runtime_seconds": 91.60981440544128
+  },
+  "component2_recommender": {
+    "profiles": 375,
+    "grid": {
+      "risk": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "horizonMonths": [
+        6,
+        24,
+        60,
+        120,
+        240
+      ],
+      "goals": [
+        "emergency_fund",
+        "education",
+        "home_purchase",
+        "retirement",
+        "wealth_building"
+      ],
+      "financeTiers": [
+        "comfortable",
+        "tight",
+        "deficit"
+      ],
+      "finances": {
+        "comfortable": {
+          "monthlyIncome": 120000,
+          "monthlyExpenses": 50000,
+          "emiPayments": 5000,
+          "emiIncludedInExpenses": true,
+          "accessibleSavings": 800000,
+          "incomeStability": "stable",
+          "liquidityNeedMonths": 3
+        },
+        "tight": {
+          "monthlyIncome": 45000,
+          "monthlyExpenses": 38000,
+          "emiPayments": 9000,
+          "emiIncludedInExpenses": true,
+          "accessibleSavings": 40000,
+          "incomeStability": "irregular",
+          "liquidityNeedMonths": 1
+        },
+        "deficit": {
+          "monthlyIncome": 30000,
+          "monthlyExpenses": 32000,
+          "emiPayments": 6000,
+          "emiIncludedInExpenses": true,
+          "accessibleSavings": 10000,
+          "incomeStability": "irregular",
+          "liquidityNeedMonths": 1
+        }
+      },
+      "count": 375
+    },
+    "top_n": 6,
+    "profiles_with_recommendations": 375,
+    "recommendations_total": 2250,
+    "readiness_counts": {
+      "ready": 250,
+      "invest-later": 125
+    },
+    "readiness_by_tier": [
+      {
+        "tier": "comfortable",
+        "readiness": "ready",
+        "profiles": 125
+      },
+      {
+        "tier": "deficit",
+        "readiness": "invest-later",
+        "profiles": 125
+      },
+      {
+        "tier": "tight",
+        "readiness": "ready",
+        "profiles": 125
+      }
+    ],
+    "by_tier": [
+      {
+        "tier": "comfortable",
+        "profiles": 125,
+        "with_recommendations": 125,
+        "mean_recs": 6.0,
+        "mean_riskometer": 2.5573333333333337,
+        "mean_effective_risk": 2.8
+      },
+      {
+        "tier": "deficit",
+        "profiles": 125,
+        "with_recommendations": 125,
+        "mean_recs": 6.0,
+        "mean_riskometer": 1.8,
+        "mean_effective_risk": 1.8
+      },
+      {
+        "tier": "tight",
+        "profiles": 125,
+        "with_recommendations": 125,
+        "mean_recs": 6.0,
+        "mean_riskometer": 2.4133333333333336,
+        "mean_effective_risk": 2.4
+      }
+    ],
+    "coverage": {
+      "unique_funds_recommended": 25,
+      "active_catalog_funds": 8885,
+      "eligible_universe_funds": 2529,
+      "catalog_coverage_pct": 0.28137310073157007,
+      "eligible_universe_coverage_pct": 0.9885330170027679,
+      "unique_amcs_recommended": 16,
+      "eligible_universe_amcs": 46,
+      "catalog_amcs": 74,
+      "unique_subcategories_recommended": 4,
+      "subcategories_recommended": [
+        "Liquid Fund",
+        "Money Market Fund",
+        "Overnight Fund",
+        "Retirement Fund"
+      ],
+      "eligible_universe_subcategories": 22,
+      "catalog_subcategories": 75,
+      "unique_raw_category_labels_recommended": 15,
+      "recommendations_by_category_group": {
+        "Debt Scheme": 2162,
+        "Other Scheme": 88
+      },
+      "recommendations_by_pool": {
+        "liquid-debt-fund": 1760,
+        "savings-account": 402,
+        "retirement-oriented": 88
+      },
+      "eligible_universe_definition": "active funds passing at least one pool's hard rules with the horizon rule not binding"
+    },
+    "diversity_top_n": {
+      "n_recs": {
+        "mean": 6.0,
+        "min": 6.0,
+        "max": 6.0
+      },
+      "distinct_subcategories": {
+        "mean": 1.432,
+        "min": 1.0,
+        "max": 3.0
+      },
+      "distinct_raw_category_labels": {
+        "mean": 3.5893333333333333,
+        "min": 1.0,
+        "max": 6.0
+      },
+      "distinct_amcs": {
+        "mean": 5.642666666666667,
+        "min": 5.0,
+        "max": 6.0
+      },
+      "distinct_riskometer_levels": {
+        "mean": 1.064,
+        "min": 1.0,
+        "max": 2.0
+      },
+      "distinct_pools": {
+        "mean": 1.0426666666666666,
+        "min": 1.0,
+        "max": 2.0
+      },
+      "intra_list_diversity_subcategory": {
+        "mean": 0.2104888888888889,
+        "min": 0.0,
+        "max": 0.6
+      },
+      "intra_list_diversity_amc": {
+        "mean": 0.9761777777777779,
+        "min": 0.9333333333333333,
+        "max": 1.0
+      },
+      "equity_group_recs": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "pool_diagnostics_most_aggressive_profile": {
+      "profile": "comfortable-r5-h240-wealth_building",
+      "effectiveRiskLevel": 4,
+      "riskCapacity": {
+        "level": 4,
+        "maxRaw": 4
+      },
+      "eligiblePoolsConsulted": [
+        "retirement-oriented",
+        "equity-etf-direct",
+        "equity-index-fund",
+        "gold"
+      ],
+      "returnedScores": [
+        0.9449,
+        0.9167,
+        0.9158,
+        0.9125,
+        0.9116,
+        0.8967
+      ],
+      "returnedPools": [
+        "retirement-oriented",
+        "retirement-oriented",
+        "retirement-oriented",
+        "retirement-oriented",
+        "retirement-oriented",
+        "retirement-oriented"
+      ],
+      "pools": {
+        "savings-account": {
+          "riskBand": [
+            1,
+            2
+          ],
+          "eligibleFunds": 655,
+          "eligibleByRiskometer": {
+            "1": 242,
+            "2": 413
+          },
+          "best": {
+            "score": 0.84,
+            "schemeName": "BARODA BNP PARIBAS LIQUID FUND",
+            "riskometerLevel": 2,
+            "riskAlignmentFactor": 0.5
+          }
+        },
+        "fixed-deposit": {
+          "riskBand": [
+            1,
+            2
+          ],
+          "eligibleFunds": 459,
+          "eligibleByRiskometer": {
+            "2": 459
+          },
+          "best": {
+            "score": 0.8392,
+            "schemeName": "Bandhan Money Market  Fund",
+            "riskometerLevel": 2,
+            "riskAlignmentFactor": 0.5
+          }
+        },
+        "liquid-debt-fund": {
+          "riskBand": [
+            1,
+            3
+          ],
+          "eligibleFunds": 1307,
+          "eligibleByRiskometer": {
+            "1": 6,
+            "2": 864,
+            "3": 437
+          },
+          "best": {
+            "score": 0.9117,
+            "schemeName": "Franklin India Money Market Fund",
+            "riskometerLevel": 3,
+            "riskAlignmentFactor": 0.75
+          }
+        },
+        "equity-index-fund": {
+          "riskBand": [
+            3,
+            6
+          ],
+          "eligibleFunds": 655,
+          "eligibleByRiskometer": {
+            "6": 655
+          },
+          "best": {
+            "score": 0.7879,
+            "schemeName": "Parag Parikh Flexi Cap Fund",
+            "riskometerLevel": 6,
+            "riskAlignmentFactor": 0.5
+          }
+        },
+        "equity-etf-direct": {
+          "riskBand": [
+            4,
+            6
+          ],
+          "eligibleFunds": 774,
+          "eligibleByRiskometer": {
+            "6": 774
+          },
+          "best": {
+            "score": 0.7886,
+            "schemeName": "Kotak Mid Cap Fund",
+            "riskometerLevel": 6,
+            "riskAlignmentFactor": 0.5
+          }
+        },
+        "gold": {
+          "riskBand": [
+            4,
+            6
+          ],
+          "eligibleFunds": 20,
+          "eligibleByRiskometer": {
+            "5": 19,
+            "6": 1
+          },
+          "best": {
+            "score": 0.8942,
+            "schemeName": "Mirae Asset Gold ETF",
+            "riskometerLevel": 5,
+            "riskAlignmentFactor": 0.75
+          }
+        },
+        "retirement-oriented": {
+          "riskBand": [
+            3,
+            6
+          ],
+          "eligibleFunds": 94,
+          "eligibleByRiskometer": {
+            "4": 42,
+            "5": 4,
+            "6": 48
+          },
+          "best": {
+            "score": 0.9449,
+            "schemeName": "Aditya Birla Sun Life Retirement Fund-The 50s Plan",
+            "riskometerLevel": 4,
+            "riskAlignmentFactor": 1
+          }
+        }
+      }
+    },
+    "top_recommended_funds_share": {
+      "most_frequent_fund_share_of_profiles": 0.42133333333333334
+    },
+    "risk_alignment": {
+      "by_risk_tolerance": [
+        {
+          "risk": 1,
+          "profiles": 75,
+          "mean_effective_risk": 1.0,
+          "min_effective_risk": 1,
+          "max_effective_risk": 1,
+          "mean_riskometer": 1.088888888888889,
+          "min_riskometer": 1,
+          "max_riskometer": 2,
+          "mean_distinct_subcategories": 1.0
+        },
+        {
+          "risk": 2,
+          "profiles": 75,
+          "mean_effective_risk": 2.0,
+          "min_effective_risk": 2,
+          "max_effective_risk": 2,
+          "mean_riskometer": 2.0,
+          "min_riskometer": 2,
+          "max_riskometer": 2,
+          "mean_distinct_subcategories": 1.0
+        },
+        {
+          "risk": 3,
+          "profiles": 75,
+          "mean_effective_risk": 2.6666666666666665,
+          "min_effective_risk": 2,
+          "max_effective_risk": 3,
+          "mean_riskometer": 2.6666666666666665,
+          "min_riskometer": 2,
+          "max_riskometer": 3,
+          "mean_distinct_subcategories": 1.6666666666666667
+        },
+        {
+          "risk": 4,
+          "profiles": 75,
+          "mean_effective_risk": 3.0,
+          "min_effective_risk": 2,
+          "max_effective_risk": 4,
+          "mean_riskometer": 2.7644444444444445,
+          "min_riskometer": 2,
+          "max_riskometer": 4,
+          "mean_distinct_subcategories": 1.7466666666666666
+        },
+        {
+          "risk": 5,
+          "profiles": 75,
+          "mean_effective_risk": 3.0,
+          "min_effective_risk": 2,
+          "max_effective_risk": 4,
+          "mean_riskometer": 2.7644444444444445,
+          "min_riskometer": 2,
+          "max_riskometer": 4,
+          "mean_distinct_subcategories": 1.7466666666666666
+        }
+      ],
+      "mean_riskometer_non_decreasing_with_risk": true
+    },
+    "by_horizon": [
+      {
+        "horizon_months": 6,
+        "profiles": 75,
+        "mean_riskometer": 2.2,
+        "mean_distinct_subcategories": 1.4
+      },
+      {
+        "horizon_months": 24,
+        "profiles": 75,
+        "mean_riskometer": 2.2,
+        "mean_distinct_subcategories": 1.4
+      },
+      {
+        "horizon_months": 60,
+        "profiles": 75,
+        "mean_riskometer": 2.2444444444444445,
+        "mean_distinct_subcategories": 1.4
+      },
+      {
+        "horizon_months": 120,
+        "profiles": 75,
+        "mean_riskometer": 2.32,
+        "mean_distinct_subcategories": 1.48
+      },
+      {
+        "horizon_months": 240,
+        "profiles": 75,
+        "mean_riskometer": 2.32,
+        "mean_distinct_subcategories": 1.48
+      }
+    ],
+    "constraint_violations": 0,
+    "determinism": {
+      "profiles_identical_across_two_runs": 375,
+      "profiles": 375
+    },
+    "latency_in_process_ms": {
+      "calls": 750,
+      "p50": 22.833650000000034,
+      "p95": 48.53585999999994,
+      "mean": 26.37268266666666,
+      "max": 82.79740000000038,
+      "catalog_cold_load_ms": 1011.1292000000001,
+      "note": "generateRecommendation() called directly (no HTTP), catalog already loaded; numpy linear-interpolated percentiles"
+    },
+    "catalog_stats": {
+      "totalFundsInDataset": 38495,
+      "inactiveExcluded": 29610,
+      "activeFunds": 8885,
+      "fundsWithRiskometer": 8684,
+      "fundsWithTer": 7999,
+      "fundsWithNavMetrics": 8885,
+      "fundsWithHistoryOneYear": 7769,
+      "fundsWithHistoryThreeYear": 6280,
+      "fundsWithHistoryFiveYear": 4841,
+      "fundsWithHoldingsMetrics": 0,
+      "sourceManifest": {
+        "generated_from": {
+          "scheme_master": "wealthgenie-datasets\\scheme_master.csv.csv",
+          "scheme_details": "wealthgenie-datasets\\scheme_details.csv.csv",
+          "scheme_master_sha_note": "row-count identity, no hash on 38k rows needed for reproducibility"
+        },
+        "matchedDetailsRows": 11417,
+        "unmatchedMasterRows": 27078
+      }
+    },
+    "rerun_vs_previous_report": {
+      "previous_generated": "2026-11-02T20:13:19.118Z",
+      "rerun_generated": "2026-11-23T09:46:40.074Z",
+      "rows": [
+        {
+          "metric": "recommendations re-validated",
+          "previous": 216,
+          "rerun": 216,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "constraint violations",
+          "previous": 0,
+          "rerun": 0,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "determinism (all identical)",
+          "previous": true,
+          "rerun": true,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "payload bytes - conservative",
+          "previous": 26085,
+          "rerun": 26085,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "payload bytes - moderate",
+          "previous": 31543,
+          "rerun": 31543,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "payload bytes - aggressive",
+          "previous": 31517,
+          "rerun": 31517,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "top-N scheme codes - conservative",
+          "previous": "100814,119833,145481,145535,145810,146141",
+          "rerun": "100814,119833,145481,145535,145810,146141",
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "top-N scheme codes - moderate",
+          "previous": "101357,149661,100835,101893,100723,101847",
+          "rerun": "101357,149661,100835,101893,100723,101847",
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "top-N scheme codes - aggressive",
+          "previous": "146940,148687,133569,146716,101357,149661",
+          "rerun": "146940,148687,133569,146716,101357,149661",
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "catalog activeFunds",
+          "previous": 8885,
+          "rerun": 8885,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "catalog fundsWithRiskometer",
+          "previous": 8684,
+          "rerun": 8684,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "catalog fundsWithTer",
+          "previous": 7999,
+          "rerun": 7999,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "catalog fundsWithNavMetrics",
+          "previous": 8885,
+          "rerun": 8885,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "catalog fundsWithHistoryOneYear",
+          "previous": 7769,
+          "rerun": 7769,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "tests total",
+          "previous": 448,
+          "rerun": 484,
+          "kind": "changes when tests are added",
+          "match": false
+        },
+        {
+          "metric": "tests failed",
+          "previous": 0,
+          "rerun": 0,
+          "kind": "deterministic",
+          "match": true
+        },
+        {
+          "metric": "HTTP latency p50 ms - conservative",
+          "previous": 27,
+          "rerun": 26,
+          "kind": "timing (expected to vary)",
+          "match": false
+        },
+        {
+          "metric": "HTTP latency p95 ms - conservative",
+          "previous": 139,
+          "rerun": 192,
+          "kind": "timing (expected to vary)",
+          "match": false
+        },
+        {
+          "metric": "HTTP latency p50 ms - moderate",
+          "previous": 43,
+          "rerun": 34,
+          "kind": "timing (expected to vary)",
+          "match": false
+        },
+        {
+          "metric": "HTTP latency p95 ms - moderate",
+          "previous": 64,
+          "rerun": 64,
+          "kind": "timing (expected to vary)",
+          "match": true
+        },
+        {
+          "metric": "HTTP latency p50 ms - aggressive",
+          "previous": 54,
+          "rerun": 35,
+          "kind": "timing (expected to vary)",
+          "match": false
+        },
+        {
+          "metric": "HTTP latency p95 ms - aggressive",
+          "previous": 98,
+          "rerun": 62,
+          "kind": "timing (expected to vary)",
+          "match": false
+        }
+      ],
+      "deterministic_items_matching": 15,
+      "deterministic_items": 15,
+      "rerun_tests": {
+        "total": 484,
+        "passed": 484,
+        "failed": 0,
+        "suites": 110
+      },
+      "rerun_latency": {
+        "conservative": {
+          "coldMs": 192,
+          "warmMs": [
+            46,
+            36,
+            35,
+            29,
+            26,
+            23,
+            26,
+            28,
+            23,
+            22,
+            22
+          ],
+          "p50Ms": 26,
+          "p95Ms": 192,
+          "meanMs": 42.3
+        },
+        "moderate": {
+          "coldMs": 41,
+          "warmMs": [
+            31,
+            29,
+            31,
+            33,
+            64,
+            41,
+            49,
+            34,
+            35,
+            53,
+            32
+          ],
+          "p50Ms": 34,
+          "p95Ms": 64,
+          "meanMs": 39.4
+        },
+        "aggressive": {
+          "coldMs": 34,
+          "warmMs": [
+            62,
+            35,
+            42,
+            36,
+            37,
+            51,
+            41,
+            35,
+            35,
+            33,
+            34
+          ],
+          "p50Ms": 35,
+          "p95Ms": 62,
+          "meanMs": 39.6
+        }
+      }
+    }
+  },
+  "component3_money_checkup_whatif": {
+    "run_directory": "experiments/results/run-20261123T094623Z-seed-20261027",
+    "generated_at": "2026-11-23T09:46:23.796Z",
+    "seed": 20261027,
+    "as_of_date": "2026-10-27",
+    "profiles": 226,
+    "random_profiles": 200,
+    "edge_case_profiles": 26,
+    "checks": [
+      {
+        "check": "Formula correctness (14 core metrics vs independent reference)",
+        "passed": 22988,
+        "total": 22988,
+        "failed": 0,
+        "rate": 1
+      },
+      {
+        "check": "Goal calculations (11 fields)",
+        "passed": 18062,
+        "total": 18062,
+        "failed": 0,
+        "rate": 1
+      },
+      {
+        "check": "Recommendation trigger set (exact match)",
+        "passed": 1642,
+        "total": 1642,
+        "failed": 0,
+        "rate": 1
+      },
+      {
+        "check": "Recommendation per-ID decisions",
+        "passed": 11494,
+        "total": 11494,
+        "failed": 0,
+        "rate": 1
+      },
+      {
+        "check": "What-if scenario comparison",
+        "passed": 148680,
+        "total": 148680,
+        "failed": 0,
+        "rate": 1
+      },
+      {
+        "check": "Determinism (repeat runs identical)",
+        "passed": 1642,
+        "total": 1642,
+        "failed": 0,
+        "rate": 1
+      },
+      {
+        "check": "Directional invariants (applicable cases)",
+        "passed": 1172,
+        "total": 1172,
+        "failed": 0,
+        "rate": 1
+      },
+      {
+        "check": "Explainability coverage",
+        "passed": 261857,
+        "total": 261857,
+        "failed": 0,
+        "rate": 1
+      },
+      {
+        "check": "Validation - invalid inputs rejected with correct message",
+        "passed": 31,
+        "total": 31,
+        "failed": 0,
+        "rate": 1
+      },
+      {
+        "check": "Validation - valid inputs accepted",
+        "passed": 5,
+        "total": 5,
+        "failed": 0,
+        "rate": 1
+      }
+    ],
+    "invariants": [
+      {
+        "id": "income_up_surplus_non_decreasing",
+        "description": "Increasing monthly income, all else equal, must not reduce monthly surplus.",
+        "applicable": 226,
+        "passed": 226,
+        "not_applicable": 0
+      },
+      {
+        "id": "expenses_up_surplus_non_increasing",
+        "description": "Increasing monthly expenses, all else equal, must not increase monthly surplus.",
+        "applicable": 226,
+        "passed": 226,
+        "not_applicable": 0
+      },
+      {
+        "id": "savings_up_coverage_non_decreasing",
+        "description": "Increasing accessible savings, all else equal, must not reduce living-expense coverage.",
+        "applicable": 208,
+        "passed": 208,
+        "not_applicable": 18
+      },
+      {
+        "id": "shock_up_post_shock_non_increasing",
+        "description": "Increasing the one-time unexpected expense, all else equal, must not increase post-shock savings.",
+        "applicable": 226,
+        "passed": 226,
+        "not_applicable": 0
+      },
+      {
+        "id": "contribution_up_months_non_increasing",
+        "description": "Increasing a positive goal contribution must not increase the projected months to an unfunded goal.",
+        "applicable": 60,
+        "passed": 60,
+        "not_applicable": 166
+      },
+      {
+        "id": "emi_included_up_surplus_unchanged",
+        "description": "When EMI is already included in expenses, increasing EMI must not change outflows or surplus.",
+        "applicable": 208,
+        "passed": 208,
+        "not_applicable": 18
+      },
+      {
+        "id": "emi_separate_up_surplus_non_increasing",
+        "description": "When EMI is paid separately, increasing EMI must not increase monthly surplus.",
+        "applicable": 18,
+        "passed": 18,
+        "not_applicable": 208
+      }
+    ],
+    "synthetic_only": true
+  },
+  "component5_paper_trading_and_simulation": {
+    "xirr": {
+      "tolerance_pct_points": 0.005,
+      "day_count": "actual/365.25 (the app's MS_PER_YEAR); actual/365 (Excel XIRR) shown for reference",
+      "cases": [
+        {
+          "case": "two_flow_gain_leap_year",
+          "description": "-10,000 then +11,000 one calendar year later (366 days, 2020 leap year)",
+          "n_flows": 2,
+          "app_xirr_pct": 9.98,
+          "reference_xirr_pct_365_25": 9.978518,
+          "reference_xirr_pct_365_excel": 9.971359,
+          "reference_method": "closed form (FV/PV)^(1/t) - 1",
+          "abs_error_pct_points": 0.0014817541602933915,
+          "pass": true
+        },
+        {
+          "case": "two_flow_two_years",
+          "description": "-10,000 then +12,100 two calendar years later (730 days)",
+          "n_flows": 2,
+          "app_xirr_pct": 10.01,
+          "reference_xirr_pct_365_25": 10.007181,
+          "reference_xirr_pct_365_excel": 10.0,
+          "reference_method": "closed form (FV/PV)^(1/t) - 1",
+          "abs_error_pct_points": 0.002818861648938409,
+          "pass": true
+        },
+        {
+          "case": "two_flow_loss",
+          "description": "-10,000 then +8,000 one calendar year later (365 days)",
+          "n_flows": 2,
+          "app_xirr_pct": -20.01,
+          "reference_xirr_pct_365_25": -20.012226,
+          "reference_xirr_pct_365_excel": -20.0,
+          "reference_method": "closed form (FV/PV)^(1/t) - 1",
+          "abs_error_pct_points": 0.0022261095764584127,
+          "pass": true
+        },
+        {
+          "case": "three_flow_staggered",
+          "description": "-1,000, -1,000 a year later, +2,310 two years after start",
+          "n_flows": 3,
+          "app_xirr_pct": 10.01,
+          "reference_xirr_pct_365_25": 10.007181,
+          "reference_xirr_pct_365_excel": 10.0,
+          "reference_method": "scipy brentq root of NPV",
+          "abs_error_pct_points": 0.0028188616487678786,
+          "pass": true
+        },
+        {
+          "case": "monthly_sip_12",
+          "description": "12 monthly -1,000 contributions in 2023, +13,000 on 2024-01-01",
+          "n_flows": 13,
+          "app_xirr_pct": 15.68,
+          "reference_xirr_pct_365_25": 15.681369,
+          "reference_xirr_pct_365_excel": 15.669835,
+          "reference_method": "scipy brentq root of NPV",
+          "abs_error_pct_points": 0.0013685598967612123,
+          "pass": true
+        },
+        {
+          "case": "invalid_no_inflow",
+          "description": "only outflows: XIRR undefined, app must return null",
+          "n_flows": 2,
+          "app_xirr_pct": null,
+          "reference_xirr_pct_365_25": null,
+          "reference_xirr_pct_365_excel": null,
+          "reference_method": "undefined (no sign change)",
+          "abs_error_pct_points": null,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "total": 6
+    },
+    "paper_trading_ledger": {
+      "ops": [
+        {
+          "op": "buyAt",
+          "quantity": 10,
+          "price": 250.5,
+          "expected": {
+            "ok": true,
+            "error": null,
+            "tradeTotal": 2505.0,
+            "cash": 97495.0,
+            "holdingQty": 10,
+            "avgCost": 250.5,
+            "realizedPnl": null
+          },
+          "app": {
+            "ok": true,
+            "error": null,
+            "tradeTotal": 2505,
+            "cash": 97495,
+            "holdingQty": 10,
+            "avgCost": 250.5,
+            "realizedPnl": null,
+            "totalEquity": 99995,
+            "holdingsValue": 2500
+          },
+          "fields_checked": 9,
+          "fields_passed": 9,
+          "pass": true
+        },
+        {
+          "op": "buyAt",
+          "quantity": 5,
+          "price": 260,
+          "expected": {
+            "ok": true,
+            "error": null,
+            "tradeTotal": 1300.0,
+            "cash": 96195.0,
+            "holdingQty": 15,
+            "avgCost": 253.67,
+            "realizedPnl": null
+          },
+          "app": {
+            "ok": true,
+            "error": null,
+            "tradeTotal": 1300,
+            "cash": 96195,
+            "holdingQty": 15,
+            "avgCost": 253.67,
+            "realizedPnl": null,
+            "totalEquity": 99945,
+            "holdingsValue": 3750
+          },
+          "fields_checked": 9,
+          "fields_passed": 9,
+          "pass": true
+        },
+        {
+          "op": "sellAt",
+          "quantity": 8,
+          "price": 270,
+          "expected": {
+            "ok": true,
+            "error": null,
+            "tradeTotal": 2160.0,
+            "cash": 98355.0,
+            "holdingQty": 7,
+            "avgCost": 253.67,
+            "realizedPnl": 130.64
+          },
+          "app": {
+            "ok": true,
+            "error": null,
+            "tradeTotal": 2160,
+            "cash": 98355,
+            "holdingQty": 7,
+            "avgCost": 253.67,
+            "realizedPnl": 130.64,
+            "totalEquity": 100105,
+            "holdingsValue": 1750
+          },
+          "fields_checked": 9,
+          "fields_passed": 9,
+          "pass": true
+        },
+        {
+          "op": "sellAt",
+          "quantity": 50,
+          "price": 270,
+          "expected": {
+            "ok": false,
+            "error": "Insufficient holdings."
+          },
+          "app": {
+            "ok": false,
+            "error": "Insufficient holdings.",
+            "tradeTotal": null,
+            "cash": null,
+            "holdingQty": null,
+            "avgCost": null,
+            "realizedPnl": null,
+            "totalEquity": null,
+            "holdingsValue": null
+          },
+          "fields_checked": 2,
+          "fields_passed": 2,
+          "pass": true
+        },
+        {
+          "op": "buyAt",
+          "quantity": 100000,
+          "price": 270,
+          "expected": {
+            "ok": false,
+            "error": "Insufficient virtual cash."
+          },
+          "app": {
+            "ok": false,
+            "error": "Insufficient virtual cash.",
+            "tradeTotal": null,
+            "cash": null,
+            "holdingQty": null,
+            "avgCost": null,
+            "realizedPnl": null,
+            "totalEquity": null,
+            "holdingsValue": null
+          },
+          "fields_checked": 2,
+          "fields_passed": 2,
+          "pass": true
+        },
+        {
+          "op": "buyAt",
+          "quantity": 1.5,
+          "price": 270,
+          "expected": {
+            "ok": false,
+            "error": "Quantity must be a positive whole number."
+          },
+          "app": {
+            "ok": false,
+            "error": "Quantity must be a positive whole number.",
+            "tradeTotal": null,
+            "cash": null,
+            "holdingQty": null,
+            "avgCost": null,
+            "realizedPnl": null,
+            "totalEquity": null,
+            "holdingsValue": null
+          },
+          "fields_checked": 2,
+          "fields_passed": 2,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "total": 6,
+      "fields_passed": 33,
+      "fields_checked": 33
+    },
+    "historical_sip": {
+      "series": {
+        "start": "2023-01-01",
+        "end": "2024-01-01",
+        "rule": "nav_i = round(100 + 0.05*i, 4), i = days since 2023-01-01",
+        "points": 366
+      },
+      "checks": {
+        "installments": {
+          "app": 13,
+          "reference": 13,
+          "pass": true
+        },
+        "total_invested": {
+          "app": 13000,
+          "reference": 13000,
+          "pass": true
+        },
+        "units_accumulated_4dp": {
+          "app": 119.4956,
+          "reference": 119.4956,
+          "pass": true
+        },
+        "portfolio_value_rounded_to_rupee": {
+          "app": 14130,
+          "reference": 14130.0,
+          "pass": true
+        },
+        "xirr_within_0.01pp": {
+          "app": 17.77,
+          "reference": 17.7751,
+          "pass": true
+        }
+      },
+      "passed": 5,
+      "total": 5,
+      "unrounded_reference_portfolio_value": 14130.357778046984,
+      "note": "The app rounds portfolio value to whole rupees (historicalSimulation.js Math.round) and units to 4 dp; both are compared exactly after the same rounding."
+    }
+  },
+  "not_computed": [
+    {
+      "item": "Precision@k, Recall@k, NDCG@k, MAP, hit rate for the recommender",
+      "reason": "no ground-truth relevance labels or user-fund interactions exist in the repository",
+      "needed": "expert relevance ratings (e.g. 2-3 raters grading the top-6 funds for 20-30 profiles) or logged user interactions"
+    },
+    {
+      "item": "Answer quality / faithfulness of Gemini lesson generation and narrator",
+      "reason": "no reference answers exist and Gemini calls were out of scope (no paid APIs)",
+      "needed": "a reference set of curated lessons with expected key facts, plus generated outputs to compare against"
+    },
+    {
+      "item": "Retrieval metrics (Recall@k, MRR)",
+      "reason": "the system has no retrieval / RAG component",
+      "needed": "n/a"
+    },
+    {
+      "item": "Backtest (Sharpe, drawdown, win rate)",
+      "reason": "the system makes no buy/sell or allocation decisions; users place practice trades themselves",
+      "needed": "n/a"
+    },
+    {
+      "item": "Real-world accuracy of the Money Check-up / What-if Planner",
+      "reason": "rule-based formulas evaluated only on synthetic profiles; no outcome labels",
+      "needed": "longitudinal user outcome data"
+    }
+  ]
+}

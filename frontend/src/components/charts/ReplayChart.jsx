@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { normalizeCandles } from '../../utils/candles';
 import {
   createChart,
   CandlestickSeries,
@@ -21,56 +22,7 @@ const FORMATTER = new Intl.NumberFormat('en-IN', {
  * the library throws on out-of-order or duplicate timestamps (the earlier
  * version passed the array straight through, so one bad row blanked the chart).
  */
-export function normalizeCandles(candles) {
-  if (!Array.isArray(candles)) return [];
-  const rows = [];
-  for (const c of candles) {
-    let time;
-    if (typeof c?.date === 'string') {
-      const date = c.date.slice(0, 10);
-      if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-        time = date;
-      } else {
-        // Intraday timestamps (e.g. live 1-minute buckets) become seconds.
-        const parsed = Date.parse(c.date);
-        if (!Number.isFinite(parsed)) continue;
-        time = Math.floor(parsed / 1000);
-      }
-    } else if (Number.isFinite(Number(c?.date))) {
-      time = Math.floor(Number(c.date) / 1000);
-    } else {
-      continue;
-    }
-    const open = Number(c.open);
-    const high = Number(c.high);
-    const low = Number(c.low);
-    const close = Number(c.close);
-    if (![open, high, low, close].every(Number.isFinite)) continue;
-    rows.push({
-      time,
-      open,
-      high,
-      low,
-      close,
-      volume: Number(c.volume) > 0 ? Number(c.volume) : null,
-    });
-  }
-  rows.sort((a, b) => a.time - b.time);
-  // Merge duplicate timestamps (the library throws otherwise).
-  const merged = [];
-  for (const row of rows) {
-    const last = merged[merged.length - 1];
-    if (last && last.time === row.time) {
-      last.high = Math.max(last.high, row.high);
-      last.low = Math.min(last.low, row.low);
-      last.close = row.close;
-      if (row.volume !== null) last.volume = row.volume;
-    } else {
-      merged.push({ ...row });
-    }
-  }
-  return merged;
-}
+export { normalizeCandles };
 
 export default function ReplayChart({ candles, chartType = 'candle', heightClass = 'h-72 sm:h-[420px]' }) {
   const containerRef = useRef(null);
@@ -143,7 +95,7 @@ export default function ReplayChart({ candles, chartType = 'candle', heightClass
       if (!el) return;
       const bar = param?.seriesData?.get(candleSeries) || param?.seriesData?.get(lineSeries);
       if (!bar || bar.open === undefined) {
-        el.textContent = 'Hover the chart for OHLC details';
+        el.textContent = 'Hover the chart to see prices';
         return;
       }
       const isUp = bar.close >= bar.open;
@@ -217,7 +169,7 @@ export default function ReplayChart({ candles, chartType = 'candle', heightClass
         ref={legendRef}
         className="px-1 text-[11px] font-semibold text-slate-500"
       >
-        Hover the chart for OHLC details
+        Hover the chart to see prices
       </div>
       <div className={`relative w-full ${heightClass}`}>
         <div ref={containerRef} className="absolute inset-0" />

@@ -35,6 +35,7 @@ import {
 import Card from '../components/common/Card';
 import Badge from '../components/common/Badge';
 import { formatINR } from '../utils/formatters';
+import { apiUrl } from '../lib/api';
 import { assessmentGoalLabel, formatAssessmentDate } from '../utils/assessmentDisplay';
 import { useUserData } from '../context/UserDataContext';
 import {
@@ -877,7 +878,7 @@ function PersonalizedGuidance({ snapshot, onNavigate }) {
               className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:border-slate-300"
             >
               <Sparkles className="w-3 h-3" />
-              Compare scenarios in the Digital Twin
+              Compare plans in the What-if Planner
               <ArrowRight className="w-3 h-3" />
             </button>
             <p className="text-[10px] text-slate-500 flex-1 min-w-0">{result.disclaimer}</p>
@@ -946,7 +947,7 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
 
   // Fetch verified data sources registry from backend
   useEffect(() => {
-    fetch('/api/investments/sources')
+    fetch(apiUrl('/api/investments/sources'))
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -964,7 +965,7 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
   // Fetch verified AMFI mutual fund schemes from backend
   useEffect(() => {
     let cancelled = false;
-    fetch('/api/investments/mutual-funds')
+    fetch(apiUrl('/api/investments/mutual-funds'))
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -1004,7 +1005,7 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
   // Fetch genuine historical TRI data from backend
   useEffect(() => {
     setHistoricalStatus('loading');
-    fetch('/api/investments/historical')
+    fetch(apiUrl('/api/investments/historical'))
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -1130,7 +1131,7 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
       setSimError(null);
       setSimResult(null);
 
-      fetch(endpoint, {
+      fetch(apiUrl(endpoint), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -1353,15 +1354,15 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
       <div>
         <div className="flex items-center gap-2 text-xs font-semibold text-genie-700 uppercase tracking-wider mb-1">
           <TrendingUp className="w-3.5 h-3.5" />
-          <span>Personalized Investment Planner &bull; Educational Scenarios</span>
+          <span>Learn before you invest</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-navy-950 tracking-tight">
           Explore Investments
         </h1>
         <p className="text-sm text-slate-600 mt-1 max-w-3xl leading-relaxed">
-          Turn your saved financial assessment into transparent investment scenarios,
-          then compare them with verified historical market data. Projections are
-          hypothetical illustrations, not forecasts or regulated advice.
+          See how regular investing could grow using your own numbers, and how real
+          Indian market indexes have behaved in the past. Everything here is an
+          illustration for learning, not a prediction or advice.
         </p>
       </div>
 
@@ -1376,7 +1377,7 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
         {userDataLoading ? (
           <div className="flex items-center gap-3 text-xs text-slate-600">
             <Loader2 className="w-4 h-4 animate-spin text-genie-600" />
-            <span>Loading your latest financial assessment…</span>
+            <span>Loading your latest money check-up…</span>
           </div>
         ) : snapshot ? (
           <div className="flex flex-col sm:flex-row sm:items-center gap-3">
@@ -1388,7 +1389,7 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
                 <p className="text-sm font-bold text-navy-950">
                   Connected to your latest financial assessment
                 </p>
-                <Badge variant="green" size="xs">Assessment data</Badge>
+                <Badge variant="green" size="xs">Your numbers</Badge>
               </div>
               <p className="text-[11px] text-slate-600 mt-0.5">
                 Saved {formatAssessmentDate(snapshot.createdAt) || 'recently'}. The
@@ -1411,11 +1412,11 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-bold text-navy-950">
-                No saved financial assessment found
+                No money check-up saved yet
               </p>
               <p className="text-[11px] text-slate-600 mt-0.5">
                 Personal surplus, emergency coverage, and goal comparisons stay empty
-                until you save an assessment. You can still explore hypothetical
+                until you do a money check-up. You can still explore hypothetical
                 contributions below; WealthGenie will not invent personal figures.
               </p>
               {userDataError && (
@@ -1442,7 +1443,7 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
               Your financial snapshot
             </h2>
             <span className="text-[11px] text-slate-500">
-              From your saved assessment &bull; nothing inferred
+              From your latest money check-up
             </span>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
@@ -1463,7 +1464,7 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
               value={formatOptionalINR(snapshot.monthlySurplus)}
               hint={
                 !hasSurplusValue
-                  ? 'Not available in this assessment'
+                  ? 'Not in your check-up'
                   : hasPositiveSurplus
                     ? 'Available before investing'
                     : 'No positive surplus'
@@ -1830,8 +1831,8 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
             <Info className="w-5 h-5 text-slate-400 shrink-0" />
             <p className="text-xs text-slate-600 flex-1">
               {snapshot
-                ? 'Your saved assessment does not include a goal target, so there is nothing to compare yet.'
-                : 'Save a financial assessment with a goal target to see whether your projected corpus closes the gap.'}
+                ? 'Your money check-up does not include a goal amount, so there is nothing to compare yet.'
+                : 'Do a money check-up with a goal amount to see whether this plan would reach it.'}
             </p>
             <button
               type="button"
@@ -2195,8 +2196,8 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
                 {historicalStatus === 'loading'
                   ? 'Connecting to verified historical dataset…'
                   : historicalStatus === 'error'
-                    ? 'The backend could not be reached, so no market values are shown. Start the API server and retry; WealthGenie never substitutes fabricated chart points or returns.'
-                    : 'WealthGenie does not fabricate market values, inject random chart points, or present fake historical returns. To connect real historical data, run "npm run import:nifty" or import a manual CSV.'}
+                    ? 'Past market data could not be loaded right now. Please try again in a moment. We never show made-up numbers in its place.'
+                    : 'Past market data is not available yet. We never show made-up numbers in its place.'}
               </p>
 
               {historicalStatus !== 'loading' && (

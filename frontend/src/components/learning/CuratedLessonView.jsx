@@ -149,7 +149,6 @@ export default function CuratedLessonView({
   isCompleted,
   onComplete,
   onQuizProgress,
-  onAskGenie,
   onClose,
 }) {
   const { lesson, sources, review, contentVersion } = entry || {};
@@ -227,7 +226,7 @@ export default function CuratedLessonView({
     if (!result?.ok) {
       setCompletionError(
         result?.reason === 'prerequisites-incomplete'
-          ? 'A prerequisite is still incomplete. Refresh the roadmap and try again.'
+          ? 'An earlier lesson is not finished yet. Please refresh the page and try again.'
           : 'This concept could not be marked complete.'
       );
       return;
@@ -434,16 +433,6 @@ export default function CuratedLessonView({
           </button>
         )}
 
-        {onAskGenie && (
-          <button
-            type="button"
-            onClick={() => onAskGenie(safeLesson.title)}
-            className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-genie-200 bg-genie-50 px-3 py-2 text-xs font-semibold text-genie-800 hover:bg-genie-100"
-          >
-            <ShieldCheck className="h-3.5 w-3.5" />
-            Ask AI Tutor more (optional)
-          </button>
-        )}
       </div>
 
       <p className="text-[10px] leading-relaxed text-slate-400">{safeLesson.disclaimer}</p>

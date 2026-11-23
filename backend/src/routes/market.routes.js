@@ -25,7 +25,9 @@ router.get('/instruments', (req, res) => {
 
 /** Rolling 1-minute candles aggregated from live ticks. */
 router.get('/candles/:instrumentKey', (req, res) => {
-  const instrumentKey = decodeURIComponent(req.params.instrumentKey);
+  // Express has already percent-decoded route params; decoding again throws a
+  // URIError (500) for any key containing a literal '%'.
+  const { instrumentKey } = req.params;
   res.json({
     status: 'success',
     instrumentKey,

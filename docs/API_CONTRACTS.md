@@ -21,35 +21,14 @@ Returns system status and configuration state.
 
 ---
 
-## 2. AI Tutor Endpoint
+## 2. AI Status Endpoint
 
-### `POST /api/ai/chat`
-Sends a user query to the AI Financial Tutor.
+### `GET /api/ai/status`
+Reports whether optional AI lesson generation (`POST /api/learn/lesson`) is available. The free-form AI chat endpoint (`POST /api/ai/chat`) has been removed; it now returns 404.
 
-**Request Body:**
+**Response (200 OK):**
 ```json
-{
-  "message": "What is an index fund and how is it different from an active mutual fund?",
-  "history": []
-}
-```
-
-**Response (When Configured - 200 OK):**
-```json
-{
-  "status": "success",
-  "reply": "An **Index Fund** is a type of mutual fund that passively tracks a specific benchmark...",
-  "disclaimer": "WealthGenie provides educational content for financial literacy and does not constitute certified financial or investment advice."
-}
-```
-
-**Response (When Unconfigured - 503 Service Unavailable):**
-```json
-{
-  "status": "unconfigured",
-  "error": "AI Tutor service is not configured. Please set GEMINI_API_KEY in the backend .env file.",
-  "setupRequired": true
-}
+{ "isConfigured": true, "provider": "gemini", "status": "ready", "message": "AI lesson generation is ready." }
 ```
 
 ---
@@ -170,7 +149,7 @@ Generates one structured lesson through the backend Gemini integration. The API 
     }
   },
   "provider": "gemini",
-  "model": "gemini-1.5-flash",
+  "model": "gemini-3.5-flash",
   "generatedAt": "2026-10-25T08:00:00.000Z",
   "disclaimer": "WealthGenie provides educational content for financial literacy and does not constitute certified financial or investment advice."
 }
@@ -460,3 +439,18 @@ Runs a deterministic monthly SIP back-test using genuine AMFI NAV observations f
 - Ending value uses the last available observation on or before the requested end date; the actual valuation date is returned in `endDate`.
 - `monthlySnapshots` contains contribution dates only. `portfolioSeries` additionally includes the final valuation date and is intended for charting.
 - Annualized return uses XIRR over actual dated cash flows and is `null` when the numerical solve does not converge.
+
+---
+
+## Practice (Paper) Trading Endpoints
+
+All `/api/paper-trading/*` routes except `GET /instruments` require `Authorization: Bearer <Supabase access token>`. Each signed-in user has a private virtual account (₹1,00,000 starting cash) and a private historical-replay session, keyed by the verified user id. Requests without a valid token return `401`.
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/api/paper-trading/instruments` | Public instrument list with live/practice price labels |
+| POST | `/api/paper-trading/init` | Create the caller's account if missing (`status: initialized` or `exists`) |
+| POST | `/api/paper-trading/buy` · `/sell` | `{ symbol, quantity, allowStale? }` |
+| GET | `/api/paper-trading/portfolio` · `/history` | The caller's holdings and trades |
+| POST | `/api/paper-trading/replay/start` · `/replay/next` · `/replay/trade` · `/replay/hold` | Historical replay for the caller |
+| GET | `/api/paper-trading/replay` | Current replay session |

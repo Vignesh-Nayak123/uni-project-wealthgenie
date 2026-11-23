@@ -1,0 +1,23 @@
+metric,previous,rerun,kind,match
+recommendations re-validated,216,216,deterministic,True
+constraint violations,0,0,deterministic,True
+determinism (all identical),True,True,deterministic,True
+payload bytes - conservative,26085,26085,deterministic,True
+payload bytes - moderate,31543,31543,deterministic,True
+payload bytes - aggressive,31517,31517,deterministic,True
+top-N scheme codes - conservative,"100814,119833,145481,145535,145810,146141","100814,119833,145481,145535,145810,146141",deterministic,True
+top-N scheme codes - moderate,"101357,149661,100835,101893,100723,101847","101357,149661,100835,101893,100723,101847",deterministic,True
+top-N scheme codes - aggressive,"146940,148687,133569,146716,101357,149661","146940,148687,133569,146716,101357,149661",deterministic,True
+catalog activeFunds,8885,8885,deterministic,True
+catalog fundsWithRiskometer,8684,8684,deterministic,True
+catalog fundsWithTer,7999,7999,deterministic,True
+catalog fundsWithNavMetrics,8885,8885,deterministic,True
+catalog fundsWithHistoryOneYear,7769,7769,deterministic,True
+tests total,448,484,changes when tests are added,False
+tests failed,0,0,deterministic,True
+HTTP latency p50 ms - conservative,27,26,timing (expected to vary),False
+HTTP latency p95 ms - conservative,139,192,timing (expected to vary),False
+HTTP latency p50 ms - moderate,43,34,timing (expected to vary),False
+HTTP latency p95 ms - moderate,64,64,timing (expected to vary),True
+HTTP latency p50 ms - aggressive,54,35,timing (expected to vary),False
+HTTP latency p95 ms - aggressive,98,62,timing (expected to vary),False

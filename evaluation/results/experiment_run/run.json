@@ -1,0 +1,5962 @@
+{
+  "meta": {
+    "phase": "Phase 4",
+    "experimentVersion": "1.0.0",
+    "schemaVersion": "1.0.0",
+    "seed": 20261027,
+    "asOfDate": "2026-10-27",
+    "thresholds": {
+      "lowMandatoryCoverageMonths": 3,
+      "highEmiBurdenPct": 40
+    },
+    "syntheticOnly": true,
+    "realData": false
+  },
+  "config": {
+    "experimentVersion": "1.0.0",
+    "seed": 20261027,
+    "profiles": 200,
+    "includeEdgeCases": true,
+    "asOfDate": "2026-10-27",
+    "thresholds": {
+      "lowMandatoryCoverageMonths": 3,
+      "highEmiBurdenPct": 40
+    }
+  },
+  "results": {
+    "formula": {
+      "overall": {
+        "passed": 22988,
+        "total": 22988,
+        "failed": 0,
+        "rate": 1
+      },
+      "baseline": {
+        "passed": 3164,
+        "total": 3164,
+        "failed": 0,
+        "rate": 1
+      },
+      "scenario": {
+        "passed": 19824,
+        "total": 19824,
+        "failed": 0,
+        "rate": 1
+      },
+      "byKey": {
+        "monthlyIncome": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1642,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "monthlyExpenses": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1642,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "accessibleSavings": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1642,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "emiPayments": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1642,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "emiIncludedInExpenses": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 0,
+            "maxAbsError": 0,
+            "meanAbsError": null,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "unexpectedExpense": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1642,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "monthlyOutflows": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1642,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "monthlySurplus": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1642,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "savingsRatePct": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1545,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "livingExpenseCoverageMonths": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1551,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "mandatoryOutflowCoverageMonths": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1551,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "emiBurdenPct": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1545,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "postShockSavings": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1642,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "unfundedShock": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1642,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        }
+      }
+    },
+    "formulaAlias": {
+      "passed": 1642,
+      "total": 1642,
+      "failed": 0,
+      "rate": 1
+    },
+    "goal": {
+      "overall": {
+        "passed": 18062,
+        "total": 18062,
+        "failed": 0,
+        "rate": 1
+      },
+      "baseline": {
+        "passed": 2486,
+        "total": 2486,
+        "failed": 0,
+        "rate": 1
+      },
+      "scenario": {
+        "passed": 15576,
+        "total": 15576,
+        "failed": 0,
+        "rate": 1
+      },
+      "byKey": {
+        "targetAmount": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 480,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "currentGoalSavings": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1642,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "remainingAmount": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 480,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "assumedMonthlyContribution": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 1642,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "estimatedMonths": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 375,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "unreachable": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 0,
+            "maxAbsError": 0,
+            "meanAbsError": null,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "requestedTimelineMonths": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 280,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "requiredMonthlyContributionForTimeline": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 280,
+            "maxAbsError": 0,
+            "meanAbsError": 0,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "onTrackForRequestedTimeline": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 0,
+            "maxAbsError": 0,
+            "meanAbsError": null,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "goalAchieved": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 0,
+            "maxAbsError": 0,
+            "meanAbsError": null,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        },
+        "estimatedCompletionDate": {
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          },
+          "errors": {
+            "numericAssertions": 0,
+            "maxAbsError": 0,
+            "meanAbsError": null,
+            "nullMismatches": 0,
+            "mismatches": 0
+          }
+        }
+      }
+    },
+    "goalContext": {
+      "overall": {
+        "passed": 1642,
+        "total": 1642,
+        "failed": 0,
+        "rate": 1
+      },
+      "baseline": {
+        "passed": 226,
+        "total": 226,
+        "failed": 0,
+        "rate": 1
+      },
+      "scenario": {
+        "passed": 1416,
+        "total": 1416,
+        "failed": 0,
+        "rate": 1
+      }
+    },
+    "recommendation": {
+      "exact": {
+        "overall": {
+          "passed": 1642,
+          "total": 1642,
+          "failed": 0,
+          "rate": 1
+        },
+        "baseline": {
+          "passed": 226,
+          "total": 226,
+          "failed": 0,
+          "rate": 1
+        },
+        "scenario": {
+          "passed": 1416,
+          "total": 1416,
+          "failed": 0,
+          "rate": 1
+        }
+      },
+      "decisions": {
+        "overall": {
+          "passed": 11494,
+          "total": 11494,
+          "failed": 0,
+          "rate": 1
+        },
+        "baseline": {
+          "passed": 1582,
+          "total": 1582,
+          "failed": 0,
+          "rate": 1
+        },
+        "scenario": {
+          "passed": 9912,
+          "total": 9912,
+          "failed": 0,
+          "rate": 1
+        }
+      },
+      "severity": {
+        "overall": {
+          "passed": 1643,
+          "total": 1643,
+          "failed": 0,
+          "rate": 1
+        },
+        "baseline": {
+          "passed": 195,
+          "total": 195,
+          "failed": 0,
+          "rate": 1
+        },
+        "scenario": {
+          "passed": 1448,
+          "total": 1448,
+          "failed": 0,
+          "rate": 1
+        }
+      },
+      "unknownIds": {
+        "overall": {
+          "passed": 1642,
+          "total": 1642,
+          "failed": 0,
+          "rate": 1
+        },
+        "baseline": {
+          "passed": 226,
+          "total": 226,
+          "failed": 0,
+          "rate": 1
+        },
+        "scenario": {
+          "passed": 1416,
+          "total": 1416,
+          "failed": 0,
+          "rate": 1
+        }
+      },
+      "byId": {
+        "deficit": {
+          "expected": 345,
+          "actual": 345,
+          "truePositives": 345,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 1297,
+          "total": 1642,
+          "agreement": 1,
+          "precision": 1,
+          "recall": 1
+        },
+        "break_even": {
+          "expected": 73,
+          "actual": 73,
+          "truePositives": 73,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 1569,
+          "total": 1642,
+          "agreement": 1,
+          "precision": 1,
+          "recall": 1
+        },
+        "low_mandatory_coverage": {
+          "expected": 761,
+          "actual": 761,
+          "truePositives": 761,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 881,
+          "total": 1642,
+          "agreement": 1,
+          "precision": 1,
+          "recall": 1
+        },
+        "high_emi_burden": {
+          "expected": 11,
+          "actual": 11,
+          "truePositives": 11,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 1631,
+          "total": 1642,
+          "agreement": 1,
+          "precision": 1,
+          "recall": 1
+        },
+        "unfunded_shock": {
+          "expected": 306,
+          "actual": 306,
+          "truePositives": 306,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 1336,
+          "total": 1642,
+          "agreement": 1,
+          "precision": 1,
+          "recall": 1
+        },
+        "unaffordable_goal_contribution": {
+          "expected": 19,
+          "actual": 19,
+          "truePositives": 19,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 1623,
+          "total": 1642,
+          "agreement": 1,
+          "precision": 1,
+          "recall": 1
+        },
+        "goal_achieved": {
+          "expected": 128,
+          "actual": 128,
+          "truePositives": 128,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 1514,
+          "total": 1642,
+          "agreement": 1,
+          "precision": 1,
+          "recall": 1
+        }
+      }
+    },
+    "comparison": {
+      "overall": {
+        "passed": 148680,
+        "total": 148680,
+        "failed": 0,
+        "rate": 1
+      },
+      "byMetric": {
+        "monthlyIncome": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "monthlyExpenses": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "monthlyOutflows": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "monthlySurplus": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "savingsRatePct": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "accessibleSavings": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "unexpectedExpense": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "postShockSavings": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "unfundedShock": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "livingExpenseCoverageMonths": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "mandatoryOutflowCoverageMonths": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "emiPayments": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "emiBurdenPct": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        }
+      },
+      "byField": {
+        "baseline": {
+          "passed": 18408,
+          "total": 18408,
+          "failed": 0,
+          "rate": 1
+        },
+        "scenario": {
+          "passed": 18408,
+          "total": 18408,
+          "failed": 0,
+          "rate": 1
+        },
+        "difference": {
+          "passed": 18408,
+          "total": 18408,
+          "failed": 0,
+          "rate": 1
+        },
+        "percentageChange": {
+          "passed": 18408,
+          "total": 18408,
+          "failed": 0,
+          "rate": 1
+        },
+        "percentagePointDifference": {
+          "passed": 18408,
+          "total": 18408,
+          "failed": 0,
+          "rate": 1
+        }
+      },
+      "goal": {
+        "passed": 49560,
+        "total": 49560,
+        "failed": 0,
+        "rate": 1
+      },
+      "goalByField": {
+        "targetAmount": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "currentGoalSavings": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "remainingAmount": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "assumedMonthlyContribution": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "estimatedMonths": {
+          "passed": 7080,
+          "total": 7080,
+          "failed": 0,
+          "rate": 1
+        },
+        "completionDate": {
+          "passed": 5664,
+          "total": 5664,
+          "failed": 0,
+          "rate": 1
+        },
+        "goalAchieved": {
+          "passed": 4248,
+          "total": 4248,
+          "failed": 0,
+          "rate": 1
+        },
+        "onTrackForRequestedTimeline": {
+          "passed": 4248,
+          "total": 4248,
+          "failed": 0,
+          "rate": 1
+        }
+      },
+      "recommendations": {
+        "passed": 5664,
+        "total": 5664,
+        "failed": 0,
+        "rate": 1
+      },
+      "baselineConsistency": {
+        "passed": 1416,
+        "total": 1416,
+        "failed": 0,
+        "rate": 1
+      }
+    },
+    "determinism": {
+      "overall": {
+        "passed": 1642,
+        "total": 1642,
+        "failed": 0,
+        "rate": 1
+      },
+      "baseline": {
+        "passed": 226,
+        "total": 226,
+        "failed": 0,
+        "rate": 1
+      },
+      "scenario": {
+        "passed": 1416,
+        "total": 1416,
+        "failed": 0,
+        "rate": 1
+      }
+    },
+    "validation": {
+      "invalid": {
+        "total": 31,
+        "rejected": 31,
+        "correctMessage": 31,
+        "passed": 31,
+        "failed": 0,
+        "rejectionRate": 1,
+        "correctMessageRate": 1,
+        "passRate": 1
+      },
+      "valid": {
+        "total": 5,
+        "accepted": 5,
+        "failed": 0,
+        "acceptanceRate": 1
+      }
+    },
+    "invariants": {
+      "overall": {
+        "applicable": 1172,
+        "passed": 1172,
+        "notApplicable": 410,
+        "total": 1172,
+        "failed": 0,
+        "rate": 1
+      },
+      "byInvariant": [
+        {
+          "id": "income_up_surplus_non_decreasing",
+          "description": "Increasing monthly income, all else equal, must not reduce monthly surplus.",
+          "assumption": "Delta is non-negative and no other input changes.",
+          "applicable": 226,
+          "passed": 226,
+          "failed": 0,
+          "notApplicable": 0,
+          "rate": 1
+        },
+        {
+          "id": "expenses_up_surplus_non_increasing",
+          "description": "Increasing monthly expenses, all else equal, must not increase monthly surplus.",
+          "assumption": "Delta is non-negative. When EMI is included in expenses, expenses remain the outflow base.",
+          "applicable": 226,
+          "passed": 226,
+          "failed": 0,
+          "notApplicable": 0,
+          "rate": 1
+        },
+        {
+          "id": "savings_up_coverage_non_decreasing",
+          "description": "Increasing accessible savings, all else equal, must not reduce living-expense coverage.",
+          "assumption": "Applies only when monthly living expenses are positive; coverage is undefined when E = 0.",
+          "applicable": 208,
+          "passed": 208,
+          "failed": 0,
+          "notApplicable": 18,
+          "rate": 1
+        },
+        {
+          "id": "shock_up_post_shock_non_increasing",
+          "description": "Increasing the one-time unexpected expense, all else equal, must not increase post-shock savings.",
+          "assumption": "The shock is applied once to accessible savings and never to monthly surplus.",
+          "applicable": 226,
+          "passed": 226,
+          "failed": 0,
+          "notApplicable": 0,
+          "rate": 1
+        },
+        {
+          "id": "contribution_up_months_non_increasing",
+          "description": "Increasing a positive goal contribution must not increase the projected months to an unfunded goal.",
+          "assumption": "Applies only when a target amount is set. An unreachable goal (no positive contribution) is treated as infinite months.",
+          "applicable": 60,
+          "passed": 60,
+          "failed": 0,
+          "notApplicable": 166,
+          "rate": 1
+        },
+        {
+          "id": "emi_included_up_surplus_unchanged",
+          "description": "When EMI is already included in expenses, increasing EMI must not change outflows or surplus.",
+          "assumption": "Applies only when emiIncludedInExpenses is true, because EMI is already inside E.",
+          "applicable": 208,
+          "passed": 208,
+          "failed": 0,
+          "notApplicable": 18,
+          "rate": 1
+        },
+        {
+          "id": "emi_separate_up_surplus_non_increasing",
+          "description": "When EMI is paid separately, increasing EMI must not increase monthly surplus.",
+          "assumption": "Applies only when emiIncludedInExpenses is false, because EMI is then added to O.",
+          "applicable": 18,
+          "passed": 18,
+          "failed": 0,
+          "notApplicable": 208,
+          "rate": 1
+        }
+      ]
+    },
+    "explainability": {
+      "overall": {
+        "passed": 261857,
+        "total": 261857,
+        "failed": 0,
+        "rate": 1
+      },
+      "baseline": {
+        "passed": 35821,
+        "total": 35821,
+        "failed": 0,
+        "rate": 1
+      },
+      "scenario": {
+        "passed": 226036,
+        "total": 226036,
+        "failed": 0,
+        "rate": 1
+      },
+      "byCheck": {
+        "result.resultType": {
+          "category": "result",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "result.disclaimer": {
+          "category": "result",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "result.assumptions": {
+          "category": "result",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "result.thresholds_heuristic_label": {
+          "category": "result",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "result.explanations_object": {
+          "category": "result",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "result.recommendations_array": {
+          "category": "result",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyIncome.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyIncome.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyIncome.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyIncome.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyIncome.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyExpenses.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyExpenses.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyExpenses.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyExpenses.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyExpenses.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.accessibleSavings.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.accessibleSavings.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.accessibleSavings.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.accessibleSavings.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.accessibleSavings.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiPayments.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiPayments.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiPayments.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiPayments.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiPayments.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiIncludedInExpenses.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiIncludedInExpenses.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiIncludedInExpenses.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiIncludedInExpenses.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiIncludedInExpenses.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.unexpectedExpense.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.unexpectedExpense.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.unexpectedExpense.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.unexpectedExpense.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.unexpectedExpense.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyOutflows.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyOutflows.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyOutflows.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyOutflows.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlyOutflows.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlySurplus.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlySurplus.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlySurplus.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlySurplus.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.monthlySurplus.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.savingsRatePct.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.savingsRatePct.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.savingsRatePct.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.savingsRatePct.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.savingsRatePct.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.livingExpenseCoverageMonths.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.livingExpenseCoverageMonths.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.livingExpenseCoverageMonths.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.livingExpenseCoverageMonths.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.livingExpenseCoverageMonths.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.mandatoryOutflowCoverageMonths.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.mandatoryOutflowCoverageMonths.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.mandatoryOutflowCoverageMonths.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.mandatoryOutflowCoverageMonths.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.mandatoryOutflowCoverageMonths.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiBurdenPct.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiBurdenPct.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiBurdenPct.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiBurdenPct.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.emiBurdenPct.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.postShockSavings.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.postShockSavings.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.postShockSavings.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.postShockSavings.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.postShockSavings.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.unfundedShock.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.unfundedShock.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.unfundedShock.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.unfundedShock.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.unfundedShock.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.expenseCoverageMonths.present": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.expenseCoverageMonths.formula": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.expenseCoverageMonths.inputs": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.expenseCoverageMonths.reason": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric.expenseCoverageMonths.assumptions": {
+          "category": "metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goal.present": {
+          "category": "goal",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goal.formula": {
+          "category": "goal",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goal.inputs": {
+          "category": "goal",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goal.reason": {
+          "category": "goal",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goal.assumptions": {
+          "category": "goal",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.targetAmount.present": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.targetAmount.formula": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.targetAmount.inputs": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.targetAmount.reason": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.targetAmount.assumptions": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.currentGoalSavings.present": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.currentGoalSavings.formula": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.currentGoalSavings.inputs": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.currentGoalSavings.reason": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.currentGoalSavings.assumptions": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.remainingAmount.present": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.remainingAmount.formula": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.remainingAmount.inputs": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.remainingAmount.reason": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.remainingAmount.assumptions": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.assumedMonthlyContribution.present": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.assumedMonthlyContribution.formula": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.assumedMonthlyContribution.inputs": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.assumedMonthlyContribution.reason": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.assumedMonthlyContribution.assumptions": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.estimatedMonths.present": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.estimatedMonths.formula": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.estimatedMonths.inputs": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.estimatedMonths.reason": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.estimatedMonths.assumptions": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.unreachable.present": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.unreachable.formula": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.unreachable.inputs": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.unreachable.reason": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.unreachable.assumptions": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.requestedTimelineMonths.present": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.requestedTimelineMonths.formula": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.requestedTimelineMonths.inputs": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.requestedTimelineMonths.reason": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.requestedTimelineMonths.assumptions": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.requiredMonthlyContributionForTimeline.present": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.requiredMonthlyContributionForTimeline.formula": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.requiredMonthlyContributionForTimeline.inputs": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.requiredMonthlyContributionForTimeline.reason": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.requiredMonthlyContributionForTimeline.assumptions": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.onTrackForRequestedTimeline.present": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.onTrackForRequestedTimeline.formula": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.onTrackForRequestedTimeline.inputs": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.onTrackForRequestedTimeline.reason": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.onTrackForRequestedTimeline.assumptions": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.goalAchieved.present": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.goalAchieved.formula": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.goalAchieved.inputs": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.goalAchieved.reason": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.goalAchieved.assumptions": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.estimatedCompletionDate.present": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.estimatedCompletionDate.formula": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.estimatedCompletionDate.inputs": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.estimatedCompletionDate.reason": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goalMetric.estimatedCompletionDate.assumptions": {
+          "category": "goal_metric",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.ids_unique": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.heuristic_recs_have_threshold": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "formula.monthlyOutflows": {
+          "category": "formula_accuracy",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "formula.monthlySurplus": {
+          "category": "formula_accuracy",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "formula.savingsRatePct": {
+          "category": "formula_accuracy",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "formula.livingExpenseCoverageMonths": {
+          "category": "formula_accuracy",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "formula.mandatoryOutflowCoverageMonths": {
+          "category": "formula_accuracy",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "formula.emiBurdenPct": {
+          "category": "formula_accuracy",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "formula.postShockSavings": {
+          "category": "formula_accuracy",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "formula.unfundedShock": {
+          "category": "formula_accuracy",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "formula.goalProjection": {
+          "category": "formula_accuracy",
+          "overall": {
+            "passed": 1642,
+            "total": 1642,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 226,
+            "total": 226,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 1416,
+            "total": 1416,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unfunded_shock.decision_rule": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 306,
+            "total": 306,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 15,
+            "total": 15,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 291,
+            "total": 291,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unfunded_shock.formula": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 306,
+            "total": 306,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 15,
+            "total": 15,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 291,
+            "total": 291,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unfunded_shock.inputs": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 306,
+            "total": 306,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 15,
+            "total": 15,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 291,
+            "total": 291,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unfunded_shock.reason": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 306,
+            "total": 306,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 15,
+            "total": 15,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 291,
+            "total": 291,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unfunded_shock.assumptions": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 306,
+            "total": 306,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 15,
+            "total": 15,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 291,
+            "total": 291,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unfunded_shock.severity": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 306,
+            "total": 306,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 15,
+            "total": 15,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 291,
+            "total": 291,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unfunded_shock.heuristic_flag": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 306,
+            "total": 306,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 15,
+            "total": 15,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 291,
+            "total": 291,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unaffordable_goal_contribution.decision_rule": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 0,
+            "total": 0,
+            "failed": 0,
+            "rate": null
+          },
+          "scenario": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unaffordable_goal_contribution.formula": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 0,
+            "total": 0,
+            "failed": 0,
+            "rate": null
+          },
+          "scenario": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unaffordable_goal_contribution.inputs": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 0,
+            "total": 0,
+            "failed": 0,
+            "rate": null
+          },
+          "scenario": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unaffordable_goal_contribution.reason": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 0,
+            "total": 0,
+            "failed": 0,
+            "rate": null
+          },
+          "scenario": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unaffordable_goal_contribution.assumptions": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 0,
+            "total": 0,
+            "failed": 0,
+            "rate": null
+          },
+          "scenario": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unaffordable_goal_contribution.severity": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 0,
+            "total": 0,
+            "failed": 0,
+            "rate": null
+          },
+          "scenario": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.unaffordable_goal_contribution.heuristic_flag": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 0,
+            "total": 0,
+            "failed": 0,
+            "rate": null
+          },
+          "scenario": {
+            "passed": 19,
+            "total": 19,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.break_even.decision_rule": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 73,
+            "total": 73,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 18,
+            "total": 18,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 55,
+            "total": 55,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.break_even.formula": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 73,
+            "total": 73,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 18,
+            "total": 18,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 55,
+            "total": 55,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.break_even.inputs": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 73,
+            "total": 73,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 18,
+            "total": 18,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 55,
+            "total": 55,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.break_even.reason": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 73,
+            "total": 73,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 18,
+            "total": 18,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 55,
+            "total": 55,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.break_even.assumptions": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 73,
+            "total": 73,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 18,
+            "total": 18,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 55,
+            "total": 55,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.break_even.severity": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 73,
+            "total": 73,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 18,
+            "total": 18,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 55,
+            "total": 55,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.break_even.heuristic_flag": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 73,
+            "total": 73,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 18,
+            "total": 18,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 55,
+            "total": 55,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.deficit.decision_rule": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 345,
+            "total": 345,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 42,
+            "total": 42,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 303,
+            "total": 303,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.deficit.formula": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 345,
+            "total": 345,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 42,
+            "total": 42,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 303,
+            "total": 303,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.deficit.inputs": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 345,
+            "total": 345,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 42,
+            "total": 42,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 303,
+            "total": 303,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.deficit.reason": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 345,
+            "total": 345,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 42,
+            "total": 42,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 303,
+            "total": 303,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.deficit.assumptions": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 345,
+            "total": 345,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 42,
+            "total": 42,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 303,
+            "total": 303,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.deficit.severity": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 345,
+            "total": 345,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 42,
+            "total": 42,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 303,
+            "total": 303,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.deficit.heuristic_flag": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 345,
+            "total": 345,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 42,
+            "total": 42,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 303,
+            "total": 303,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.low_mandatory_coverage.decision_rule": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 761,
+            "total": 761,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 103,
+            "total": 103,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 658,
+            "total": 658,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.low_mandatory_coverage.formula": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 761,
+            "total": 761,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 103,
+            "total": 103,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 658,
+            "total": 658,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.low_mandatory_coverage.inputs": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 761,
+            "total": 761,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 103,
+            "total": 103,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 658,
+            "total": 658,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.low_mandatory_coverage.reason": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 761,
+            "total": 761,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 103,
+            "total": 103,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 658,
+            "total": 658,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.low_mandatory_coverage.assumptions": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 761,
+            "total": 761,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 103,
+            "total": 103,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 658,
+            "total": 658,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.low_mandatory_coverage.severity": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 761,
+            "total": 761,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 103,
+            "total": 103,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 658,
+            "total": 658,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.low_mandatory_coverage.heuristic_flag": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 761,
+            "total": 761,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 103,
+            "total": 103,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 658,
+            "total": 658,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.low_mandatory_coverage.threshold": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 761,
+            "total": 761,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 103,
+            "total": 103,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 658,
+            "total": 658,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.goal_achieved.decision_rule": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 128,
+            "total": 128,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 16,
+            "total": 16,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 112,
+            "total": 112,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.goal_achieved.formula": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 128,
+            "total": 128,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 16,
+            "total": 16,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 112,
+            "total": 112,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.goal_achieved.inputs": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 128,
+            "total": 128,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 16,
+            "total": 16,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 112,
+            "total": 112,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.goal_achieved.reason": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 128,
+            "total": 128,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 16,
+            "total": 16,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 112,
+            "total": 112,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.goal_achieved.assumptions": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 128,
+            "total": 128,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 16,
+            "total": 16,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 112,
+            "total": 112,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.goal_achieved.severity": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 128,
+            "total": 128,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 16,
+            "total": 16,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 112,
+            "total": 112,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.goal_achieved.heuristic_flag": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 128,
+            "total": 128,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 16,
+            "total": 16,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 112,
+            "total": 112,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.high_emi_burden.decision_rule": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 11,
+            "total": 11,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 1,
+            "total": 1,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 10,
+            "total": 10,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.high_emi_burden.formula": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 11,
+            "total": 11,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 1,
+            "total": 1,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 10,
+            "total": 10,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.high_emi_burden.inputs": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 11,
+            "total": 11,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 1,
+            "total": 1,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 10,
+            "total": 10,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.high_emi_burden.reason": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 11,
+            "total": 11,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 1,
+            "total": 1,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 10,
+            "total": 10,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.high_emi_burden.assumptions": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 11,
+            "total": 11,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 1,
+            "total": 1,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 10,
+            "total": 10,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.high_emi_burden.severity": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 11,
+            "total": 11,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 1,
+            "total": 1,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 10,
+            "total": 10,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.high_emi_burden.heuristic_flag": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 11,
+            "total": 11,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 1,
+            "total": 1,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 10,
+            "total": 10,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation.high_emi_burden.threshold": {
+          "category": "recommendation",
+          "overall": {
+            "passed": 11,
+            "total": 11,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 1,
+            "total": 1,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 10,
+            "total": 10,
+            "failed": 0,
+            "rate": 1
+          }
+        }
+      },
+      "byCategory": {
+        "result": {
+          "overall": {
+            "passed": 9852,
+            "total": 9852,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 1356,
+            "total": 1356,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 8496,
+            "total": 8496,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "metric": {
+          "overall": {
+            "passed": 123150,
+            "total": 123150,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 16950,
+            "total": 16950,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 106200,
+            "total": 106200,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goal": {
+          "overall": {
+            "passed": 8210,
+            "total": 8210,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 1130,
+            "total": 1130,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 7080,
+            "total": 7080,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "goal_metric": {
+          "overall": {
+            "passed": 90310,
+            "total": 90310,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 12430,
+            "total": 12430,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 77880,
+            "total": 77880,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "recommendation": {
+          "overall": {
+            "passed": 15557,
+            "total": 15557,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 1921,
+            "total": 1921,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 13636,
+            "total": 13636,
+            "failed": 0,
+            "rate": 1
+          }
+        },
+        "formula_accuracy": {
+          "overall": {
+            "passed": 14778,
+            "total": 14778,
+            "failed": 0,
+            "rate": 1
+          },
+          "baseline": {
+            "passed": 2034,
+            "total": 2034,
+            "failed": 0,
+            "rate": 1
+          },
+          "scenario": {
+            "passed": 12744,
+            "total": 12744,
+            "failed": 0,
+            "rate": 1
+          }
+        }
+      }
+    }
+  },
+  "summary": {
+    "profiles": {
+      "source": "synthetic",
+      "realData": false,
+      "requestedRandomProfiles": 200,
+      "randomProfiles": 200,
+      "edgeCaseProfiles": 26,
+      "totalProfiles": 226,
+      "randomArchetypes": [
+        "positive_surplus",
+        "zero_surplus",
+        "negative_surplus",
+        "emi_separate",
+        "emi_included",
+        "low_emergency_savings",
+        "high_emergency_savings",
+        "shock_funded",
+        "shock_unfunded",
+        "goal_achieved",
+        "goal_achievable",
+        "goal_unreachable",
+        "zero_income",
+        "zero_expenses"
+      ],
+      "archetypeCounts": {
+        "positive_surplus": 15,
+        "zero_surplus": 15,
+        "negative_surplus": 15,
+        "emi_separate": 16,
+        "emi_included": 15,
+        "low_emergency_savings": 14,
+        "high_emergency_savings": 14,
+        "shock_funded": 15,
+        "shock_unfunded": 15,
+        "goal_achieved": 16,
+        "goal_achievable": 14,
+        "goal_unreachable": 15,
+        "zero_income": 15,
+        "zero_expenses": 15,
+        "zero_outflows": 1,
+        "zero_everything": 1,
+        "break_even": 1,
+        "deficit": 1,
+        "coverage_boundary": 2,
+        "emi_boundary": 2,
+        "float_noise": 1,
+        "month_end": 2,
+        "no_goal": 1,
+        "timeline": 2,
+        "zero_savings": 1,
+        "tiny_goal": 1,
+        "large_values": 1
+      },
+      "scenarios": {
+        "basePerProfile": 6,
+        "conditionalGoalContribution": 1
+      }
+    },
+    "scenarios": {
+      "totalCases": 1416,
+      "byName": {
+        "income_up": 226,
+        "expenses_up": 226,
+        "emi_up": 226,
+        "savings_up": 226,
+        "shock": 226,
+        "combined_stress": 226,
+        "goal_contribution_up": 60
+      }
+    },
+    "results": {
+      "baselineResults": 226,
+      "scenarioResults": 1416,
+      "totalResults": 1642,
+      "withTarget": 480,
+      "withoutTarget": 1162,
+      "goalAchieved": 128,
+      "unreachable": 105,
+      "monthEndAsOf": 16,
+      "floatingPoint": 8
+    },
+    "assertions": {
+      "formula": {
+        "passed": 22988,
+        "total": 22988,
+        "failed": 0,
+        "rate": 1
+      },
+      "formulaAlias": {
+        "passed": 1642,
+        "total": 1642,
+        "failed": 0,
+        "rate": 1
+      },
+      "goal": {
+        "passed": 18062,
+        "total": 18062,
+        "failed": 0,
+        "rate": 1
+      },
+      "goalContext": {
+        "passed": 1642,
+        "total": 1642,
+        "failed": 0,
+        "rate": 1
+      },
+      "recommendationExact": {
+        "passed": 1642,
+        "total": 1642,
+        "failed": 0,
+        "rate": 1
+      },
+      "recommendationDecisions": {
+        "passed": 11494,
+        "total": 11494,
+        "failed": 0,
+        "rate": 1
+      },
+      "recommendationSeverity": {
+        "passed": 1643,
+        "total": 1643,
+        "failed": 0,
+        "rate": 1
+      },
+      "recommendationUnknownIds": {
+        "passed": 1642,
+        "total": 1642,
+        "failed": 0,
+        "rate": 1
+      },
+      "comparison": {
+        "passed": 148680,
+        "total": 148680,
+        "failed": 0,
+        "rate": 1
+      },
+      "comparisonGoal": {
+        "passed": 49560,
+        "total": 49560,
+        "failed": 0,
+        "rate": 1
+      },
+      "comparisonRecommendations": {
+        "passed": 5664,
+        "total": 5664,
+        "failed": 0,
+        "rate": 1
+      },
+      "comparisonBaselineConsistency": {
+        "passed": 1416,
+        "total": 1416,
+        "failed": 0,
+        "rate": 1
+      },
+      "determinism": {
+        "passed": 1642,
+        "total": 1642,
+        "failed": 0,
+        "rate": 1
+      },
+      "validationInvalid": {
+        "total": 31,
+        "rejected": 31,
+        "correctMessage": 31,
+        "passed": 31,
+        "failed": 0,
+        "rejectionRate": 1,
+        "correctMessageRate": 1,
+        "passRate": 1
+      },
+      "validationValid": {
+        "total": 5,
+        "accepted": 5,
+        "failed": 0,
+        "acceptanceRate": 1
+      },
+      "invariants": {
+        "applicable": 1172,
+        "passed": 1172,
+        "notApplicable": 410,
+        "total": 1172,
+        "failed": 0,
+        "rate": 1
+      },
+      "explainability": {
+        "passed": 261857,
+        "total": 261857,
+        "failed": 0,
+        "rate": 1
+      }
+    },
+    "failureCounts": {
+      "formula": 0,
+      "formulaAlias": 0,
+      "goal": 0,
+      "goalContext": 0,
+      "recommendation": 0,
+      "comparison": 0,
+      "determinism": 0,
+      "validation": 0,
+      "invariants": 0,
+      "explainability": 0
+    },
+    "totalFailureCount": 0,
+    "storedFailureCount": 0
+  },
+  "failures": [],
+  "generatedAt": "2026-11-23T09:46:23.796Z",
+  "environment": {
+    "node": "v22.16.0",
+    "npm": "10.9.2",
+    "platform": "win32",
+    "arch": "x64",
+    "osRelease": "10.0.26300",
+    "cwd": "C:\\Users\\vigne\\Documents\\z\\uni-project",
+    "dependencies": {
+      "root package": "0.1.0",
+      "backend package": "0.1.0",
+      "frontend package": "1.0.0"
+    }
+  },
+  "runDirectory": "experiments/results/run-20261123T094623Z-seed-20261027",
+  "dataset": {
+    "schemaVersion": "1.0.0",
+    "seed": 20261027,
+    "asOfDate": "2026-10-27",
+    "thresholds": {
+      "lowMandatoryCoverageMonths": 3,
+      "highEmiBurdenPct": 40
+    },
+    "meta": {
+      "source": "synthetic",
+      "realData": false,
+      "requestedRandomProfiles": 200,
+      "randomProfiles": 200,
+      "edgeCaseProfiles": 26,
+      "totalProfiles": 226,
+      "randomArchetypes": [
+        "positive_surplus",
+        "zero_surplus",
+        "negative_surplus",
+        "emi_separate",
+        "emi_included",
+        "low_emergency_savings",
+        "high_emergency_savings",
+        "shock_funded",
+        "shock_unfunded",
+        "goal_achieved",
+        "goal_achievable",
+        "goal_unreachable",
+        "zero_income",
+        "zero_expenses"
+      ],
+      "archetypeCounts": {
+        "positive_surplus": 15,
+        "zero_surplus": 15,
+        "negative_surplus": 15,
+        "emi_separate": 16,
+        "emi_included": 15,
+        "low_emergency_savings": 14,
+        "high_emergency_savings": 14,
+        "shock_funded": 15,
+        "shock_unfunded": 15,
+        "goal_achieved": 16,
+        "goal_achievable": 14,
+        "goal_unreachable": 15,
+        "zero_income": 15,
+        "zero_expenses": 15,
+        "zero_outflows": 1,
+        "zero_everything": 1,
+        "break_even": 1,
+        "deficit": 1,
+        "coverage_boundary": 2,
+        "emi_boundary": 2,
+        "float_noise": 1,
+        "month_end": 2,
+        "no_goal": 1,
+        "timeline": 2,
+        "zero_savings": 1,
+        "tiny_goal": 1,
+        "large_values": 1
+      },
+      "scenarios": {
+        "basePerProfile": 6,
+        "conditionalGoalContribution": 1
+      }
+    }
+  },
+  "artifacts": [
+    "run.json",
+    "dataset.json",
+    "profiles.csv",
+    "scenario-cases.csv",
+    "metric-results.csv",
+    "goal-results.csv",
+    "comparison-results.csv",
+    "recommendation-results.csv",
+    "validation-results.csv",
+    "invariants.csv",
+    "explainability-summary.csv",
+    "explainability-failures.csv",
+    "failures.csv",
+    "report.md",
+    "manifest.json"
+  ],
+  "storedExplainabilityFailures": 0
+}

@@ -13,15 +13,22 @@ import {
 import { evaluateQuizAnswer } from '../../utils/learningQuiz';
 import { normalizeCuratedLessonResponse } from '../../utils/curatedLesson';
 import CuratedLessonView from './CuratedLessonView';
+import { apiUrl } from '../../lib/api';
 
 const LOAD_TIMEOUT_MS = 15000;
+// AI generation routinely takes 20-30s on thinking models. This must exceed the
+// backend's provider timeout (AI_TIMEOUT_MS, 45s) so the server's specific
+// error message reaches the learner instead of a generic client timeout.
+const AI_LOAD_TIMEOUT_MS = 60000;
 
-function LessonSkeleton() {
+function LessonSkeleton({ stage = 'curated' }) {
   return (
     <div className="space-y-4" aria-live="polite" aria-busy="true">
       <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs font-medium text-slate-600">
         <Loader2 className="h-4 w-4 animate-spin text-genie-600" />
-        Loading this lesson...
+        {stage === 'ai'
+          ? 'Preparing this lesson. This can take up to 30 seconds...'
+          : 'Loading this lesson...'}
       </div>
       <div className="animate-pulse space-y-3">
         <div className="h-3 w-1/3 rounded bg-slate-100" />
@@ -31,10 +38,6 @@ function LessonSkeleton() {
         <div className="h-3 w-1/4 rounded bg-slate-100" />
         <div className="h-3 w-full rounded bg-slate-100" />
       </div>
-      <p className="text-[11px] text-slate-400">
-        Source-checked lessons are read from the curriculum content files. Other concepts use the
-        optional AI tutor.
-      </p>
     </div>
   );
 }
@@ -46,24 +49,13 @@ function SetupState({ message, onRetry }) {
         <div className="flex items-start gap-2.5">
           <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" />
           <div>
-            <h4 className="text-sm font-bold text-amber-950">AI lesson generation is not configured</h4>
-            <p className="mt-1 text-xs leading-relaxed text-amber-900">{message}</p>
+            <h4 className="text-sm font-bold text-amber-950">This lesson is not available yet</h4>
+            <p className="mt-1 text-xs leading-relaxed text-amber-900">
+              We are still preparing it. All other lessons and your progress work as usual, so
+              you can continue with another lesson and come back later.
+            </p>
           </div>
         </div>
-      </div>
-
-      <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-        <p className="text-xs font-semibold text-navy-900">Backend setup</p>
-        <p className="mt-1 text-[11px] leading-relaxed text-slate-600">
-          Add a genuine Gemini API key to the root or backend <code className="rounded bg-white px-1 py-0.5">.env</code> file, then restart the backend:
-        </p>
-        <pre className="mt-2 overflow-x-auto rounded-lg bg-navy-950 p-3 text-[11px] text-genie-200">
-{`GEMINI_API_KEY=your_key_here
-GEMINI_MODEL=gemini-1.5-flash`}
-        </pre>
-        <p className="mt-2 text-[11px] leading-relaxed text-slate-500">
-          The key stays on the server. This lesson will not fall back to hardcoded content.
-        </p>
       </div>
 
       <button
@@ -72,7 +64,7 @@ GEMINI_MODEL=gemini-1.5-flash`}
         className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-navy-800 hover:bg-slate-50"
       >
         <RefreshCw className="h-3.5 w-3.5" />
-        Retry after setup
+        Try again
       </button>
     </div>
   );
@@ -88,8 +80,8 @@ function ErrorState({ error, onRetry }) {
             <h4 className="text-sm font-bold text-rose-950">{error.title}</h4>
             <p className="mt-1 text-xs leading-relaxed text-rose-900">{error.message}</p>
             <p className="mt-2 text-[11px] leading-relaxed text-rose-800/80">
-              WealthGenie only displays lesson content that passes its validation, so nothing
-              partial is shown here.
+              We only show lessons that pass our accuracy checks, so nothing half-finished is
+              shown here.
             </p>
           </div>
         </div>
@@ -112,13 +104,13 @@ export default function LessonPanel({
   isCompleted,
   onComplete,
   onQuizProgress,
-  onAskGenie,
   onClose,
 }) {
   const [lesson, setLesson] = useState(null);
   const [lessonMeta, setLessonMeta] = useState(null);
   const [curatedEntry, setCuratedEntry] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loadingStage, setLoadingStage] = useState('curated');
   const [error, setError] = useState(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -131,10 +123,15 @@ export default function LessonPanel({
   useEffect(() => {
     const controller = new AbortController();
     let timedOut = false;
-    const timeoutId = setTimeout(() => {
-      timedOut = true;
-      controller.abort();
-    }, LOAD_TIMEOUT_MS);
+    let timeoutId = null;
+    const armTimeout = (ms) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        timedOut = true;
+        controller.abort();
+      }, ms);
+    };
+    armTimeout(LOAD_TIMEOUT_MS);
 
     async function readJson(response) {
       try {
@@ -145,7 +142,10 @@ export default function LessonPanel({
     }
 
     async function loadAiLesson() {
-      const response = await fetch('/api/learn/lesson', {
+      // The curated lookup's short budget would abort a normal AI generation.
+      armTimeout(AI_LOAD_TIMEOUT_MS);
+      setLoadingStage('ai');
+      const response = await fetch(apiUrl('/api/learn/lesson'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ conceptId: concept.id }),
@@ -158,7 +158,7 @@ export default function LessonPanel({
         if (body?.status === 'unconfigured') {
           setError({
             kind: 'unconfigured',
-            title: 'AI lesson generation is not configured',
+            title: 'This lesson is not available yet',
             message:
               body.message ||
               'Set GEMINI_API_KEY in the backend environment to generate live lessons.',
@@ -170,11 +170,11 @@ export default function LessonPanel({
           kind: 'provider',
           title:
             body?.code === 'provider_quota'
-              ? 'The AI tutor is temporarily over its quota'
-              : 'The AI tutor could not generate this lesson',
+              ? 'Too many lessons requested right now'
+              : 'This lesson could not be prepared',
           message:
             body?.message ||
-            `The backend returned HTTP ${response.status}. Please try again.`,
+            'Something went wrong while preparing this lesson. Please try again.',
         });
         return;
       }
@@ -187,7 +187,7 @@ export default function LessonPanel({
       ) {
         setError({
           kind: 'invalid',
-          title: 'The AI tutor returned an invalid lesson',
+          title: 'This lesson could not be prepared',
           message: 'The response failed WealthGenie validation, so it was not displayed.',
         });
         return;
@@ -204,6 +204,7 @@ export default function LessonPanel({
 
     async function loadLesson() {
       setLoading(true);
+      setLoadingStage('curated');
       setError(null);
       setLesson(null);
       setLessonMeta(null);
@@ -218,7 +219,7 @@ export default function LessonPanel({
         // Curated lessons are served from the versioned content files and never
         // touch the AI provider. A 404 means this concept has no curated lesson
         // yet, so the optional AI tutor path is used exactly as before.
-        const response = await fetch(`/api/learn/lessons/${concept.id}`, {
+        const response = await fetch(apiUrl(`/api/learn/lessons/${concept.id}`), {
           signal: controller.signal,
         });
         const body = await readJson(response);
@@ -249,7 +250,7 @@ export default function LessonPanel({
           title: 'Could not load this lesson',
           message:
             body?.message ||
-            `The lesson service returned HTTP ${response.status}. Please try again.`,
+            'Something went wrong while opening this lesson. Please try again.',
         });
       } catch (fetchError) {
         if (fetchError.name === 'AbortError') {
@@ -258,7 +259,7 @@ export default function LessonPanel({
               kind: 'timeout',
               title: 'This lesson is taking too long to load',
               message:
-                'The lesson service did not respond in time. Check the backend and try again.',
+                'The lesson took too long to load. Check your internet connection and try again.',
             });
           }
           return;
@@ -266,7 +267,7 @@ export default function LessonPanel({
         setError({
           kind: 'network',
           title: 'Could not reach the lesson service',
-          message: 'Check that the WealthGenie backend is running and try again.',
+          message: 'Check your internet connection and try again.',
         });
       } finally {
         clearTimeout(timeoutId);
@@ -307,7 +308,7 @@ export default function LessonPanel({
     if (!result?.ok) {
       setCompletionError(
         result?.reason === 'prerequisites-incomplete'
-          ? 'A prerequisite is still incomplete. Refresh the roadmap and try again.'
+          ? 'An earlier lesson is not finished yet. Please refresh the page and try again.'
           : 'This concept could not be marked complete.'
       );
       return;
@@ -316,7 +317,7 @@ export default function LessonPanel({
     setCompletionResult(result);
   };
 
-  if (loading) return <LessonSkeleton />;
+  if (loading) return <LessonSkeleton stage={loadingStage} />;
 
   if (error?.kind === 'unconfigured') {
     return <SetupState message={error.message} onRetry={() => setReloadKey((key) => key + 1)} />;
@@ -335,7 +336,6 @@ export default function LessonPanel({
         onQuizProgress={
           onQuizProgress ? (score) => onQuizProgress(concept, score) : null
         }
-        onAskGenie={onAskGenie}
         onClose={onClose}
       />
     );
@@ -346,7 +346,7 @@ export default function LessonPanel({
       <ErrorState
         error={{
           title: 'No lesson was returned',
-          message: 'The AI tutor returned an empty lesson. Please try again.',
+          message: 'Nothing came back for this lesson. Please try again.',
         }}
         onRetry={() => setReloadKey((key) => key + 1)}
       />
@@ -534,16 +534,6 @@ export default function LessonPanel({
           </button>
         )}
 
-        {onAskGenie && (
-          <button
-            type="button"
-            onClick={() => onAskGenie(concept.title)}
-            className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-genie-200 bg-genie-50 px-3 py-2 text-xs font-semibold text-genie-800 hover:bg-genie-100"
-          >
-            <Sparkles className="h-3.5 w-3.5" />
-            Ask AI Tutor more
-          </button>
-        )}
       </div>
 
       <p className="text-[10px] leading-relaxed text-slate-400">

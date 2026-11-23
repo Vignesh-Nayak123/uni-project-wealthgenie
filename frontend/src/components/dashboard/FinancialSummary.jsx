@@ -22,11 +22,11 @@ export default function FinancialSummary({ summary, isEmpty = false, onNavigate 
         <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400 mb-3">
           <Wallet className="w-6 h-6" />
         </div>
-        <h4 className="text-base font-semibold text-navy-900">No Financial Snapshot Yet</h4>
+        <h4 className="text-base font-semibold text-navy-900">See your money in one place</h4>
         <p className="text-sm text-slate-500 max-w-md mx-auto mt-1 mb-4">
-          Run your first financial assessment to see your cash-flow snapshot
-          here. This dashboard only shows data saved to your account — demo
-          values are never substituted.
+          Do a quick money check-up with your monthly income, spending and
+          savings. We will show how much you save each month and how long your
+          savings would last. Only your own numbers are shown here.
         </p>
         <button
           type="button"
@@ -34,7 +34,7 @@ export default function FinancialSummary({ summary, isEmpty = false, onNavigate 
           className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 bg-navy-900 text-white rounded-lg hover:bg-navy-800 transition-colors"
         >
           <Calculator className="w-4 h-4" />
-          <span>Run your first assessment</span>
+          <span>Start money check-up</span>
           <ArrowUpRight className="w-4 h-4" />
         </button>
       </Card>
@@ -63,7 +63,7 @@ export default function FinancialSummary({ summary, isEmpty = false, onNavigate 
       <Card className="flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between text-xs font-medium text-slate-500 mb-2">
-            <span>Accessible Savings</span>
+            <span>Savings you can use</span>
             {coverageMonths !== null && (
               <Badge variant="green" size="xs">
                 <ShieldCheck className="w-3 h-3" />
@@ -76,8 +76,7 @@ export default function FinancialSummary({ summary, isEmpty = false, onNavigate 
           </div>
         </div>
         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-          <span>Liquid savings</span>
-          <span className="font-medium text-navy-800">From your assessment</span>
+          <span>Money you can withdraw quickly</span>
         </div>
       </Card>
 
@@ -85,14 +84,14 @@ export default function FinancialSummary({ summary, isEmpty = false, onNavigate 
       <Card className="flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between text-xs font-medium text-slate-500 mb-2">
-            <span>Monthly Cash Flow</span>
+            <span>Left over each month</span>
             <Badge
               variant={summary.monthlySavings >= 0 ? 'blue' : 'rose'}
               size="xs"
             >
               <span>
                 {summary.monthlySavings >= 0 ? '+' : '-'}
-                {formatINR(Math.abs(summary.monthlySavings))} Net
+                {formatINR(Math.abs(summary.monthlySavings))}
               </span>
             </Badge>
           </div>
@@ -106,9 +105,9 @@ export default function FinancialSummary({ summary, isEmpty = false, onNavigate 
           </div>
         </div>
         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-          <span className="text-emerald-700 font-medium">In: {formatINR(summary.monthlyInflow)}</span>
+          <span className="text-emerald-700 font-medium">Earn {formatINR(summary.monthlyInflow)}</span>
           <span className="text-slate-400">•</span>
-          <span className="text-slate-600 font-medium">Out: {formatINR(summary.monthlyOutflow)}</span>
+          <span className="text-slate-600 font-medium">Spend {formatINR(summary.monthlyOutflow)}</span>
         </div>
       </Card>
 
@@ -116,7 +115,7 @@ export default function FinancialSummary({ summary, isEmpty = false, onNavigate 
       <Card className="flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between text-xs font-medium text-slate-500 mb-2">
-            <span>Savings Rate</span>
+            <span>Share of income saved</span>
             {savingsRate !== null && (
               <Badge variant={savingsRate >= 20 ? 'green' : 'amber'} size="xs">
                 <span>{savingsRate >= 20 ? 'On track' : 'Below 20%'}</span>
@@ -128,13 +127,13 @@ export default function FinancialSummary({ summary, isEmpty = false, onNavigate 
               {savingsRate === null ? 'Not available' : `${savingsRate.toFixed(1)}%`}
             </span>
             {savingsRate !== null && (
-              <span className="text-xs font-normal text-slate-400">of monthly income</span>
+              <span className="text-xs font-normal text-slate-400">of income</span>
             )}
           </div>
         </div>
         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-          <span>Benchmark</span>
-          <span className="font-medium text-navy-800">20%–30% Recommended</span>
+          <span>A good target</span>
+          <span className="font-medium text-navy-800">20% or more</span>
         </div>
       </Card>
 
@@ -142,7 +141,7 @@ export default function FinancialSummary({ summary, isEmpty = false, onNavigate 
       <Card className="flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between text-xs font-medium text-slate-500 mb-2">
-            <span>Emergency Cushion</span>
+            <span>Emergency fund</span>
             <span className="text-xs font-semibold text-genie-700">
               {emergencyPercent}%
             </span>
@@ -157,10 +156,10 @@ export default function FinancialSummary({ summary, isEmpty = false, onNavigate 
         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
           <span className="flex items-center gap-1">
             <PiggyBank className="w-3.5 h-3.5" />
-            <span>6-month target</span>
+            <span>Target: 6 months</span>
           </span>
           <span className="font-medium text-navy-800">
-            {coverageMonths === null ? 'Not available' : `${coverageMonths.toFixed(1)} Months`}
+            {coverageMonths === null ? 'Not available' : `${coverageMonths.toFixed(1)} months now`}
           </span>
         </div>
       </Card>

@@ -70,7 +70,7 @@ export function UserDataProvider({ children }) {
     } else if (goalsResult.status === 'fulfilled') {
       setError(
         assessmentsResult.reason?.message ||
-          'Unable to load your assessment history.'
+          'Unable to load your past money check-ups.'
       );
     }
 

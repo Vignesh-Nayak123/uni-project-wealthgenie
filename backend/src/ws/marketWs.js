@@ -5,13 +5,15 @@
  * only normalised snapshots/ticks plus an explicit connection state so the UI
  * can distinguish "waiting for first tick" from "market closed", an auth
  * failure, a subscription failure, or a stale feed.
+ *
+ * It carries market data only. Paper-trading accounts are private per user and
+ * this socket is unauthenticated, so portfolios are never broadcast here; the
+ * page re-fetches its own portfolio over the authenticated REST API.
  */
 import { WebSocketServer } from 'ws';
 import { marketFeed } from '../services/marketData/upstoxFeed.js';
-import { portfolio } from '../services/paperTrading/simulationService.js';
 
 const MARKET_WS_PATH = '/ws/market';
-const PORTFOLIO_BROADCAST_MS = 750;
 const STATUS_BROADCAST_MS = 10_000;
 
 export function attachMarketWebSocket(httpServer) {
@@ -31,23 +33,8 @@ export function attachMarketWebSocket(httpServer) {
     for (const client of wss.clients) send(client, payload);
   };
 
-  let portfolioTimer = null;
-  const schedulePortfolioBroadcast = () => {
-    if (portfolioTimer) return;
-    portfolioTimer = setTimeout(async () => {
-      portfolioTimer = null;
-      if (wss.clients.size === 0) return;
-      try {
-        broadcast({ type: 'portfolio', account: await portfolio() });
-      } catch {
-        // Portfolio valuation must never break the market feed.
-      }
-    }, PORTFOLIO_BROADCAST_MS);
-  };
-
   const unsubscribe = marketFeed.onTick((payload) => {
     broadcast(payload);
-    if (payload?.type === 'market_tick') schedulePortfolioBroadcast();
   });
 
   const statusTimer = setInterval(() => {
@@ -65,7 +52,7 @@ export function attachMarketWebSocket(httpServer) {
     });
   });
 
-  wss.on('connection', async (client) => {
+  wss.on('connection', (client) => {
     client.isAlive = true;
     client.on('pong', () => {
       client.isAlive = true;
@@ -82,11 +69,6 @@ export function attachMarketWebSocket(httpServer) {
         ? new Date(status.lastMarketInfoAt).toISOString()
         : null,
     });
-    try {
-      send(client, { type: 'portfolio', account: await portfolio() });
-    } catch {
-      // The REST portfolio endpoint remains available.
-    }
   });
 
   // Detect half-open browser connections.
@@ -110,7 +92,6 @@ export function attachMarketWebSocket(httpServer) {
     unsubscribe();
     clearInterval(heartbeat);
     clearInterval(statusTimer);
-    if (portfolioTimer) clearTimeout(portfolioTimer);
     wss.close();
   };
 }

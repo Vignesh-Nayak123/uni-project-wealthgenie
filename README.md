@@ -31,9 +31,8 @@ The frontend (React SPA, `frontend/src/pages/`) implements five modules plus an 
 | Learn | `LearnPage.jsx` | Follow a 23-concept roadmap in five branches (Money Basics, Saving, Growing Money, Investing, Financial Safety). Concepts unlock only when prerequisites are complete; each concept has a versioned lesson, worked examples, a quiz, and cited sources. |
 | Assessment | `AssessmentPage.jsx` | Enter income, expenses, savings, EMIs and get computed metrics (surplus, savings rate, emergency coverage, EMI burden), a saved profile, and recommendations. |
 | Explore Investments | `ExploreInvestmentsPage.jsx` | See a **readiness gate** derived from the assessment, browse index funds backed by verified AMFI/Nifty data, and receive rule-based fund recommendations. |
-| Paper Trading | `PaperTradingPage.jsx` | Buy and sell in a simulated portfolio with order history, and run **replay** sessions against historical data — no real money. |
-| Digital Twin | `DigitalTwinPage.jsx` | Run what-if scenarios (income, expenses, EMI, savings, shocks) against a baseline with metric-by-metric comparison, goal projection, and explanations. |
-| Ask Genie | `AskGeniePage.jsx` | Optional Gemini-backed tutor (`POST /api/ai/chat`). With no API key it shows an honest "unconfigured" state — it never fakes an answer. |
+| Practice Trading | `PaperTradingPage.jsx` | Buy and sell with ₹1,00,000 of virtual money in a private, per-user portfolio with order history, and run **replay** sessions against historical data — no real money. |
+| What-if Planner | `DigitalTwinPage.jsx` | Run what-if scenarios (income, expenses, EMI, savings, shocks) against a baseline with metric-by-metric comparison, goal projection, and explanations. |
 
 **Typical user flow:** sign in (Supabase auth) → Learn → complete quizzes (progress syncs to the account, with a browser fallback for guests) → run the Assessment → check readiness → explore verified funds → practise in Paper Trading → rehearse life decisions in the Digital Twin.
 

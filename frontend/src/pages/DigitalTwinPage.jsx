@@ -728,7 +728,7 @@ export default function DigitalTwinPage() {
     if (!latestAssessment?.inputs) return;
     setBaselineForm(baselineFromInputs(latestAssessment.inputs));
     setScenarioForm(EMPTY_SCENARIO);
-    setSaveMessage('Baseline loaded from your latest saved assessment.');
+    setSaveMessage('Your current numbers were loaded from your latest money check-up.');
     setSaveError('');
     userEditedRef.current = false;
     prefilledRef.current = true;
@@ -911,16 +911,16 @@ export default function DigitalTwinPage() {
       <div>
         <div className="flex items-center gap-2 text-xs font-semibold text-genie-700 uppercase tracking-wider mb-1">
           <FlaskConical className="w-3.5 h-3.5" />
-          <span>Financial Digital Twin • What-if simulator</span>
+          <span>Try changes safely before you make them</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-navy-950 tracking-tight">
-          Financial Digital Twin
+          What-if Planner
         </h1>
         <p className="text-sm text-slate-600 mt-0.5 max-w-3xl">
-          Adjust monthly income, expenses, EMI, accessible savings, and a
-          one-time unexpected expense. The baseline stays unchanged while each
-          scenario is recalculated independently. Every number includes its
-          formula, inputs, assumptions, and reason.
+          See what would happen to your savings if something changes: a pay
+          rise, a new EMI, higher rent or a one-time expense. Your real numbers
+          stay untouched. Each &ldquo;what-if&rdquo; is calculated separately
+          and shows exactly how it was worked out.
         </p>
       </div>
 
@@ -950,10 +950,10 @@ export default function DigitalTwinPage() {
                 <Wallet className="w-4 h-4 text-genie-700" />
                 <div>
                   <h2 className="text-base font-bold text-navy-950">
-                    Baseline (original)
+                    Your numbers now
                   </h2>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Scenario adjustments never change these values.
+                    The what-if changes below never alter these.
                   </p>
                 </div>
               </div>
@@ -963,7 +963,7 @@ export default function DigitalTwinPage() {
                 disabled={!latestAssessment?.inputs}
                 className="shrink-0 text-xs font-semibold text-genie-700 hover:text-genie-900 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Use latest assessment
+                Use my latest check-up
               </button>
             </div>
 
@@ -986,7 +986,7 @@ export default function DigitalTwinPage() {
               />
               <NumberField
                 id="baselineSavings"
-                label="Accessible savings (₹)"
+                label="Savings you can use quickly (₹)"
                 value={baselineForm.accessibleSavings}
                 onChange={(value) => updateBaseline('accessibleSavings', value)}
                 placeholder="e.g. 150000"
@@ -1016,7 +1016,7 @@ export default function DigitalTwinPage() {
 
               <div className="pt-3 border-t border-slate-100">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
-                  Optional personalisation
+                  Optional: for a more exact result
                 </h3>
 
                 <div className="space-y-4">
@@ -1095,10 +1095,10 @@ export default function DigitalTwinPage() {
                 <SlidersHorizontal className="w-4 h-4 text-genie-700" />
                 <div>
                   <h2 className="text-base font-bold text-navy-950">
-                    What-if adjustments
+                    What if...?
                   </h2>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Only these inputs change in the scenario.
+                    Fill in only what you want to change.
                   </p>
                 </div>
               </div>
@@ -1107,7 +1107,7 @@ export default function DigitalTwinPage() {
                 onClick={handleResetScenario}
                 className="shrink-0 text-xs font-semibold text-slate-600 hover:text-navy-900"
               >
-                Reset to baseline
+                Clear changes
               </button>
             </div>
 
@@ -1117,7 +1117,7 @@ export default function DigitalTwinPage() {
                 label="Monthly income (₹)"
                 value={scenarioForm.monthlyIncome}
                 onChange={(value) => updateScenarioField('monthlyIncome', value)}
-                placeholder="Leave blank to inherit baseline"
+                placeholder="Leave blank to keep it the same"
                 hint={
                   preview
                     ? `Baseline: ${formatINR(preview.baseline.metrics.monthlyIncome)}`
@@ -1129,7 +1129,7 @@ export default function DigitalTwinPage() {
                 label="Monthly expenses (₹)"
                 value={scenarioForm.monthlyExpenses}
                 onChange={(value) => updateScenarioField('monthlyExpenses', value)}
-                placeholder="Leave blank to inherit baseline"
+                placeholder="Leave blank to keep it the same"
                 hint={
                   preview
                     ? `Baseline: ${formatINR(preview.baseline.metrics.monthlyExpenses)}`
@@ -1141,7 +1141,7 @@ export default function DigitalTwinPage() {
                 label="EMI payments (₹)"
                 value={scenarioForm.emiPayments}
                 onChange={(value) => updateScenarioField('emiPayments', value)}
-                placeholder="Leave blank to inherit baseline"
+                placeholder="Leave blank to keep it the same"
                 hint={
                   preview
                     ? `Baseline: ${formatINR(preview.baseline.metrics.emiPayments)}`
@@ -1150,10 +1150,10 @@ export default function DigitalTwinPage() {
               />
               <NumberField
                 id="scenarioSavings"
-                label="Accessible savings (₹)"
+                label="Savings you can use quickly (₹)"
                 value={scenarioForm.accessibleSavings}
                 onChange={(value) => updateScenarioField('accessibleSavings', value)}
-                placeholder="Leave blank to inherit baseline"
+                placeholder="Leave blank to keep it the same"
                 hint={
                   preview
                     ? `Baseline: ${formatINR(preview.baseline.metrics.accessibleSavings)}`
@@ -1166,7 +1166,7 @@ export default function DigitalTwinPage() {
                 value={scenarioForm.unexpectedExpense}
                 onChange={(value) => updateScenarioField('unexpectedExpense', value)}
                 placeholder="e.g. 50000"
-                hint="Applied once to accessible savings; not deducted from monthly surplus."
+                hint="Taken once from your savings, not from your monthly budget."
               />
             </div>
           </Card>
@@ -1175,7 +1175,7 @@ export default function DigitalTwinPage() {
             <div className="flex items-center gap-2 mb-3">
               <Save className="w-4 h-4 text-genie-700" />
               <h2 className="text-base font-bold text-navy-950">
-                Save this scenario
+                Save this what-if
               </h2>
             </div>
 
@@ -1185,7 +1185,7 @@ export default function DigitalTwinPage() {
                   htmlFor="scenarioName"
                   className="block text-xs font-semibold text-navy-900 mb-1"
                 >
-                  Scenario name <span className="text-rose-600">*</span>
+                  Give it a name <span className="text-rose-600">*</span>
                 </label>
                 <input
                   id="scenarioName"
@@ -1222,13 +1222,12 @@ export default function DigitalTwinPage() {
                 ) : (
                   <Save className="w-4 h-4" />
                 )}
-                <span>{saving ? 'Saving scenario...' : 'Save scenario'}</span>
+                <span>{saving ? 'Saving...' : 'Save'}</span>
               </button>
 
               <p className="text-[11px] text-slate-500">
-                Saved scenarios store the baseline inputs, scenario inputs, and
-                the calculated estimate. Loading a saved scenario recalculates
-                from those inputs.
+                Saving keeps your numbers, your changes and the result, so you
+                can open or compare it later.
               </p>
             </form>
           </Card>
@@ -1245,7 +1244,7 @@ export default function DigitalTwinPage() {
               </h3>
               <p className="text-sm text-slate-500 max-w-md mx-auto">
                 Income, monthly expenses, and accessible savings are required.
-                The Digital Twin will then recalculate the scenario as you type.
+                The What-if Planner then updates the result as you type.
               </p>
             </Card>
           ) : (
@@ -1422,7 +1421,7 @@ export default function DigitalTwinPage() {
               id="saved-scenarios-heading"
               className="text-base font-bold text-navy-950"
             >
-              Saved scenarios
+              Saved what-ifs
             </h2>
             <Badge variant="slate" size="xs">
               {scenarios.length} saved
@@ -1442,7 +1441,7 @@ export default function DigitalTwinPage() {
           <div className="flex items-center gap-2 mb-3">
             <Target className="w-4 h-4 text-genie-700" />
             <h3 className="text-sm font-bold text-navy-950">
-              Compare two saved scenarios
+              Compare two saved what-ifs
             </h3>
           </div>
 
@@ -1455,7 +1454,7 @@ export default function DigitalTwinPage() {
                 htmlFor="compareBaseline"
                 className="block text-xs font-semibold text-navy-900 mb-1"
               >
-                Baseline scenario
+                First what-if
               </label>
               <select
                 id="compareBaseline"
@@ -1477,7 +1476,7 @@ export default function DigitalTwinPage() {
                 htmlFor="compareScenario"
                 className="block text-xs font-semibold text-navy-900 mb-1"
               >
-                Scenario to compare
+                Second what-if
               </label>
               <select
                 id="compareScenario"
@@ -1527,11 +1526,10 @@ export default function DigitalTwinPage() {
           <Card className="p-8 text-center border-dashed border-2 border-slate-200 bg-slate-50/50">
             <FlaskConical className="w-8 h-8 text-slate-300 mx-auto mb-2" />
             <p className="text-sm font-semibold text-navy-900">
-              No saved scenarios yet
+              No saved what-ifs yet
             </p>
             <p className="text-xs text-slate-500 mt-1">
-              Adjust the what-if inputs above and save your first scenario to
-              compare it later.
+              Try a change above and save it to compare later.
             </p>
           </Card>
         ) : (

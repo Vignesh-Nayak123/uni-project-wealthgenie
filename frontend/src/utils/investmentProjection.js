@@ -196,7 +196,7 @@ export function buildInvestmentWarnings({
       warnings.push({
         id: 'no_surplus',
         severity: 'critical',
-        message: `Your assessment shows no positive monthly surplus, so a ${formatINR(
+        message: `Your money check-up shows no money left over each month, so a ${formatINR(
           contribution
         )} monthly investment is not funded by current cash flow.`,
       });

@@ -4,6 +4,22 @@ const API_BASE = (
   ''
 ).replace(/\/$/, '');
 
+/**
+ * Absolute URL for a backend path. Every API call must go through this (or
+ * apiRequest) so builds that set VITE_API_BASE_URL work without the Vite
+ * dev-server proxy.
+ */
+export function apiUrl(path) {
+  return `${API_BASE}${path}`;
+}
+
+/** WebSocket URL on the same backend (ws/wss), honouring VITE_API_BASE_URL. */
+export function wsUrl(path) {
+  if (API_BASE) return `${API_BASE.replace(/^http/, 'ws')}${path}`;
+  const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+  return `${protocol}://${window.location.host}${path}`;
+}
+
 export class ApiError extends Error {
   constructor(message, { status = 0, code = '' } = {}) {
     super(message);

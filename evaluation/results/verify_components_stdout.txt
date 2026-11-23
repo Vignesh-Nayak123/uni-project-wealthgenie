@@ -1,0 +1,3 @@
+components_raw.json written: 375 profiles, 6 XIRR cases, 6 ledger ops
+
+exit=0

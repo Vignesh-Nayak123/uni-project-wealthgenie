@@ -1,0 +1,4 @@
+tier,profiles,with_recommendations,mean_recs,mean_riskometer,mean_effective_risk
+comfortable,125,125,6.0,2.5573333333333337,2.8
+deficit,125,125,6.0,1.8,1.8
+tight,125,125,6.0,2.4133333333333336,2.4

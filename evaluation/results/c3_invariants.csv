@@ -1,0 +1,8 @@
+id,description,applicable,passed,not_applicable
+income_up_surplus_non_decreasing,"Increasing monthly income, all else equal, must not reduce monthly surplus.",226,226,0
+expenses_up_surplus_non_increasing,"Increasing monthly expenses, all else equal, must not increase monthly surplus.",226,226,0
+savings_up_coverage_non_decreasing,"Increasing accessible savings, all else equal, must not reduce living-expense coverage.",208,208,18
+shock_up_post_shock_non_increasing,"Increasing the one-time unexpected expense, all else equal, must not increase post-shock savings.",226,226,0
+contribution_up_months_non_increasing,Increasing a positive goal contribution must not increase the projected months to an unfunded goal.,60,60,166
+emi_included_up_surplus_unchanged,"When EMI is already included in expenses, increasing EMI must not change outflows or surplus.",208,208,18
+emi_separate_up_surplus_non_increasing,"When EMI is paid separately, increasing EMI must not increase monthly surplus.",18,18,208

@@ -17,11 +17,27 @@ import scenariosRoutes from './routes/scenarios.routes.js';
 import marketRoutes from './routes/market.routes.js';
 import recommendationsRoutes from './routes/recommendations.routes.js';
 
+const LOCALHOST_ORIGIN = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
+
+/**
+ * Only the WealthGenie frontend may call the API from a browser. Configure
+ * production origins with CORS_ORIGINS (comma separated). In development any
+ * localhost port is allowed so `vite` and `vite preview` both work.
+ */
+function isAllowedOrigin(origin, callback) {
+  if (!origin) return callback(null, true); // same-origin, curl, server-to-server
+  if (config.corsOrigins.includes(origin)) return callback(null, true);
+  if (config.nodeEnv === 'development' && LOCALHOST_ORIGIN.test(origin)) {
+    return callback(null, true);
+  }
+  return callback(null, false);
+}
+
 export function createApp() {
   const app = express();
 
   // Middleware
-  app.use(cors());
+  app.use(cors({ origin: isAllowedOrigin }));
   app.use(express.json());
 
   // Request logging in development (status + duration make failures diagnosable)
@@ -62,11 +78,30 @@ export function createApp() {
   });
 
   // Centralized error handler
+  // Client errors raised by middleware (malformed JSON, oversized body) carry
+  // their own 4xx status and must not be reported as server crashes.
   app.use((err, req, res, next) => {
+    if (res.headersSent) return next(err);
+
+    const status = Number(err?.status || err?.statusCode);
+    if (status >= 400 && status < 500) {
+      return res.status(status).json({
+        error:
+          err.type === 'entity.parse.failed'
+            ? 'Request body is not valid JSON.'
+            : err.expose
+              ? err.message
+              : 'Bad request.',
+        code: err.type || 'bad_request',
+      });
+    }
+
     console.error('Server error:', err);
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Internal server error',
-      message: err.message,
+      // Internal messages can reveal file paths or SQL; keep them in logs only
+      // outside development.
+      ...(config.nodeEnv === 'development' ? { message: err.message } : {}),
     });
   });
 

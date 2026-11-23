@@ -23,7 +23,7 @@ export default function LockedConceptModal({
     <Modal
       isOpen={Boolean(concept)}
       onClose={onClose}
-      title="Locked concept"
+      title="This lesson is locked"
       subtitle={concept?.title}
       maxWidth="max-w-lg"
     >
@@ -33,10 +33,10 @@ export default function LockedConceptModal({
             <Lock className="h-4 w-4" />
           </span>
           <div>
-            <p className="text-sm font-bold text-navy-950">Complete these prerequisites first</p>
+            <p className="text-sm font-bold text-navy-950">Finish these lessons first</p>
             <p className="mt-1 text-xs leading-relaxed text-slate-600">
-              <strong className="font-semibold text-navy-900">{concept?.title}</strong> unlocks only
-              after every prerequisite below is completed.
+              <strong className="font-semibold text-navy-900">{concept?.title}</strong> builds on the
+              lessons below. Finish them and it opens automatically.
             </p>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function LockedConceptModal({
                       ? 'Ready to start now'
                       : prerequisiteMissing.length > 0
                         ? `Still needs: ${prerequisiteMissing.map((item) => item.title).join(', ')}`
-                        : 'Complete the remaining prerequisites'}
+                        : 'Finish the earlier lessons first'}
                   </p>
                 </div>
                 {isReady ? (

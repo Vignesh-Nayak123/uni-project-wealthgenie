@@ -1,0 +1,80 @@
+{
+  "runDirectory": "experiments/results/run-20261123T094623Z-seed-20261027",
+  "generatedAt": "2026-11-23T09:46:23.796Z",
+  "experimentVersion": "1.0.0",
+  "datasetSchemaVersion": "1.0.0",
+  "seed": 20261027,
+  "node": "v22.16.0",
+  "files": [
+    {
+      "name": "dataset.json",
+      "bytes": 125474,
+      "sha256": "d959321f3d57ec5a57a05c6ed6e53b8b74fcd3f51812e4a106227337244dcf75"
+    },
+    {
+      "name": "profiles.csv",
+      "bytes": 32326,
+      "sha256": "26acb634bcadbb6b07dd928e22e48c8e1b3c67dc54e38255711cce6837ec459a"
+    },
+    {
+      "name": "scenario-cases.csv",
+      "bytes": 115969,
+      "sha256": "6e2d0b69041ce0994e1a633d555bd9214ebec33a6ae5b36ecc6eaba2e6ed8ded"
+    },
+    {
+      "name": "metric-results.csv",
+      "bytes": 2864379,
+      "sha256": "27e8d54f54e779f4298f225792b26513de73a71d6a87616cf3f779c5071e11a1"
+    },
+    {
+      "name": "goal-results.csv",
+      "bytes": 2268100,
+      "sha256": "7c9cc330d1996c80bfdd7966c594e36d82602236039f713e5ac2c33d666b7729"
+    },
+    {
+      "name": "comparison-results.csv",
+      "bytes": 663839,
+      "sha256": "d7149d4f761720f37c6b3a247dd60a97e9f9dca067db3f9b9a312e25c58bd483"
+    },
+    {
+      "name": "recommendation-results.csv",
+      "bytes": 1822305,
+      "sha256": "fb29af935194a810ba431594c3391d80d68fd25a294f758f5d7b794eda599bf7"
+    },
+    {
+      "name": "validation-results.csv",
+      "bytes": 5781,
+      "sha256": "d56aa6342fc758824834397945be13b948b48fa4388d43d76315a9ce2af8a2bd"
+    },
+    {
+      "name": "invariants.csv",
+      "bytes": 172013,
+      "sha256": "d00ea1ece7043f66ece4b9a7dbb2c25cc326d99795695b113b1d88bbe52e2569"
+    },
+    {
+      "name": "explainability-summary.csv",
+      "bytes": 15791,
+      "sha256": "d842584515b54832c4bb6bf7f4fb7ffa0c36ee251fa4d8d34a03cf2ed2dcebf4"
+    },
+    {
+      "name": "explainability-failures.csv",
+      "bytes": 60,
+      "sha256": "98f38fa27414656326a196e750c7a216186a4cf6db9b581cb7ec97f8e29323a5"
+    },
+    {
+      "name": "failures.csv",
+      "bytes": 108,
+      "sha256": "c39019cbbd01f621da1ea4f56e758820d03d0975be15a702645365bb29666d2c"
+    },
+    {
+      "name": "report.md",
+      "bytes": 24735,
+      "sha256": "9932919f9b08e4d8ccb065d870e1ebac15282693dafb4acfecaf6beb6241ee32"
+    },
+    {
+      "name": "run.json",
+      "bytes": 143613,
+      "sha256": "6c6b73c0502643c7d81b2110c89a2cd267ba4a823090ea34038f358249774682"
+    }
+  ]
+}

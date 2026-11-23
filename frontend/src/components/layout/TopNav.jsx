@@ -7,10 +7,11 @@ import {
   User,
   Target,
   LogOut,
-  Calculator,
+  ClipboardCheck,
+  Clock,
 } from 'lucide-react';
-import { MOCK_LESSONS } from '../../data/mockData';
 import { useAuth } from '../../context/AuthContext';
+import { useCurriculum } from '../../hooks/useLearningOverview';
 
 function initials(name, email) {
   const source = (name || email || 'WG').trim();
@@ -21,8 +22,11 @@ function initials(name, email) {
     .join('');
 }
 
-export default function TopNav({ onToggleMobileSidebar, onNavigate }) {
+const MAX_RESULTS = 8;
+
+export default function TopNav({ onToggleMobileSidebar, onNavigate, onOpenLesson }) {
   const { user, profile, signOut } = useAuth();
+  const { concepts, lessons } = useCurriculum();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -50,19 +54,25 @@ export default function TopNav({ onToggleMobileSidebar, onNavigate }) {
     return () => document.removeEventListener('mousedown', handleOutsideClick);
   }, []);
 
-  const filteredLessons = searchQuery.trim()
-    ? MOCK_LESSONS.filter(
-        (l) =>
-          l.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          l.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          l.summary.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+  // Searches the real lesson roadmap (titles, topics and what each lesson
+  // teaches), so every result opens an actual lesson.
+  const query = searchQuery.trim().toLowerCase();
+  const filteredLessons = query
+    ? concepts
+        .filter((concept) => {
+          const summary = lessons[concept.id]?.summary || '';
+          return [concept.title, concept.category, summary].some((text) =>
+            String(text).toLowerCase().includes(query)
+          );
+        })
+        .slice(0, MAX_RESULTS)
     : [];
 
-  const handleSelectSearchResult = () => {
+  const handleSelectSearchResult = (conceptId) => {
     setShowSearchResults(false);
     setSearchQuery('');
-    onNavigate('learn');
+    if (onOpenLesson) onOpenLesson(conceptId);
+    else onNavigate('learn');
   };
 
   const goTo = (tabId) => {
@@ -71,7 +81,7 @@ export default function TopNav({ onToggleMobileSidebar, onNavigate }) {
   };
 
   return (
-    <header className="sticky top-0 z-20 bg-white/95 backdrop-blur-xs border-b border-slate-200">
+    <header className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-slate-200">
       <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
         {/* Left: Mobile Menu Toggle */}
         <div className="flex items-center gap-3">
@@ -99,9 +109,9 @@ export default function TopNav({ onToggleMobileSidebar, onNavigate }) {
                 setShowSearchResults(true);
               }}
               onFocus={() => setShowSearchResults(true)}
-              placeholder="Search lessons, topics, terms (e.g. index fund)..."
+              placeholder="Search lessons, e.g. SIP, inflation, UPI..."
               className="w-full pl-9 pr-8 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-navy-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-genie-500 focus:ring-2 focus:ring-genie-100 transition-all"
-              aria-label="Search financial topics and lessons"
+              aria-label="Search lessons"
             />
             {searchQuery && (
               <button
@@ -119,7 +129,7 @@ export default function TopNav({ onToggleMobileSidebar, onNavigate }) {
           {showSearchResults && searchQuery.trim() && (
             <div className="absolute left-0 right-0 mt-2 bg-white rounded-xl shadow-elevated border border-slate-200/90 py-2 z-30 overflow-hidden">
               <div className="px-3 py-1.5 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-                Matching Educational Content ({filteredLessons.length})
+                Lessons ({filteredLessons.length})
               </div>
               {filteredLessons.length > 0 ? (
                 <div className="max-h-64 overflow-y-auto">
@@ -127,7 +137,7 @@ export default function TopNav({ onToggleMobileSidebar, onNavigate }) {
                     <button
                       key={lesson.id}
                       type="button"
-                      onClick={handleSelectSearchResult}
+                      onClick={() => handleSelectSearchResult(lesson.id)}
                       className="w-full text-left px-3.5 py-2 hover:bg-slate-50 flex items-start gap-2.5 transition-colors group"
                     >
                       <BookOpen className="w-4 h-4 text-genie-600 mt-0.5 shrink-0" />
@@ -137,8 +147,15 @@ export default function TopNav({ onToggleMobileSidebar, onNavigate }) {
                         </div>
                         <div className="text-xs text-slate-500 flex items-center gap-2 mt-0.5">
                           <span>{lesson.category}</span>
-                          <span>•</span>
-                          <span>{lesson.readTime}</span>
+                          {lessons[lesson.id]?.estimatedMinutes && (
+                            <>
+                              <span aria-hidden="true">•</span>
+                              <span className="inline-flex items-center gap-1">
+                                <Clock className="w-3 h-3" />
+                                {lessons[lesson.id].estimatedMinutes} min
+                              </span>
+                            </>
+                          )}
                         </div>
                       </div>
                     </button>
@@ -146,7 +163,7 @@ export default function TopNav({ onToggleMobileSidebar, onNavigate }) {
                 </div>
               ) : (
                 <div className="px-4 py-3 text-xs text-slate-500 text-center">
-                  No matching lessons found for &ldquo;{searchQuery}&rdquo;. Try asking WealthGenie AI directly!
+                  No lessons match &ldquo;{searchQuery}&rdquo;. Try a simpler word, like &ldquo;savings&rdquo; or &ldquo;loan&rdquo;.
                 </div>
               )}
             </div>
@@ -185,7 +202,7 @@ export default function TopNav({ onToggleMobileSidebar, onNavigate }) {
             </button>
 
             {showProfileMenu && (
-              <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-elevated border border-slate-200/90 py-2 z-30 animate-in fade-in zoom-in-95 duration-100">
+              <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-elevated border border-slate-200/90 py-2 z-30">
                 <div className="px-4 py-3 border-b border-slate-100">
                   <div className="text-sm font-semibold text-navy-900">{displayName}</div>
                   <div className="text-xs text-slate-500 break-all">{email}</div>
@@ -213,8 +230,8 @@ export default function TopNav({ onToggleMobileSidebar, onNavigate }) {
                     onClick={() => goTo('assessment')}
                     className="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 flex items-center gap-2"
                   >
-                    <Calculator className="w-4 h-4 text-slate-400" />
-                    <span>New Assessment</span>
+                    <ClipboardCheck className="w-4 h-4 text-slate-400" />
+                    <span>Money check-up</span>
                   </button>
                 </div>
 
@@ -232,9 +249,6 @@ export default function TopNav({ onToggleMobileSidebar, onNavigate }) {
                   </button>
                 </div>
 
-                <div className="pt-1 border-t border-slate-100 px-4 py-2 text-[11px] text-slate-400">
-                  WealthGenie Phase 0 • India Context
-                </div>
               </div>
             )}
           </div>

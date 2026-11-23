@@ -144,17 +144,17 @@ function RoadmapNode({
 
           <p className="mt-1 text-[11px] leading-relaxed text-slate-500 line-clamp-2">
             {state === 'completed'
-              ? 'Completed. Open to review the AI lesson.'
+              ? 'Finished. Open to review the lesson.'
               : state === 'available'
-                ? 'Prerequisites met. Open the AI lesson.'
-                : `Complete ${missingPrerequisites.length === 1 ? 'the prerequisite' : 'the prerequisites'} to unlock.`}
+                ? 'Ready. Open to start the lesson.'
+                : `Finish ${missingPrerequisites.length === 1 ? 'the lesson' : 'the lessons'} below to unlock.`}
           </p>
         </div>
       </div>
 
       {concept.prerequisites.length > 0 && (
         <div className="mt-2.5 flex items-center gap-1.5 border-t border-slate-100 pt-2 text-[10px] text-slate-400">
-          <span className="shrink-0 font-semibold text-slate-500">Requires:</span>
+          <span className="shrink-0 font-semibold text-slate-500">First finish:</span>
           <span className="line-clamp-1">{prerequisiteTitles.join(' · ')}</span>
         </div>
       )}

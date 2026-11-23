@@ -1,4 +1,10 @@
-import { loadState, saveState, defaultState, INITIAL_CASH } from './persistence.js';
+import {
+  loadState,
+  saveState,
+  defaultState,
+  INITIAL_CASH,
+  DEFAULT_ACCOUNT_ID,
+} from './persistence.js';
 import { getPrice } from './priceProvider.js';
 
 let lock = Promise.resolve();
@@ -8,11 +14,11 @@ function withLock(fn) {
   return next;
 }
 
-function getAccount() {
-  let state = loadState();
+function getAccount(accountId) {
+  let state = loadState(accountId);
   if (!state) {
     state = defaultState();
-    saveState(state);
+    saveState(state, accountId);
   }
   return state;
 }
@@ -51,22 +57,23 @@ function tradeMeta(priceInfo, at) {
   };
 }
 
-export function initAccount() {
+export function initAccount(accountId = DEFAULT_ACCOUNT_ID) {
   return withLock(() => {
-    let state = loadState();
+    let state = loadState(accountId);
     if (state) return { status: 'exists', account: summarize(state) };
     state = defaultState();
-    saveState(state);
+    saveState(state, accountId);
     return { status: 'initialized', account: summarize(state) };
   });
 }
 
 export function buy(symbol, quantity, options = {}) {
+  const accountId = options.accountId || DEFAULT_ACCOUNT_ID;
   return withLock(() => {
     const q = Number(quantity);
     if (!Number.isInteger(q) || q <= 0) throw new Error('Quantity must be a positive whole number.');
     const priceInfo = resolveOrderPrice(symbol, options);
-    const state = getAccount();
+    const state = getAccount(accountId);
     const cost = round2(priceInfo.price * q);
     if (cost > state.cash) throw new Error('Insufficient virtual cash.');
     const sym = priceInfo.symbol;
@@ -85,17 +92,18 @@ export function buy(symbol, quantity, options = {}) {
       at,
       ...tradeMeta(priceInfo, at),
     });
-    saveState(state);
+    saveState(state, accountId);
     return { status: 'success', trade: state.history[state.history.length - 1], account: summarize(state) };
   });
 }
 
 export function sell(symbol, quantity, options = {}) {
+  const accountId = options.accountId || DEFAULT_ACCOUNT_ID;
   return withLock(() => {
     const q = Number(quantity);
     if (!Number.isInteger(q) || q <= 0) throw new Error('Quantity must be a positive whole number.');
     const priceInfo = resolveOrderPrice(symbol, options);
-    const state = getAccount();
+    const state = getAccount(accountId);
     const sym = priceInfo.symbol;
     const holding = state.holdings[sym];
     if (!holding || holding.quantity < q) throw new Error('Insufficient holdings.');
@@ -116,31 +124,31 @@ export function sell(symbol, quantity, options = {}) {
       at,
       ...tradeMeta(priceInfo, at),
     });
-    saveState(state);
+    saveState(state, accountId);
     return { status: 'success', trade: state.history[state.history.length - 1], account: summarize(state) };
   });
 }
 
-export function portfolio() {
+export function portfolio(accountId = DEFAULT_ACCOUNT_ID) {
   return withLock(() => {
-    const state = getAccount();
+    const state = getAccount(accountId);
     return summarize(state);
   });
 }
 
-export function history() {
+export function history(accountId = DEFAULT_ACCOUNT_ID) {
   return withLock(() => {
-    const state = getAccount();
+    const state = getAccount(accountId);
     return { history: state.history };
   });
 }
 
-export function buyAt(symbol, quantity, price) {
+export function buyAt(symbol, quantity, price, accountId = DEFAULT_ACCOUNT_ID) {
   return withLock(() => {
     const q = Number(quantity);
     if (!Number.isInteger(q) || q <= 0) throw new Error('Quantity must be a positive whole number.');
     if (typeof price !== 'number' || !Number.isFinite(price) || price <= 0) throw new Error('Invalid price.');
-    const state = getAccount();
+    const state = getAccount(accountId);
     const sym = String(symbol).toUpperCase();
     const cost = round2(price * q);
     if (cost > state.cash) throw new Error('Insufficient virtual cash.');
@@ -164,17 +172,17 @@ export function buyAt(symbol, quantity, price) {
       priceTimestamp: null,
       executedAt: at,
     });
-    saveState(state);
+    saveState(state, accountId);
     return { status: 'success', trade: state.history[state.history.length - 1], account: summarize(state) };
   });
 }
 
-export function sellAt(symbol, quantity, price) {
+export function sellAt(symbol, quantity, price, accountId = DEFAULT_ACCOUNT_ID) {
   return withLock(() => {
     const q = Number(quantity);
     if (!Number.isInteger(q) || q <= 0) throw new Error('Quantity must be a positive whole number.');
     if (typeof price !== 'number' || !Number.isFinite(price) || price <= 0) throw new Error('Invalid price.');
-    const state = getAccount();
+    const state = getAccount(accountId);
     const sym = String(symbol).toUpperCase();
     const holding = state.holdings[sym];
     if (!holding || holding.quantity < q) throw new Error('Insufficient holdings.');
@@ -200,7 +208,7 @@ export function sellAt(symbol, quantity, price) {
       priceTimestamp: null,
       executedAt: at,
     });
-    saveState(state);
+    saveState(state, accountId);
     return { status: 'success', trade: state.history[state.history.length - 1], account: summarize(state) };
   });
 }

@@ -18,26 +18,29 @@ async function run(res, fn) {
   }
 }
 
+// req.user is set by requireAuth; every account is scoped to the verified user.
+const accountOf = (req) => req.user.id;
+
 export async function init(req, res) {
-  await run(res, () => initAccount());
+  await run(res, () => initAccount(accountOf(req)));
 }
 
 export async function buyOrder(req, res) {
   const { symbol, quantity, allowStale } = req.body || {};
-  await run(res, () => buy(symbol, quantity, { allowStale: Boolean(allowStale) }));
+  await run(res, () => buy(symbol, quantity, { allowStale: Boolean(allowStale), accountId: accountOf(req) }));
 }
 
 export async function sellOrder(req, res) {
   const { symbol, quantity, allowStale } = req.body || {};
-  await run(res, () => sell(symbol, quantity, { allowStale: Boolean(allowStale) }));
+  await run(res, () => sell(symbol, quantity, { allowStale: Boolean(allowStale), accountId: accountOf(req) }));
 }
 
 export function getPortfolio(req, res) {
-  run(res, () => portfolio());
+  run(res, () => portfolio(accountOf(req)));
 }
 
 export function getHistory(req, res) {
-  run(res, () => history());
+  run(res, () => history(accountOf(req)));
 }
 
 export function getInstruments(req, res) {
@@ -52,11 +55,11 @@ export function getInstruments(req, res) {
   });
 }
 
-export async function replayStart(req, res) { await run(res, () => replay.start()); }
-export async function replayGet(req, res) { await run(res, () => replay.get()); }
-export async function replayNext(req, res) { await run(res, () => replay.next()); }
+export async function replayStart(req, res) { await run(res, () => replay.start(accountOf(req))); }
+export async function replayGet(req, res) { await run(res, () => replay.get(accountOf(req))); }
+export async function replayNext(req, res) { await run(res, () => replay.next(accountOf(req))); }
 export async function replayTrade(req, res) {
   const { side, quantity } = req.body || {};
-  await run(res, () => replay.trade(side, quantity));
+  await run(res, () => replay.trade(side, quantity, accountOf(req)));
 }
 export function replayHold(req, res) { res.json(replay.hold()); }

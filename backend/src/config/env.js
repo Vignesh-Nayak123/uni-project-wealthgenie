@@ -44,16 +44,29 @@ const supabasePublishableKey = (
   ''
 ).trim();
 
+// Previous default (gemini-1.5-flash) is a retired model; this one is verified
+// to work with the lesson JSON schema.
+export const DEFAULT_GEMINI_MODEL = 'gemini-3.5-flash';
+
 export const config = {
   port: parseInt(process.env.PORT || '5001', 10),
   nodeEnv: process.env.NODE_ENV || 'development',
   geminiApiKey: process.env.GEMINI_API_KEY || '',
-  geminiModel: process.env.GEMINI_MODEL || 'gemini-1.5-flash',
+  geminiModel: (process.env.GEMINI_MODEL || '').trim() || DEFAULT_GEMINI_MODEL,
+  // Optional: "low" cuts latency/cost on models that support thinkingLevel.
+  geminiThinkingLevel: (process.env.GEMINI_THINKING_LEVEL || '').trim(),
+  aiTimeoutMs: parseInt(process.env.AI_TIMEOUT_MS || '45000', 10),
   isAiConfigured: Boolean(process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.trim().length > 0),
   supabaseUrl,
   supabasePublishableKey,
   isSupabaseConfigured: Boolean(supabaseUrl && supabasePublishableKey),
   // Upstox market data feed (server-side only; never sent to the frontend).
   upstoxAccessToken: (process.env.UPSTOX_ACCESS_TOKEN || '').trim(),
+  // Browser origins allowed to call the API (comma separated), e.g.
+  // CORS_ORIGINS=https://wealthgenie.example.in
+  corsOrigins: (process.env.CORS_ORIGINS || '')
+    .split(',')
+    .map((origin) => origin.trim().replace(/\/$/, ''))
+    .filter(Boolean),
 };
 config.isUpstoxConfigured = config.upstoxAccessToken.length > 0;

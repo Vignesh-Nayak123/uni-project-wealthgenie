@@ -68,13 +68,13 @@ export default function MyFinancesPage({ onNavigate }) {
         <div>
           <div className="flex items-center gap-2 text-xs font-semibold text-genie-700 uppercase tracking-wider mb-1">
             <Wallet className="w-3.5 h-3.5" />
-            <span>Personal Cash Flow & Liquid Reserves</span>
+            <span>Your cash flow and savings</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-navy-950 tracking-tight">
             My Finances
           </h1>
           <p className="text-sm text-slate-600 mt-0.5">
-            A snapshot built from the financial assessment saved to your account.
+            A simple picture of your money, built from your latest money check-up.
           </p>
         </div>
 
@@ -85,7 +85,7 @@ export default function MyFinancesPage({ onNavigate }) {
             className="text-xs font-semibold px-3.5 py-2 rounded-lg bg-navy-900 hover:bg-navy-800 text-white transition-colors flex items-center gap-1.5 shadow-2xs"
           >
             <Calculator className="w-3.5 h-3.5" />
-            <span>{latestAssessment ? 'Run new assessment' : 'Run assessment'}</span>
+            <span>{latestAssessment ? 'Update check-up' : 'Start check-up'}</span>
           </button>
           <button
             type="button"
@@ -125,11 +125,11 @@ export default function MyFinancesPage({ onNavigate }) {
           <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400 mb-4">
             <Wallet className="w-7 h-7" />
           </div>
-          <h3 className="text-lg font-bold text-navy-900 mb-1">No Financial Snapshot Yet</h3>
+          <h3 className="text-lg font-bold text-navy-900 mb-1">Nothing to show yet</h3>
           <p className="text-sm text-slate-500 max-w-md mx-auto mb-6">
-            WealthGenie does not fabricate account balances or transactions.
-            Run a financial assessment to save your income, expenses, savings,
-            and goal projection to your account.
+            Do a quick money check-up with your income, spending and savings.
+            This page then shows where your money goes, using only the numbers
+            you enter.
           </p>
           <button
             type="button"
@@ -137,7 +137,7 @@ export default function MyFinancesPage({ onNavigate }) {
             className="px-5 py-2.5 bg-navy-900 text-white rounded-lg text-xs font-semibold hover:bg-navy-800 transition-colors inline-flex items-center gap-2 shadow-2xs"
           >
             <Sparkles className="w-4 h-4 text-genie-400" />
-            <span>Run your first assessment</span>
+            <span>Start money check-up</span>
           </button>
         </Card>
       ) : (
@@ -146,7 +146,7 @@ export default function MyFinancesPage({ onNavigate }) {
           <section aria-labelledby="snapshot-heading">
             <div className="flex items-center justify-between mb-3">
               <h2 id="snapshot-heading" className="text-base font-bold text-navy-950">
-                Latest Assessment Snapshot
+                Latest check-up
               </h2>
               <span className="text-xs text-slate-400">
                 {formatAssessmentDate(latestAssessment.createdAt)}
@@ -330,7 +330,7 @@ export default function MyFinancesPage({ onNavigate }) {
           <section aria-labelledby="history-heading">
             <div className="flex items-center justify-between mb-3">
               <h2 id="history-heading" className="text-base font-bold text-navy-950">
-                Assessment History
+                Past check-ups
               </h2>
               <span className="text-xs text-slate-400">
                 {assessments.length} saved

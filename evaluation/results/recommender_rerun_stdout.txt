@@ -1,0 +1,69 @@
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":74,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":34,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":29,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":28,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":22,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":19,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":19,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":20,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":19,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":17,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":18,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":17,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":37,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":25,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":26,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":26,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":27,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":56,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":33,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":36,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":29,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":29,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":48,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":27,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":28,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":53,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":31,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":36,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":31,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":33,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":46,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":35,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":30,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":29,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":30,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":29,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":20,"categoriesRanked":3,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":32,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+{"route":"POST /api/recommendations","userId":"evaluation-runner","status":200,"durationMs":31,"categoriesRanked":7,"fundsRecommended":6,"fundStageStatus":"connected","readinessStatus":"ready"}
+evaluation report written:
+  data/reports/evaluation_report.json
+  data/reports/evaluation_report.md
+{
+  "latency": {
+    "conservative": {
+      "p50": 26,
+      "p95": 192
+    },
+    "moderate": {
+      "p50": 34,
+      "p95": 64
+    },
+    "aggressive": {
+      "p50": 35,
+      "p95": 62
+    }
+  },
+  "determinism": true,
+  "violations": 0,
+  "recommendationsChecked": 216,
+  "tests": {
+    "total": 484,
+    "passed": 484,
+    "failed": 0,
+    "suites": 110
+  }
+}
+
+exit=0

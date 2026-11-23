@@ -106,8 +106,8 @@ export default function AuthPage() {
             <div className="font-bold text-xl text-navy-950 tracking-tight">
               WealthGenie
             </div>
-            <p className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">
-              Financial Literacy
+            <p className="text-[11px] font-medium text-slate-500">
+              Money made simple
             </p>
           </div>
         </div>
@@ -119,8 +119,8 @@ export default function AuthPage() {
             </h1>
             <p className="text-sm text-slate-500 mt-1">
               {isSignup
-                ? 'Save assessments and goals securely to your account.'
-                : 'Sign in to access your assessments, goals, and dashboard.'}
+                ? 'Learn about money in plain language and plan with your own numbers.'
+                : 'Sign in to continue your lessons, goals and money check-ups.'}
             </p>
           </div>
 
@@ -265,8 +265,8 @@ export default function AuthPage() {
 
           {isSignup && (
             <p className="mt-3 text-[11px] text-slate-400 text-center leading-relaxed">
-              If email confirmation is enabled in Supabase, you will need to
-              confirm your address before signing in.
+              We may send you an email to confirm your address. Please open
+              it before signing in.
             </p>
           )}
         </Card>
@@ -274,8 +274,8 @@ export default function AuthPage() {
         <div className="mt-5 flex items-start justify-center gap-2 text-[11px] text-slate-500 text-center">
           <ShieldCheck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
           <span>
-            Your account data is protected by Supabase Auth and row-level
-            security. Google sign-in is intentionally not enabled yet.
+            Your information is private to your account. WealthGenie never
+            asks for bank passwords, PINs or OTPs.
           </span>
         </div>
       </div>

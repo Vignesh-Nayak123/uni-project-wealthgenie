@@ -1,0 +1,7 @@
+case,description,n_flows,app_xirr_pct,reference_xirr_pct_365_25,reference_xirr_pct_365_excel,reference_method,abs_error_pct_points,pass
+two_flow_gain_leap_year,"-10,000 then +11,000 one calendar year later (366 days, 2020 leap year)",2,9.98,9.978518,9.971359,closed form (FV/PV)^(1/t) - 1,0.0014817541602933915,True
+two_flow_two_years,"-10,000 then +12,100 two calendar years later (730 days)",2,10.01,10.007181,10.0,closed form (FV/PV)^(1/t) - 1,0.002818861648938409,True
+two_flow_loss,"-10,000 then +8,000 one calendar year later (365 days)",2,-20.01,-20.012226,-20.0,closed form (FV/PV)^(1/t) - 1,0.0022261095764584127,True
+three_flow_staggered,"-1,000, -1,000 a year later, +2,310 two years after start",3,10.01,10.007181,10.0,scipy brentq root of NPV,0.0028188616487678786,True
+monthly_sip_12,"12 monthly -1,000 contributions in 2023, +13,000 on 2024-01-01",13,15.68,15.681369,15.669835,scipy brentq root of NPV,0.0013685598967612123,True
+invalid_no_inflow,"only outflows: XIRR undefined, app must return null",2,,,,undefined (no sign change),,True

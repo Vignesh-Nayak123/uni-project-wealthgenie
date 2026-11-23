@@ -1,0 +1,11 @@
+check,passed,total,failed,rate
+Formula correctness (14 core metrics vs independent reference),22988,22988,0,1
+Goal calculations (11 fields),18062,18062,0,1
+Recommendation trigger set (exact match),1642,1642,0,1
+Recommendation per-ID decisions,11494,11494,0,1
+What-if scenario comparison,148680,148680,0,1
+Determinism (repeat runs identical),1642,1642,0,1
+Directional invariants (applicable cases),1172,1172,0,1
+Explainability coverage,261857,261857,0,1
+Validation - invalid inputs rejected with correct message,31,31,0,1
+Validation - valid inputs accepted,5,5,0,1

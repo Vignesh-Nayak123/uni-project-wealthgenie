@@ -1,14 +1,41 @@
 import { describe, it, before, after, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { createApp } from '../backend/src/app.js';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { createRequire } from 'node:module';
+import { createPaperTradingRouter } from '../backend/src/routes/paperTrading.routes.js';
 import { resetState } from '../backend/src/services/paperTrading/persistence.js';
+
+// Never read or write the real per-user paper trading files from tests.
+process.env.PAPER_TRADING_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'wg-paper-'));
+
+// express is a backend dependency, not a root one.
+const express = createRequire(new URL('../backend/package.json', import.meta.url))('express');
+
+const TEST_USER_ID = '00000000-0000-4000-8000-0000000000aa';
+
+function injectUser(req, res, next) {
+  const userId = req.headers['x-test-user'];
+  if (!userId) return res.status(401).json({ code: 'unauthorized' });
+  req.user = { id: userId };
+  return next();
+}
 
 describe('Paper Trading API', () => {
   let server;
   let baseUrl;
 
   before(async () => {
-    const app = createApp();
+    const app = express();
+    app.use(express.json());
+    app.use((req, res, next) => {
+      // Default every request in this suite to the same signed-in user unless
+      // a test opts out with an explicit empty header.
+      if (req.headers['x-test-user'] === undefined) req.headers['x-test-user'] = TEST_USER_ID;
+      next();
+    });
+    app.use('/api/paper-trading', createPaperTradingRouter({ requireAuth: injectUser }));
     await new Promise((resolve) => {
       server = app.listen(0, () => {
         baseUrl = `http://127.0.0.1:${server.address().port}`;
@@ -19,7 +46,10 @@ describe('Paper Trading API', () => {
 
   after(async () => await new Promise((resolve) => server.close(resolve)));
 
-  beforeEach(() => resetState());
+  beforeEach(() => {
+    resetState(TEST_USER_ID);
+    resetState('00000000-0000-4000-8000-0000000000bb');
+  });
 
   it('init repeated returns exists', async () => {
     await fetch(`${baseUrl}/api/paper-trading/init`, { method: 'POST' });
@@ -61,5 +91,20 @@ describe('Paper Trading API', () => {
     const res = await fetch(`${baseUrl}/api/paper-trading/sell`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ symbol: 'RELIANCE', quantity: 1 }) });
     const body = await res.json();
     assert.equal(body.trade.realizedPnl, 0);
+  });
+
+  it('requires a signed-in user for account routes', async () => {
+    const res = await fetch(`${baseUrl}/api/paper-trading/portfolio`, { headers: { 'x-test-user': '' } });
+    assert.equal(res.status, 401);
+  });
+
+  it('keeps each user account separate', async () => {
+    const other = '00000000-0000-4000-8000-0000000000bb';
+    await fetch(`${baseUrl}/api/paper-trading/buy`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ symbol: 'TCS', quantity: 2 }) });
+    const mine = await (await fetch(`${baseUrl}/api/paper-trading/portfolio`)).json();
+    const theirs = await (await fetch(`${baseUrl}/api/paper-trading/portfolio`, { headers: { 'x-test-user': other } })).json();
+    assert.equal(mine.holdings.length, 1);
+    assert.equal(theirs.holdings.length, 0);
+    assert.equal(theirs.cash, 100000);
   });
 });

@@ -1,0 +1,10 @@
+# Python packages used by evaluation/evaluate.py (versions the reported run used).
+# Install into the repo virtualenv:  .venv/Scripts/python.exe -m pip install -r evaluation/requirements.txt
+# Node >= 20 is also required (tested on v22.16.0), with backend deps: npm --prefix backend install
+scikit-learn==1.9.1
+pandas==3.1.0
+numpy==2.5.4
+scipy==1.18.1
+statsmodels==0.15.0
+matplotlib==3.11.2
+seaborn==0.13.2

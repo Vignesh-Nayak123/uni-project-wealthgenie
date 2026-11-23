@@ -85,13 +85,13 @@ export default function ProfilePage() {
       <div>
         <div className="flex items-center gap-2 text-xs font-semibold text-genie-700 uppercase tracking-wider mb-1">
           <User className="w-3.5 h-3.5" />
-          <span>Account & Profile</span>
+          <span>Your account</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-navy-950 tracking-tight">
           Profile
         </h1>
         <p className="text-sm text-slate-600 mt-0.5">
-          Your Supabase account identity and the profile linked to it.
+          Your name, email and a summary of what you have saved.
         </p>
       </div>
 
@@ -113,7 +113,7 @@ export default function ProfilePage() {
             <p className="text-xs text-slate-500 break-all">{email}</p>
             <Badge variant="green" size="xs" className="mt-3">
               <ShieldCheck className="w-3 h-3" />
-              <span>Supabase account</span>
+              <span>Verified account</span>
             </Badge>
           </div>
 
@@ -137,7 +137,7 @@ export default function ProfilePage() {
             <div className="flex items-center justify-between gap-3">
               <span className="text-slate-500 flex items-center gap-1.5">
                 <Calculator className="w-3.5 h-3.5" />
-                Assessments
+                Money check-ups
               </span>
               <span className="font-medium text-navy-900">
                 {assessments.length}
@@ -160,8 +160,8 @@ export default function ProfilePage() {
             Edit profile
           </h2>
           <p className="text-xs text-slate-500 mb-5">
-            Your email address is managed by Supabase Auth. Only the display
-            name and avatar URL can be changed here.
+            You can change your display name and profile picture here. Your
+            email address stays the same.
           </p>
 
           {profileError && (
