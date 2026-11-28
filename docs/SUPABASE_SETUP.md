@@ -52,6 +52,7 @@ order:
 3. `20261027090200_financial_goals.sql`
 4. `20261027100000_financial_scenarios.sql`
 5. `20261028120000_learning_progress.sql`
+6. `20261128090000_paper_trading_accounts.sql`
 
 ### Option A — Supabase CLI (recommended)
 
@@ -94,13 +95,16 @@ In the Supabase dashboard:
 
 After applying migrations, sign in as two different users and confirm:
 
-- Each user sees only their own profile, assessments, goals, scenarios, and
-  learning progress.
+- Each user sees only their own profile, assessments, goals, scenarios,
+  learning progress, and practice-trading account.
 - Inserting a row with another user's `user_id` is rejected by the `with check`
   policy.
 - Updating or deleting another user's row affects zero rows.
 - `learning_progress` has one row per user (`user_id` primary key); the backend
   derives `user_id` from the verified JWT, never from the request body.
+- `paper_trading_accounts` has one row per user holding virtual cash, holdings,
+  trade history and the replay cursor. Without it, Practice Trading returns
+  `503 database_not_initialized`.
 - A saved scenario can only reference a baseline assessment owned by the same
   user; the composite foreign key on `(baseline_assessment_id, user_id)`
   enforces this at the database level.

@@ -1,9 +1,5 @@
 import { describe, it, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import {
   NIFTYBEES_INSTRUMENT_KEY,
   marketFeed,
@@ -14,11 +10,7 @@ import { buy, sell, portfolio } from '../backend/src/services/paperTrading/simul
 import * as replay from '../backend/src/services/paperTrading/replayService.js';
 import { getPrice } from '../backend/src/services/paperTrading/priceProvider.js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// Never read or write the real per-user paper trading files from tests.
-process.env.PAPER_TRADING_DATA_DIR = fs.mkdtempSync(
-  path.join(os.tmpdir(), 'wg-paper-live-')
-);
+// Direct service calls use the in-memory default store, never Supabase or disk.
 
 const savedWatchlist = marketFeed.watchlist;
 const savedSnapshots = new Map(marketFeed.snapshots);
@@ -26,7 +18,7 @@ const savedCandles = new Map(marketFeed.candles);
 
 function clearPaperState() {
   // Removes both the default account and its replay session.
-  resetState();
+  return resetState();
 }
 
 function seedLiveTick({
@@ -64,15 +56,15 @@ function seedLiveTick({
   });
 }
 
-beforeEach(() => {
-  clearPaperState();
+beforeEach(async () => {
+  await clearPaperState();
   marketFeed.snapshots.clear();
   marketFeed.candles.clear();
   marketFeed.watchlist = [];
   marketFeed.marketSummary = summarizeMarketInfo(null);
 });
 
-afterEach(() => {
+afterEach(async () => {
   if (marketFeed.tickTimer) {
     clearTimeout(marketFeed.tickTimer);
     marketFeed.tickTimer = null;
@@ -81,7 +73,7 @@ afterEach(() => {
   marketFeed.snapshots = savedSnapshots;
   marketFeed.candles = savedCandles;
   marketFeed.lastTickAt = null;
-  clearPaperState();
+  await clearPaperState();
 });
 
 describe('Paper trading with live Upstox prices', () => {

@@ -444,7 +444,7 @@ Runs a deterministic monthly SIP back-test using genuine AMFI NAV observations f
 
 ## Practice (Paper) Trading Endpoints
 
-All `/api/paper-trading/*` routes except `GET /instruments` require `Authorization: Bearer <Supabase access token>`. Each signed-in user has a private virtual account (₹1,00,000 starting cash) and a private historical-replay session, keyed by the verified user id. Requests without a valid token return `401`.
+All `/api/paper-trading/*` routes except `GET /instruments` require `Authorization: Bearer <Supabase access token>`. Each signed-in user has a private virtual account (₹1,00,000 starting cash) and a private historical-replay session, keyed by the verified user id and stored in the Supabase `paper_trading_accounts` table (one row per user). Requests without a valid token return `401`; if the table has not been migrated, account routes return `503` with `code: database_not_initialized`.
 
 | Method | Path | Purpose |
 |---|---|---|

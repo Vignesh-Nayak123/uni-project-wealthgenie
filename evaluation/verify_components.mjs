@@ -17,8 +17,7 @@
  */
 process.env.GEMINI_API_KEY = ''; // never call the LLM; deterministic only
 
-import { mkdtempSync, rmSync, writeFileSync, mkdirSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { writeFileSync, mkdirSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { performance } from 'node:perf_hooks';
@@ -26,9 +25,7 @@ import { performance } from 'node:perf_hooks';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const imp = (rel) => import(pathToFileURL(resolve(ROOT, rel)).href);
 
-// Paper trading must never touch real user files.
-const PT_DIR = mkdtempSync(join(tmpdir(), 'wg-eval-pt-'));
-process.env.PAPER_TRADING_DATA_DIR = PT_DIR;
+// Paper trading service calls use the in-memory default store (no disk, no DB).
 
 const { generateRecommendation } = await imp('backend/src/services/recommendation/index.js');
 const { getFundCatalog } = await imp('backend/src/services/recommendation/fundData.js');
@@ -233,7 +230,6 @@ for (const o of ledgerOps) {
     ledger.push({ ...o, ok: false, error: String(error.message || error) });
   }
 }
-rmSync(PT_DIR, { recursive: true, force: true });
 
 // ─── Component 5c: historical SIP arithmetic on a synthetic series ───────────
 // Calendar-daily NAV from 2023-01-01, linear growth, so every month has an

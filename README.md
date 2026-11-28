@@ -138,7 +138,7 @@ wealthgenie/
 ├── ai/                # lesson prompt and safety guardrails (ai/safety/guardrails.json)
 ├── content/           # Versioned lesson content (v1) + JSON schema + sources registry
 ├── data/              # Raw/processed datasets, provenance registry, quality reports
-├── supabase/migrations/  # profiles, assessments, goals, scenarios, learning_progress
+├── supabase/migrations/  # profiles, assessments, goals, scenarios, learning_progress, paper_trading_accounts
 ├── experiments/       # Reproducible evaluation harness (assessment engine & What-if Planner)
 ├── evaluation/        # Python evaluation pipeline for the report (results/, RESULTS.md)
 ├── ml/                # Isolated Findex research experiment (NOT used by the app)
@@ -331,7 +331,7 @@ Registered with provenance in `data/sources/sources.json`:
 4. **NAV precision artifact:** liquid/overnight-fund NAV rounding can inflate volatility estimates (penalising but never rewarding a fund); documented rather than smoothed.
 5. **~70% of merged rows lack a Riskometer** (legacy/inactive schemes); they are excluded and flagged, never imputed.
 6. **Hosted Supabase setup must include every migration** — if the `learning_progress` table is missing, Learn shows a "saved in this browser" notice and progress does not sync to the account.
-7. **Paper-trading state is stored in local JSON files** per user (`backend/src/data/paper-trading/`), not in Supabase.
+7. **Paper-trading orders are serialised per user inside one backend process.** State lives in Supabase (`paper_trading_accounts`), but run a single backend instance; scaling out would need order execution moved into a database function. The row is user-writable under RLS, so a user could edit their own virtual balance directly — acceptable for practice money, not for anything real.
 8. **Coverage is uneven:** route handlers and data-import scripts are the least-covered areas; core calculation utils, the recommendation engine and experiment harness sit at 95–98%.
 
 ### Privacy & security

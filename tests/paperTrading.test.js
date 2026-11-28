@@ -1,14 +1,11 @@
 import { describe, it, before, after, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
 import { createRequire } from 'node:module';
 import { createPaperTradingRouter } from '../backend/src/routes/paperTrading.routes.js';
-import { resetState } from '../backend/src/services/paperTrading/persistence.js';
+import { createMemoryStore, resetState } from '../backend/src/services/paperTrading/persistence.js';
 
-// Never read or write the real per-user paper trading files from tests.
-process.env.PAPER_TRADING_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'wg-paper-'));
+// The API stores accounts in Supabase; this suite swaps in an in-memory store.
+const store = createMemoryStore();
 
 // express is a backend dependency, not a root one.
 const express = createRequire(new URL('../backend/package.json', import.meta.url))('express');
@@ -35,7 +32,7 @@ describe('Paper Trading API', () => {
       if (req.headers['x-test-user'] === undefined) req.headers['x-test-user'] = TEST_USER_ID;
       next();
     });
-    app.use('/api/paper-trading', createPaperTradingRouter({ requireAuth: injectUser }));
+    app.use('/api/paper-trading', createPaperTradingRouter({ requireAuth: injectUser, storeFor: () => store }));
     await new Promise((resolve) => {
       server = app.listen(0, () => {
         baseUrl = `http://127.0.0.1:${server.address().port}`;
@@ -46,9 +43,9 @@ describe('Paper Trading API', () => {
 
   after(async () => await new Promise((resolve) => server.close(resolve)));
 
-  beforeEach(() => {
-    resetState(TEST_USER_ID);
-    resetState('00000000-0000-4000-8000-0000000000bb');
+  beforeEach(async () => {
+    await resetState(TEST_USER_ID, store);
+    await resetState('00000000-0000-4000-8000-0000000000bb', store);
   });
 
   it('init repeated returns exists', async () => {
