@@ -71,8 +71,12 @@ export async function apiRequest(
   }
 
   if (!response.ok) {
+    // Our API sends { error: "text" }, but a host answering in its place (e.g.
+    // Vercel's 404 when VITE_API_BASE_URL is missing) sends { error: { message } }.
+    const reason =
+      typeof data?.error === 'string' ? data.error : data?.error?.message;
     throw new ApiError(
-      data?.error || `Request failed with status ${response.status}.`,
+      reason || `Request failed with status ${response.status}.`,
       {
         status: response.status,
         code: data?.code || '',
