@@ -309,6 +309,11 @@ npm run experiment:publish  # also regenerates docs/RESEARCH_EVALUATION.md
 npm run experiment:verify -- experiments/results/<run>   # checksum-vs-manifest audit
 ```
 
+### Deploy (free tiers)
+- **Database:** apply every file in `supabase/migrations/` (see `docs/SUPABASE_SETUP.md`) and add the frontend URL under Supabase → Authentication → URL Configuration.
+- **Backend → Render:** New → Blueprint → this repo. [`render.yaml`](render.yaml) sets the build/start commands, health check and region; Render then asks for `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `CORS_ORIGINS` (the frontend URL) and the optional `GEMINI_API_KEY` / `UPSTOX_ACCESS_TOKEN`. The free plan sleeps after ~15 idle minutes, so the first request after that is slow.
+- **Frontend → Vercel:** import the repo with root directory `frontend` (Vite preset, output `dist`) and set `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` and `VITE_API_BASE_URL` (the Render URL). Vite bakes these in at build time, so redeploy after changing them.
+
 ## 10. Data sources, assumptions, limitations, privacy/security, future work
 
 ### Data sources

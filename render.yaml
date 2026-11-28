@@ -1,0 +1,51 @@
+# Render Blueprint for the WealthGenie backend (Express + WebSocket).
+# Render dashboard → New → Blueprint → pick this repo. Render reads this file,
+# then asks for every `sync: false` value below; they are never stored in git.
+#
+# The frontend is deployed separately (e.g. Vercel, root directory `frontend`)
+# with VITE_API_BASE_URL set to this service's https://...onrender.com URL.
+
+services:
+  - type: web
+    name: wealthgenie-api
+    runtime: node
+    plan: free
+    # Closest Render region to Indian users.
+    region: singapore
+    # Build and run from the repo root: the backend reads content/ and data/
+    # from there, so the root directory must not be narrowed to backend/.
+    buildCommand: npm --prefix backend ci
+    startCommand: npm --prefix backend start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    # Skip redeploys for frontend-only or docs-only commits.
+    buildFilter:
+      paths:
+        - backend/**
+        - content/**
+        - data/**
+        - render.yaml
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      # Render sets PORT itself; the server already reads it.
+
+      # Supabase project URL and publishable (anon) key. Never a service-role key.
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_PUBLISHABLE_KEY
+        sync: false
+      # The deployed frontend origin(s), comma separated, no trailing slash,
+      # e.g. https://wealthgenie.vercel.app
+      - key: CORS_ORIGINS
+        sync: false
+
+      # Optional: AI fallback lesson generator. Leave empty to disable.
+      - key: GEMINI_API_KEY
+        sync: false
+      # Optional: live NSE prices. Upstox tokens expire daily; leave empty to
+      # use only the practice market and historical replay.
+      - key: UPSTOX_ACCESS_TOKEN
+        sync: false
