@@ -103,13 +103,13 @@ function RoadmapNode({
       aria-label={`${concept.title}, ${stateLabel}${
         state === 'locked' && missingTitles ? `. Requires ${missingTitles}` : ''
       }`}
-      className={`group relative w-full rounded-xl border bg-white p-3.5 text-left shadow-2xs transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-genie-500 focus-visible:ring-offset-2 ${stateClasses} ${
+      className={`group pop-group press relative w-full rounded-xl border bg-white p-3.5 text-left shadow-2xs transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-genie-500 focus-visible:ring-offset-2 ${stateClasses} ${
         state === 'locked' ? 'opacity-80' : 'hover:-translate-y-0.5 hover:shadow-card'
       }`}
     >
       <div className="flex items-start gap-3">
         <span
-          className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border ${iconClasses}`}
+          className={`icon-pop mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border ${iconClasses}`}
         >
           <Icon className="h-4 w-4" />
         </span>

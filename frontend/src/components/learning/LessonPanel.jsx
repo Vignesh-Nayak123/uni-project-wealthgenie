@@ -359,7 +359,7 @@ export default function LessonPanel({
   const quizLocked = checked && evaluation?.isCorrect;
 
   return (
-    <div className="max-h-[72vh] space-y-5 overflow-y-auto pr-1 text-navy-900">
+    <div className="space-y-5 text-navy-900">
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-genie-200 bg-genie-50/70 px-3.5 py-2.5">
         <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-genie-800">
           <Sparkles className="h-3.5 w-3.5" />
@@ -408,7 +408,7 @@ export default function LessonPanel({
             return (
               <label
                 key={`${option}-${index}`}
-                className={`flex cursor-pointer items-start gap-2.5 rounded-lg border p-3 text-xs leading-relaxed transition-colors ${
+                className={`relative flex cursor-pointer items-start gap-2.5 rounded-lg border p-3 text-xs leading-relaxed transition-colors ${
                   isCorrect
                     ? 'border-genie-400 bg-genie-50 text-genie-950'
                     : isWrong

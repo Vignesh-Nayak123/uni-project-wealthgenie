@@ -20,6 +20,7 @@ import {
   Loader2,
   RefreshCw,
   Sparkles,
+  Compass,
 } from 'lucide-react';
 import {
   AreaChart,
@@ -897,7 +898,49 @@ function PersonalizedGuidance({ snapshot, onNavigate }) {
   );
 }
 
+// The page is split into three tabs so each job is easy to find.
+const EXPLORE_TABS = [
+  {
+    id: 'planner',
+    label: 'Planner',
+    icon: SlidersHorizontal,
+    hint: 'See how regular investing could grow with your own numbers.',
+  },
+  {
+    id: 'guide',
+    label: 'Guide',
+    icon: Compass,
+    hint: 'Personal guidance: are you ready to invest, and which kinds of funds fit you.',
+  },
+  {
+    id: 'historical',
+    label: 'Historical',
+    icon: History,
+    hint: 'How real Indian indexes and funds have done in the past.',
+  },
+];
+const EXPLORE_TAB_KEY = 'wealthgenie.explore.tab';
+
+function readSavedExploreTab() {
+  try {
+    const saved = window.sessionStorage.getItem(EXPLORE_TAB_KEY);
+    return EXPLORE_TABS.some((tab) => tab.id === saved) ? saved : 'planner';
+  } catch {
+    return 'planner';
+  }
+}
+
 export default function ExploreInvestmentsPage({ onNavigate }) {
+  const [activeSection, setActiveSection] = useState(readSavedExploreTab);
+  const selectSection = (id) => {
+    setActiveSection(id);
+    try {
+      window.sessionStorage.setItem(EXPLORE_TAB_KEY, id);
+    } catch {
+      // Remembering the tab is a nicety; ignore private-mode storage errors.
+    }
+  };
+
   const {
     latestAssessment,
     loading: userDataLoading,
@@ -1435,6 +1478,50 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
         )}
       </Card>
 
+      {/* Section tabs */}
+      <div
+        className="sticky top-16 z-10 -mx-1 rounded-2xl border border-slate-200 bg-white/90 p-1.5 shadow-subtle backdrop-blur"
+        role="tablist"
+        aria-label="Explore Investments sections"
+      >
+        <div className="grid grid-cols-3 gap-1.5">
+          {EXPLORE_TABS.map((tab) => {
+            const Icon = tab.icon;
+            const selected = activeSection === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                id={`explore-tab-${tab.id}`}
+                aria-selected={selected}
+                aria-controls={`explore-panel-${tab.id}`}
+                onClick={() => selectSection(tab.id)}
+                className={`pop-group press flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-left transition-colors ${
+                  selected ? 'bg-navy-900 text-white shadow-card' : 'text-slate-600 hover:bg-slate-100'
+                }`}
+              >
+                <span
+                  className={`icon-pop h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
+                    selected ? 'bg-white/15 text-white' : 'bg-slate-100 text-slate-500'
+                  }`}
+                >
+                  <Icon className="m-auto h-4 w-4" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-bold">{tab.label}</span>
+                  <span className={`hidden text-[11px] leading-snug md:block ${selected ? 'text-slate-300' : 'text-slate-400'}`}>
+                    {tab.hint}
+                  </span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {activeSection === 'planner' && (
+      <div id="explore-panel-planner" role="tabpanel" aria-labelledby="explore-tab-planner" className="fade-up space-y-8">
       {/* 2. Personalized financial snapshot */}
       {snapshot && (
         <section>
@@ -2005,11 +2092,36 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
         )}
       </Card>
 
+      <button
+        type="button"
+        onClick={() => selectSection('guide')}
+        className="lift pop-group flex w-full items-center gap-3 rounded-2xl border border-indigo-200 bg-indigo-50/60 p-4 text-left"
+      >
+        <span className="icon-pop h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-indigo-700">
+          <Compass className="m-auto h-5 w-5" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm font-bold text-navy-950">Not sure what to invest in?</span>
+          <span className="block text-xs text-slate-600">
+            Open the Guide for personal guidance: whether you are ready to invest and which kinds of funds suit you.
+          </span>
+        </span>
+        <ArrowRight className="h-4 w-4 shrink-0 text-indigo-700" />
+      </button>
+      </div>
+      )}
+
+      {activeSection === 'guide' && (
+      <div id="explore-panel-guide" role="tabpanel" aria-labelledby="explore-tab-guide" className="fade-up space-y-8">
       {/* 6. Personalized category guidance (deterministic engine) */}
       <PersonalizedGuidance snapshot={snapshot} onNavigate={onNavigate} />
+      </div>
+      )}
 
+      {activeSection === 'historical' && (
+      <div id="explore-panel-historical" role="tabpanel" aria-labelledby="explore-tab-historical" className="fade-up space-y-8">
       {/* 7. Historical Performance Lab */}
-      <div className="pt-2 border-t border-slate-200">
+      <div>
         <div className="flex flex-wrap items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center">
             <History className="w-4 h-4" />
@@ -2020,7 +2132,7 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
         <p className="text-xs text-slate-600 mt-1 max-w-3xl leading-relaxed">
           Back-tests using official NSE Nifty 50 TRI observations and verified AMFI
           mutual fund NAVs. Historical outcomes are not expected future returns and
-          are kept separate from the hypothetical planner above.
+          are kept separate from the hypothetical numbers in the Planner tab.
         </p>
       </div>
 
@@ -2685,6 +2797,9 @@ export default function ExploreInvestmentsPage({ onNavigate }) {
             </div>
           )}
         </Card>
+      )}
+
+      </div>
       )}
 
       {/* 7. Educational disclaimer and assumptions */}

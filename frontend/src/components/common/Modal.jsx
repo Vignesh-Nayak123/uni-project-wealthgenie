@@ -46,9 +46,12 @@ export default function Modal({
 
       {/* Dialog box */}
       <div
-        className={`relative w-full ${maxWidth} bg-white rounded-2xl shadow-elevated border border-slate-200/90 z-10 overflow-hidden transform transition-all my-8 animate-in fade-in zoom-in-95 duration-150`}
+        // A flex column capped to the viewport: the header stays put and only
+        // the body scrolls, so focusing a control deep in a long lesson scrolls
+        // the body instead of shifting the whole (clipped) dialog out of view.
+        className={`relative flex w-full ${maxWidth} max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] flex-col bg-white rounded-2xl shadow-elevated border border-slate-200/90 z-10 overflow-hidden modal-pop`}
       >
-        <div className="flex items-start justify-between p-5 sm:p-6 border-b border-slate-100">
+        <div className="flex shrink-0 items-start justify-between p-5 sm:p-6 border-b border-slate-100">
           <div>
             <h3 id="modal-title" className="text-lg font-semibold text-navy-900">
               {title}
@@ -67,7 +70,7 @@ export default function Modal({
           </button>
         </div>
 
-        <div className="p-5 sm:p-6">{children}</div>
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-5 sm:p-6">{children}</div>
       </div>
     </div>
   );

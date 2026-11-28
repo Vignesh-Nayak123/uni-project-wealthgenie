@@ -123,10 +123,10 @@ function formatDate(value) {
 
 function StepItem({ done, icon: Icon, title, detail, actionLabel, onAction }) {
   return (
-    <li className="flex flex-col gap-3 rounded-xl border border-slate-200/80 bg-white p-3.5 sm:flex-row sm:items-center">
+    <li className="lift pop-group flex flex-col gap-3 rounded-xl border border-slate-200/80 bg-white p-3.5 sm:flex-row sm:items-center">
       <div className="flex min-w-0 flex-1 items-start gap-3">
         <span
-          className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
+          className={`icon-pop mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
             done ? 'bg-genie-600 text-white' : 'bg-slate-100 text-slate-500'
           }`}
           aria-hidden="true"
@@ -144,7 +144,7 @@ function StepItem({ done, icon: Icon, title, detail, actionLabel, onAction }) {
       <button
         type="button"
         onClick={onAction}
-        className={`shrink-0 self-start sm:self-center inline-flex items-center gap-1 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors ${
+        className={`press shrink-0 self-start sm:self-center inline-flex items-center gap-1 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors ${
           done
             ? 'border border-slate-200 text-slate-600 hover:bg-slate-50'
             : 'bg-genie-600 text-white hover:bg-genie-700 shadow-subtle'

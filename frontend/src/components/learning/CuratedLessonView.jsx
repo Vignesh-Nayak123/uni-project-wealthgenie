@@ -65,7 +65,7 @@ function QuizQuestion({ quiz, index, selectedIndex, checked, onSelect, onCheck, 
           return (
             <label
               key={`${quiz.id}-${optionIndex}`}
-              className={`flex cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 text-xs leading-relaxed transition-colors ${
+              className={`relative flex cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 text-xs leading-relaxed transition-colors ${
                 isCorrect
                   ? 'border-genie-400 bg-genie-50 text-genie-950'
                   : isWrong
@@ -236,7 +236,7 @@ export default function CuratedLessonView({
   };
 
   return (
-    <div className="max-h-[72vh] space-y-5 overflow-y-auto pr-1 text-navy-900">
+    <div className="space-y-5 text-navy-900">
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-amber-200 bg-amber-50/70 px-3.5 py-2.5">
         <Badge variant={reviewView.tone} size="xs">
           <ShieldCheck className="h-3 w-3" />

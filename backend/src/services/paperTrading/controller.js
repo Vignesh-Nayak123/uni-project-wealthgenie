@@ -5,9 +5,10 @@ import {
   portfolio,
   history,
 } from './simulationService.js';
-import { listInstruments } from './priceProvider.js';
+import { listInstruments, listPracticeInstruments } from './priceProvider.js';
 import { marketFeed } from '../marketData/upstoxFeed.js';
 import * as replay from './replayService.js';
+import { virtualMarket, BASE_CANDLE_MS } from './virtualMarket.js';
 
 async function run(res, fn) {
   try {
@@ -48,6 +49,7 @@ export function getInstruments(req, res) {
   const anyLive = instruments.some((item) => item.isLive);
   res.json({
     instruments,
+    practiceInstruments: listPracticeInstruments(),
     marketFeed: marketFeed.getStatus(),
     note: anyLive
       ? 'Live Upstox V3 prices are shown where available; any remaining fixture price is explicitly labelled simulated.'
@@ -63,3 +65,18 @@ export async function replayTrade(req, res) {
   await run(res, () => replay.trade(side, quantity, accountOf(req)));
 }
 export function replayHold(req, res) { res.json(replay.hold()); }
+
+/** Practice-market candles (5-second base candles, oldest first). */
+export function getPracticeCandles(req, res) {
+  const symbol = String(req.params.symbol || '').toUpperCase();
+  if (!virtualMarket.has(symbol)) {
+    return res.status(404).json({ status: 'error', error: 'Unknown practice instrument.' });
+  }
+  return res.json({
+    status: 'success',
+    symbol,
+    intervalMs: BASE_CANDLE_MS,
+    quote: virtualMarket.quote(symbol),
+    candles: virtualMarket.candles(symbol),
+  });
+}

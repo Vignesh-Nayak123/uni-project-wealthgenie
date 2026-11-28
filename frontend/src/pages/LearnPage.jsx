@@ -611,9 +611,9 @@ export default function LearnPage({ initialConceptId = null, onInitialConceptHan
       <div className="flex items-start gap-2 rounded-xl border border-slate-200 bg-white p-3.5 text-xs leading-relaxed text-slate-500">
         <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-400" />
         <p>
-          {session
+          {session && progressSync !== 'error'
             ? 'Your progress is saved to your account, so you can continue on any device. Only you can see it.'
-            : 'Your progress is saved on this device.'}
+            : 'Your progress is saved in this browser on this device.'}
         </p>
       </div>
 

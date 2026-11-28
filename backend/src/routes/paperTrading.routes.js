@@ -11,6 +11,7 @@ export function createPaperTradingRouter({ requireAuth = defaultRequireAuth } = 
   const router = Router();
 
   router.get('/instruments', controller.getInstruments);
+  router.get('/practice/candles/:symbol', controller.getPracticeCandles);
 
   router.use(requireAuth);
   router.post('/init', controller.init);

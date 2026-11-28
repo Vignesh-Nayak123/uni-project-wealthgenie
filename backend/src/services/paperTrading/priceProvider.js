@@ -5,6 +5,7 @@
 // development fixture is used and clearly labelled as simulated — never as a
 // live or historical market price.
 import { marketFeed } from '../marketData/upstoxFeed.js';
+import { virtualMarket, PRACTICE_SOURCE } from './virtualMarket.js';
 
 const INSTRUMENTS = {
   NIFTYBEES: { name: 'Nippon India ETF Nifty 50 BeES', price: 250.0 },
@@ -62,12 +63,38 @@ function priceFromFixture(symbol, info) {
   };
 }
 
+// Practice-market instruments are fictional and always simulated; they are
+// labelled with their own source so they are never mistaken for real prices.
+function priceFromPractice(quote) {
+  return {
+    symbol: quote.symbol,
+    name: quote.name,
+    price: quote.price,
+    market: 'practice',
+    live: false,
+    isLive: false,
+    stale: false,
+    source: PRACTICE_SOURCE,
+    instrumentKey: null,
+    timestamp: quote.updatedAt,
+    lastTradedTime: quote.updatedAt,
+    receivedAt: quote.updatedAt,
+    previousClose: quote.previousClose,
+    open: quote.open,
+    high: quote.high,
+    low: quote.low,
+    close: quote.price,
+  };
+}
+
 /**
  * @param {string} symbol
  * @param {{ feed?: typeof marketFeed }} [options] injectable feed for tests.
  */
 export function getPrice(symbol, options = {}) {
   const upper = String(symbol || '').toUpperCase();
+  const market = options.market || virtualMarket;
+  if (market.has(upper)) return priceFromPractice(market.quote(upper));
   const info = INSTRUMENTS[upper];
   if (!info) return null;
 
@@ -81,10 +108,11 @@ export function getPrice(symbol, options = {}) {
 }
 
 export function listInstruments() {
-  return Object.entries(INSTRUMENTS).map(([symbol, info]) => {
+  return Object.keys(INSTRUMENTS).map((symbol) => {
     const price = getPrice(symbol);
     return {
       symbol,
+      market: 'real',
       name: price.name,
       price: price.price,
       live: price.live,
@@ -103,8 +131,13 @@ export function listInstruments() {
   });
 }
 
+/** Practice-market quotes (simulated, fictional instruments). */
+export function listPracticeInstruments(options = {}) {
+  return (options.market || virtualMarket).list();
+}
+
 export function isValidInstrument(symbol) {
   return getPrice(symbol) !== null;
 }
 
-export { FIXTURE_SOURCE, LIVE_SOURCE, INSTRUMENTS };
+export { FIXTURE_SOURCE, LIVE_SOURCE, PRACTICE_SOURCE, INSTRUMENTS };

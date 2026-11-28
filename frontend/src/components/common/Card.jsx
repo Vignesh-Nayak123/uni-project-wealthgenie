@@ -21,7 +21,7 @@ export default function Card({
   };
 
   const hoverStyle = hoverEffect
-    ? 'transition-all duration-200 hover:shadow-card hover:border-slate-300 hover:-translate-y-0.5 cursor-pointer'
+    ? 'lift pop-group hover:border-slate-300 cursor-pointer'
     : '';
 
   return (

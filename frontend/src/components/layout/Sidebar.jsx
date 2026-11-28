@@ -118,7 +118,7 @@ export default function Sidebar({
                     type="button"
                     onClick={() => handleNavClick(item.id)}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`relative w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-colors group focus:outline-none focus-visible:ring-2 focus-visible:ring-genie-500 ${
+                    className={`pop-group press relative w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-colors group focus:outline-none focus-visible:ring-2 focus-visible:ring-genie-500 ${
                       isActive
                         ? 'bg-genie-50 text-genie-900 font-semibold'
                         : 'font-medium text-slate-600 hover:text-navy-900 hover:bg-slate-50'
@@ -131,12 +131,14 @@ export default function Sidebar({
                       />
                     )}
                     <span className="flex items-center gap-3">
-                      <Icon
-                        className={`w-4 h-4 transition-colors ${
-                          isActive ? 'text-genie-700' : 'text-slate-400 group-hover:text-navy-800'
-                        }`}
-                        aria-hidden="true"
-                      />
+                      <span className="icon-pop">
+                        <Icon
+                          className={`w-4 h-4 transition-colors ${
+                            isActive ? 'text-genie-700' : 'text-slate-400 group-hover:text-genie-700'
+                          }`}
+                          aria-hidden="true"
+                        />
+                      </span>
                       <span>{item.label}</span>
                     </span>
                     {hint && (

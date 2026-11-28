@@ -1,4 +1,36 @@
 /**
+ * Combine small candles ({ time: epoch ms, open, high, low, close, volume })
+ * into larger buckets of `intervalMs` (e.g. 5-second candles into 1-minute
+ * ones). Input must be ascending; output is ascending with ms times.
+ */
+export function aggregateCandles(candles, intervalMs) {
+  if (!Array.isArray(candles) || !(intervalMs > 0)) return [];
+  const out = [];
+  for (const c of candles) {
+    const time = Number(c?.time);
+    if (!Number.isFinite(time)) continue;
+    const bucket = Math.floor(time / intervalMs) * intervalMs;
+    const last = out[out.length - 1];
+    if (last && last.time === bucket) {
+      last.high = Math.max(last.high, Number(c.high));
+      last.low = Math.min(last.low, Number(c.low));
+      last.close = Number(c.close);
+      last.volume += Number(c.volume) || 0;
+    } else {
+      out.push({
+        time: bucket,
+        open: Number(c.open),
+        high: Number(c.high),
+        low: Number(c.low),
+        close: Number(c.close),
+        volume: Number(c.volume) || 0,
+      });
+    }
+  }
+  return out;
+}
+
+/**
  * Convert raw OHLC rows (daily CSV rows with a 'YYYY-MM-DD' date, or live
  * 1-minute buckets with an ISO/epoch date) into sorted, de-duplicated rows for
  * lightweight-charts: { time, open, high, low, close, volume }.

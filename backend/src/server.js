@@ -2,6 +2,7 @@ import app from './app.js';
 import { config } from './config/env.js';
 import { attachMarketWebSocket } from './ws/marketWs.js';
 import { marketFeed, NIFTYBEES_INSTRUMENT_KEY } from './services/marketData/upstoxFeed.js';
+import { virtualMarket } from './services/paperTrading/virtualMarket.js';
 
 const server = app.listen(config.port, () => {
   console.log(`WealthGenie backend listening on port ${config.port} (${config.nodeEnv})`);
@@ -22,6 +23,9 @@ server.on('error', (error) => {
 });
 
 attachMarketWebSocket(server);
+
+// The practice market runs at all hours so learners can trade when NSE is shut.
+virtualMarket.start();
 
 // The market feed is optional background work: a feed failure (expired Upstox
 // token, network error) must be logged, never allowed to kill the API.
@@ -44,6 +48,7 @@ process.on('uncaughtException', (error) => {
 function shutdown(signal) {
   console.log(`[shutdown] ${signal} received; closing market feed and HTTP server.`);
   marketFeed.shutdown();
+  virtualMarket.stop();
   server.close(() => process.exit(0));
   setTimeout(() => process.exit(0), 5_000).unref();
 }

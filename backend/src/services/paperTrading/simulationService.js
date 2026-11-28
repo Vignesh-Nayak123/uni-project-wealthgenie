@@ -48,7 +48,7 @@ function resolveOrderPrice(symbol, options = {}) {
 
 function tradeMeta(priceInfo, at) {
   return {
-    priceSource: priceInfo.isLive ? 'upstox_v3' : 'simulated_fixture',
+    priceSource: priceInfo.source || (priceInfo.isLive ? 'upstox_v3' : 'simulated_fixture'),
     isLive: Boolean(priceInfo.isLive),
     stale: Boolean(priceInfo.stale),
     priceTimestamp:

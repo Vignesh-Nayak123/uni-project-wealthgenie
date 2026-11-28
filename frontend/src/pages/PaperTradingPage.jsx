@@ -1,12 +1,58 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { AlertTriangle, CandlestickChart, CheckCircle2, Loader2, RefreshCw } from 'lucide-react';
+import {
+  AlertTriangle,
+  CandlestickChart,
+  CheckCircle2,
+  History,
+  Loader2,
+  Radio,
+  RefreshCw,
+  Sparkles,
+  TrendingDown,
+  TrendingUp,
+} from 'lucide-react';
 import Card from '../components/common/Card';
 import Badge from '../components/common/Badge';
 import ReplayChart, { normalizeCandles } from '../components/charts/ReplayChart';
+import { aggregateCandles } from '../utils/candles';
 import { apiUrl, wsUrl } from '../lib/api';
 import { useAuth } from '../context/AuthContext';
 
 const API = '/api/paper-trading';
+
+const MARKETS = [
+  {
+    id: 'practice',
+    label: 'Practice market',
+    icon: Sparkles,
+    hint: 'Made-up companies whose prices move every second, day or night. Best for learning how buying and selling feels.',
+  },
+  {
+    id: 'live',
+    label: 'Real market',
+    icon: Radio,
+    hint: 'Real NSE prices. They only move while the market is open (9:15 AM to 3:30 PM on trading days).',
+  },
+  {
+    id: 'replay',
+    label: 'Replay the past',
+    icon: History,
+    hint: 'Step through real past prices one day at a time and practise deciding.',
+  },
+];
+
+// Candle sizes for second-by-second markets.
+const PRACTICE_INTERVALS = [
+  { id: '5s', label: '5 sec', ms: 5_000 },
+  { id: '15s', label: '15 sec', ms: 15_000 },
+  { id: '1m', label: '1 min', ms: 60_000 },
+  { id: '5m', label: '5 min', ms: 300_000 },
+];
+const LIVE_INTERVALS = [
+  { id: '1m', label: '1 min', ms: 60_000 },
+  { id: '5m', label: '5 min', ms: 300_000 },
+  { id: '15m', label: '15 min', ms: 900_000 },
+];
 
 const TIMEFRAMES = [
   { id: '5D', candles: 5 },
@@ -84,6 +130,7 @@ function sourceLabel(source) {
   if (source === 'historical_replay' || source === 'historical_csv') {
     return 'Past price (replay)';
   }
+  if (source === 'practice_market') return 'Practice market';
   if (source === 'simulated_fixture') return 'Practice price (not live)';
   return source || 'Unknown';
 }
@@ -156,7 +203,15 @@ export default function PaperTradingPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const [symbol, setSymbol] = useState('NIFTYBEES');
+  const [realSymbol, setRealSymbol] = useState('NIFTYBEES');
+  const [practiceSymbol, setPracticeSymbol] = useState('PRAC-NIFTY');
+  const [practiceOrder, setPracticeOrder] = useState([]);
+  const [practiceQuotes, setPracticeQuotes] = useState({});
+  const [practiceCandles, setPracticeCandles] = useState({});
+  const practiceQuotesRef = useRef({});
+  const practiceCandlesRef = useRef({});
+  const [practiceInterval, setPracticeInterval] = useState('15s');
+  const [liveInterval, setLiveInterval] = useState('1m');
   const [quantity, setQuantity] = useState('1');
   const [allowStale, setAllowStale] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -164,7 +219,7 @@ export default function PaperTradingPage() {
   const [feedback, setFeedback] = useState('');
 
   const [mode, setMode] = useState('learn');
-  const [dataMode, setDataMode] = useState('live');
+  const [dataMode, setDataMode] = useState('practice');
   const [timeframe, setTimeframe] = useState('3M');
   const [chartType, setChartType] = useState('candle');
 
@@ -186,10 +241,11 @@ export default function PaperTradingPage() {
         const body = await initRes.json().catch(() => ({}));
         throw new Error(body.error || `Init failed (${initRes.status})`);
       }
-      const [instRes, portRes, histRes] = await Promise.all([
+      const [instRes, portRes, histRes, replayRes] = await Promise.all([
         paperFetch(`/instruments`),
         paperFetch(`/portfolio`),
         paperFetch(`/history`),
+        paperFetch(`/replay`),
       ]);
       const failed = [instRes, portRes, histRes].find((response) => !response.ok);
       if (failed) {
@@ -200,10 +256,25 @@ export default function PaperTradingPage() {
       const port = await portRes.json();
       const hist = await histRes.json();
       setInstruments(inst.instruments || []);
+      const practice = inst.practiceInstruments || [];
+      setPracticeOrder(practice.map((item) => item.symbol));
+      for (const quote of practice) {
+        practiceQuotesRef.current[quote.symbol] = {
+          ...quote,
+          ...(practiceQuotesRef.current[quote.symbol] || {}),
+        };
+      }
+      setPracticeQuotes({ ...practiceQuotesRef.current });
       if (inst.marketFeed) setMarketStatus(inst.marketFeed);
       setPortfolio(port);
       setHistory(hist.history || []);
-      setSymbol((current) => current || inst.instruments?.[0]?.symbol || 'NIFTYBEES');
+      setRealSymbol((current) => current || inst.instruments?.[0]?.symbol || 'NIFTYBEES');
+      setPracticeSymbol((current) => current || practice[0]?.symbol || 'PRAC-NIFTY');
+      // Pick up a replay left running from an earlier visit.
+      if (replayRes.ok) {
+        const savedReplay = await replayRes.json().catch(() => null);
+        if (savedReplay && savedReplay.status && savedReplay.status !== 'none') setReplay(savedReplay);
+      }
     } catch (e) {
       setError(e.message || 'Server error');
     } finally {
@@ -240,11 +311,42 @@ export default function PaperTradingPage() {
       }, 5000);
     };
 
+    let practiceDirty = false;
     const flushTimer = setInterval(() => {
       if (cancelled) return;
       setLiveTicks({ ...liveTicksRef.current });
       setLiveCandles({ ...liveCandlesRef.current });
+      if (practiceDirty) {
+        practiceDirty = false;
+        setPracticeQuotes({ ...practiceQuotesRef.current });
+        setPracticeCandles({ ...practiceCandlesRef.current });
+      }
     }, 500);
+
+    // Practice-market ticks: one message a second with every instrument.
+    const applyPracticeTicks = (ticks) => {
+      for (const tick of ticks || []) {
+        if (!tick?.symbol) continue;
+        const previous = practiceQuotesRef.current[tick.symbol];
+        const direction =
+          previous && Number.isFinite(previous.price) && tick.price !== previous.price
+            ? tick.price > previous.price
+              ? 'up'
+              : 'down'
+            : previous?.direction || null;
+        practiceQuotesRef.current[tick.symbol] = { ...tick, direction };
+        const candle = tick.candle;
+        if (candle && Number.isFinite(Number(candle.time))) {
+          const rows = (practiceCandlesRef.current[tick.symbol] || []).slice();
+          const last = rows[rows.length - 1];
+          if (last && last.time === candle.time) rows[rows.length - 1] = candle;
+          else if (!last || candle.time > last.time) rows.push(candle);
+          while (rows.length > 1_440) rows.shift();
+          practiceCandlesRef.current[tick.symbol] = rows;
+        }
+      }
+      practiceDirty = true;
+    };
 
     const updateCandle = (tick, candle) => {
       if (!tick?.symbol) return;
@@ -318,6 +420,9 @@ export default function PaperTradingPage() {
           // Backwards-compatible with older backend frames.
           for (const tick of message.ticks || []) applyTick(tick);
           break;
+        case 'practice_ticks':
+          applyPracticeTicks(message.ticks);
+          break;
         default:
           break;
       }
@@ -382,20 +487,61 @@ export default function PaperTradingPage() {
     };
   }, []);
 
-  const instrument = instruments.find((item) => item.symbol === symbol) || null;
-  const liveTick = symbol ? liveTicks[symbol] : null;
+  // Load the full candle history for the practice instrument being viewed; the
+  // socket then keeps it growing every second.
+  useEffect(() => {
+    if (!practiceSymbol) return undefined;
+    let active = true;
+    fetch(apiUrl(`${API}/practice/candles/${encodeURIComponent(practiceSymbol)}`))
+      .then((response) => (response.ok ? response.json() : null))
+      .then((body) => {
+        if (!active || !Array.isArray(body?.candles)) return;
+        const fetched = body.candles;
+        const streamed = practiceCandlesRef.current[practiceSymbol] || [];
+        const lastFetched = fetched[fetched.length - 1]?.time ?? -Infinity;
+        practiceCandlesRef.current[practiceSymbol] = [
+          ...fetched,
+          ...streamed.filter((row) => row.time > lastFetched),
+        ];
+        setPracticeCandles({ ...practiceCandlesRef.current });
+      })
+      .catch(() => {
+        // The chart fills from the live stream instead.
+      });
+    return () => {
+      active = false;
+    };
+  }, [practiceSymbol]);
+
+  const isPractice = dataMode === 'practice';
+  const symbol = isPractice ? practiceSymbol : realSymbol;
+  const setSymbol = isPractice ? setPracticeSymbol : setRealSymbol;
+  const practiceList = practiceOrder.map((key) => practiceQuotes[key]).filter(Boolean);
+  const practiceQuote = isPractice ? practiceQuotes[symbol] || null : null;
+
+  const instrument = isPractice
+    ? practiceQuote
+    : instruments.find((item) => item.symbol === symbol) || null;
+  const liveTick = !isPractice && symbol ? liveTicks[symbol] : null;
   const livePrice = liveTick ? Number(liveTick.ltp) : null;
   const hasLivePrice = Number.isFinite(livePrice) && livePrice > 0;
-  const displayedPrice = hasLivePrice ? livePrice : instrument?.price ?? null;
+  const displayedPrice = isPractice
+    ? practiceQuote?.price ?? null
+    : hasLivePrice
+      ? livePrice
+      : instrument?.price ?? null;
   const previousClose = Number(
-    liveTick?.previousClose ?? instrument?.previousClose ?? 0
+    (isPractice ? practiceQuote?.previousClose : liveTick?.previousClose ?? instrument?.previousClose) ?? 0
   );
   const hasPreviousClose = Number.isFinite(previousClose) && previousClose > 0;
-  const change = hasLivePrice && hasPreviousClose ? livePrice - previousClose : null;
+  const change =
+    (isPractice ? Number.isFinite(Number(displayedPrice)) : hasLivePrice) && hasPreviousClose
+      ? Number(displayedPrice) - previousClose
+      : null;
   const changePct =
     change !== null && hasPreviousClose ? (change / previousClose) * 100 : null;
 
-  const marketClosed = Boolean(marketStatus?.marketStatus?.isClosed);
+  const marketClosed = !isPractice && Boolean(marketStatus?.marketStatus?.isClosed);
   const marketOpen = Boolean(marketStatus?.marketStatus?.isOpen);
   const tickBasis = liveTick
     ? Date.parse(liveTick.receivedAt || '') || Number(liveTick.timestamp) || null
@@ -403,9 +549,14 @@ export default function PaperTradingPage() {
   const clientStale = Boolean(
     tickBasis && !marketClosed && Date.now() - tickBasis > 60_000
   );
-  const stale = Boolean(marketStatus?.stale || clientStale || instrument?.stale);
+  const stale =
+    !isPractice && Boolean(marketStatus?.stale || clientStale || instrument?.stale);
 
-  const chip = statusChip({ marketStatus, socketState, stale, livePrice: hasLivePrice });
+  const chip = isPractice
+    ? socketState === 'open'
+      ? { label: 'Practice market open · prices move every second', tone: 'green' }
+      : { label: 'Connecting to the practice market…', tone: 'amber' }
+    : statusChip({ marketStatus, socketState, stale, livePrice: hasLivePrice });
   const badgeVariant =
     chip.tone === 'green'
       ? 'green'
@@ -415,11 +566,13 @@ export default function PaperTradingPage() {
           ? 'rose'
           : 'slate';
 
-  const priceSource = hasLivePrice
-    ? 'Live price'
-    : instrument?.isLive
-      ? 'Last live price'
-      : 'Practice price';
+  const priceSource = isPractice
+    ? 'Practice market price'
+    : hasLivePrice
+      ? 'Live price'
+      : instrument?.isLive
+        ? 'Last live price'
+        : 'Practice price';
 
   const visibleCandles = useMemo(() => {
     const revealed = normalizeCandles(replay?.revealed);
@@ -428,18 +581,63 @@ export default function PaperTradingPage() {
     return revealed.slice(revealed.length - range.candles);
   }, [replay, timeframe]);
 
+  const liveIntervalMs = (LIVE_INTERVALS.find((item) => item.id === liveInterval) || LIVE_INTERVALS[0]).ms;
   const liveChartCandles = useMemo(() => {
-    const rows = liveCandles[symbol] || [];
-    const range = TIMEFRAMES.find((item) => item.id === timeframe) || TIMEFRAMES[0];
-    const limited = rows.length <= range.candles ? rows : rows.slice(rows.length - range.candles);
-    return normalizeCandles(limited);
-  }, [liveCandles, symbol, timeframe]);
+    const rows = (liveCandles[symbol] || []).map((row) => ({ ...row, time: Date.parse(row.date) }));
+    return normalizeCandles(aggregateCandles(rows, liveIntervalMs));
+  }, [liveCandles, symbol, liveIntervalMs]);
 
-  const chartCandles = dataMode === 'replay' ? visibleCandles : liveChartCandles;
+  const practiceIntervalMs = (
+    PRACTICE_INTERVALS.find((item) => item.id === practiceInterval) || PRACTICE_INTERVALS[0]
+  ).ms;
+  const practiceChartCandles = useMemo(
+    () => normalizeCandles(aggregateCandles(practiceCandles[symbol] || [], practiceIntervalMs)),
+    [practiceCandles, symbol, practiceIntervalMs]
+  );
+
+  const chartCandles =
+    dataMode === 'replay'
+      ? visibleCandles
+      : isPractice
+        ? practiceChartCandles
+        : liveChartCandles;
+  const chartViewKey = `${dataMode}:${symbol}:${
+    dataMode === 'replay' ? timeframe : isPractice ? practiceInterval : liveInterval
+  }`;
+  const chartShowsSeconds = isPractice && practiceIntervalMs < 60_000;
   const chartEmptyMessage =
     dataMode === 'replay'
-      ? 'Start the replay to see past prices.'
-      : 'Waiting for live prices. The chart fills in while the market is open.';
+      ? 'Press “Start replay” to see past prices.'
+      : isPractice
+        ? 'Loading the practice market…'
+        : marketClosed
+          ? 'The real market is closed, so there are no new candles. Switch to the Practice market to trade with prices that move right now.'
+          : 'Waiting for live prices. The chart fills in while the market is open.';
+
+  // Value holdings with the freshest price we have (practice prices change every
+  // second), so profit and loss move with the market instead of every few seconds.
+  const pricedHoldings = useMemo(
+    () =>
+      (portfolio?.holdings || []).map((holding) => {
+        const fresh = Number(
+          practiceQuotes[holding.symbol]?.price ?? liveTicks[holding.symbol]?.ltp
+        );
+        if (!Number.isFinite(fresh) || fresh <= 0) return holding;
+        const round2 = (value) => Math.round(value * 100) / 100;
+        return {
+          ...holding,
+          currentPrice: fresh,
+          marketValue: round2(fresh * holding.quantity),
+          unrealizedPnl: round2((fresh - holding.avgCost) * holding.quantity),
+        };
+      }),
+    [portfolio, practiceQuotes, liveTicks]
+  );
+  const holdingsValue = pricedHoldings.reduce((sum, item) => sum + Number(item.marketValue || 0), 0);
+  const unrealizedTotal = pricedHoldings.reduce((sum, item) => sum + Number(item.unrealizedPnl || 0), 0);
+  const totalWorth = portfolio ? Number(portfolio.cash || 0) + holdingsValue : null;
+  const replayStarted = Boolean(replay && replay.status && replay.status !== 'none');
+  const replayCanAdvance = replayStarted && replay.status !== 'completed';
 
   const handleOrder = async (side) => {
     setOrderError('');
@@ -595,7 +793,17 @@ export default function PaperTradingPage() {
     Number(displayedPrice) > 0 &&
     !(stale && !allowStale);
 
-  const watchlistRows = [
+  const watchlistRows = isPractice
+    ? practiceList.map((item) => ({
+        symbol: item.symbol,
+        name: item.name,
+        price: item.price,
+        changePct: item.changePct,
+        direction: item.direction,
+        live: false,
+        watchOnly: false,
+      }))
+    : [
     ...instruments.map((item) => ({
       symbol: item.symbol,
       name: item.name,
@@ -616,24 +824,38 @@ export default function PaperTradingPage() {
 
   const changeText =
     change !== null
-      ? `${change >= 0 ? '+' : '−'}₹${formatPrice(Math.abs(change))} (${change >= 0 ? '+' : '−'}${Math.abs(changePct).toFixed(2)}%) today`
+      ? `${change >= 0 ? '+' : '−'}₹${formatPrice(Math.abs(change))} (${change >= 0 ? '+' : '−'}${Math.abs(changePct).toFixed(2)}%) ${isPractice ? 'since the session started' : 'today'}`
       : null;
 
+  // Replay picks how many days to show; second-by-second markets pick how much
+  // time each candle covers.
+  const rangeOptions =
+    dataMode === 'replay'
+      ? TIMEFRAMES.map((item) => ({ id: item.id, label: item.id }))
+      : isPractice
+        ? PRACTICE_INTERVALS
+        : LIVE_INTERVALS;
+  const rangeValue = dataMode === 'replay' ? timeframe : isPractice ? practiceInterval : liveInterval;
+  const setRangeValue =
+    dataMode === 'replay' ? setTimeframe : isPractice ? setPracticeInterval : setLiveInterval;
   const timeframeButtons = (
-    <div className="flex flex-wrap items-center gap-1" role="group" aria-label="Chart time range">
-      {TIMEFRAMES.map((item) => (
+    <div className="flex flex-wrap items-center gap-1" role="group" aria-label={dataMode === 'replay' ? 'Chart time range' : 'Candle size'}>
+      {dataMode !== 'replay' && (
+        <span className="mr-1 text-[11px] font-medium text-slate-400">Each candle =</span>
+      )}
+      {rangeOptions.map((item) => (
         <button
           key={item.id}
           type="button"
-          onClick={() => setTimeframe(item.id)}
-          aria-pressed={timeframe === item.id}
-          className={`px-2.5 py-1 text-[11px] font-semibold rounded-md transition-colors ${
-            timeframe === item.id
+          onClick={() => setRangeValue(item.id)}
+          aria-pressed={rangeValue === item.id}
+          className={`press px-2.5 py-1 text-[11px] font-semibold rounded-md transition-colors ${
+            rangeValue === item.id
               ? 'bg-genie-600 text-white'
               : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
           }`}
         >
-          {item.id}
+          {item.label}
         </button>
       ))}
     </div>
@@ -670,8 +892,8 @@ export default function PaperTradingPage() {
           </h1>
           <p className="text-sm text-slate-600 mt-1 max-w-2xl">
             You get {formatMoney(portfolio?.initialCash ?? 100000)} of pretend money to buy and
-            sell real Indian shares and ETFs. No real money or real orders are ever involved, so
-            mistakes cost nothing.
+            sell. Use the practice market any time, or real Indian share prices while the market is
+            open. No real money or real orders are ever involved, so mistakes cost nothing.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -704,11 +926,11 @@ export default function PaperTradingPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: 'Cash left', value: formatMoney(portfolio?.cash), hint: 'Virtual money you can still use' },
-          { label: 'Total worth', value: formatMoney(portfolio?.totalEquity), hint: 'Cash + value of what you own' },
+          { label: 'Total worth', value: formatMoney(totalWorth === null ? null : Math.round(totalWorth * 100) / 100), hint: 'Cash + value of what you own' },
           { label: 'Profit from sales', value: formatSignedMoney(portfolio?.realizedPnl), tone: pnlTone(portfolio?.realizedPnl), hint: 'Gain or loss on things you sold' },
-          { label: 'Profit on holdings', value: formatSignedMoney(portfolio?.unrealizedPnl), tone: pnlTone(portfolio?.unrealizedPnl), hint: 'If you sold everything now' },
+          { label: 'Profit on holdings', value: formatSignedMoney(Math.round(unrealizedTotal * 100) / 100), tone: pnlTone(unrealizedTotal), hint: 'If you sold everything now' },
         ].map((stat) => (
-          <Card key={stat.label} padding="sm">
+          <Card key={stat.label} padding="sm" className="lift">
             <div className="text-xs font-medium text-slate-500">{stat.label}</div>
             <div className={`mt-1 text-xl font-bold tracking-tight ${stat.tone || 'text-navy-950'}`}>
               {stat.value}
@@ -718,41 +940,97 @@ export default function PaperTradingPage() {
         ))}
       </div>
 
-      {/* Price data source */}
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs font-semibold text-slate-500">Prices to use:</span>
-        <div className="inline-flex rounded-lg border border-slate-200 bg-white p-0.5" role="group" aria-label="Price data">
-          {[
-            { id: 'live', label: "Today's market prices" },
-            { id: 'replay', label: 'Replay past prices' },
-          ].map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => setDataMode(item.id)}
-              aria-pressed={dataMode === item.id}
-              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
-                dataMode === item.id ? 'bg-genie-600 text-white' : 'text-slate-600 hover:text-navy-900'
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
+      {/* Which market to trade in */}
+      <div>
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3" role="group" aria-label="Choose a market">
+          {MARKETS.map((item) => {
+            const Icon = item.icon;
+            const selected = dataMode === item.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => {
+                  setDataMode(item.id);
+                  setOrderError('');
+                  setFeedback('');
+                }}
+                aria-pressed={selected}
+                className={`pop-group press flex items-start gap-3 rounded-xl border p-3 text-left transition-colors ${
+                  selected
+                    ? 'border-genie-400 bg-genie-50/70 ring-2 ring-genie-100'
+                    : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50'
+                }`}
+              >
+                <span
+                  className={`icon-pop h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
+                    selected ? 'bg-genie-600 text-white' : 'bg-slate-100 text-slate-500'
+                  }`}
+                >
+                  <Icon className="m-auto" style={{ width: 18, height: 18 }} />
+                </span>
+                <span>
+                  <span className="block text-sm font-semibold text-navy-950">{item.label}</span>
+                  <span className="mt-0.5 block text-[11px] leading-snug text-slate-500">{item.hint}</span>
+                </span>
+              </button>
+            );
+          })}
         </div>
-        <span className="text-[11px] text-slate-500">
-          {dataMode === 'live'
-            ? 'The chart shows live prices only; past prices are never mixed in.'
-            : 'Step through real past prices one day at a time and practise deciding.'}
-        </span>
       </div>
 
+      {/* Practice market tickers */}
+      {isPractice && (
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+          {practiceList.map((item) => {
+            const up = Number(item.changePct) >= 0;
+            const selected = item.symbol === symbol;
+            return (
+              <button
+                key={item.symbol}
+                type="button"
+                onClick={() => setSymbol(item.symbol)}
+                aria-pressed={selected}
+                className={`lift press rounded-xl border bg-white p-3 text-left ${
+                  selected ? 'border-genie-400 ring-2 ring-genie-100' : 'border-slate-200'
+                }`}
+              >
+                <div className="flex items-center justify-between gap-1">
+                  <span className="truncate text-[11px] font-bold text-navy-900">{item.symbol}</span>
+                  {up ? (
+                    <TrendingUp className="h-3.5 w-3.5 shrink-0 text-emerald-600" />
+                  ) : (
+                    <TrendingDown className="h-3.5 w-3.5 shrink-0 text-rose-600" />
+                  )}
+                </div>
+                <div className="truncate text-[10px] text-slate-400">{item.kind}</div>
+                <div
+                  key={`${item.symbol}-${item.price}`}
+                  className={`mt-1 rounded px-0.5 text-base font-bold tabular-nums text-navy-950 ${
+                    item.direction === 'up' ? 'tick-up' : item.direction === 'down' ? 'tick-down' : ''
+                  }`}
+                >
+                  ₹{formatPrice(item.price)}
+                </div>
+                <div className={`text-[11px] font-semibold tabular-nums ${up ? 'text-emerald-600' : 'text-rose-600'}`}>
+                  {up ? '+' : '−'}
+                  {Math.abs(Number(item.changePct) || 0).toFixed(2)}%
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {dataMode !== 'replay' && (
+      <>
       {/* Live price */}
       <Card>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-lg font-bold text-navy-950">{symbol || 'NIFTYBEES'}</h2>
-              <Badge variant={hasLivePrice ? 'green' : 'amber'} size="xs">
+              <Badge variant={hasLivePrice || isPractice ? 'green' : 'amber'} size="xs">
                 {priceSource}
               </Badge>
               {stale && <Badge variant="amber" size="xs">Delayed</Badge>}
@@ -761,9 +1039,23 @@ export default function PaperTradingPage() {
             <p className="text-xs text-slate-500 mt-1">
               {instrument?.name || 'Nippon India ETF Nifty 50 BeES'}
             </p>
+            {isPractice && instrument?.description && (
+              <p className="mt-0.5 text-[11px] text-slate-400">
+                {instrument.description} A made-up company used only for practice.
+              </p>
+            )}
           </div>
           <div className="text-right">
-            <div className="text-3xl font-extrabold tracking-tight text-navy-950">
+            <div
+              key={isPractice ? `${symbol}-${displayedPrice}` : symbol}
+              className={`rounded-md px-1 text-3xl font-extrabold tabular-nums tracking-tight text-navy-950 ${
+                isPractice && practiceQuote?.direction === 'up'
+                  ? 'tick-up'
+                  : isPractice && practiceQuote?.direction === 'down'
+                    ? 'tick-down'
+                    : ''
+              }`}
+            >
               ₹{formatPrice(displayedPrice)}
             </div>
             {changeText && (
@@ -775,21 +1067,30 @@ export default function PaperTradingPage() {
         </div>
 
         <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 rounded-xl bg-slate-50 p-3 text-sm">
-          {[
-            { label: "Today's open", value: liveTick?.open },
-            { label: "Today's high", value: liveTick?.high },
-            { label: "Today's low", value: liveTick?.low },
-            { label: "Yesterday's close", value: hasPreviousClose ? previousClose : undefined },
-          ].map((item) => (
+          {(isPractice
+            ? [
+                { label: 'Opened at', value: practiceQuote?.open },
+                { label: 'Highest so far', value: practiceQuote?.high },
+                { label: 'Lowest so far', value: practiceQuote?.low },
+                { label: 'Starting price', value: hasPreviousClose ? previousClose : undefined },
+              ]
+            : [
+                { label: "Today's open", value: liveTick?.open },
+                { label: "Today's high", value: liveTick?.high },
+                { label: "Today's low", value: liveTick?.low },
+                { label: "Yesterday's close", value: hasPreviousClose ? previousClose : undefined },
+              ]
+          ).map((item) => (
             <div key={item.label}>
               <div className="text-[11px] text-slate-500">{item.label}</div>
-              <div className="font-semibold text-navy-900">
+              <div className="font-semibold tabular-nums text-navy-900">
                 {item.value !== undefined && item.value !== null ? `₹${formatPrice(item.value)}` : '—'}
               </div>
             </div>
           ))}
         </div>
 
+        {!isPractice && (
         <details className="mt-3 text-[11px] text-slate-500">
           <summary className="cursor-pointer select-none font-medium text-slate-600 hover:text-navy-900">
             Price feed details
@@ -815,8 +1116,16 @@ export default function PaperTradingPage() {
             <span>Source: {hasLivePrice ? 'Upstox market data feed' : 'practice price (not live)'}</span>
           </div>
         </details>
+        )}
 
-        {marketStatus?.failureReason && (
+        {isPractice && (
+          <div className="mt-3 rounded-lg border border-genie-200 bg-genie-50/60 px-3 py-2 text-xs text-genie-900">
+            Practice market prices are simulated: they move every second like a real market, but
+            the companies are made up and nothing here predicts real share prices.
+          </div>
+        )}
+
+        {!isPractice && marketStatus?.failureReason && (
           <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
             Live prices are not available right now, so practice prices are used instead.
           </div>
@@ -831,13 +1140,22 @@ export default function PaperTradingPage() {
         )}
 
         {marketClosed && (
-          <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-700">
-            The stock market is closed now (it is open 9:15 AM to 3:30 PM on trading days). You are
-            seeing the last price from when it was open.
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-700">
+            <span>
+              The stock market is closed now (it is open 9:15 AM to 3:30 PM on trading days). You are
+              seeing the last price from when it was open.
+            </span>
+            <button
+              type="button"
+              onClick={() => setDataMode('practice')}
+              className="press rounded-md bg-genie-600 px-2.5 py-1 text-[11px] font-semibold text-white hover:bg-genie-700"
+            >
+              Try the practice market
+            </button>
           </div>
         )}
 
-        {!hasLivePrice && !marketClosed && marketStatus?.state !== 'auth_failed' && !marketStatus?.failureReason && (
+        {!isPractice && !hasLivePrice && !marketClosed && marketStatus?.state !== 'auth_failed' && !marketStatus?.failureReason && (
           <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-700">
             Waiting for a live price for {symbol}. Until it arrives, orders use a clearly labelled
             practice price.
@@ -867,7 +1185,7 @@ export default function PaperTradingPage() {
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_120px_auto] sm:items-end">
           <div>
             <label htmlFor="paper-symbol" className="block text-xs font-medium text-slate-600 mb-1">
-              Share or ETF
+              {isPractice ? 'Practice company' : 'Share or ETF'}
             </label>
             <select
               id="paper-symbol"
@@ -875,11 +1193,17 @@ export default function PaperTradingPage() {
               onChange={(event) => setSymbol(event.target.value)}
               className="block w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-genie-500 focus:outline-none focus:ring-2 focus:ring-genie-100"
             >
-              {instruments.map((item) => (
-                <option key={item.symbol} value={item.symbol}>
-                  {item.symbol} · ₹{formatPrice(item.price)} {item.isLive ? '(live)' : '(practice price)'}
-                </option>
-              ))}
+              {isPractice
+                ? practiceList.map((item) => (
+                    <option key={item.symbol} value={item.symbol}>
+                      {item.symbol} · {item.name}
+                    </option>
+                  ))
+                : instruments.map((item) => (
+                    <option key={item.symbol} value={item.symbol}>
+                      {item.symbol} · ₹{formatPrice(item.price)} {item.isLive ? '(live)' : '(practice price)'}
+                    </option>
+                  ))}
             </select>
           </div>
           <div>
@@ -936,6 +1260,94 @@ export default function PaperTradingPage() {
         )}
         {orderMessages}
       </Card>
+      </>
+      )}
+
+      {/* Replay controls (replay mode only) */}
+      {dataMode === 'replay' && (
+        <Card>
+          <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
+            <div>
+              <h2 className="text-base font-semibold text-navy-950">Replay the past</h2>
+              <p className="text-xs text-slate-500 max-w-xl">
+                See real NIFTYBEES prices from the past one day at a time. Decide to buy, sell or
+                wait, then reveal the next day to see what happened.
+              </p>
+            </div>
+            {replayStarted && (
+              <Badge variant="slate" size="xs">
+                Day {replay.currentIndex + 1} of {replay.total}
+              </Badge>
+            )}
+          </div>
+          <div className="mb-3 flex flex-wrap items-end gap-2">
+            <button type="button" onClick={startReplay} className="press rounded-lg bg-navy-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-navy-800">
+              {replayStarted ? 'Restart replay' : 'Start replay'}
+            </button>
+            <button
+              type="button"
+              disabled={!replayCanAdvance}
+              onClick={nextCandle}
+              className="press rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-navy-800 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Next day
+            </button>
+            <span className="mx-1 hidden h-6 w-px bg-slate-200 sm:block" />
+            <label className="flex items-center gap-1.5 text-xs text-slate-600">
+              Units
+              <input
+                type="number"
+                min="1"
+                step="1"
+                inputMode="numeric"
+                value={quantity}
+                onChange={(event) => setQuantity(event.target.value)}
+                className="w-20 rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm text-navy-900 focus:border-genie-500 focus:outline-none focus:ring-2 focus:ring-genie-100"
+              />
+            </label>
+            <button type="button" disabled={submitting || !replayStarted} onClick={() => replayTrade('buy')} className="press rounded-lg bg-emerald-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50">
+              Buy at day&apos;s close
+            </button>
+            <button type="button" disabled={submitting || !replayStarted} onClick={() => replayTrade('sell')} className="press rounded-lg bg-rose-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-50">
+              Sell at day&apos;s close
+            </button>
+            <button
+              type="button"
+              disabled={!replayCanAdvance}
+              onClick={async () => {
+                await nextCandle();
+                setFeedback('You chose to wait. No trade was made, so here is the next day.');
+              }}
+              className="press rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-navy-800 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Wait (no trade)
+            </button>
+          </div>
+          {replayStarted ? (
+            <div className="text-sm text-slate-600">
+              <p>
+                <span className="font-semibold text-navy-900">{replay.instrument}</span> closed at{' '}
+                <strong className="text-navy-900">₹{formatPrice(replay.current?.close)}</strong> on {replay.current?.date}.
+              </p>
+              <div className="text-xs text-slate-500 mt-1">
+                That day: opened ₹{formatPrice(replay.current?.open)}, high ₹{formatPrice(replay.current?.high)}, low ₹
+                {formatPrice(replay.current?.low)}, closed ₹{formatPrice(replay.current?.close)}
+              </div>
+              {replay.status === 'completed' && (
+                <p className="mt-2 text-xs font-medium text-navy-900">
+                  You reached the last day of the data. Press &ldquo;Restart replay&rdquo; to go again.
+                </p>
+              )}
+              <p className="mt-2 text-[11px] text-amber-700">
+                These are real past prices, not today&apos;s. Replay trades are marked as replay in your history.
+              </p>
+            </div>
+          ) : (
+            <p className="text-sm text-slate-500">Press &ldquo;Start replay&rdquo; to see the first day. The other buttons switch on once it starts.</p>
+          )}
+          {orderMessages}
+        </Card>
+      )}
 
       {mode === 'terminal' && (
         <div className="grid grid-cols-1 lg:grid-cols-[210px_minmax(0,1fr)] gap-4 items-stretch">
@@ -962,9 +1374,22 @@ export default function PaperTradingPage() {
                       </span>
                     )}
                   </div>
-                  <div className="text-[11px] text-slate-500">
-                    ₹{formatPrice(item.price)}
-                    {item.watchOnly && ' • view only'}
+                  <div className="flex items-center justify-between gap-2 text-[11px] text-slate-500">
+                    <span
+                      key={`${item.symbol}-${item.price}`}
+                      className={`rounded px-0.5 tabular-nums ${
+                        item.direction === 'up' ? 'tick-up' : item.direction === 'down' ? 'tick-down' : ''
+                      }`}
+                    >
+                      ₹{formatPrice(item.price)}
+                      {item.watchOnly && ' • view only'}
+                    </span>
+                    {item.changePct !== undefined && (
+                      <span className={`font-semibold tabular-nums ${Number(item.changePct) >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                        {Number(item.changePct) >= 0 ? '+' : '−'}
+                        {Math.abs(Number(item.changePct) || 0).toFixed(2)}%
+                      </span>
+                    )}
                   </div>
                 </button>
               ))}
@@ -975,8 +1400,12 @@ export default function PaperTradingPage() {
             <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm font-bold text-navy-950">{symbol}</span>
-                <Badge variant={dataMode === 'live' ? 'green' : 'amber'} size="xs">
-                  {dataMode === 'live' ? 'Live · 1-minute candles' : 'Past prices · daily candles'}
+                <Badge variant={dataMode === 'replay' ? 'amber' : 'green'} size="xs">
+                  {dataMode === 'replay'
+                    ? 'Past prices · daily candles'
+                    : isPractice
+                      ? 'Practice market · updates every second'
+                      : 'Real market · live candles'}
                 </Badge>
               </div>
               <div className="flex flex-wrap items-center gap-1.5">
@@ -1004,23 +1433,15 @@ export default function PaperTradingPage() {
             </div>
             <div className="min-w-0 flex-1">
               {chartCandles.length > 0 ? (
-                <ReplayChart candles={chartCandles} chartType={chartType} />
+                <ReplayChart
+                  candles={chartCandles}
+                  chartType={chartType}
+                  viewKey={chartViewKey}
+                  showSeconds={chartShowsSeconds}
+                />
               ) : (
                 <ChartEmptyState message={chartEmptyMessage} />
               )}
-            </div>
-            <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
-              <button type="button" onClick={startReplay} className="px-3 py-1.5 bg-slate-100 rounded-md font-semibold text-slate-700 hover:bg-slate-200">
-                Start replay
-              </button>
-              <button type="button" onClick={nextCandle} className="px-3 py-1.5 bg-slate-100 rounded-md font-semibold text-slate-700 hover:bg-slate-200">
-                Next day
-              </button>
-              <span>
-                {replay && replay.status !== 'none'
-                  ? `Day ${replay.currentIndex + 1} of ${replay.total}`
-                  : 'Replay not started'}
-              </span>
             </div>
           </Card>
         </div>
@@ -1033,88 +1454,32 @@ export default function PaperTradingPage() {
               <div>
                 <h2 className="text-base font-semibold text-navy-950">Price chart</h2>
                 <p className="text-xs text-slate-500">
-                  {dataMode === 'live'
-                    ? 'Each bar is one minute of live trading today.'
-                    : 'Each bar is one day of past prices from the replay.'}
+                  {dataMode === 'replay'
+                    ? 'Each candle is one day of past prices from the replay.'
+                    : 'Each candle shows where the price started, its highest and lowest point, and where it ended in that time. Green means it went up, red means it went down.'}
                 </p>
               </div>
               {timeframeButtons}
             </div>
             {chartCandles.length > 0 ? (
-              <ReplayChart candles={chartCandles} chartType={chartType} />
+              <ReplayChart
+                candles={chartCandles}
+                chartType={chartType}
+                viewKey={chartViewKey}
+                showSeconds={chartShowsSeconds}
+              />
             ) : (
               <ChartEmptyState message={chartEmptyMessage} />
             )}
           </Card>
 
-          <Card>
-            <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
-              <div>
-                <h2 className="text-base font-semibold text-navy-950">Replay the past</h2>
-                <p className="text-xs text-slate-500 max-w-xl">
-                  See real NIFTYBEES prices from the past one day at a time. Decide to buy, sell or
-                  wait, then reveal the next day to see what happened.
-                </p>
-              </div>
-              {replay && replay.status !== 'none' && (
-                <Badge variant="slate" size="xs">
-                  Day {replay.currentIndex + 1} of {replay.total}
-                </Badge>
-              )}
-            </div>
-            <div className="flex flex-wrap gap-2 mb-3">
-              <button type="button" onClick={startReplay} className="rounded-lg bg-navy-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-navy-800">
-                {replay && replay.status !== 'none' ? 'Restart replay' : 'Start replay'}
-              </button>
-              <button type="button" onClick={nextCandle} className="rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-navy-800 hover:bg-slate-50">
-                Next day
-              </button>
-              <button type="button" disabled={submitting} onClick={() => replayTrade('buy')} className="rounded-lg bg-emerald-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-emerald-700 disabled:opacity-50">
-                Buy at day&apos;s close
-              </button>
-              <button type="button" disabled={submitting} onClick={() => replayTrade('sell')} className="rounded-lg bg-rose-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-rose-700 disabled:opacity-50">
-                Sell at day&apos;s close
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  paperFetch(`/replay/hold`, { method: 'POST' });
-                  setFeedback('You chose to wait. No trade was made.');
-                }}
-                className="rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-navy-800 hover:bg-slate-50"
-              >
-                Wait (no trade)
-              </button>
-            </div>
-            {replay && replay.status !== 'none' ? (
-              <div className="text-sm text-slate-600">
-                <p>
-                  <span className="font-semibold text-navy-900">{replay.instrument}</span> closed at{' '}
-                  <strong className="text-navy-900">₹{formatPrice(replay.current?.close)}</strong> on {replay.current?.date}.
-                </p>
-                <div className="mt-2">
-                  <ReplayChart candles={replay.revealed} />
-                </div>
-                <div className="text-xs text-slate-500 mt-1">
-                  That day: opened ₹{formatPrice(replay.current?.open)}, high ₹{formatPrice(replay.current?.high)}, low ₹
-                  {formatPrice(replay.current?.low)}, closed ₹{formatPrice(replay.current?.close)}
-                </div>
-                <p className="mt-2 text-[11px] text-amber-700">
-                  These are real past prices, not today&apos;s. Replay trades are marked as replay in your history.
-                </p>
-              </div>
-            ) : (
-              <p className="text-sm text-slate-500">Press &ldquo;Start replay&rdquo; to see the first day.</p>
-            )}
-            {orderMessages}
-          </Card>
         </>
       )}
 
       {/* Holdings */}
       <Card>
         <h2 className="text-base font-semibold text-navy-950 mb-3">What you own</h2>
-        {(!portfolio?.holdings || portfolio.holdings.length === 0) ? (
+        {pricedHoldings.length === 0 ? (
           <p className="text-sm text-slate-500">
             Nothing yet. Buy a few units above to see how their value changes.
           </p>
@@ -1132,7 +1497,7 @@ export default function PaperTradingPage() {
                 </tr>
               </thead>
               <tbody>
-                {portfolio.holdings.map((holding) => (
+                {pricedHoldings.map((holding) => (
                   <tr key={holding.symbol} className="border-b border-slate-100 last:border-0">
                     <td className="px-1 py-2.5">
                       <div className="font-semibold text-navy-900">{holding.symbol}</div>

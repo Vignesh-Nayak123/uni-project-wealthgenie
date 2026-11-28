@@ -12,6 +12,7 @@
  */
 import { WebSocketServer } from 'ws';
 import { marketFeed } from '../services/marketData/upstoxFeed.js';
+import { virtualMarket } from '../services/paperTrading/virtualMarket.js';
 
 const MARKET_WS_PATH = '/ws/market';
 const STATUS_BROADCAST_MS = 10_000;
@@ -35,6 +36,11 @@ export function attachMarketWebSocket(httpServer) {
 
   const unsubscribe = marketFeed.onTick((payload) => {
     broadcast(payload);
+  });
+
+  // The practice market ticks once a second; only send while someone listens.
+  const unsubscribePractice = virtualMarket.onTick((payload) => {
+    if (wss.clients.size > 0) broadcast(payload);
   });
 
   const statusTimer = setInterval(() => {
@@ -90,6 +96,7 @@ export function attachMarketWebSocket(httpServer) {
 
   return () => {
     unsubscribe();
+    unsubscribePractice();
     clearInterval(heartbeat);
     clearInterval(statusTimer);
     wss.close();
